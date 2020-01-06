@@ -23,7 +23,6 @@ public class GUIController {
     public GUIController(Translator _lib, GameBoard _board) {
         lib = _lib;
         board = _board;
-        //GUI_Field[];
         gui = new GUI(boardSetup(board));
     }
 

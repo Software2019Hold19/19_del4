@@ -1,0 +1,43 @@
+Start//Start: Receive 2 money.: You receive 2 money when you pass the start field.
+Brown1//Burger bar: 1 money.: You have landed on the Burger bar.: Rent 1 money.
+Brown2//Pizzeria: 1 money.: You have landed on the Pizzeria.: Rent 1 money.
+Chance//?: Try your luck.: Pick up a chance card.
+Lightblue1//Candy shop: 1 money.: You have landed on the Candy shop.: Rent 1 money.
+Lightblue2//Ice-cream stall: 1 money.: You have landed on the Ice-cream stall.: Rent 1 money.
+Visiting//Jail: Jail.: You are on a visit at the jail.
+Purple1//Museum: 2 money.: You have landed on the Museum.: Rent 2 money.
+Purple2//Library: 2 money.: You have landed on the Library.: Rent 2 money.
+Orange1//Skater park: 2 money.: You have landed on the Skater park.: Rent 2 money.
+Orange2//Swimming pool: 2 money.: You have landed on the Swimming pool.: Rent 2 money.
+FreeParking//Parking: Free parking.: You have landed on the Free parking take a break.
+Red1//Arcade: 3 money.: You have landed on the Arcade.: Rent 3 money.
+Red2//Cinema: 3 money.: You have landed on the Cinema.: Rent 3 money.
+Yellow1//Toyshop: 3 money.: You have landed on the Toyshop.: Rent 3 money.
+Yellow2//Pet shop: 3 money.: You have landed on the Pet shop.: Rent 3 money.
+GoToJail//Jail: Go to Jail.: Go to Jail and pay 1 money next time its your turn to get out.
+Green1//Bowling hall: 4 money.: You have landed on the Bowling hal.: Rent 4 money.
+Green2//Zoo: 4 money.: You have landed on the Zoo.: Rent 4 money.
+Darkblue1//Water park: 5 money.: You have landed on the Water park.: Rent 5 money.
+Darkblue2//Beach Promenade: 5 money.: You have landed on the Beach promenade.: Rent 5 money.
+Welcome//Welcome to the game. The game is about buying more property's than your opponents. The first player that runs out of money has lost.
+NumberOfPlayers//How many players?
+InputName//Input player %ds name in the available space.
+Turn//It is player %s's turn to roll the dice.
+Roll//You rolled %d and %d so you go to %s.
+EndOfGame//%s has run you of money and therefor the game is over.
+WinnerByDefault//%s Has gotten over 100 money and the game ends.
+Winner//%s has the most money and has won. Congratulations!
+SameName//Players cannot be named the same.
+OwnField//You own this field yourself.
+OthersField//This field is owned by %s and you need to pay them %d money!
+NotOwned//You buy this field for %d money, Congratz!
+LandOnStart//You landed on the start field and you recieve 2 money!
+LandOnJail//You are visiting the Jail.
+LandOnFree//You landed on free parking. Take a break!
+LandOnGoToJail//You have been caught cheating and you're going to jail! Pay your fine on 1 money and play on.
+ChanceCTxt1//You receive 2 money
+ChanceCTxt2//You lose 2 money
+ChanceCTxt3//Move 1-5 fields
+ChanceCTxt4//Move 1 field or draw new card
+ChanceCTxt5//You move to start
+ChanceCTxt6//You move to Beach Promenade

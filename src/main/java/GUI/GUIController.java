@@ -63,7 +63,7 @@ public class GUIController {
     }
 
     public void updateBoard(Field[] fLst){
-        bObs.ownerUpdate(gui.getFields(), fLst, fieldFac.getStreets(), pObs.getGuiPlayerList());
+        bObs.ownerUpdate(gui.getFields(), fLst, fieldFac.getOwnable(), pObs.getGuiPlayerList());
     }
 
     public GUI getGui() {

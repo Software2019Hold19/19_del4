@@ -6,14 +6,15 @@ import GameBoard.GameBoard;
 import java.io.IOException;
 
 public class Controller {
+    Boolean testing = false;
     Translator lib = new Translator("Dansk");
     GameBoard board = new GameBoard(lib);
     GUIController gui = new GUIController(lib, board);
     Player[] pLst;
-    ChanceDeck deck = new ChanceDeck(lib);
+    ChanceDeck deck = new ChanceDeck(lib, testing);
     Dice dice = new Dice();
     int playerCount;
-    Boolean testing = false;
+
     
     public Controller() throws IOException {
         
@@ -123,7 +124,7 @@ public class Controller {
         
         gui.updatePlayers(pLst);
  //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
-        board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib, testing);
+        board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
         
 
         gui.updatePlayers(pLst);
@@ -131,6 +132,7 @@ public class Controller {
 
     public void setTesting() {
         testing = true;
+        deck = new ChanceDeck(lib, testing);
     }
     
 }

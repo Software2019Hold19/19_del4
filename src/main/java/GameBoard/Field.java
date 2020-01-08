@@ -41,7 +41,7 @@ public abstract class Field {
         return null;
     }
 
-    public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib, Boolean testing){
+    public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
         guiHandler(gui, lib);
     }
 

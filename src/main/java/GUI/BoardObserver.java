@@ -23,7 +23,7 @@ public class BoardObserver extends Observer {
                     for (GUI_Player guiP : guiPLst){
                         if (guiP.getName().equals(owner)){
                             Color color = guiP.getCar().getPrimaryColor();
-                            streets.get(key).setBorder(color);
+                            streets.get(key).setBorder(color); //test
                         }
                     }
                 }

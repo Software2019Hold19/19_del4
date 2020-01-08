@@ -8,10 +8,10 @@ import Main.Translator;
 public class StreetField extends OwnableField {
 
     
-    private int level = 0;
+    private int houseLevel = 0;
     private String color;
 
-    private String key;
+    private String key; // use in hashmap
 
     public StreetField(String name, String subName, String desc, String type, int[] price, String color, String key){
         super(name, subName, desc, type);
@@ -24,11 +24,11 @@ public class StreetField extends OwnableField {
     }
 
     public int getRent() {
-        if (level != 0) {
-            return rent[level];
+        if (houseLevel != 0) {
+            return rent[houseLevel];
         }
         else { // TODO: return 2x rent if all fields in color are owned
-            return rent[level];
+            return rent[houseLevel];
         }
         
         

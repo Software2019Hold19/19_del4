@@ -22,37 +22,41 @@ public class Controller {
 
     // Init players and language
     public void startGame() throws IOException {
-        String selectedL = gui.getPlayerDropbown("Vælg Sprog / Choose Language", "Dansk", "English");
-        lib.getLanguage(selectedL);
-        gui.updateLanguage(lib);
-        board.boardUpdate(lib);
+        if (testing) {
 
-        gui.showMessage(lib.text.get("Welcome"));
+        } else {
+            String selectedL = gui.getPlayerDropbown("Vælg Sprog / Choose Language", "Dansk");
+            lib.getLanguage(selectedL);
+            gui.updateLanguage(lib);
+            board.boardUpdate(lib);
 
-        String playerCountstr = gui.getPlayerDropbown(lib.text.get("NumberOfPlayers"),  "3", "4", "5", "6");
-        playerCount = Integer.parseInt(playerCountstr);
-        int startBal = 30000;
+            gui.showMessage(lib.text.get("Welcome"));
 
-        while (true) {
+            String playerCountstr = gui.getPlayerDropbown(lib.text.get("NumberOfPlayers"), "3", "4", "5", "6");
+            playerCount = Integer.parseInt(playerCountstr);
+            int startBal = 30000;
 
-            boolean sameName = false;
-            pLst = new Player[playerCount];
-            for (int i = 0; i < playerCount; i++) {
-                Player p = new Player(gui.getUserString(String.format(lib.text.get("InputName"), i + 1)), startBal);
-                pLst[i] = p;
-            }
+            while (true) {
 
-            for (int i = 0; i < pLst.length; i++) {
-                for (int j = i + 1; j < pLst.length; j++) {
-                    if (pLst[i].getName().equals(pLst[j].getName())) {
-                        sameName = true;
-                        gui.showMessage(lib.text.get("SameName"));
+                boolean sameName = false;
+                pLst = new Player[playerCount];
+                for (int i = 0; i < playerCount; i++) {
+                    Player p = new Player(gui.getUserString(String.format(lib.text.get("InputName"), i + 1)), startBal);
+                    pLst[i] = p;
+                }
+
+                for (int i = 0; i < pLst.length; i++) {
+                    for (int j = i + 1; j < pLst.length; j++) {
+                        if (pLst[i].getName().equals(pLst[j].getName())) {
+                            sameName = true;
+                            gui.showMessage(lib.text.get("SameName"));
+                        }
                     }
                 }
-            }
 
-            if (!sameName){
-                break;
+                if (!sameName) {
+                    break;
+                }
             }
         }
 
@@ -158,6 +162,7 @@ public class Controller {
     public void setTesting() {
         testing = true;
         deck = new ChanceDeck(lib, testing);
+        gui.setTesting();
     }
     
 }

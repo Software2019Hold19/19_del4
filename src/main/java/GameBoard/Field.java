@@ -48,8 +48,4 @@ public abstract class Field {
     public void guiHandler(GUIController gui, Translator lib){
         gui.showMessage(getDesc());
     }
-    
-    public String getColor(){return "";}
-
-    public String getOwner(){return "";}
 }

@@ -11,7 +11,7 @@ public class ChanceDeck {
     ChanceCard deck[] = new ChanceCard[6];
     int cardCount = 0;
 
-    public ChanceDeck(Translator lib) {
+    public ChanceDeck(Translator lib, Boolean testing) {
 
         deck[0] = new ChoiceMoveChanceCard(lib.text.get("ChanceCTxt3"), true);
         deck[1] = new ChoiceMoveChanceCard(lib.text.get("ChanceCTxt4"), false);
@@ -20,8 +20,9 @@ public class ChanceDeck {
         deck[4] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt5"), true);
         deck[5] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt6"), false);
 
-        shuffleDeck();
-
+        if (!testing) {
+            shuffleDeck();
+        }
     }
 
     public void shuffleDeck(){

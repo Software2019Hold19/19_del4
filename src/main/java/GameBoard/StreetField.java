@@ -5,22 +5,33 @@ import GUI.GUIController;
 import Main.Player;
 import Main.Translator;
 
-public class StreetField extends Field {
+public class StreetField extends OwnableField {
 
-    private int price;
+    
+    private int level = 0;
     private String color;
-    private String owner = "";
+
     private String key;
 
-    public StreetField(String name, String subName, String desc, String type, int price, String color, String key){
+    public StreetField(String name, String subName, String desc, String type, int[] price, String color, String key){
         super(name, subName, desc, type);
-        this.price = price;
+
+        this.rent = new int[6];
+        this.rent = price;
+
         this.color = color;
         this.key = key;
     }
 
-    public int getPrice() {
-        return price;
+    public int getRent() {
+        if (level != 0) {
+            return rent[level];
+        }
+        else { // TODO: return 2x rent if all fields in color are owned
+            return rent[level];
+        }
+        
+        
     }
 
     public String getColor() {
@@ -57,7 +68,7 @@ public class StreetField extends Field {
         if (this.owner.equals("")){
             gui.showMessage(String.format(lib.text.get("NotOwned"), price));
             this.owner = player.getName();
-            player.addBal(-price);
+            player.addBal(-this.getRent());
             gui.updateBoard(board.getBoard());
             //print - field not bought so you are buying this field
         }
@@ -75,13 +86,13 @@ public class StreetField extends Field {
                     }
                     if(sameColorOwned == 2){
                         gui.showMessage(String.format(lib.text.get("OthersField"), ownercheck.getName(), 2*price));
-                        player.addBal(-(2*price));
-                        ownercheck.addBal(2*price);
+                        player.addBal(-(2*this.getRent()));
+                        ownercheck.addBal(2*this.getRent());
                     }
                     else{
                         gui.showMessage(String.format(lib.text.get("OthersField"), ownercheck.getName(), price));
-                        player.addBal(-price);
-                        ownercheck.addBal(price);
+                        player.addBal(-this.getRent());
+                        ownercheck.addBal(this.getRent());
                     }
                 }
             }

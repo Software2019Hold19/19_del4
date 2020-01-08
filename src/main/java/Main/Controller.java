@@ -6,13 +6,15 @@ import GameBoard.GameBoard;
 import java.io.IOException;
 
 public class Controller {
+    Boolean testing = false;
     Translator lib = new Translator("Dansk");
     GameBoard board = new GameBoard(lib);
     GUIController gui = new GUIController(lib, board);
     Player[] pLst;
-    ChanceDeck deck = new ChanceDeck(lib);
+    ChanceDeck deck = new ChanceDeck(lib, testing);
     Dice dice = new Dice();
     int playerCount;
+
     
     public Controller() throws IOException {
         
@@ -145,6 +147,11 @@ public class Controller {
                 }else{ count++; }
             }
         }
+    }
+
+    public void setTesting() {
+        testing = true;
+        deck = new ChanceDeck(lib, testing);
     }
     
 }

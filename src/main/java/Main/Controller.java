@@ -108,7 +108,7 @@ public class Controller {
                 gui.showMessage(String.format(lib.text.get("EndOfGame"), p.getName()));
             }
 
-            if (p.getBal() >= 100) {
+            if (p.getBal() >= 90000) {
                 isGameFinished = true;
                 gui.showMessage(String.format(lib.text.get("WinnerByDefault"), p.getName()));
             }
@@ -119,19 +119,38 @@ public class Controller {
 
 
     private void playerTurn(Player p) {
-        int[] diceRoll = dice.roll(testing);
 
-        gui.showDiceOnBoard(diceRoll);
+        if(!p.getIsJailed()) {
+            int[] diceRoll = dice.roll(false);
 
-        p.move(diceRoll[0] + diceRoll[1]);
+            gui.showDiceOnBoard(diceRoll);
 
-        
-        gui.updatePlayers(pLst);
- //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
-        board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
-        
+            p.move(diceRoll[0] + diceRoll[1]);
 
-        gui.updatePlayers(pLst);
+
+            gui.updatePlayers(pLst);
+            //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
+            board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+
+
+            gui.updatePlayers(pLst);
+        }else{
+            int count = 0;
+
+            while(count < 3) {
+                int[] diceRoll = dice.roll(false);
+                gui.showDiceOnBoard(diceRoll);
+
+                if (diceRoll[0] == diceRoll[1]) {
+                    p.move(diceRoll[0] + diceRoll[1]);
+
+                    gui.updatePlayers(pLst);
+                    board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                    gui.updatePlayers(pLst);
+                    break;
+                }else{ count++; }
+            }
+        }
     }
 
     public void setTesting() {

@@ -1,24 +1,36 @@
-Start//Start: Modtag 2 penge.: Du modtager 2 penge når du passere start.
-Brown1//Burgerbaren: 1 penge.: Du er landet på Burgerbaren.: Leje 1 penge.
-Brown2//Pizzeriaet: 1 penge.: Du er landet på Pizzeriaet.: Leje 1 penge.
+Start//Start: Modtag 4000 kr.: Du modtager 4000 kr når du passere start.
+Lightblue1//Rødovrevej: 1200 kr.: Du er landet på Rødovrevej.: 200,600,1800,2200,5000
+Lightblue2//Hvidovre: 1200 kr.: Du er landet på Hvidovre.: 400,1200,3600, 6400,10800
 Chance//?: Prøv lykken.: Tag et chancekort.
-Lightblue1//Slikbutikken: 1 penge.: Du er landet på Slikbutikken.: Leje 1 penge.
-Lightblue2//Iskiosken: 1 penge.: Du er landet på Iskiosken.: Leje 1 penge.
+Orange1//Roskildevej: 2000 kr.: Du er landet på Roskildevej.: 600,1800,5400,8000,11000
+Orange2//Valby Langgade: 2000 kr.: Du er landet på Valby Langgade.: 600,1800,5400,8000,11000
+Orange3//Allegade: 24000 kr.: Du er landet på Allegade.: 800,2000,6000,9000,18000
 Visiting//Fængsel: Fængsel.: Du er på besøg i fængslet.
-Purple1//Museet: 2 penge.: Du er landet på Museet.: Leje 2 penge.
-Purple2//Bibliotek: 2 penge.: Du er landet på Biblioteket.: Leje 2 penge.
-Orange1//Skaterparken: 2 penge.: Du er landet i Skaterparken.: Leje 2 penge.
-Orange2//Swimmingpoolen: 2 penge.: Du er landet i Swimmingpoolen.: Leje 2 penge.
+Green1//Frederiksberg Alle: 2800 kr.: Du er landet på Frederiksberg Alle.: 1000,3000,9000,12500,15000
+Green2//Bulowsvej: 2800 kr.: Du er landet på Bulowsvej.: 1000,3000,9000,12500,15000
+Green3//Gl. Kongevej: 3200 kr.: Du er landet på Gl. Kongevej.: 1200,3600,10000,14000,18000
+Darkgrey1//Bernstorffsvej: 3600 kr.: Du er landet på Bernstorffsvej.: 1400,4000,11000,15000,19000
+Darkgrey2//Hellerupvej: 3600 kr.: Du er landet på Hellerupvej.: 1400,4000,11000,15000,19000
+Darkgrey3//Strandvej: 4000 kr.: Du er landet på Strandvej.: 1600,4400,12000,16000,20000
+Red1//Trianglen: 4400 kr.: Du er landet på Trianglen.: 1800,5000,14000,17500,21000
+Red2//Østerbrogade: 4400 kr.: Du er landet på Østerbrogade.: 1800,5000,14000,17500,21000
+Red3//Grønningen: 4800 kr.: Du er landet på Grønningen.: 2000,6000,150000,18500,22000
 FreeParking//Parkering: Gratis parkering.: Du har gratis parkering tag en pause.
-Red1//Spillehallen: 3 penge.: Du er landet på Spillehallen: Leje 3 penge.
-Red2//Biografen: 3 penge.: Du er landet på Biografen.: Leje 3 penge.
-Yellow1//Legetøjsbutikken: 3 penge.: Du er landet på Legetøjsbutikken.: Leje 3 penge.
-Yellow2//Dyrehandlen: 3 penge.: Du er landet på Dyrehandlen.: Leje 3 penge.
+Lightgrey1//Bredgade: 5200 kr.: Du er landet på Bredgade: 2200,6600,16000,19500,23000
+Lightgrey2//Kgs. Nytorv: 5200 kr.: Du er landet på Kgs. Nytorv.: 2200,6600,16000,19500,23000
+Lightgrey3//Østergade: 5600 kr.: Du er landet på Østergade.: 2400,7200,1700,20500,24000
+Yellow1//Amagertorv: 6000 kr.: Du er landet på Amagertorv.: 2600,7800,18000,22000,26000,25500
+Yellow2//Vimmelskaftet: 6000 kr.: Du er landet på Vimmelskaftet.: 2600,7800,18000,22000,25500
+Yellow3//Nygade: 6400 kr.: Du er landet på Nygade.: 3000,9000,20000,24000,28000
 GoToJail//Fængsel: Du er skal i fængsel.: Du skal i fængsel og skal betale 1 penge for at komme ud.
-Green1//Bowlinghallen: 4 penge.: Du er landet på Bowlinghallen.: Leje 4 penge.
-Green2//Zoo: 4 penge.: Du er landet på Zoo.: Leje 4 penge.
-Darkblue1//Vandlandet: 5 penge.: Du er landet på Vandlandet.: Leje 5 penge.
-Darkblue2//Strandpromonaden: 5 penge.: Du er landet på Strandpromonaden.: Leje 5 penge.
+Brown1//Frederiskberggade: 7000 kr.: Du er landet på Frederiskberggade.: 3500,10000,22000,26000,30000
+Brown2//Rådhuspladsen: 8000 kr.: Du er landet på Rådhuspladsen.: 4000,12000,28000,34000,40000
+Brewery1//Tuborg Bryggeriet: 3000 kr.: Du er landet på Tuborg.: 80,200
+Brewery2//Carlsberg Bryggeriet: 3000 kr.: Du er landet på Carlsberg.: 80,200
+Ferry1//D/S BORNHOLM 1866: 4000 kr.: Du er landet på D/S BORNHOLM 1866.: 500,1000,2000,4000
+Ferry2//DAMPSKIBSSELSKABET A/S ØRESUND: 4000 kr.: Du er landet på DAMPSKIBSSELSKABET A/S ØRESUND.: 500,1000,2000,4000
+Ferry3//DAMPSKIBSSELSKABET Ø. K: 4000 kr.: Du er landet på DAMPSKIBSSELSKABET Ø. K.: 500,1000,2000,4000
+Ferry4//DAMPSKIBSSELSKABET. D. F. D. S.: 4000 kr.: Du er landet på DAMPSKIBSSELSKABET. D. F. D. S.: 500,1000,2000,4000
 Welcome//Velkommen til spillet. Spillet handler om at købe egendeomme før din modspiller. Den første der løber tør for penge har tabt.
 NumberOfPlayers//Hvor mange spillere spiller?
 InputName//Indtast Spiller %ds navn i det ledige felt.
@@ -31,7 +43,7 @@ SameName//Spillere kan ikke hedde det samme.
 OwnField//Du ejer selv dette felt.
 OthersField//Dette felt er eget af %s og du skal betale dem %d penge!
 NotOwned//Du køber dette felt for %d penge, Tillykke!
-LandOnStart//Du lander på startfeltet og modtager 2 penge!
+LandOnStart//Du lander på startfeltet og modtager 4000 kr.!
 LandOnJail//Du er på besøg i fængslet.
 LandOnFree//Du er landet på gratis parkering. Tag en velfortjent pause!
 LandOnGoToJail//Du er blevet fanget i at snyde og skal i fængsel! Betal din bøde på 1 penge og spil videre.

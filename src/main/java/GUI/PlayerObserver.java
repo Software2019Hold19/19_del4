@@ -13,7 +13,9 @@ public class PlayerObserver extends Observer{
             Color.RED,
             Color.BLUE,
             Color.GREEN,
-            Color.YELLOW
+            Color.YELLOW,
+            Color.CYAN,
+            Color.MAGENTA
     };
 
     public PlayerObserver(Player[] pLst){

@@ -6,11 +6,13 @@ package GameBoard;
 abstract class OwnableField extends Field {
 
     protected int price;
-    protected int rent[];
+    
     protected String owner = "";
 
-    public OwnableField(String name, String subName, String desc, String type) {
+    public OwnableField(String name, String subName, String desc, String type, int[] rentLst) {
         super(name, subName, desc, type);
+        this.rent = new int[6];
+        this.rent = rentLst;
         // TODO Auto-generated constructor stub
     }
 

@@ -10,6 +10,7 @@ public abstract class Field {
     private String type; // "start", "street", "chance" "jail" or "visit"
     private String subName;
     private String desc;
+    protected int rent[];
 
     public Field(String name, String subName, String desc, String type){
         this.name = name;
@@ -19,6 +20,10 @@ public abstract class Field {
     }
 
     public String toString() {return "";}
+
+    public int getRent() {
+        return rent[0];
+    }
 
     public String getName() {
         return this.name;

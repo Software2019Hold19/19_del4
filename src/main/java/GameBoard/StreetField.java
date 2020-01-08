@@ -14,7 +14,7 @@ public class StreetField extends OwnableField {
     private String key; // use in hashmap
 
     public StreetField(String name, String subName, String desc, String type, int[] price, String color, String key){
-        super(name, subName, desc, type);
+        super(name, subName, desc, type, price); // TODO: edit to price and rent
 
         this.rent = new int[6];
         this.rent = price;

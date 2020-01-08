@@ -88,11 +88,11 @@ public class FieldFactory {
                     break;
 
                 case ("brewery"):
-                    guiFields[i++] = new GUI_Brewery("default", field.getName(), field.getSubName(), field.getDesc(), "10", Color.BLACK, Color.WHITE);
+                    guiFields[i++] = new GUI_Brewery("default", field.getName(), field.getSubName(), field.getDesc(), Integer.toString(field.getRent()), Color.BLACK, Color.WHITE);
                     break;
 
                 case ("ferry"):
-                    guiFields[i++] = new GUI_Shipping("default", field.getName(), field.getSubName(), field.getDesc(), "10",Color.WHITE, Color.YELLOW);
+                    guiFields[i++] = new GUI_Shipping("default", field.getName(), field.getSubName(), field.getDesc(), Integer.toString(field.getRent()),Color.WHITE, Color.YELLOW);
                     break;
 
                 case ("tax"):

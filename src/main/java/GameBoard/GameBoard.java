@@ -127,4 +127,8 @@ public class GameBoard {
     public Field[] getBoard() {
         return board;
     }
+
+    public OwnableField[] getOwnableFields() {
+        return new OwnableField[12]; // TODO: have to chance!!!
+    }
 }

@@ -38,7 +38,6 @@ public class StreetField extends OwnableField {
         return color;
     }
 
-    @Override
     public String getOwner() {
         return owner;
     }
@@ -79,7 +78,7 @@ public class StreetField extends OwnableField {
             for(Player ownercheck : pLst){
                 if(ownercheck.getName().equals(this.owner)){//with for loop it finds player who owns THIS field
                     int sameColorOwned = 0;//counter for how many fields of THIS color has THIS owner
-                    for(Field fieldCheck : board.getBoard()){//checks all fields (including this)
+                    for(OwnableField fieldCheck : board.getOwnableFields()){//checks all fields (including this)
                         if(fieldCheck.getColor().equals(this.color) && fieldCheck.getOwner().equals(this.owner)){
                             sameColorOwned++;
                         }

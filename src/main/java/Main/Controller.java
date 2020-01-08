@@ -117,7 +117,7 @@ public class Controller {
     private void playerTurn(Player p) {
 
         if(!p.getIsJailed()) {
-            int[] diceRoll = dice.roll();
+            int[] diceRoll = dice.roll(false);
 
             gui.showDiceOnBoard(diceRoll);
 
@@ -134,7 +134,7 @@ public class Controller {
             int count = 0;
 
             while(count < 3) {
-                int[] diceRoll = dice.roll();
+                int[] diceRoll = dice.roll(false);
                 gui.showDiceOnBoard(diceRoll);
 
                 if (diceRoll[0] == diceRoll[1]) {

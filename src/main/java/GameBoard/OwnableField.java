@@ -18,6 +18,18 @@ abstract class OwnableField extends Field {
 
     }
 
+    public String getRentString() {
+        return Integer.toString(rent[0]);
+    }
+
+    public String getColor() {
+        return "";
+    }
+
+    public String getOwner() {
+        return this.owner;
+    }
+    
     public int getPrice() {
         return this.price;
     }

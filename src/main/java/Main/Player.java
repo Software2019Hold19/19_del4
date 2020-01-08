@@ -5,6 +5,7 @@ public class Player {
     String name;
     private Account acc = new Account();
     int fieldNumber = 0;
+    int jailCount = 0;
     boolean isJailed = false;
 
     public Player (String name){
@@ -50,5 +51,17 @@ public class Player {
 
     public void setIsJailed(boolean jailed){
         isJailed = jailed;
+    }
+
+    public void addJailTurn(){
+        jailCount++;
+    }
+
+    public void resetJailTurn(){
+        jailCount = 0;
+    }
+
+    public int getJailTurn(){
+        return jailCount;
     }
 }

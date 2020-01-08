@@ -1,4 +1,4 @@
-Start//Start: Modtag 2 penge.: Du modtager 2 penge når du passere start.
+Start//Start: Modtag 2 penge.: Du modtager 4000 penge når du passere start.
 Brown1//Burgerbaren: 1 penge.: Du er landet på Burgerbaren.: Leje 1 penge.
 Brown2//Pizzeriaet: 1 penge.: Du er landet på Pizzeriaet.: Leje 1 penge.
 Chance//?: Prøv lykken.: Tag et chancekort.

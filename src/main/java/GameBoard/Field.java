@@ -21,15 +21,15 @@ public abstract class Field {
     public String toString() {return "";}
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getType() {
-        return type;
+        return this.type;
     }
 
     public String getSubName() {
-        return subName;
+        return this.subName;
     }
 
     public String getDesc() {

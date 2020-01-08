@@ -13,6 +13,7 @@ public class Controller {
     ChanceDeck deck = new ChanceDeck(lib);
     Dice dice = new Dice();
     int playerCount;
+    Boolean testing = false;
     
     public Controller() throws IOException {
         
@@ -113,7 +114,7 @@ public class Controller {
 
 
     private void playerTurn(Player p) {
-        int[] diceRoll = dice.roll();
+        int[] diceRoll = dice.roll(testing);
 
         gui.showDiceOnBoard(diceRoll);
 
@@ -122,10 +123,14 @@ public class Controller {
         
         gui.updatePlayers(pLst);
  //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
-        board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+        board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib, testing);
         
 
         gui.updatePlayers(pLst);
+    }
+
+    public void setTesting() {
+        testing = true;
     }
     
 }

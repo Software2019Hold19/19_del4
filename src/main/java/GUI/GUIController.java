@@ -26,8 +26,8 @@ public class GUIController {
         gui = new GUI(boardSetup(board));
     }
 
-    public void showDiceOnBoard(int roll){
-        gui.setDie(roll);
+    public void showDiceOnBoard(int[] roll){
+        gui.setDice(roll[0], roll[1]);
     }
 
 

@@ -27,9 +27,9 @@ public class Controller {
 
         gui.showMessage(lib.text.get("Welcome"));
 
-        String playerCountstr = gui.getPlayerDropbown(lib.text.get("NumberOfPlayers"), "2", "3", "4");
+        String playerCountstr = gui.getPlayerDropbown(lib.text.get("NumberOfPlayers"),  "3", "4", "5", "6");
         playerCount = Integer.parseInt(playerCountstr);
-        int startBal = 24-2*playerCount;
+        int startBal = 30000;
 
         while (true) {
 

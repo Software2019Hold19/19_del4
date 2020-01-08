@@ -15,7 +15,7 @@ public class GoToJailField extends Field {
     public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
         gui.showMessage(lib.text.get("LandOnGoToJail"));
         player.blink(6);
-        player.addBal(-1);
+        player.setIsJailed(true);
     }
 
     @Override

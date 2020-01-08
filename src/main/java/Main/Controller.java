@@ -6,13 +6,15 @@ import GameBoard.GameBoard;
 import java.io.IOException;
 
 public class Controller {
+    Boolean testing = false;
     Translator lib = new Translator("Dansk");
     GameBoard board = new GameBoard(lib);
     GUIController gui = new GUIController(lib, board);
     Player[] pLst;
-    ChanceDeck deck = new ChanceDeck(lib);
+    ChanceDeck deck = new ChanceDeck(lib, testing);
     Dice dice = new Dice();
     int playerCount;
+
     
     public Controller() throws IOException {
         
@@ -20,37 +22,41 @@ public class Controller {
 
     // Init players and language
     public void startGame() throws IOException {
-        String selectedL = gui.getPlayerDropbown("Vælg Sprog / Choose Language", "Dansk", "English");
-        lib.getLanguage(selectedL);
-        gui.updateLanguage(lib);
-        board.boardUpdate(lib);
+        if (testing) {
 
-        gui.showMessage(lib.text.get("Welcome"));
+        } else {
+            String selectedL = gui.getPlayerDropbown("Vælg Sprog / Choose Language", "Dansk");
+            lib.getLanguage(selectedL);
+            gui.updateLanguage(lib);
+            board.boardUpdate(lib);
 
-        String playerCountstr = gui.getPlayerDropbown(lib.text.get("NumberOfPlayers"),  "3", "4", "5", "6");
-        playerCount = Integer.parseInt(playerCountstr);
-        int startBal = 30000;
+            gui.showMessage(lib.text.get("Welcome"));
 
-        while (true) {
+            String playerCountstr = gui.getPlayerDropbown(lib.text.get("NumberOfPlayers"), "3", "4", "5", "6");
+            playerCount = Integer.parseInt(playerCountstr);
+            int startBal = 30000;
 
-            boolean sameName = false;
-            pLst = new Player[playerCount];
-            for (int i = 0; i < playerCount; i++) {
-                Player p = new Player(gui.getUserString(String.format(lib.text.get("InputName"), i + 1)), startBal);
-                pLst[i] = p;
-            }
+            while (true) {
 
-            for (int i = 0; i < pLst.length; i++) {
-                for (int j = i + 1; j < pLst.length; j++) {
-                    if (pLst[i].getName().equals(pLst[j].getName())) {
-                        sameName = true;
-                        gui.showMessage(lib.text.get("SameName"));
+                boolean sameName = false;
+                pLst = new Player[playerCount];
+                for (int i = 0; i < playerCount; i++) {
+                    Player p = new Player(gui.getUserString(String.format(lib.text.get("InputName"), i + 1)), startBal);
+                    pLst[i] = p;
+                }
+
+                for (int i = 0; i < pLst.length; i++) {
+                    for (int j = i + 1; j < pLst.length; j++) {
+                        if (pLst[i].getName().equals(pLst[j].getName())) {
+                            sameName = true;
+                            gui.showMessage(lib.text.get("SameName"));
+                        }
                     }
                 }
-            }
 
-            if (!sameName){
-                break;
+                if (!sameName) {
+                    break;
+                }
             }
         }
 
@@ -102,7 +108,7 @@ public class Controller {
                 gui.showMessage(String.format(lib.text.get("EndOfGame"), p.getName()));
             }
 
-            if (p.getBal() >= 100) {
+            if (p.getBal() >= 90000) {
                 isGameFinished = true;
                 gui.showMessage(String.format(lib.text.get("WinnerByDefault"), p.getName()));
             }
@@ -113,19 +119,44 @@ public class Controller {
 
 
     private void playerTurn(Player p) {
-        int[] diceRoll = dice.roll();
 
-        gui.showDiceOnBoard(diceRoll);
+        if(!p.getIsJailed()) {
+            int[] diceRoll = dice.roll(false);
 
-        p.move(diceRoll[0] + diceRoll[1]);
+            gui.showDiceOnBoard(diceRoll);
 
-        
-        gui.updatePlayers(pLst);
- //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
-        board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
-        
+            p.move(diceRoll[0] + diceRoll[1]);
 
-        gui.updatePlayers(pLst);
+
+            gui.updatePlayers(pLst);
+            //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
+            board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+
+
+            gui.updatePlayers(pLst);
+        }else{
+            int count = 0;
+
+            while(count < 3) {
+                int[] diceRoll = dice.roll(false);
+                gui.showDiceOnBoard(diceRoll);
+
+                if (diceRoll[0] == diceRoll[1]) {
+                    p.move(diceRoll[0] + diceRoll[1]);
+
+                    gui.updatePlayers(pLst);
+                    board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                    gui.updatePlayers(pLst);
+                    break;
+                }else{ count++; }
+            }
+        }
+    }
+
+    public void setTesting() {
+        testing = true;
+        deck = new ChanceDeck(lib, testing);
+        gui.setTesting();
     }
     
 }

@@ -28,12 +28,7 @@ public class StreetField extends OwnableField {
 
     @Override
     public int getRent() {
-        if (level != 0) {
-            return rent[level];
-        }
-        else { // TODO: return 2x rent if all fields in color are owned
-            return rent[level];
-        }        
+        return rent[level];
     }
 
     public String getColor() {
@@ -70,10 +65,11 @@ public class StreetField extends OwnableField {
 
         if (this.owner.equals(player.getName())) {
             if (ownsSameColorFields(board, pLst)) {
-           //     chooseToBuyHouses(player, gui);
+                chooseToBuyHouses(player, gui, lib);
+                System.out.println("owns same color fields");
             }
         }
-
+/*
         super.landOnField(player, pLst, deck, board, gui, lib);
         if (this.owner.equals("")){
             gui.showMessage(String.format(lib.text.get("NotOwned"), price));
@@ -94,7 +90,7 @@ public class StreetField extends OwnableField {
                             sameColorOwned++;
                         }
                     }
-                    if(ownercheck.getIsJailed()){  //Checks if the owner is in jail
+                    if(ownercheck.getIsJailed()){  //Checks if the owner is in jailx
                         gui.showMessage(String.format(lib.text.get("OthersFieldJailed"), ownercheck.getName()));
                     }
                     else if(sameColorOwned == 2){
@@ -114,7 +110,7 @@ public class StreetField extends OwnableField {
         // Log to console
         System.out.println(player.getName() + ": Landed on " + this.getName() + ", Field is owned by " + owner);
 
-
+*/
     }
 
 
@@ -134,6 +130,21 @@ public class StreetField extends OwnableField {
     }
 
     private boolean ownsSameColorFields(GameBoard board, Player[] pLst){
+        int ownSamecolorFieldCnt = 0;
+        for (OwnableField field : board.getOwnableBoard()) {
+            if(field.getColor().equals(this.getColor()) && field.getOwner().equals(this.owner)) {
+                ownSamecolorFieldCnt++;
+            }
+        }
+
+        if (ownSamecolorFieldCnt == 3)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+        /*
         for(Player ownercheck : pLst){
             if(ownercheck.getName().equals(this.owner)){//with for loop it finds player who owns THIS field
                 int sameColorOwned = 0;//counter for how many fields of THIS color has THIS owner
@@ -154,6 +165,7 @@ public class StreetField extends OwnableField {
             }
         }
         return false;
+        */
 
     }
 
@@ -173,7 +185,7 @@ public class StreetField extends OwnableField {
         }
         else if (this.level == 4) {
             int hotelPrice = getHousePrice();
-            String choise = gui.getPlayerDropbown(lib.text.get("Købhotel") + hotelPrice + " kr.", lib.text.get("Yes"), lib.text.get("No"));
+            String choise = gui.getPlayerDropbown("Vil du købe et hotel for " + hotelPrice + " kr.", "Ja", "Nej");
 
             if (choise.equals("Ja")) {
                 if (player.getBal() > hotelPrice) {

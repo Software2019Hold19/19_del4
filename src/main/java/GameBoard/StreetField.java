@@ -71,8 +71,8 @@ public class StreetField extends OwnableField {
         //Import LandOnField from ownablefield class
         super.landOnField(player, pLst, deck, board, gui, lib);
 
-        if (this.owner.contentEquals(player.getName())) {
-
+        if (this.owner.equals(player.getName())) {
+            ChooseToBuyHouseAndHotel();
         }
         /*
         super.landOnField(player, pLst, deck, board, gui, lib);

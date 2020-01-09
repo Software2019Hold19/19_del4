@@ -74,12 +74,12 @@ public class StreetField extends OwnableField {
         if (this.owner.contentEquals(player.getName())) {
 
         }
-        /*
+
         super.landOnField(player, pLst, deck, board, gui, lib);
         if (this.owner.equals("")){
             gui.showMessage(String.format(lib.text.get("NotOwned"), price));
             this.owner = player.getName();
-            player.addBal(-this.getRent());
+            player.addBal(-price);
             gui.updateBoard(board.getOwnableBoard(), pLst);
             //print - field not bought so you are buying this field
         }
@@ -115,7 +115,7 @@ public class StreetField extends OwnableField {
         // Log to console
         System.out.println(player.getName() + ": Landed on " + this.getName() + ", Field is owned by " + owner);
 
-        */
+
     }
 
     private void ChooseToBuyHouseAndHotel() {

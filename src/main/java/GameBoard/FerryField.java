@@ -5,8 +5,8 @@ package GameBoard;
  */
 public class FerryField extends OwnableField{
 
-    public FerryField(String name, String subName, String desc, String type, int[] rentLst) {
-        super(name, subName, desc, type, rentLst);
+    public FerryField(String name, String subName, String desc, String type, String rent) {
+        super(name, subName, desc, type, rent);
         // TODO Auto-generated constructor stub
     }
 

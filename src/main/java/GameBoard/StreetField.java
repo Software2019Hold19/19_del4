@@ -13,11 +13,16 @@ public class StreetField extends OwnableField {
 
     private String key; // use in hashmap
 
-    public StreetField(String name, String subName, String desc, String type, int[] price, String color, String key){
-        super(name, subName, desc, type, price); // TODO: edit to price and rent
+    public StreetField(String name, String subName, String desc, String type, String rent, String color, String key){
+        super(name, subName, desc, type, rent); // TODO: edit to price and rent
 
         this.rent = new int[6];
-        this.rent = price;
+        String[] rentLst = rent.split(",");
+        this.rent = new int[6];
+        for (int i = 0; i < 6; i++){
+            this.rent[i] = Integer.parseInt(rentLst[i]);
+        }
+
 
         this.color = color;
         this.key = key;

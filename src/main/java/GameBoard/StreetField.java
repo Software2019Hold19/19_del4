@@ -68,6 +68,13 @@ public class StreetField extends OwnableField {
 
     @Override
     public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
+        //Import LandOnField from ownablefield class
+        super.landOnField(player, pLst, deck, board, gui, lib);
+
+        if (this.owner.contentEquals(player.getName())) {
+
+        }
+        /*
         super.landOnField(player, pLst, deck, board, gui, lib);
         if (this.owner.equals("")){
             gui.showMessage(String.format(lib.text.get("NotOwned"), price));
@@ -103,13 +110,16 @@ public class StreetField extends OwnableField {
                     }
                 }
             }
-        }
-
-
-        
+        }       
         
         // Log to console
         System.out.println(player.getName() + ": Landed on " + this.getName() + ", Field is owned by " + owner);
+
+        */
+    }
+
+    private void ChooseToBuyHouseAndHotel() {
+
     }
 
 

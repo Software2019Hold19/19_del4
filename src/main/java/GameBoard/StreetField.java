@@ -4,11 +4,15 @@ import GUI.GUIController;
 import Main.Player;
 import Main.Translator;
 
+import java.util.HashMap;
+
 public class StreetField extends OwnableField {
 
     private String color;
 
     private String key; // use in hashmap
+
+    HashMap<String, StreetField> pair = new HashMap<String, StreetField>();
 
     public StreetField(String name, String subName, String desc, String type, String rentStr, String color, String key){
         super(name, subName, desc, type, rentStr); // TODO: edit to price and rent
@@ -68,6 +72,9 @@ public class StreetField extends OwnableField {
                 System.out.println("owns same color fields");
             }
         }
+
+
+
 /*
         super.landOnField(player, pLst, deck, board, gui, lib);
         if (this.owner.equals("")){

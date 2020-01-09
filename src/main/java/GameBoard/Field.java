@@ -48,6 +48,10 @@ public abstract class Field {
         return null;
     }
 
+    public int getHouseLevel() {
+        return this.level;
+    }
+
     public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
         guiHandler(gui, lib);
     }

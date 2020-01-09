@@ -71,7 +71,7 @@ public class StreetField extends OwnableField {
         super.landOnField(player, pLst, deck, board, gui, lib);
 
         if (this.owner.equals(player.getName())) {
-            if (ownsSameColorFields(gui) {
+            if (ownsSameColorFields()) {
 
             }
         }
@@ -119,19 +119,51 @@ public class StreetField extends OwnableField {
         */
     }
 
-    private boolean ownsSameColorFields(){
-        return false;
+
+    private int getHousePrice() {
+        if (this.price < 2000) {
+            return 1000;
+        }
+        else if (this.price < 4000) {
+            return 2000;
+        }
+        else if (this.price < 6000) {
+            return 3000;
+        }
+        else {
+            return 4000;
+        }
     }
 
-    private void chooseToBuyHouses(GUIController gui) {
-        if (level <= 4) {
-            String choise = gui.getPlayerDropbown("Vil du købe et hus", "Ja", "Nej");
+    private boolean ownsSameColorFields(){
+        return true;
+    }
+
+    private void chooseToBuyHouses(Player player, GUIController gui) {
+
+        // priser for huse <2000 1000kr. <4000 2000kr. <6000 3000kr.  ellers 4000kr.
+        if (this.level <= 3) {
+            int housePrice = getHousePrice();
+            String choise = gui.getPlayerDropbown("Vil du købe et hus for " + housePrice + " kr.", "Ja", "Nej");
 
             if (choise.equals("Ja")) {
-                
+                if (player.getBal() > housePrice) {
+                    this.level++;
+                    player.addBal(-housePrice);
+                }
+            }
+        }
+        else if (this.level == 4) {
+            int hotelPrice = getHouseLevel();
+            String choise = gui.getPlayerDropbown("Vil du købe et hotel for " + hotelPrice + " kr.", "Ja", "Nej");
+
+            if (choise.equals("Ja")) {
+                if (player.getBal() > hotelPrice) {
+                    this.level++;
+                    player.addBal(-hotelPrice);
+                }
             }
         }
 
     }
-
 }

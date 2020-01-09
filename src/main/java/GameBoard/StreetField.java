@@ -13,16 +13,16 @@ public class StreetField extends OwnableField {
 
     private String key; // use in hashmap
 
-    public StreetField(String name, String subName, String desc, String type, String rent, String color, String key){
-        super(name, subName, desc, type, rent); // TODO: edit to price and rent
+    public StreetField(String name, String subName, String desc, String type, String rentStr, String color, String key){
+        super(name, subName, desc, type, rentStr); // TODO: edit to price and rent
 
-        this.rent = new int[6];
-        String[] rentLst = rent.split(",");
+        /*
+        String[] rentLst = rentStr.split(",");
         this.rent = new int[6];
         for (int i = 0; i < 6; i++){
             this.rent[i] = Integer.parseInt(rentLst[i]);
         }
-
+*/
 
         this.color = color;
         this.key = key;
@@ -68,6 +68,13 @@ public class StreetField extends OwnableField {
 
     @Override
     public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
+        //Import LandOnField from ownablefield class
+        super.landOnField(player, pLst, deck, board, gui, lib);
+
+        if (this.owner.contentEquals(player.getName())) {
+
+        }
+        /*
         super.landOnField(player, pLst, deck, board, gui, lib);
         if (this.owner.equals("")){
             gui.showMessage(String.format(lib.text.get("NotOwned"), price));
@@ -88,7 +95,7 @@ public class StreetField extends OwnableField {
                             sameColorOwned++;
                         }
                     }
-                    if(ownercheck.getIsJailed()){
+                    if(ownercheck.getIsJailed()){  //Checks if the owner is in jail
                         gui.showMessage(String.format(lib.text.get("OthersFieldJailed"), ownercheck.getName()));
                     }
                     else if(sameColorOwned == 2){
@@ -103,13 +110,16 @@ public class StreetField extends OwnableField {
                     }
                 }
             }
-        }
-
-
-        
+        }       
         
         // Log to console
         System.out.println(player.getName() + ": Landed on " + this.getName() + ", Field is owned by " + owner);
+
+        */
+    }
+
+    private void ChooseToBuyHouseAndHotel() {
+
     }
 
 

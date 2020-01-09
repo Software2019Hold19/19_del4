@@ -56,3 +56,4 @@ ChanceCTxt3//Flyt 1-5 felter
 ChanceCTxt4//Flyt 1 felt eller træk et nyt kort
 ChanceCTxt5//Flyt til start
 ChanceCTxt6//Flyt til Strandpromonaden
+ChoiceToBuy//Ingen ejer dette felt. Vil du købe feltet for %d penge?

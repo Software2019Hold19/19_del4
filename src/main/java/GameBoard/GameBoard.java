@@ -44,7 +44,7 @@ public class GameBoard {
 
     public GameBoard(Translator _lib){
         this.lib = _lib;
-        board = new Field[24];
+        board = new Field[40];
         initGame();
     }
 

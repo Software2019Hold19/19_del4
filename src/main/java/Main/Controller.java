@@ -130,8 +130,8 @@ public class Controller {
 
     private void playerTurn(Player p) {
 
-        if(!p.getIsJailed()) {
-            int[] diceRoll = dice.roll(false);
+        if(!p.getIsJailed()) {  //If the player is not jailed
+            int[] diceRoll = dice.roll(testing);
 
             gui.showDiceOnBoard(diceRoll);
 
@@ -144,10 +144,10 @@ public class Controller {
 
 
             gui.updatePlayers(pLst);
-        }else{
+        }else{                              // If the player is in jail
 
             while(p.getJailTurn() <= 3) {
-                int[] diceRoll = dice.roll(false);
+                int[] diceRoll = dice.roll(testing);
                 gui.showDiceOnBoard(diceRoll);
 
                 if (diceRoll[0] == diceRoll[1]) {

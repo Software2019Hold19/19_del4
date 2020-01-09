@@ -45,6 +45,8 @@ public class GameBoard {
     }
 
     public void initGame(){
+
+
         //initiates all fields
         // form: fieldname from translator key, subName from translator key, description from translator key, type, price, color
         // key is split by ":" to a String[]. index 0 = name, index 1 = subName, index 2 = desc
@@ -119,9 +121,14 @@ public class GameBoard {
 
         txtlst = lib.text.get("Darkblue2").split(":");
         board[23] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", 5, "blue", fieldLst[23]);
+
     }
 
     public Field[] getBoard() {
         return board;
+    }
+
+    public OwnableField[] getOwnableFields() {
+        return new OwnableField[12]; // TODO: have to chance!!!
     }
 }

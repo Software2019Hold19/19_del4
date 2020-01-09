@@ -10,6 +10,7 @@ public abstract class Field {
     private String type; // "start", "street", "chance" "jail" or "visit"
     private String subName;
     private String desc;
+    protected int rent[];
 
     public Field(String name, String subName, String desc, String type){
         this.name = name;
@@ -20,16 +21,20 @@ public abstract class Field {
 
     public String toString() {return "";}
 
+    public int getRent() {
+        return rent[0];
+    }
+
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getType() {
-        return type;
+        return this.type;
     }
 
     public String getSubName() {
-        return subName;
+        return this.subName;
     }
 
     public String getDesc() {
@@ -48,10 +53,5 @@ public abstract class Field {
     public void guiHandler(GUIController gui, Translator lib){
         gui.showMessage(getDesc());
     }
-    public String getColor(){return "";}
-    public String getOwner(){return "";}
 
-    public void setOwner(String owner){
-        //just need this for research purposes
-    }
 }

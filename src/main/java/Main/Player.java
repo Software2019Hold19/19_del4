@@ -6,6 +6,8 @@ public class Player {
     private Account acc = new Account();
     int fieldNumber = 0;
     boolean alive = true;
+    int jailCount = 0;
+    boolean isJailed = false;
 
     public Player (String name){
         this.name = name;
@@ -44,11 +46,32 @@ public class Player {
         return fieldNumber;
     }
 
+<<<<<<< HEAD
     public boolean getAlive(){
         return alive;
     }
 
     public void kill(){
         this.alive = false;
+=======
+    public boolean getIsJailed(){
+        return isJailed;
+    }
+
+    public void setIsJailed(boolean jailed){
+        isJailed = jailed;
+    }
+
+    public void addJailTurn(){
+        jailCount++;
+    }
+
+    public void resetJailTurn(){
+        jailCount = 0;
+    }
+
+    public int getJailTurn(){
+        return jailCount;
+>>>>>>> fcbd1331c00b00dd3ed96cd8f531edbd06c17bde
     }
 }

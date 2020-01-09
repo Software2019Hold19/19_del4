@@ -5,29 +5,44 @@ import GUI.GUIController;
 import Main.Player;
 import Main.Translator;
 
-public class StreetField extends Field {
+public class StreetField extends OwnableField {
 
-    private int price;
+    
+    private int houseLevel = 0;
     private String color;
-    private String owner = "";
-    private String key;
 
-    public StreetField(String name, String subName, String desc, String type, int price, String color, String key){
-        super(name, subName, desc, type);
-        this.price = price;
+    private String key; // use in hashmap
+
+    public StreetField(String name, String subName, String desc, String type, String rent, String color, String key){
+        super(name, subName, desc, type, rent); // TODO: edit to price and rent
+
+        this.rent = new int[6];
+        String[] rentLst = rent.split(",");
+        this.rent = new int[6];
+        for (int i = 0; i < 6; i++){
+            this.rent[i] = Integer.parseInt(rentLst[i]);
+        }
+
+
         this.color = color;
         this.key = key;
     }
 
-    public int getPrice() {
-        return price;
+    public int getRent() {
+        if (houseLevel != 0) {
+            return rent[houseLevel];
+        }
+        else { // TODO: return 2x rent if all fields in color are owned
+            return rent[houseLevel];
+        }
+        
+        
     }
 
     public String getColor() {
         return color;
     }
 
-    @Override
     public String getOwner() {
         return owner;
     }
@@ -57,7 +72,7 @@ public class StreetField extends Field {
         if (this.owner.equals("")){
             gui.showMessage(String.format(lib.text.get("NotOwned"), price));
             this.owner = player.getName();
-            player.addBal(-price);
+            player.addBal(-this.getRent());
             gui.updateBoard(board.getBoard(), pLst);
             //print - field not bought so you are buying this field
         }
@@ -68,20 +83,20 @@ public class StreetField extends Field {
             for(Player ownercheck : pLst){
                 if(ownercheck.getName().equals(this.owner)){//with for loop it finds player who owns THIS field
                     int sameColorOwned = 0;//counter for how many fields of THIS color has THIS owner
-                    for(Field fieldCheck : board.getBoard()){//checks all fields (including this)
+                    for(OwnableField fieldCheck : board.getOwnableFields()){//checks all fields (including this)
                         if(fieldCheck.getColor().equals(this.color) && fieldCheck.getOwner().equals(this.owner)){
                             sameColorOwned++;
                         }
                     }
                     if(sameColorOwned == 2){
                         gui.showMessage(String.format(lib.text.get("OthersField"), ownercheck.getName(), 2*price));
-                        player.addBal(-(2*price));
-                        ownercheck.addBal(2*price);
+                        player.addBal(-(2*this.getRent()));
+                        ownercheck.addBal(2*this.getRent());
                     }
                     else{
                         gui.showMessage(String.format(lib.text.get("OthersField"), ownercheck.getName(), price));
-                        player.addBal(-price);
-                        ownercheck.addBal(price);
+                        player.addBal(-this.getRent());
+                        ownercheck.addBal(this.getRent());
                     }
                 }
             }

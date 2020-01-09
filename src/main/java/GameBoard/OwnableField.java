@@ -80,7 +80,7 @@ public abstract class OwnableField extends Field {
     public void setOwner(String owner){
         this.owner = owner;
     }
-    
+
      */
 
     public void choiceToBuy(Player player, GUIController gui, Translator lib){

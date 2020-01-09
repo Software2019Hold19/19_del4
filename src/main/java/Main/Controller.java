@@ -146,7 +146,6 @@ public class Controller {
             gui.updatePlayers(pLst);
         }else{                              // If the player is in jail
 
-            while(p.getJailTurn() <= 3) {
                 int[] diceRoll = dice.roll(testing);
                 gui.showDiceOnBoard(diceRoll);
 
@@ -157,15 +156,15 @@ public class Controller {
                     board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                     gui.updatePlayers(pLst);
                     p.setIsJailed(false);
-                    break;
 
                 }else if(p.getJailTurn() == 3){
                     p.addBal(-1000);
                     p.setIsJailed(false);
+                    p.move(diceRoll[0] + diceRoll[1]);
 
 
                 }else{ p.addJailTurn(); }
-            }
+
         }
     }
 

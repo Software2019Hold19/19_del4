@@ -44,7 +44,7 @@ Winner//%s har flest penge og har vundet. Tillykke!
 SameName//Spillere kan ikke hedde det samme.
 OwnField//Du ejer selv dette felt.
 OthersField//Dette felt er eget af %s og du skal betale dem %d penge!
-OthersFieldJailed//Dette felt er eget af %s, men %s er i fængsel.
+OthersFieldJailed//Dette felt er eget af %s men spilleren er i fængsel.
 NotOwned//Du køber dette felt for %d penge, Tillykke!
 LandOnStart//Du lander på startfeltet og modtager 4000 kr.!
 LandOnJail//Du er på besøg i fængslet.

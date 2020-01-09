@@ -88,7 +88,10 @@ public class StreetField extends OwnableField {
                             sameColorOwned++;
                         }
                     }
-                    if(sameColorOwned == 2){
+                    if(ownercheck.getIsJailed()){
+                        gui.showMessage(String.format(lib.text.get("OthersFieldJailed"), ownercheck.getName()));
+                    }
+                    else if(sameColorOwned == 2){
                         gui.showMessage(String.format(lib.text.get("OthersField"), ownercheck.getName(), 2*price));
                         player.addBal(-(2*this.getRent()));
                         ownercheck.addBal(2*this.getRent());

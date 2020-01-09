@@ -57,7 +57,7 @@ ChanceCTxt4//Flyt 1 felt eller træk et nyt kort
 ChanceCTxt5//Flyt til start
 ChanceCTxt6//Flyt til Strandpromonaden
 ChoiceToBuy//Ingen ejer dette felt. Vil du købe feltet for %d kroner?
-Købhus//Vil du købe et hus for
-Købhotel//Vil du købe et hotel for
+Buyhouse//Vil du købe et hus for
+Buyhotel//Vil du købe et hotel for
 Yes//Ja
 No//Nej

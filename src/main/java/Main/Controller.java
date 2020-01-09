@@ -131,7 +131,18 @@ public class Controller {
     private void playerTurn(Player p) {
 
         if(!p.getIsJailed()) {  //If the player is not jailed
+            Boolean manual = false;
             int[] diceRoll = dice.roll(testing);
+            if (manual) {
+                int val = Integer.parseInt(gui.getPlayerDropbown("__MANUEL__ Dice", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2"));
+                if (val < 7) {
+                    diceRoll[0] = val - 1;
+                    diceRoll[1] = 1;
+                } else {
+                    diceRoll[0] = val - 6;
+                    diceRoll[1] = 6;
+                }
+            }
 
             gui.showDiceOnBoard(diceRoll);
 

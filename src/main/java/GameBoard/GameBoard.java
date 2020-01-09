@@ -206,7 +206,7 @@ public class GameBoard {
         board[29] = tmpField;
 
         txtlst = lib.text.get("Gotojail").split(": ");
-        board[30] = new VisitingField(txtlst[0], txtlst[1], txtlst[2],"visit");
+        board[30] = new GoToJailField(txtlst[0], txtlst[1], txtlst[2],"visit");
 
         txtlst = lib.text.get("Yellow1").split(": ");
         tmpField = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "yellow", fieldLst[31]);

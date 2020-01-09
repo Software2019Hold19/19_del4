@@ -71,8 +71,7 @@ public class Player {
         jailCount = 0;
     }
 
-    public int getJailTurn(){
-        return jailCount;
 
-    }
+    public int getJailTurn() { return jailCount; }
+
 }

@@ -1,13 +1,9 @@
 package GameBoard;
-import GameBoard.GameBoard;
 import GUI.GUIController;
 import Main.Player;
 import Main.Translator;
 
 import ChanceDeck.ChanceDeck;
-import GUI.GUIController;
-import Main.Player;
-import Main.Translator;
 
 /**
  * OwnableField
@@ -39,12 +35,22 @@ public abstract class OwnableField extends Field {
     /*@Override
     public void landOnField (Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
         super.landOnField(player, pLst, deck, board, gui, lib);
-        if (!owner.equals("") || owner.equals(player.getName())){
 
+        if (!this.owner.equals(" ") && this.owner.equals(player.getName())){
+            // payrent
         }
-        else ()
+        else if (this.owner.equals(" ")) {
+            // choise to buy
+        }
+
+    }
+
+    private void payRent(Player player){
 
     }*/
+
+    @Override
+    public int getRent(){return rent[level];}
 
     public String getRentString() {
         return Integer.toString(rent[0]);
@@ -74,13 +80,12 @@ public abstract class OwnableField extends Field {
         this.owner = owner;
     }
 
-    public boolean choiceToBuy(Player player, GameBoard board, GUIController gui, Translator lib){
-        String buyChoice = gui.getPlayerDropbown(String.format(lib.text.get("ChoiceToBuy"), this.price), "Yes", "No");
-        if(buyChoice.equals("Yes")){
+    public void choiceToBuy(Player player, GUIController gui, Translator lib){
+        //shows dropdown with yes/no button to buy
+        String buyChoice = gui.getPlayerDropbown(String.format(lib.text.get("ChoiceToBuy"), this.price), lib.text.get("Yes"), lib.text.get("No"));
+        if(buyChoice.equals(lib.text.get("Yes"))){
             setOwner(player.getName());
+            player.addBal(-this.price);
         }
-
     }
-    (Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
-        guiHandler(gui, lib);
 }

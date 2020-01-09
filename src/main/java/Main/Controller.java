@@ -29,7 +29,7 @@ public class Controller {
 
         String playerCountstr = gui.getPlayerDropbown(lib.text.get("NumberOfPlayers"),  "3", "4", "5", "6");
         playerCount = Integer.parseInt(playerCountstr);
-        int startBal = 30000;
+        int startBal = 10;
 
         while (true) {
 
@@ -63,9 +63,15 @@ public class Controller {
         int turnCount = 0;
         int turnCountTotal = 0;
 
-        while (hasPlayerNotWon(lib)) {
+        while (!isOnePlayerLeft(lib)) {
+            gui.updateBoard(board.getBoard(), pLst);
             if(turnCount >= playerCount)
                 turnCount = 0;
+            while(!pLst[turnCount].getAlive()){
+                turnCount++;
+                if(turnCount >= playerCount)
+                    turnCount = 0;
+            }
 
             gui.showMessage(String.format(lib.text.get("Turn"), pLst[turnCount].getName()));
 
@@ -77,9 +83,6 @@ public class Controller {
             if (turnCountTotal % 100 == 0) {
                 System.out.println("Turn Count total: " + turnCountTotal);
             }
-                
-
-           // gui.showMessage("Næste spiller tur");
         }
         int max = pLst[0].getBal();
         String winner = pLst[0].getName();
@@ -92,23 +95,30 @@ public class Controller {
         gui.showMessage(String.format(lib.text.get("Winner"), winner));
     }
 
-    private boolean hasPlayerNotWon(Translator lib) {
-        boolean isGameFinished = false;
+    // kills players that are on 0 money and checks how many are left.
+    private boolean isOnePlayerLeft(Translator lib) {    //dette var "hasPlayerNotWon" før
+
+        int aliveCount = 0;
         for (Player p : pLst) {
-
-            // if player has no money or over 100
+            // if player has no money then die
             if (p.getBal() == 0) {
-                isGameFinished = true;
-                gui.showMessage(String.format(lib.text.get("EndOfGame"), p.getName()));
+                p.kill();
+
+        //        gui.showMessage(String.format(lib.text.get("EndOfGame"), p.getName()));
+            }
+            if (p.getAlive()){
+                aliveCount++;
             }
 
-            if (p.getBal() >= 100) {
-                isGameFinished = true;
-                gui.showMessage(String.format(lib.text.get("WinnerByDefault"), p.getName()));
-            }
-
+        //        gui.showMessage(String.format(lib.text.get("WinnerByDefault"), p.getName()));
         }
-        return !isGameFinished;
+        if(aliveCount==1){
+            return true;
+        }
+        else {
+            return false;
+        }
+        //return !isGameFinished;
     }
 
 

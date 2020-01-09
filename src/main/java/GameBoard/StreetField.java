@@ -58,7 +58,7 @@ public class StreetField extends Field {
             gui.showMessage(String.format(lib.text.get("NotOwned"), price));
             this.owner = player.getName();
             player.addBal(-price);
-            gui.updateBoard(board.getBoard());
+            gui.updateBoard(board.getBoard(), pLst);
             //print - field not bought so you are buying this field
         }
         else if (player.getName().equals(this.owner)){ //player is the owner

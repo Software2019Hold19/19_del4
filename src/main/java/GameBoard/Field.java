@@ -50,4 +50,8 @@ public abstract class Field {
     }
     public String getColor(){return "";}
     public String getOwner(){return "";}
+
+    public void setOwner(String owner){
+        //just need this for research purposes
+    }
 }

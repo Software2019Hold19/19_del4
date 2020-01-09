@@ -5,6 +5,7 @@ public class Player {
     String name;
     private Account acc = new Account();
     int fieldNumber = 0;
+    boolean alive = true;
 
     public Player (String name){
         this.name = name;
@@ -23,7 +24,7 @@ public class Player {
         this.fieldNumber += val;
         if (this.fieldNumber >= 24){
             this.fieldNumber -= 24;
-            this.addBal(4000); // income from start
+            this.addBal(0); // income from start
         }
     }
 
@@ -41,5 +42,13 @@ public class Player {
 
     public int getFieldNumber() {
         return fieldNumber;
+    }
+
+    public boolean getAlive(){
+        return alive;
+    }
+
+    public void kill(){
+        this.alive = false;
     }
 }

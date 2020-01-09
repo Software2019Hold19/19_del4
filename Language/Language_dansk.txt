@@ -4,7 +4,7 @@ Lightblue2//Hvidovre: 1200 kr.: Du er landet på Hvidovre.: 80,400,1200,3600,640
 Chance//?: Prøv lykken.: Tag et chancekort.
 Orange1//Roskildevej: 2000 kr.: Du er landet på Roskildevej.: 120,600,1800,5400,8000,11000
 Orange2//Valby Langgade: 2000 kr.: Du er landet på Valby Langgade.: 120,600,1800,5400,8000,11000
-Orange3//Allegade: 24000 kr.: Du er landet på Allegade.: 160,800,2000,6000,9000,18000
+Orange3//Allegade: 2400 kr.: Du er landet på Allegade.: 160,800,2000,6000,9000,18000
 Visiting//Fængsel: Fængsel.: Du er på besøg i fængslet.
 Green1//Frederiksberg Alle: 2800 kr.: Du er landet på Frederiksberg Alle.: 200,1000,3000,9000,12500,15000
 Green2//Bulowsvej: 2800 kr.: Du er landet på Bulowsvej.: 200,1000,3000,9000,12500,15000

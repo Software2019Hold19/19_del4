@@ -36,13 +36,17 @@ abstract class OwnableField extends Field {
     public void landOnField (Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
         super.landOnField(player, pLst, deck, board, gui, lib);
 
-        if (!this.owner.equals(" ") && this.owner.equals(player)){
+        if (!this.owner.equals(" ") && this.owner.equals(player.getName())){
             // payrent
         }
         else if (this.owner.equals(" ")) {
             // choise to buy
         }
 
+    }
+
+    public int payRent(){
+        
     }
 
     public String getRentString() {

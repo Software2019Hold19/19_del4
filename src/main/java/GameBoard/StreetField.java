@@ -7,8 +7,6 @@ import Main.Translator;
 
 public class StreetField extends OwnableField {
 
-    
-    private int houseLevel = 0;
     private String color;
 
     private String key; // use in hashmap
@@ -28,12 +26,13 @@ public class StreetField extends OwnableField {
         this.key = key;
     }
 
+    @Override
     public int getRent() {
-        if (houseLevel != 0) {
-            return rent[houseLevel];
+        if (level != 0) {
+            return rent[level];
         }
         else { // TODO: return 2x rent if all fields in color are owned
-            return rent[houseLevel];
+            return rent[level];
         }
         
         
@@ -72,7 +71,9 @@ public class StreetField extends OwnableField {
         super.landOnField(player, pLst, deck, board, gui, lib);
 
         if (this.owner.equals(player.getName())) {
-            ChooseToBuyHouseAndHotel();
+            if (ownsSameColorFields(gui) {
+
+            }
         }
         /*
         super.landOnField(player, pLst, deck, board, gui, lib);
@@ -118,9 +119,19 @@ public class StreetField extends OwnableField {
         */
     }
 
-    private void ChooseToBuyHouseAndHotel() {
-
+    private boolean ownsSameColorFields(){
+        return false;
     }
 
+    private void chooseToBuyHouses(GUIController gui) {
+        if (level <= 4) {
+            String choise = gui.getPlayerDropbown("Vil du købe et hus", "Ja", "Nej");
+
+            if (choise.equals("Ja")) {
+                
+            }
+        }
+
+    }
 
 }

@@ -18,6 +18,7 @@ public abstract class Field {
         this.type = type;
         this.subName = subName;
         this.desc = desc;
+        this.level = 0;
     }
 
     public String toString() {return "";}

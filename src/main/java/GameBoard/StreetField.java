@@ -88,7 +88,7 @@ public class StreetField extends OwnableField {
                             sameColorOwned++;
                         }
                     }
-                    if(ownercheck.getIsJailed()){
+                    if(ownercheck.getIsJailed()){  //Checks if the owner is in jail
                         gui.showMessage(String.format(lib.text.get("OthersFieldJailed"), ownercheck.getName()));
                     }
                     else if(sameColorOwned == 2){

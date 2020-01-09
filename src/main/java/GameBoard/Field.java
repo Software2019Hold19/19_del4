@@ -11,6 +11,7 @@ public abstract class Field {
     private String subName;
     private String desc;
     protected int rent[];
+    protected int level;
 
     public Field(String name, String subName, String desc, String type){
         this.name = name;

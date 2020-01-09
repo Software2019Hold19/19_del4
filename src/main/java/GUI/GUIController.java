@@ -30,6 +30,11 @@ public class GUIController {
     }
 
     public void showDiceOnBoard(int[] roll){
+        if (testing) {
+            gui.showMessage("Next turn");
+        }
+
+        
         gui.setDice(roll[0], roll[1]);
     }
 

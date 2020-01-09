@@ -45,9 +45,12 @@ abstract class OwnableField extends Field {
 
     }
 
-    public int payRent(){
-        
+    private void payRent(Player player){
+
     }
+
+    @Override
+    public int getRent(){return rent[level];}
 
     public String getRentString() {
         return Integer.toString(rent[0]);

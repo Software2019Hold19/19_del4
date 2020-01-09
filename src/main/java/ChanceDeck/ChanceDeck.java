@@ -19,7 +19,6 @@ public class ChanceDeck {
         deck[3] = new BankChanceCard(lib.text.get("ChanceCTxt2"), -2);
         deck[4] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt5"), true);
         deck[5] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt6"), false);
-        deck[6] = new JailChanceCard("Jailed");
 
         if (!testing) {
             shuffleDeck();
@@ -55,8 +54,7 @@ public class ChanceDeck {
         if (cardCount >= deck.length){ //resets count when all cards have been drawn
             cardCount = 0;
         }
-        //return deck[cardCount++];//returns drawn card and THEN adds 1 to cardCount
-        return deck[6];
+        return deck[cardCount++];//returns drawn card and THEN adds 1 to cardCount
     }
 
 

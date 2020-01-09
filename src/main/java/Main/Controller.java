@@ -22,41 +22,38 @@ public class Controller {
 
     // Init players and language
     public void startGame() throws IOException {
-        if (testing) {
+        String selectedL = gui.getPlayerDropbown("Vælg Sprog / Choose Language", "Dansk");
+        lib.getLanguage(selectedL);
+        gui.updateLanguage(lib);
+        board.boardUpdate(lib);
+        gui.showMessage(lib.text.get("Welcome"));
 
-        } else {
-            String selectedL = gui.getPlayerDropbown("Vælg Sprog / Choose Language", "Dansk");
-            lib.getLanguage(selectedL);
-            gui.updateLanguage(lib);
-            board.boardUpdate(lib);
-            gui.showMessage(lib.text.get("Welcome"));
+        String playerCountstr = gui.getPlayerDropbown(lib.text.get("NumberOfPlayers"), "3", "4", "5", "6");
+        playerCount = Integer.parseInt(playerCountstr);
+        int startBal = 30000;
 
-            String playerCountstr = gui.getPlayerDropbown(lib.text.get("NumberOfPlayers"), "3", "4", "5", "6");
-            playerCount = Integer.parseInt(playerCountstr);
-            int startBal = 30000;
+        while (true) {
 
-            while (true) {
+            boolean sameName = false;
+            pLst = new Player[playerCount];
+            for (int i = 0; i < playerCount; i++) {
+                Player p = new Player(gui.getUserString(String.format(lib.text.get("InputName"), i + 1)), startBal);
+                pLst[i] = p;
+            }
 
-                boolean sameName = false;
-                pLst = new Player[playerCount];
-                for (int i = 0; i < playerCount; i++) {
-                    Player p = new Player(gui.getUserString(String.format(lib.text.get("InputName"), i + 1)), startBal);
-                    pLst[i] = p;
-                }
-
-                for (int i = 0; i < pLst.length; i++) {
-                    for (int j = i + 1; j < pLst.length; j++) {
-                        if (pLst[i].getName().equals(pLst[j].getName())) {
-                            sameName = true;
-                            gui.showMessage(lib.text.get("SameName"));
-                        }
+            for (int i = 0; i < pLst.length; i++) {
+                for (int j = i + 1; j < pLst.length; j++) {
+                    if (pLst[i].getName().equals(pLst[j].getName())) {
+                        sameName = true;
+                        gui.showMessage(lib.text.get("SameName"));
                     }
                 }
-
-                if (!sameName) {
-                    break;
-                }
             }
+
+            if (!sameName) {
+                break;
+            }
+
         }
 
         gui.addPlayers(pLst);

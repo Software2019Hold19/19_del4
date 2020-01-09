@@ -1,12 +1,13 @@
 package GUI;
 
 import GameBoard.GameBoard;
-import GameBoard.Field;
+import GameBoard.OwnableField;
 import Main.Player;
 import Main.Translator;
 //Side Fields
 import gui_fields.*;
 import gui_main.GUI;
+
 
 //Corner Fields
 
@@ -72,8 +73,9 @@ public class GUIController {
         pObs.update(gui, pLst);
     }
 
-    public void updateBoard(Field[] fLst){
-        bObs.ownerUpdate(gui.getFields(), fLst, fieldFac.getOwnable(), pObs.getGuiPlayerList());
+    public void updateBoard(OwnableField[] fLst, Player[] pLst){
+        bObs.ownerUpdate(gui.getFields(), fLst, fieldFac.getOwnable(), pObs.getGuiPlayerList(), pLst);
+
     }
 
     public GUI getGui() {

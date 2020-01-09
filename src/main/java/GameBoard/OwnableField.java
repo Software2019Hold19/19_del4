@@ -8,11 +8,11 @@ import ChanceDeck.ChanceDeck;
 /**
  * OwnableField
  */
-abstract class OwnableField extends Field {
+public abstract class OwnableField extends Field {
 
     protected int price;
-    
-    protected String owner = " ";
+    protected String key;
+    protected String owner = "";
 
     public OwnableField(String name, String subName, String desc, String type, String rentStr) {
         super(name, subName, desc, type);
@@ -60,8 +60,16 @@ abstract class OwnableField extends Field {
         return "";
     }
 
+    public String getKey() {
+        return key;
+    }
+
     public String getOwner() {
         return this.owner;
+    }
+
+    public void setOwner(String name) {
+        this.owner = name;
     }
     
     public int getPrice() {

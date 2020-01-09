@@ -33,16 +33,16 @@ public class FieldFactory {
                     String[] tmpLst = field.getInfo();
                     Color color = Color.BLACK;
                     switch (tmpLst[5]){
-                        case("brown"):
-                            color = new Color(127, 76, 25);
+                        case("lightgray"):
+                            color = new Color(224, 224, 224);
                             break;
 
-                        case("cyan"):
-                            color = Color.CYAN;
+                        case("lightblue"):
+                            color = new Color(31, 236, 255);
                             break;
 
-                        case("magenta"):
-                            color = Color.MAGENTA;
+                        case("darkgray"):
+                            color = new Color(117, 117, 117);
                             break;
 
                         case("orange"):
@@ -61,8 +61,8 @@ public class FieldFactory {
                             color = Color.GREEN;
                             break;
 
-                        case("blue"):
-                            color = Color.BLUE;
+                        case("brown"):
+                            color = new Color(127, 76, 25);
                             break;
 
                         default:
@@ -92,7 +92,7 @@ public class FieldFactory {
                     break;
 
                 case ("ferry"):
-                    guiFields[i++] = new GUI_Shipping("default", field.getName(), field.getSubName(), field.getDesc(), Integer.toString(field.getRent()),Color.WHITE, Color.YELLOW);
+                    guiFields[i++] = new GUI_Shipping("default", field.getName(), field.getSubName(), field.getDesc(), Integer.toString(field.getRent()),Color.WHITE, Color.BLACK);
                     break;
 
                 case ("tax"):

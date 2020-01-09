@@ -13,7 +13,7 @@ abstract class OwnableField extends Field {
         super(name, subName, desc, type);
         String[] rentLst = rent.split(",");
         this.rent = new int[rentLst.length];
-        for (int i = 0; i < 6; i++){
+        for (int i = 0; i < rentLst.length; i++){
             this.rent[i] = Integer.parseInt(rentLst[i]);
         }
         // TODO Auto-generated constructor stub

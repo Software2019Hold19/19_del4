@@ -33,9 +33,7 @@ public class StreetField extends OwnableField {
         }
         else { // TODO: return 2x rent if all fields in color are owned
             return rent[level];
-        }
-        
-        
+        }        
     }
 
     public String getColor() {
@@ -71,8 +69,8 @@ public class StreetField extends OwnableField {
         super.landOnField(player, pLst, deck, board, gui, lib);
 
         if (this.owner.equals(player.getName())) {
-            if (ownsSameColorFields()) {
-
+            if (ownsSameColorFields(board, pLst)) {
+           //     chooseToBuyHouses(player, gui);
             }
         }
 
@@ -135,8 +133,28 @@ public class StreetField extends OwnableField {
         }
     }
 
-    private boolean ownsSameColorFields(){
-        return true;
+    private boolean ownsSameColorFields(GameBoard board, Player[] pLst){
+        for(Player ownercheck : pLst){
+            if(ownercheck.getName().equals(this.owner)){//with for loop it finds player who owns THIS field
+                int sameColorOwned = 0;//counter for how many fields of THIS color has THIS owner
+                for(OwnableField fieldCheck : board.getOwnableBoard()){//checks all fields (including this)
+                    if(fieldCheck.getColor().equals(this.color) && fieldCheck.getOwner().equals(this.owner)){
+                        sameColorOwned++;
+                    }
+                }
+                if(sameColorOwned == 3){
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
+        }
+        return false;
+
     }
 
     private void chooseToBuyHouses(Player player, GUIController gui) {
@@ -154,7 +172,7 @@ public class StreetField extends OwnableField {
             }
         }
         else if (this.level == 4) {
-            int hotelPrice = getHouseLevel();
+            int hotelPrice = getHousePrice();
             String choise = gui.getPlayerDropbown("Vil du købe et hotel for " + hotelPrice + " kr.", "Ja", "Nej");
 
             if (choise.equals("Ja")) {

@@ -249,12 +249,12 @@ public class GameBoard {
 
 
         //Test
-        /*
+/*
         for (int i = 0; i < ownableBoard.length; i++) {
             ownableBoard[i].setOwner("Oli");
         }
-        */
 
+*/
     }
 
     public Field[] getBoard() {

@@ -131,7 +131,7 @@ public class Controller {
     private void playerTurn(Player p) {
 
         if(!p.getIsJailed()) {  //If the player is not jailed
-            Boolean manual = false;
+            Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
             int[] diceRoll = dice.roll(testing);
             if (manual) {
                 int val = Integer.parseInt(gui.getPlayerDropbown("__MANUEL__ Dice", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2"));

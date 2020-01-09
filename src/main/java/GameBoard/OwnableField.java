@@ -3,10 +3,10 @@ package GameBoard;
 /**
  * OwnableField
  */
-abstract class OwnableField extends Field {
+public abstract class OwnableField extends Field {
 
     protected int price;
-    
+    protected String key;
     protected String owner = "";
 
     public OwnableField(String name, String subName, String desc, String type, String rent) {
@@ -29,6 +29,10 @@ abstract class OwnableField extends Field {
 
     public String getColor() {
         return "";
+    }
+
+    public String getKey() {
+        return key;
     }
 
     public String getOwner() {

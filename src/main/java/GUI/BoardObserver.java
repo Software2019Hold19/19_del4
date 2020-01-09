@@ -1,8 +1,10 @@
 package GUI;
 
 import GameBoard.Field;
+import GameBoard.OwnableField;
 import Main.Player;
 import gui_fields.GUI_Field;
+import gui_fields.GUI_Ownable;
 import gui_fields.GUI_Player;
 import gui_fields.GUI_Street;
 import java.awt.*;
@@ -14,11 +16,11 @@ public class BoardObserver extends Observer {
 
     }
 
-    public void ownerUpdate(GUI_Field[] guiFields, Field[] fields, HashMap<String, GUI_Street> streets, GUI_Player[] guiPLst, Player[] pLst){
+    public void ownerUpdate(GUI_Field[] guiFields, OwnableField[] fields, HashMap<String, GUI_Ownable> streets, GUI_Player[] guiPLst, Player[] pLst){
         for (int i = 0; i < fields.length; i++){
-            if (fields[i].getInfo()[3].equals("street")){
-                String owner = fields[i].getInfo()[6];
-                String key = fields[i].getInfo()[7];
+            if (fields[i].getType().equals("street")){
+                String owner = fields[i].getOwner();
+                String key = fields[i].getKey();
                 // find owner and see if ded - if ded remove owner
                 for(Player p : pLst){
                     if(owner.equals(p.getName()) && !p.getAlive()){

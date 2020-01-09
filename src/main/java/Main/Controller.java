@@ -69,7 +69,7 @@ public class Controller {
         int turnCountTotal = 0;
 
         while (!isOnePlayerLeft(lib)) {
-            gui.updateBoard(board.getBoard(), pLst);
+            gui.updateBoard(board.getOwnableBoard(), pLst);
             if(turnCount >= playerCount)
                 turnCount = 0;
             while(!pLst[turnCount].getAlive()){

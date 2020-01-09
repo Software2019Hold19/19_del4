@@ -109,16 +109,11 @@ public class Controller {
             if (p.getBal() == 0) {
                 p.kill();
 
-<<<<<<< HEAD
+
         //        gui.showMessage(String.format(lib.text.get("EndOfGame"), p.getName()));
             }
             if (p.getAlive()){
                 aliveCount++;
-=======
-            if (p.getBal() >= 90000) {
-                isGameFinished = true;
-                gui.showMessage(String.format(lib.text.get("WinnerByDefault"), p.getName()));
->>>>>>> fcbd1331c00b00dd3ed96cd8f531edbd06c17bde
             }
 
         //        gui.showMessage(String.format(lib.text.get("WinnerByDefault"), p.getName()));

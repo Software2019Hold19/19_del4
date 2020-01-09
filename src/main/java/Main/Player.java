@@ -26,7 +26,7 @@ public class Player {
         this.fieldNumber += val;
         if (this.fieldNumber >= 24){
             this.fieldNumber -= 24;
-            this.addBal(0); // income from start
+            this.addBal(4000); // income from start
         }
     }
 
@@ -46,14 +46,15 @@ public class Player {
         return fieldNumber;
     }
 
-<<<<<<< HEAD
+
     public boolean getAlive(){
         return alive;
     }
 
-    public void kill(){
+    public void kill() {
         this.alive = false;
-=======
+    }
+
     public boolean getIsJailed(){
         return isJailed;
     }
@@ -72,6 +73,6 @@ public class Player {
 
     public int getJailTurn(){
         return jailCount;
->>>>>>> fcbd1331c00b00dd3ed96cd8f531edbd06c17bde
+
     }
 }

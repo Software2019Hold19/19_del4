@@ -187,7 +187,6 @@ public class GameBoard {
 
         txtlst = lib.text.get("Brown2").split(": ");
         board[39] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "brown", fieldLst[39]);
-
     }
 
     public Field[] getBoard() {

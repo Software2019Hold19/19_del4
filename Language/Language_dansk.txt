@@ -1,6 +1,6 @@
 Start//Start: Modtag 4000 kr.: Du modtager 4000 kr når du passere start.
 Lightblue1//Rødovrevej: 1200 kr.: Du er landet på Rødovrevej.: 40,200,600,1800,2200,5000
-Lightblue2//Hvidovre: 1200 kr.: Du er landet på Hvidovre.: 80,400,1200,3600, 6400,10800
+Lightblue2//Hvidovre: 1200 kr.: Du er landet på Hvidovre.: 80,400,1200,3600,6400,10800
 Chance//?: Prøv lykken.: Tag et chancekort.
 Orange1//Roskildevej: 2000 kr.: Du er landet på Roskildevej.: 120,600,1800,5400,8000,11000
 Orange2//Valby Langgade: 2000 kr.: Du er landet på Valby Langgade.: 120,600,1800,5400,8000,11000

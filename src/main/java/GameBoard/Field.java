@@ -10,6 +10,7 @@ public abstract class Field {
     private String type; //"brewery", "ferry", "start", "street", "chance" "jail" or "visit"
     private String subName;
     private String desc;
+    private String key;
     protected int rent[];
     protected int level;
 
@@ -43,6 +44,10 @@ public abstract class Field {
         return this.desc;
     }
 
+    public String getKey() {
+        return this.key;
+    }
+
     public String[] getInfo(){
 
         return null;
@@ -59,4 +64,5 @@ public abstract class Field {
     public void guiHandler(GUIController gui, Translator lib){
         gui.showMessage(getDesc());
     }
+
 }

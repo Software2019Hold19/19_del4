@@ -75,13 +75,13 @@ public class StreetField extends OwnableField {
 
             }
         }
-        /*
+
         super.landOnField(player, pLst, deck, board, gui, lib);
         if (this.owner.equals("")){
             gui.showMessage(String.format(lib.text.get("NotOwned"), price));
             this.owner = player.getName();
-            player.addBal(-this.getRent());
-            gui.updateBoard(board.getBoard());
+            player.addBal(-price);
+            gui.updateBoard(board.getOwnableBoard(), pLst);
             //print - field not bought so you are buying this field
         }
         else if (player.getName().equals(this.owner)){ //player is the owner
@@ -91,7 +91,7 @@ public class StreetField extends OwnableField {
             for(Player ownercheck : pLst){
                 if(ownercheck.getName().equals(this.owner)){//with for loop it finds player who owns THIS field
                     int sameColorOwned = 0;//counter for how many fields of THIS color has THIS owner
-                    for(OwnableField fieldCheck : board.getOwnableFields()){//checks all fields (including this)
+                    for(OwnableField fieldCheck : board.getOwnableBoard()){//checks all fields (including this)
                         if(fieldCheck.getColor().equals(this.color) && fieldCheck.getOwner().equals(this.owner)){
                             sameColorOwned++;
                         }
@@ -116,7 +116,7 @@ public class StreetField extends OwnableField {
         // Log to console
         System.out.println(player.getName() + ": Landed on " + this.getName() + ", Field is owned by " + owner);
 
-        */
+
     }
 
 

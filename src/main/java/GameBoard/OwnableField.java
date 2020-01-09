@@ -1,22 +1,18 @@
 package GameBoard;
-import GameBoard.GameBoard;
 import GUI.GUIController;
 import Main.Player;
 import Main.Translator;
 
 import ChanceDeck.ChanceDeck;
-import GUI.GUIController;
-import Main.Player;
-import Main.Translator;
 
 /**
  * OwnableField
  */
-abstract class OwnableField extends Field {
+public abstract class OwnableField extends Field {
 
     protected int price;
-    
-    protected String owner = " ";
+    protected String key;
+    protected String owner = "";
 
     public OwnableField(String name, String subName, String desc, String type, String rentStr) {
         super(name, subName, desc, type);
@@ -36,22 +32,28 @@ abstract class OwnableField extends Field {
 
     }
 
-    /*@Override
+    @Override
     public void landOnField (Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
         super.landOnField(player, pLst, deck, board, gui, lib);
 
-        if (!this.owner.equals(" ") && this.owner.equals(player.getName())){
-            // payrent
+        if (!this.owner.equals("") && !(this.owner.equals(player.getName()))){
+            payRent(player,pLst);
         }
-        else if (this.owner.equals(" ")) {
-            // choise to buy
+        else if (this.owner.equals("")) {
+            choiceToBuy(player,gui,lib);
         }
 
     }
 
-    private void payRent(Player player){
+    private void payRent(Player player, Player[] pLst){
+        player.addBal(-getRent());
 
-    }*/
+        for (int i = 0; i < pLst.length; i++){
+            if (getOwner().equals(pLst[i].getName())){
+                pLst[i].addBal(getRent());
+            }
+        }
+    }
 
     @Override
     public int getRent(){return rent[level];}
@@ -64,10 +66,14 @@ abstract class OwnableField extends Field {
         return "";
     }
 
+    public String getKey() {
+        return key;
+    }
+
     public String getOwner() {
         return this.owner;
     }
-    
+
     public int getPrice() {
         return this.price;
     }
@@ -76,13 +82,12 @@ abstract class OwnableField extends Field {
         this.owner = owner;
     }
 
-    public boolean choiceToBuy(Player player, GameBoard board, GUIController gui, Translator lib){
-        String buyChoice = gui.getPlayerDropbown(String.format(lib.text.get("ChoiceToBuy"), this.price), "Yes", "No");
-        if(buyChoice.equals("Yes")){
+    public void choiceToBuy(Player player, GUIController gui, Translator lib){
+        //shows dropdown with yes/no button to buy
+        String buyChoice = gui.getPlayerDropbown(String.format(lib.text.get("ChoiceToBuy"), this.price), lib.text.get("Yes"), lib.text.get("No"));
+        if(buyChoice.equals(lib.text.get("Yes"))){
             setOwner(player.getName());
+            player.addBal(-this.price);
         }
-
     }
-    (Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
-        guiHandler(gui, lib);
 }

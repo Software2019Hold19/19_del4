@@ -12,7 +12,7 @@ abstract class OwnableField extends Field {
 
     protected int price;
     
-    protected String owner = "";
+    protected String owner = " ";
 
     public OwnableField(String name, String subName, String desc, String type, String rentStr) {
         super(name, subName, desc, type);
@@ -35,12 +35,13 @@ abstract class OwnableField extends Field {
     @Override
     public void landOnField (Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
         super.landOnField(player, pLst, deck, board, gui, lib);
-        if (!owner.equals("")){
-            if(owner.equals(player){
 
-            }
+        if (!this.owner.equals(" ") && this.owner.equals(player)){
+            // payrent
         }
-        else 
+        else if (this.owner.equals(" ")) {
+            // choise to buy
+        }
 
     }
 

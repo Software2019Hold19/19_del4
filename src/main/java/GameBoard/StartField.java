@@ -6,7 +6,7 @@ import Main.Player;
 import Main.Translator;
 
 public class    StartField extends Field {
-    private int money = 2;
+    private int money = 4000;
 
     public StartField(String name, String subName, String desc, String type){
         super(name, subName, desc,type);

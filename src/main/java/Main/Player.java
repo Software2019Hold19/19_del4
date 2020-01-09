@@ -23,8 +23,8 @@ public class Player {
 
     public void move(int val){
         this.fieldNumber += val;
-        if (this.fieldNumber >= 24){
-            this.fieldNumber -= 24;
+        if (this.fieldNumber >= 40){
+            this.fieldNumber -= 40;
             this.addBal(4000); // income from start
         }
     }

@@ -1,5 +1,4 @@
 package GameBoard;
-
 import ChanceDeck.ChanceDeck;
 import GUI.GUIController;
 import Main.Player;
@@ -136,9 +135,18 @@ public class StreetField extends OwnableField {
                 ownSamecolorFieldCnt++;
             }
         }
-
-        if (ownSamecolorFieldCnt == 3)
-        {
+        //there are only 2 of lightblue and brown
+        if((ownSamecolorFieldCnt == 2) && (this.color.equals("lightblue")  ||
+                                            this.color.equals("brown"))) {
+            return true;
+        }
+        //there are 3 of all other colors.
+        else if((ownSamecolorFieldCnt == 3) && (this.color.equals("orange") ||
+                                            this.color.equals("green")      ||
+                                            this.color.equals("darkgrey")   ||
+                                            this.color.equals("red")        ||
+                                            this.color.equals("lightgrey")  ||
+                                            this.color.equals("yellow"))) {
             return true;
         }
         else{

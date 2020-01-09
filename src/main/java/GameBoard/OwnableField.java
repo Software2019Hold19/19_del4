@@ -1,5 +1,10 @@
 package GameBoard;
 
+import ChanceDeck.ChanceDeck;
+import GUI.GUIController;
+import Main.Player;
+import Main.Translator;
+
 /**
  * OwnableField
  */
@@ -24,6 +29,18 @@ abstract class OwnableField extends Field {
     }
 
     public void ownField () {
+
+    }
+
+    @Override
+    public void landOnField (Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
+        super.landOnField(player, pLst, deck, board, gui, lib);
+        if (!owner.equals("")){
+            if(owner.equals(player){
+
+            }
+        }
+        else 
 
     }
 

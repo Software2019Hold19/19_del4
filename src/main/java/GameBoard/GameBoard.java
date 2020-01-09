@@ -162,16 +162,16 @@ public class GameBoard {
         board[30] = new VisitingField(txtlst[0], txtlst[1], txtlst[2],"visit");
 
         txtlst = lib.text.get("Yellow1").split(":");
-        board[31] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "magenta", fieldLst[8]);
+        board[31] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "yellow", fieldLst[31]);
 
         txtlst = lib.text.get("Yellow2").split(":");
-        board[32] = new StreetField(txtlst[0], txtlst[1], txtlst[2], "street", txtlst[3],"yellow",);
+        board[32] = new StreetField(txtlst[0], txtlst[1], txtlst[2], "street", txtlst[3],"yellow",fieldLst[32]);
 
         txtlst = lib.text.get("Chance").split(":");
         board[33] = new ChanceField(txtlst[0], txtlst[1], txtlst[2],"chance");
 
         txtlst = lib.text.get("Yellow3").split(":");
-        board[34] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "orange", fieldLst[11]);
+        board[34] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "yellow", fieldLst[34]);
 
         txtlst = lib.text.get("Ferry4").split(":");
         board[35] = new FerryField(txtlst[0], txtlst[1], txtlst[2],"ferry", txtlst[3]);
@@ -180,13 +180,13 @@ public class GameBoard {
         board[36] = new ChanceField(txtlst[0], txtlst[1], txtlst[2],"chance");
 
         txtlst = lib.text.get("Brown1").split(":");
-        board[37] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "red", fieldLst[14]);
+        board[37] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "brown", fieldLst[37]);
 
         txtlst = lib.text.get("Tax2").split(":");
         board[38] = new TaxField(txtlst[0], txtlst[1], txtlst[2],"tax");
 
         txtlst = lib.text.get("Brown2").split(":");
-        board[39] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "yellow", fieldLst[16]);
+        board[39] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "brown", fieldLst[39]);
 
     }
 

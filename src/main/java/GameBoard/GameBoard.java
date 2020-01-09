@@ -72,13 +72,13 @@ public class GameBoard {
         board[0] = new StartField(txtlst[0], txtlst[1], txtlst[2],"start");
 
         txtlst = lib.text.get("Lightblue1").split(":");
-        board[1] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "cyan", fieldLst[1]);
+        board[1] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "lightblue", fieldLst[1]);
 
         txtlst = lib.text.get("Chance").split(":");
         board[2] = new ChanceField(txtlst[0], txtlst[1], txtlst[2], "chance");
 
         txtlst = lib.text.get("Lightblue2").split(":");
-        board[3] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "cyan", fieldLst[3]);
+        board[3] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "lightblue", fieldLst[3]);
 
         txtlst = lib.text.get("Tax1").split(":");
         board[4] = new TaxField(txtlst[0], txtlst[1], txtlst[2],"tax");

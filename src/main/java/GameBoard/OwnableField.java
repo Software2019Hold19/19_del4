@@ -1,22 +1,18 @@
 package GameBoard;
-import GameBoard.GameBoard;
 import GUI.GUIController;
 import Main.Player;
 import Main.Translator;
 
 import ChanceDeck.ChanceDeck;
-import GUI.GUIController;
-import Main.Player;
-import Main.Translator;
 
 /**
  * OwnableField
  */
-abstract class OwnableField extends Field {
+public abstract class OwnableField extends Field {
 
     protected int price;
-    
-    protected String owner = " ";
+    protected String key;
+    protected String owner = "";
 
     public OwnableField(String name, String subName, String desc, String type, String rentStr) {
         super(name, subName, desc, type);
@@ -64,8 +60,16 @@ abstract class OwnableField extends Field {
         return "";
     }
 
+    public String getKey() {
+        return key;
+    }
+
     public String getOwner() {
         return this.owner;
+    }
+
+    public void setOwner(String name) {
+        this.owner = name;
     }
     
     public int getPrice() {
@@ -76,13 +80,12 @@ abstract class OwnableField extends Field {
         this.owner = owner;
     }
 
-    public boolean choiceToBuy(Player player, GameBoard board, GUIController gui, Translator lib){
-        String buyChoice = gui.getPlayerDropbown(String.format(lib.text.get("ChoiceToBuy"), this.price), "Yes", "No");
-        if(buyChoice.equals("Yes")){
+    public void choiceToBuy(Player player, GUIController gui, Translator lib){
+        //shows dropdown with yes/no button to buy
+        String buyChoice = gui.getPlayerDropbown(String.format(lib.text.get("ChoiceToBuy"), this.price), lib.text.get("Yes"), lib.text.get("No"));
+        if(buyChoice.equals(lib.text.get("Yes"))){
             setOwner(player.getName());
+            player.addBal(-this.price);
         }
-
     }
-    (Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
-        guiHandler(gui, lib);
 }

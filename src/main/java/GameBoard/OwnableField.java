@@ -1,4 +1,8 @@
 package GameBoard;
+import GameBoard.GameBoard;
+import GUI.GUIController;
+import Main.Player;
+import Main.Translator;
 
 import ChanceDeck.ChanceDeck;
 import GUI.GUIController;
@@ -32,7 +36,7 @@ abstract class OwnableField extends Field {
 
     }
 
-    @Override
+    /*@Override
     public void landOnField (Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
         super.landOnField(player, pLst, deck, board, gui, lib);
 
@@ -47,7 +51,7 @@ abstract class OwnableField extends Field {
 
     private void payRent(Player player){
 
-    }
+    }*/
 
     @Override
     public int getRent(){return rent[level];}
@@ -68,4 +72,17 @@ abstract class OwnableField extends Field {
         return this.price;
     }
 
+    public void setOwner(String owner){
+        this.owner = owner;
+    }
+
+    public boolean choiceToBuy(Player player, GameBoard board, GUIController gui, Translator lib){
+        String buyChoice = gui.getPlayerDropbown(String.format(lib.text.get("ChoiceToBuy"), this.price), "Yes", "No");
+        if(buyChoice.equals("Yes")){
+            setOwner(player.getName());
+        }
+
+    }
+    (Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
+        guiHandler(gui, lib);
 }

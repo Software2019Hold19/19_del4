@@ -77,10 +77,6 @@ public abstract class OwnableField extends Field {
     public int getPrice() {
         return this.price;
     }
-
-    public void setOwner(String owner){
-        this.owner = owner;
-    }
     
 
     public void choiceToBuy(Player player, GUIController gui, Translator lib){

@@ -78,7 +78,6 @@ public class GameBoard {
         ownableBoard[0] = tmpField;
         board[1] = tmpField;
 
-
         txtlst = lib.text.get("Chance").split(": ");
         board[2] = new ChanceField(txtlst[0], txtlst[1], txtlst[2], "chance");
 
@@ -206,7 +205,7 @@ public class GameBoard {
         board[29] = tmpField;
 
         txtlst = lib.text.get("Gotojail").split(": ");
-        board[30] = new GoToJailField(txtlst[0], txtlst[1], txtlst[2],"visit");
+        board[30] = new GoToJailField(txtlst[0], txtlst[1], txtlst[2],"jail");
 
         txtlst = lib.text.get("Yellow1").split(": ");
         tmpField = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "yellow", fieldLst[31]);
@@ -246,6 +245,15 @@ public class GameBoard {
         tmpField = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "brown", fieldLst[39]);
         ownableBoard[27] = tmpField;
         board[39] = tmpField;
+
+
+        //Test
+/*
+        for (int i = 0; i < ownableBoard.length; i++) {
+            ownableBoard[i].setOwner("Oli");
+        }
+
+*/
     }
 
     public Field[] getBoard() {

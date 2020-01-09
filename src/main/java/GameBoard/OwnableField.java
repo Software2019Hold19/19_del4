@@ -32,22 +32,28 @@ public abstract class OwnableField extends Field {
 
     }
 
-    /*@Override
+    @Override
     public void landOnField (Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
         super.landOnField(player, pLst, deck, board, gui, lib);
 
-        if (!this.owner.equals(" ") && this.owner.equals(player.getName())){
-            // payrent
+        if (!this.owner.equals("") && !(this.owner.equals(player.getName()))){
+            payRent(player,pLst);
         }
-        else if (this.owner.equals(" ")) {
-            // choise to buy
+        else if (this.owner.equals("")) {
+            choiceToBuy(player,gui,lib);
         }
 
     }
 
-    private void payRent(Player player){
+    private void payRent(Player player, Player[] pLst){
+        player.addBal(-getRent());
 
-    }*/
+        for (int i = 0; i < pLst.length; i++){
+            if (getOwner().equals(pLst[i].getName())){
+                pLst[i].addBal(getRent());
+            }
+        }
+    }
 
     @Override
     public int getRent(){return rent[level];}
@@ -68,10 +74,6 @@ public abstract class OwnableField extends Field {
         return this.owner;
     }
 
-    public void setOwner(String name) {
-        this.owner = name;
-    }
-    
     public int getPrice() {
         return this.price;
     }
@@ -85,4 +87,8 @@ public abstract class OwnableField extends Field {
             player.addBal(-this.price);
         }
     }
+
+    public void setOwner(String s){
+        this.owner = s;
+    };
 }

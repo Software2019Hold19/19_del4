@@ -19,6 +19,7 @@ public abstract class Field {
         this.type = type;
         this.subName = subName;
         this.desc = desc;
+        this.level = 0;
     }
 
     public String toString() {return "";}
@@ -50,6 +51,10 @@ public abstract class Field {
     public String[] getInfo(){
 
         return null;
+    }
+
+    public int getHouseLevel() {
+        return this.level;
     }
 
     public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){

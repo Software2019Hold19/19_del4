@@ -61,3 +61,6 @@ Buyhouse//Vil du købe et hus for
 Buyhotel//Vil du købe et hotel for
 Yes//Ja
 No//Nej
+YourOptionsJail//Du er i fængsel, hvad vil du gøre?
+Roll//Kast terninger
+Pay//Betal 1000kr

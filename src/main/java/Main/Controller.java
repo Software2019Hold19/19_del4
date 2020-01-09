@@ -130,6 +130,78 @@ public class Controller {
         int cntDoubleDiceRoll = 0;
         boolean playAgain = false;
 
+
+        if(!p.getIsJailed()) {  //If the player is not jailed
+            int[] diceRoll = dice.roll(testing);
+
+            gui.showDiceOnBoard(diceRoll);
+
+            p.move(diceRoll[0] + diceRoll[1]);
+
+
+            gui.updatePlayers(pLst);
+            //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
+            board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+
+
+            gui.updatePlayers(pLst);
+        }else if(p.getJailTurn() < 3){           // The player is jailed and gets a choice the next 3 turns
+
+            int caseCounter = 0;
+            String roll = lib.text.get("Roll"); String pay = lib.text.get("Pay");
+
+            String jailOptionStr = gui.getPlayerDropbown(lib.text.get("YourOptionsJail"),roll, pay);
+
+            if(jailOptionStr == roll) { caseCounter = 1; }
+            else if(jailOptionStr == pay) { caseCounter = 2; }
+
+            switch(caseCounter) {
+
+                case(1):
+                    int[] diceRoll = dice.roll(testing);
+                    gui.showDiceOnBoard(diceRoll);
+
+                    if(diceRoll[0] == diceRoll[1]){
+                        p.setIsJailed(false);
+                        p.resetJailTurn();
+                        p.move(diceRoll[0] + diceRoll[1]);
+
+                        gui.updatePlayers(pLst);
+                        board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                        gui.updatePlayers(pLst);
+                    }
+                    else if(p.getJailTurn() == 3){
+                        p.setIsJailed(false);
+                        p.resetJailTurn();
+                        p.addBal(-1000);
+                        p.move(diceRoll[0] + diceRoll[1]);
+
+                        gui.updatePlayers(pLst);
+                        board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                        gui.updatePlayers(pLst);
+                    }
+                    else { p.addJailTurn(); }
+                    break;
+
+                case(2):
+                    p.setIsJailed(false);
+                    p.resetJailTurn();
+                    p.addBal(-1000);
+
+                    int[] diceRoll2 = dice.roll(testing);
+                    gui.showDiceOnBoard(diceRoll2);
+                    p.move(diceRoll2[0] + diceRoll2[1]);
+
+                    gui.updatePlayers(pLst);
+                    board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                    gui.updatePlayers(pLst);
+                    break;
+
+                default:
+                    throw new IllegalStateException("Unexpected value: " + jailOptionStr);
+            }
+        }
+                
         do {
             if(!p.getIsJailed()) {  //If the player is not jailed
                 Boolean manual = true; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)

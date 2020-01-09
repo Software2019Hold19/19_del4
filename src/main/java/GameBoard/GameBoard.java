@@ -123,7 +123,7 @@ public class GameBoard {
         board[17] = new ChanceField(txtlst[0], txtlst[1], txtlst[2], "chance");
 
         txtlst = lib.text.get("Darkgray2").split(":");
-        board[18] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "darkgray", fieldLst[18);
+        board[18] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "darkgray", fieldLst[18]);
 
         txtlst = lib.text.get("Darkgray3").split(":");
         board[19] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "darkgray", fieldLst[19]);

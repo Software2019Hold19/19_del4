@@ -9,14 +9,18 @@ abstract class OwnableField extends Field {
     
     protected String owner = "";
 
-    public OwnableField(String name, String subName, String desc, String type, String rent) {
+    public OwnableField(String name, String subName, String desc, String type, String rentStr) {
         super(name, subName, desc, type);
-        String[] rentLst = rent.split(",");
+
+        // Init price from subName
+        this.price = Integer.parseInt(subName.split(" ")[0]);
+
+        // Converting string to rent array
+        String[] rentLst = rentStr.split(",");
         this.rent = new int[rentLst.length];
         for (int i = 0; i < rentLst.length; i++){
             this.rent[i] = Integer.parseInt(rentLst[i]);
         }
-        // TODO Auto-generated constructor stub
     }
 
     public void ownField () {

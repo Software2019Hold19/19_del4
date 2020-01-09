@@ -32,7 +32,7 @@ abstract class OwnableField extends Field {
 
     }
 
-    @Override
+    /*@Override
     public void landOnField (Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
         super.landOnField(player, pLst, deck, board, gui, lib);
         if (!owner.equals("") || owner.equals(player.getName())){
@@ -40,7 +40,7 @@ abstract class OwnableField extends Field {
         }
         else ()
 
-    }
+    }*/
 
     public String getRentString() {
         return Integer.toString(rent[0]);

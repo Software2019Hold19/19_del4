@@ -9,17 +9,17 @@ import java.util.HashMap;
 
 public class FieldFactory {
 
-    private HashMap<String, GUI_Street> streets = new HashMap<String, GUI_Street>();
+    private HashMap<String, GUI_Street> ownable = new HashMap<String, GUI_Street>();
 
     public FieldFactory() {
     }
 
-    public HashMap<String, GUI_Street> getStreets() {
-        return streets;
+    public HashMap<String, GUI_Street> getOwnable() {
+        return ownable;
     }
 
     public GUI_Field[] boardSetup(GameBoard board){
-        GUI_Field[] guiFields = new GUI_Field[24];
+        GUI_Field[] guiFields = new GUI_Field[40];
         Field[] fields = board.getBoard();
         int i = 0;
         for (Field field : fields){
@@ -33,16 +33,16 @@ public class FieldFactory {
                     String[] tmpLst = field.getInfo();
                     Color color = Color.BLACK;
                     switch (tmpLst[5]){
-                        case("brown"):
-                            color = new Color(127, 76, 25);
+                        case("lightgray"):
+                            color = new Color(224, 224, 224);
                             break;
 
-                        case("cyan"):
-                            color = Color.CYAN;
+                        case("lightblue"):
+                            color = new Color(31, 236, 255);
                             break;
 
-                        case("magenta"):
-                            color = Color.MAGENTA;
+                        case("darkgray"):
+                            color = new Color(117, 117, 117);
                             break;
 
                         case("orange"):
@@ -61,14 +61,18 @@ public class FieldFactory {
                             color = Color.GREEN;
                             break;
 
-                        case("blue"):
-                            color = Color.BLUE;
+                        case("brown"):
+                            color = new Color(127, 76, 25);
+                            break;
+
+                        default:
+                            color = Color.BLACK;
                             break;
 
                     }
                     GUI_Street street = new GUI_Street(field.getName(), field.getSubName(), field.getDesc(), tmpLst[4], color, Color.BLACK);
-                    streets.put(tmpLst[7], street);
-                    guiFields[i++] = streets.get(tmpLst[7]);
+                    ownable.put(tmpLst[7], street);
+                    guiFields[i++] = ownable.get(tmpLst[7]);
                     break;
 
                 case ("visit"):
@@ -83,6 +87,17 @@ public class FieldFactory {
                     guiFields[i++] = new GUI_Chance("?", field.getSubName(), field.getDesc(), new Color(204, 204, 204), Color.BLACK);
                     break;
 
+                case ("brewery"):
+                    guiFields[i++] = new GUI_Brewery("default", field.getName(), field.getSubName(), field.getDesc(), Integer.toString(field.getRent()), Color.BLACK, Color.WHITE);
+                    break;
+
+                case ("ferry"):
+                    guiFields[i++] = new GUI_Shipping("default", field.getName(), field.getSubName(), field.getDesc(), Integer.toString(field.getRent()),Color.WHITE, Color.YELLOW);
+                    break;
+
+                case ("tax"):
+                    guiFields[i++] = new GUI_Tax(field.getName(), field.getSubName(), field.getDesc(), Color.WHITE, Color.BLUE);
+                    break;
             }
         }
         return guiFields;

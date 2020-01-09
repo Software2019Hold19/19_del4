@@ -19,29 +19,38 @@ public class GUIController {
     private BoardObserver bObs = new BoardObserver();
     private Translator lib;
     private FieldFactory fieldFac = new FieldFactory();
+    private Boolean testing = false;
+    private int testNames = 0;
 
     public GUIController(Translator _lib, GameBoard _board) {
         lib = _lib;
         board = _board;
-        //GUI_Field[];
         gui = new GUI(boardSetup(board));
     }
 
-    public void showDiceOnBoard(int roll){
-        gui.setDie(roll);
+    public void showDiceOnBoard(int[] roll){
+        gui.setDice(roll[0], roll[1]);
     }
 
 
     public void showMessage(String txt){
-        this.gui.showMessage(txt);
+        if (!testing) {
+            this.gui.showMessage(txt);
+        }
     }
 
     public String getPlayerDropbown(java.lang.String msg, java.lang.String... buttons)
     {
+        if (testing){
+            return buttons[0];
+        }
         return gui.getUserSelection(msg,buttons);
     }
 
     public String getUserString(String msg) {
+        if (testing){
+            return String.valueOf(testNames++);
+        }
         return gui.getUserString(msg);
     }
 
@@ -64,7 +73,7 @@ public class GUIController {
     }
 
     public void updateBoard(Field[] fLst){
-        bObs.ownerUpdate(gui.getFields(), fLst, fieldFac.getStreets(), pObs.getGuiPlayerList());
+        bObs.ownerUpdate(gui.getFields(), fLst, fieldFac.getOwnable(), pObs.getGuiPlayerList());
     }
 
     public GUI getGui() {
@@ -106,5 +115,10 @@ public class GUIController {
 
 
     }
+
+    public void setTesting(){
+        testing = true;
+    }
+
 
 }

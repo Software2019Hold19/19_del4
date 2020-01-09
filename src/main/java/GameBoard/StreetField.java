@@ -71,7 +71,7 @@ public class StreetField extends OwnableField {
         super.landOnField(player, pLst, deck, board, gui, lib);
 
         if (this.owner.equals(player.getName())) {
-            if (ownsSameColorFields()) {
+            if (ownsSameColorFields(gui)) {
 
             }
         }
@@ -119,24 +119,8 @@ public class StreetField extends OwnableField {
 
     }
 
-
-    private int getHousePrice() {
-        if (this.price < 2000) {
-            return 1000;
-        }
-        else if (this.price < 4000) {
-            return 2000;
-        }
-        else if (this.price < 6000) {
-            return 3000;
-        }
-        else {
-            return 4000;
-        }
-    }
-
     private boolean ownsSameColorFields(){
-        return true;
+        return false;
     }
 
     private void chooseToBuyHouses(Player player, GUIController gui) {

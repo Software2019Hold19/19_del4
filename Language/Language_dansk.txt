@@ -15,14 +15,14 @@ Darkgrey3//Strandvej: 4000 kr.: Du er landet på Strandvej.: 320,1600,4400,12000
 Red1//Trianglen: 4400 kr.: Du er landet på Trianglen.: 360,1800,5000,14000,17500,21000
 Red2//Østerbrogade: 4400 kr.: Du er landet på Østerbrogade.: 360,1800,5000,14000,17500,21000
 Red3//Grønningen: 4800 kr.: Du er landet på Grønningen.: 400,2000,6000,150000,18500,22000
-FreeParking//Parkering: Gratis parkering.: Du har gratis parkering tag en pause.
+Freeparking//Parkering: Gratis parkering.: Du har gratis parkering tag en pause.
 Lightgrey1//Bredgade: 5200 kr.: Du er landet på Bredgade: 440,2200,6600,16000,19500,23000
 Lightgrey2//Kgs. Nytorv: 5200 kr.: Du er landet på Kgs. Nytorv.: 440,2200,6600,16000,19500,23000
 Lightgrey3//Østergade: 5600 kr.: Du er landet på Østergade.: 480,2400,7200,1700,20500,24000
 Yellow1//Amagertorv: 6000 kr.: Du er landet på Amagertorv.: 520,2600,7800,18000,22000,26000,25500
 Yellow2//Vimmelskaftet: 6000 kr.: Du er landet på Vimmelskaftet.: 520,2600,7800,18000,22000,25500
 Yellow3//Nygade: 6400 kr.: Du er landet på Nygade.: 560,3000,9000,20000,24000,28000
-GoToJail//Fængsel: Du er skal i fængsel.: Du skal i fængsel og skal betale 1 penge for at komme ud.
+Gotojail//Fængsel: Du er skal i fængsel.: Du skal i fængsel og skal betale 1 penge for at komme ud.
 Brown1//Frederiskberggade: 7000 kr.: Du er landet på Frederiskberggade.: 700,3500,10000,22000,26000,30000
 Brown2//Rådhuspladsen: 8000 kr.: Du er landet på Rådhuspladsen.: 1000,4000,12000,28000,34000,40000
 Brewery1//Tuborg Bryggeriet: 3000 kr.: Du er landet på Tuborg.: 80,200
@@ -32,6 +32,8 @@ Ferry2//DAMPSKIBSSELSKABET A/S ØRESUND: 4000 kr.: Du er landet på DAMPSKIBSSEL
 Ferry3//DAMPSKIBSSELSKABET Ø. K: 4000 kr.: Du er landet på DAMPSKIBSSELSKABET Ø. K.: 500,1000,2000,4000
 Ferry4//DAMPSKIBSSELSKABET. D. F. D. S.: 4000 kr.: Du er landet på DAMPSKIBSSELSKABET. D. F. D. S.: 500,1000,2000,4000
 Welcome//Velkommen til spillet. Spillet handler om at købe egendeomme før din modspiller. Den første der løber tør for penge har tabt.
+Tax1//Indkomstskat: 4000 kr. eller 10% : Du er landet på indkomstskat.
+Tax2//Ekstrordinærstatsskat: 2000 kr.: Du er landet på Ekstrordinærstatsskat.
 NumberOfPlayers//Hvor mange spillere spiller?
 InputName//Indtast Spiller %ds navn i det ledige felt.
 Turn//Det er %s's tur kast med terningerne.

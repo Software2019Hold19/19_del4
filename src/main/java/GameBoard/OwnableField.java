@@ -34,6 +34,10 @@ abstract class OwnableField extends Field {
     public String getOwner() {
         return this.owner;
     }
+
+    public void setOwner(String name) {
+        this.owner = name;
+    }
     
     public int getPrice() {
         return this.price;

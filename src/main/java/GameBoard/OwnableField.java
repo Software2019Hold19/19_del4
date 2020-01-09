@@ -91,4 +91,8 @@ public abstract class OwnableField extends Field {
             player.addBal(-this.price);
         }
     }
+
+    public void setOwner(String s){
+        this.owner = s;
+    };
 }

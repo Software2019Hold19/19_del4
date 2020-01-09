@@ -8,7 +8,7 @@ import Main.Translator;
  */
 public class ChanceDeck {
 
-    ChanceCard deck[] = new ChanceCard[7];
+    ChanceCard deck[] = new ChanceCard[6];
     int cardCount = 0;
 
     public ChanceDeck(Translator lib, Boolean testing) {
@@ -19,7 +19,6 @@ public class ChanceDeck {
         deck[3] = new BankChanceCard(lib.text.get("ChanceCTxt2"), -2);
         deck[4] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt5"), true);
         deck[5] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt6"), false);
-        deck[6] = new JailChanceCard("Jailed");
 
         if (!testing) {
             shuffleDeck();
@@ -55,6 +54,8 @@ public class ChanceDeck {
         if (cardCount >= deck.length){ //resets count when all cards have been drawn
             cardCount = 0;
         }
+        System.out.println(cardCount);
+        System.out.println(deck.length);
         return deck[cardCount++];//returns drawn card and THEN adds 1 to cardCount
         //return deck[6];
     }

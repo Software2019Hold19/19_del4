@@ -92,7 +92,7 @@ public class FieldFactory {
                     break;
 
                 case ("ferry"):
-                    guiFields[i++] = new GUI_Shipping("default", field.getName(), field.getSubName(), field.getDesc(), Integer.toString(field.getRent()),Color.WHITE, Color.YELLOW);
+                    guiFields[i++] = new GUI_Shipping("default", field.getName(), field.getSubName(), field.getDesc(), Integer.toString(field.getRent()),Color.WHITE, Color.BLACK);
                     break;
 
                 case ("tax"):

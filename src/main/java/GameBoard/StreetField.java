@@ -193,7 +193,7 @@ public class StreetField extends OwnableField {
         }
         else if (this.level == 4) {
             int hotelPrice = getHousePrice();
-            String choise = gui.getPlayerDropbown("Vil du købe et hotel for " + hotelPrice + " kr.", "Ja", "Nej");
+            String choise = gui.getPlayerDropbown(lib.text.get("Købhotel")+ hotelPrice + " kr.", lib.text.get("Yes"), lib.text.get("No"));
 
             if (choise.equals("Ja")) {
                 if (player.getBal() > hotelPrice) {

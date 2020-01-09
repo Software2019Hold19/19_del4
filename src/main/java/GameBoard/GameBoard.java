@@ -105,7 +105,7 @@ public class GameBoard {
         board[11] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "green", fieldLst[11]);
 
         txtlst = lib.text.get("Brewery1").split(":");
-        board[12] = new BrewerryField(txtlst[0], txtlst[1], txtlst[2], "Brewery", txtlst[3]);
+        board[12] = new BreweryField(txtlst[0], txtlst[1], txtlst[2], "Brewery", txtlst[3]);
 
         txtlst = lib.text.get("Green2").split(":");
         board[13] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "green", fieldLst[13]);
@@ -153,7 +153,7 @@ public class GameBoard {
         board[27] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "lightgray", fieldLst[27]);
 
         txtlst = lib.text.get("Brewery2").split(":");
-        board[28] = new BrewerryField(txtlst[0], txtlst[1], txtlst[2],"brewery", txtlst[3]);
+        board[28] = new BreweryField(txtlst[0], txtlst[1], txtlst[2],"brewery", txtlst[3]);
 
         txtlst = lib.text.get("Lightgray3").split(":");
         board[29] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "lightgray", fieldLst[29]);

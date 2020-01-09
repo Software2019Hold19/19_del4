@@ -16,9 +16,9 @@ public class BoardObserver extends Observer {
 
     }
 
-    public void ownerUpdate(GUI_Field[] guiFields, OwnableField[] fields, HashMap<String, GUI_Ownable> streets, GUI_Player[] guiPLst, Player[] pLst){
+    public void ownerUpdate(GUI_Field[] guiFields, OwnableField[] fields, HashMap<String, GUI_Ownable> ownable, GUI_Player[] guiPLst, Player[] pLst, HashMap<String, GUI_Street> streets){
         for (int i = 0; i < fields.length; i++){
-            if (fields[i].getType().equals("street")){
+            if (fields[i].getType().equals("street") || fields[i].getType().equals("brewery") || fields[i].getType().equals("ferry")){
                 String owner = fields[i].getOwner();
                 String key = fields[i].getKey();
                 // find owner and see if ded - if ded remove owner
@@ -26,7 +26,10 @@ public class BoardObserver extends Observer {
                     if(owner.equals(p.getName()) && !p.getAlive()){
                         owner = "";
                         fields[i].setOwner("");
-                        streets.get(key).setBorder(Color.BLACK);
+                        ownable.get(key).setBorder(Color.BLACK);
+                        if (fields[i].getType().equals("street")) {
+                            streets.get(key).setHotel(false);
+                        }
                     }
                 }
                 if (!owner.equals("")){
@@ -34,7 +37,7 @@ public class BoardObserver extends Observer {
                     for (GUI_Player guiP : guiPLst){
                         if (guiP.getName().equals(owner)){
                             Color color = guiP.getCar().getPrimaryColor();
-                            streets.get(key).setBorder(color); //test
+                            ownable.get(key).setBorder(color); //test
                         }
                     }
                 }

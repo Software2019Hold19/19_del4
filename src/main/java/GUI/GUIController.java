@@ -74,7 +74,7 @@ public class GUIController {
     }
 
     public void updateBoard(OwnableField[] fLst, Player[] pLst){
-        bObs.ownerUpdate(gui.getFields(), fLst, fieldFac.getOwnable(), pObs.getGuiPlayerList(), pLst);
+        bObs.ownerUpdate(gui.getFields(), fLst, fieldFac.getOwnable(), pObs.getGuiPlayerList(), pLst, fieldFac.getStreets());
 
     }
 

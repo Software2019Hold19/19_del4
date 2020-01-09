@@ -110,35 +110,35 @@ public class GameBoard {
         txtlst = lib.text.get("Green1").split(":");
         board[19] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", 4, "green", fieldLst[19]);
 
-        txtlst = lib.text.get("Green2").split(":");
-        board[20] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", 4, "green", fieldLst[20]);
+        txtlst = lib.text.get("Freeparking").split(":");
+        board[20] = new VisitingField(txtlst[0], txtlst[1], txtlst[2],"visit");
+
+        txtlst = lib.text.get("Red1").split(":");
+        board[21] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "red", fieldLst[21]);
 
         txtlst = lib.text.get("Chance").split(":");
-        board[21] = new ChanceField(txtlst[0], txtlst[1], txtlst[2],"chance");
+        board[22] = new ChanceField(txtlst[0], txtlst[1], txtlst[2],"chance");
 
-        txtlst = lib.text.get("Darkblue1").split(":");
-        board[22] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", 5, "blue", fieldLst[22]);
+        txtlst = lib.text.get("Red2").split(":");
+        board[23] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "red", fieldLst[23]);
 
-        txtlst = lib.text.get("Darkblue2").split(":");
-        board[23] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", 5, "blue", fieldLst[23]);
-        txtlst = lib.text.get("Brown1").split(":");
+        txtlst = lib.text.get("Red3").split(":");
+        board[24] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "red", fieldLst[24]);
 
-        board[24] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", 1, "brown", fieldLst[1]);
+        txtlst = lib.text.get("Ferry3").split(":");
+        board[25] = new FerryField(txtlst[0], txtlst[1], txtlst[2],"ferry", fieldLst[25]);
 
-        txtlst = lib.text.get("Brown2").split(":");
-        board[25] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", 1, "brown", fieldLst[2]);
+        txtlst = lib.text.get("Lightgray1").split(":");
+        board[26] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "lightgray", fieldLst[26]);
 
-        txtlst = lib.text.get("Chance").split(":");
-        board[26] = new ChanceField(txtlst[0], txtlst[1], txtlst[2], "chance");
+        txtlst = lib.text.get("Lightgray2").split(":");
+        board[27] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "lightgray", fieldLst[27]);
 
-        txtlst = lib.text.get("Lightblue1").split(":");
-        board[27] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", 1, "cyan", fieldLst[4]);
+        txtlst = lib.text.get("Brewery2").split(":");
+        board[28] = new BrewerryField(txtlst[0], txtlst[1], txtlst[2],"brewery", txtlst[3]);
 
-        txtlst = lib.text.get("Lightblue2").split(":");
-        board[28] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", 1, "cyan", fieldLst[5]);
-
-        txtlst = lib.text.get("Visiting").split(":");
-        board[29] = new VisitingField(txtlst[0], txtlst[1], txtlst[2], "jail");
+        txtlst = lib.text.get("Lightgray3").split(":");
+        board[29] = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "lightgray", fieldLst[29]);
 
         txtlst = lib.text.get("Gotojail").split(":");
         board[30] = new VisitingField(txtlst[0], txtlst[1], txtlst[2],"visit");

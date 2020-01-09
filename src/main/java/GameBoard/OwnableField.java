@@ -1,4 +1,8 @@
 package GameBoard;
+import GameBoard.GameBoard;
+import GUI.GUIController;
+import Main.Player;
+import Main.Translator;
 
 /**
  * OwnableField
@@ -39,4 +43,17 @@ abstract class OwnableField extends Field {
         return this.price;
     }
 
+    public void setOwner(String owner){
+        this.owner = owner;
+    }
+
+    public boolean choiceToBuy(Player player, GameBoard board, GUIController gui, Translator lib){
+        String buyChoice = gui.getPlayerDropbown(String.format(lib.text.get("ChoiceToBuy"), this.price), "Yes", "No");
+        if(buyChoice.equals("Yes")){
+            setOwner(player.getName());
+        }
+
+    }
+    (Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
+        guiHandler(gui, lib);
 }

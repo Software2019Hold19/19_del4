@@ -78,7 +78,6 @@ public class GameBoard {
         ownableBoard[0] = tmpField;
         board[1] = tmpField;
 
-
         txtlst = lib.text.get("Chance").split(": ");
         board[2] = new ChanceField(txtlst[0], txtlst[1], txtlst[2], "chance");
 

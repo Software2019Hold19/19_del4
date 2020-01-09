@@ -18,7 +18,8 @@ public class JailChanceCard extends ChanceCard {
     @Override
     public boolean drawn(Player player, GameBoard board) {
       //  super.drawn(player, board);
-        
+        player.blink(10);
+        player.setIsJailed(true);
         // player hold card
         return false;
     }

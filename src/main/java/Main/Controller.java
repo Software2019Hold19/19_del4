@@ -32,8 +32,8 @@ public class Controller {
         playerCount = Integer.parseInt(playerCountstr);
         int startBal = 30000;
 
+        //name input - repeat if names are the same
         while (true) {
-
             boolean sameName = false;
             pLst = new Player[playerCount];
             for (int i = 0; i < playerCount; i++) {

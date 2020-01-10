@@ -63,6 +63,9 @@ Buyhotel//Vil du købe et hotel for
 Yes//Ja
 No//Nej
 YourOptionsJail//Du er i fængsel, hvad vil du gøre?
+Roll//Kast terninger
+Pay//Betal 1000kr
+NoMoney//Du har ikke penge nok til købet
 JailRoll//Kast terninger
 JailPay//Betal 1000kr
 PayedEscaped//%s bateler 1000 kr og er fri igen.

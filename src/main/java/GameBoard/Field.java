@@ -6,11 +6,11 @@ import Main.Player;
 import Main.Translator;
 
 public abstract class Field {
-    private String name;
-    private String type; //"brewery", "ferry", "start", "street", "chance" "jail" or "visit"
-    private String subName;
-    private String desc;
-    private String key;
+    protected String name;
+    protected String type; //"brewery", "ferry", "start", "street", "chance" "jail" or "visit"
+    protected String subName;
+    protected String desc;
+    protected String key;
     protected int rent[];
     protected int level;
 

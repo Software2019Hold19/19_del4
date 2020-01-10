@@ -69,6 +69,7 @@ public class ChanceDeck {
         if (cardCount >= deck.length){ //resets count when all cards have been drawn
             cardCount = 0;
         }
+
         return deck[cardCount++];//returns drawn card and THEN adds 1 to cardCount
         //return deck[6];
     }

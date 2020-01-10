@@ -87,7 +87,7 @@ public class GameBoard {
         board[3] = tmpField;
 
         txtlst = lib.text.get("Tax1").split(": ");
-        board[4] = new TaxField(txtlst[0], txtlst[1], txtlst[2],"tax");
+        board[4] = new TaxField(txtlst[0], txtlst[1], txtlst[2],"tax", fieldLst[4]);
 
         txtlst = lib.text.get("Ferry1").split(": ");
         FerryField tmpFieldF = new FerryField(txtlst[0], txtlst[1], txtlst[2],"ferry", txtlst[3], fieldLst[5]);
@@ -239,7 +239,7 @@ public class GameBoard {
         board[37] = tmpField;
 
         txtlst = lib.text.get("Tax2").split(": ");
-        board[38] = new TaxField(txtlst[0], txtlst[1], txtlst[2],"tax");
+        board[38] = new TaxField(txtlst[0], txtlst[1], txtlst[2],"tax", fieldLst[38]);
 
         txtlst = lib.text.get("Brown2").split(": ");
         tmpField = new StreetField(txtlst[0], txtlst[1], txtlst[2],"street", txtlst[3], "brown", fieldLst[39]);

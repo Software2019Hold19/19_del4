@@ -33,7 +33,8 @@ Ferry3//DAMPSKIBSSELSKABET Ø. K: 4000 kr.: Du er landet på DAMPSKIBSSELSKABET 
 Ferry4//DAMPSKIBSSELSKABET. D. F. D. S.: 4000 kr.: Du er landet på DAMPSKIBSSELSKABET. D. F. D. S.: 500,1000,2000,4000
 Welcome//Velkommen til spillet. Spillet handler om at købe egendeomme før din modspiller. Den første der løber tør for penge har tabt.
 Tax1//Indkomstskat: 4000 kr. eller 10% : Du er landet på indkomstskat.
-Tax2//Ekstrordinærstatsskat: 2000 kr.: Du er landet på Ekstrordinærstatsskat.
+Tax1Choice//Du skal vælge at betale enten 4000 kr. eller 10% af din formue i skat.
+Tax2//Ekstrordinærstatsskat: 2000 kr.: Du er landet på Ekstrordinærstatsskat. Du skal betale 2000 kr. i skat.
 NumberOfPlayers//Hvor mange spillere spiller?
 InputName//Indtast Spiller %ds navn i det ledige felt.
 Turn//Det er %s's tur kast med terningerne.
@@ -50,20 +51,27 @@ LandOnStart//Du lander på startfeltet og modtager 4000 kr.!
 LandOnJail//Du er på besøg i fængslet.
 LandOnFree//Du er landet på gratis parkering. Tag en velfortjent pause!
 LandOnGoToJail//Du er blevet fanget i at snyde og skal i fængsel! Betal din bøde på 1 penge og spil videre.
-ChanceCTxt1//Du modtager 2 penge
-ChanceCTxt2//Du mister 2 penge
+ChanceCTxt1//De har kørt over for fuld stop betal 2000 kr.
+ChanceCTxt2//Du har anskaffet dig et nyt dæk betal 2000 kr.
 ChanceCTxt3//Flyt 1-5 felter
 ChanceCTxt4//Flyt 1 felt eller træk et nyt kort
 ChanceCTxt5//Flyt til start
-ChanceCTxt6//Flyt til Strandpromonaden
+ChanceCTxt6//Flyt til Rådhuspladsen
+ChanceCTxt7//Betal 200 kr. for vogn vask
+ChanceCTxt8//Hvis du har dette kort kan du gratis komme ud af fænslet
+ChanceCTxt9//Flyt til Grønningen
+ChanceCTxt10//Du modtager 1000 kr. af banken
+ChanceCTxt11//Du flytter 3 felter tilbage
 ChoiceToBuy//Ingen ejer dette felt. Vil du købe feltet for %d kroner?
 Buyhouse//Vil du købe et hus for
 Buyhotel//Vil du købe et hotel for
 Yes//Ja
 No//Nej
 YourOptionsJail//Du er i fængsel, hvad vil du gøre?
+NoMoney//Du har ikke penge nok til købet
 JailRoll//Kast terninger
 JailPay//Betal 1000kr
+JailCard//Brug chance kort
 PayedEscaped//%s bateler 1000 kr og er fri igen.
 TurnOrderStart//Vi slår om at starte spillet. Den der slår størst starter
 TurnOrderRoll//Du, Spiller %s, har slået %d

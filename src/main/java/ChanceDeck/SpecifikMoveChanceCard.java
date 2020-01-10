@@ -8,24 +8,27 @@ import Main.Player;
  */
 public class SpecifikMoveChanceCard extends MoveChanceCard {
 
-    boolean toStartJump = false;
+    int pos = 0;
 
-    public SpecifikMoveChanceCard(String descriptionString, boolean toStart) {
+    public SpecifikMoveChanceCard(String descriptionString, int pos) {
         super(descriptionString);
-
-        toStartJump = toStart;
+        this.pos = pos;
     }
 
     @Override
-    public boolean drawn(Player player, GameBoard board ) {
-        if (toStartJump){
-            player.blink(0);
-            player.addBal(2);
+    public boolean drawn(Player player, GameBoard board) {
+        if (pos > player.getFieldNumber()){
+            int val = pos - player.getFieldNumber();
+            player.move(val);
+
             return false;
         }
         else {
-            player.blink(23);
-            return true;
+            int val = 40 - player.getFieldNumber() + pos;
+            player.move(val);
+            player.addBal(4000);
+
+            return false;
         }
         
     }

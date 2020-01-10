@@ -59,6 +59,9 @@ ChanceCTxt5//Flyt til start
 ChanceCTxt6//Flyt til Rådhuspladsen
 ChanceCTxt7//Betal 200 kr. for vogn vask
 ChanceCTxt8//Hvis du har dette kort kan du gratis komme ud af fænslet
+ChanceCTxt9//Flyt til Grønningen
+ChanceCTxt10//Du modtager 1000 kr. af banken
+ChanceCTxt11//Du flytter 3 felter tilbage
 ChoiceToBuy//Ingen ejer dette felt. Vil du købe feltet for %d kroner?
 Buyhouse//Vil du købe et hus for
 Buyhotel//Vil du købe et hotel for

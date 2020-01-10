@@ -22,41 +22,38 @@ public class Controller {
 
     // Init players and language
     public void startGame() throws IOException {
-        if (testing) {
+        String selectedL = gui.getPlayerDropbown("Vælg Sprog / Choose Language", "Dansk");
+        lib.getLanguage(selectedL);
+        gui.updateLanguage(lib);
+        board.boardUpdate(lib);
+        gui.showMessage(lib.text.get("Welcome"));
 
-        } else {
-            String selectedL = gui.getPlayerDropbown("Vælg Sprog / Choose Language", "Dansk");
-            lib.getLanguage(selectedL);
-            gui.updateLanguage(lib);
-            board.boardUpdate(lib);
-            gui.showMessage(lib.text.get("Welcome"));
+        String playerCountstr = gui.getPlayerDropbown(lib.text.get("NumberOfPlayers"), "3", "4", "5", "6");
+        playerCount = Integer.parseInt(playerCountstr);
+        int startBal = 30000;
 
-            String playerCountstr = gui.getPlayerDropbown(lib.text.get("NumberOfPlayers"), "3", "4", "5", "6");
-            playerCount = Integer.parseInt(playerCountstr);
-            int startBal = 30000;
+        while (true) {
 
-            while (true) {
+            boolean sameName = false;
+            pLst = new Player[playerCount];
+            for (int i = 0; i < playerCount; i++) {
+                Player p = new Player(gui.getUserString(String.format(lib.text.get("InputName"), i + 1)), startBal);
+                pLst[i] = p;
+            }
 
-                boolean sameName = false;
-                pLst = new Player[playerCount];
-                for (int i = 0; i < playerCount; i++) {
-                    Player p = new Player(gui.getUserString(String.format(lib.text.get("InputName"), i + 1)), startBal);
-                    pLst[i] = p;
-                }
-
-                for (int i = 0; i < pLst.length; i++) {
-                    for (int j = i + 1; j < pLst.length; j++) {
-                        if (pLst[i].getName().equals(pLst[j].getName())) {
-                            sameName = true;
-                            gui.showMessage(lib.text.get("SameName"));
-                        }
+            for (int i = 0; i < pLst.length; i++) {
+                for (int j = i + 1; j < pLst.length; j++) {
+                    if (pLst[i].getName().equals(pLst[j].getName())) {
+                        sameName = true;
+                        gui.showMessage(lib.text.get("SameName"));
                     }
                 }
-
-                if (!sameName) {
-                    break;
-                }
             }
+
+            if (!sameName) {
+                break;
+            }
+
         }
 
         gui.addPlayers(pLst);
@@ -129,6 +126,10 @@ public class Controller {
 
 
     private void playerTurn(Player p) {
+        
+        int cntDoubleDiceRoll = 0;
+        boolean playAgain = false;
+
 
         if(!p.getIsJailed()) {  //If the player is not jailed
             int[] diceRoll = dice.roll(testing);
@@ -144,29 +145,128 @@ public class Controller {
 
 
             gui.updatePlayers(pLst);
-        }else{                              // If the player is in jail
+        }else if(p.getIsJailed() || p.getJailTurn() < 3){    // The player is jailed and gets a choice the next 3 turns
 
-            while(p.getJailTurn() <= 3) {
-                int[] diceRoll = dice.roll(testing);
-                gui.showDiceOnBoard(diceRoll);
+            int caseCounter = 0;
+            String roll = lib.text.get("Roll"); String pay = lib.text.get("Pay");
+            String escape = lib.text.get("PayedEscape");
 
-                if (diceRoll[0] == diceRoll[1]) {
-                    p.move(diceRoll[0] + diceRoll[1]);
+            String jailOptionStr = gui.getPlayerDropbown(lib.text.get("YourOptionsJail"),roll, pay);
+
+            if(jailOptionStr == roll) { caseCounter = 1; }
+            else if(jailOptionStr == pay) { caseCounter = 2; }
+
+            switch(caseCounter) {
+
+                case(1):
+                    int[] diceRoll = dice.roll(testing);
+                    gui.showDiceOnBoard(diceRoll);
+
+                    if(diceRoll[0] == diceRoll[1]){
+                        p.setIsJailed(false);
+                        p.resetJailTurn();
+                        p.move(diceRoll[0] + diceRoll[1]);
+
+                        gui.updatePlayers(pLst);
+                        board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                        gui.updatePlayers(pLst);
+                    }
+                    else if(p.getJailTurn() == 3){
+                        p.setIsJailed(false);
+                        p.resetJailTurn();
+                        p.addBal(-1000);
+                        p.move(diceRoll[0] + diceRoll[1]);
+
+                        gui.updatePlayers(pLst);
+                        board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                        gui.updatePlayers(pLst);
+                        gui.showMessage(escape);
+                    }
+                    else { p.addJailTurn(); }
+                    break;
+
+                case(2):
+                    p.setIsJailed(false);
+                    p.resetJailTurn();
+                    p.addBal(-1000);
+
+                    int[] diceRoll2 = dice.roll(testing);
+                    gui.showDiceOnBoard(diceRoll2);
+                    p.move(diceRoll2[0] + diceRoll2[1]);
 
                     gui.updatePlayers(pLst);
                     board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                     gui.updatePlayers(pLst);
-                    p.setIsJailed(false);
+                    gui.showMessage(escape);
+
                     break;
 
-                }else if(p.getJailTurn() == 3){
-                    p.addBal(-1000);
-                    p.setIsJailed(false);
-
-
-                }else{ p.addJailTurn(); }
+                default:
+                    throw new IllegalStateException("Unexpected value: " + jailOptionStr);
             }
         }
+                
+        do {
+            if(!p.getIsJailed()) {  //If the player is not jailed
+                Boolean manual = true; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
+                int[] diceRoll = dice.roll(testing);
+                if (manual) {
+                    int val = Integer.parseInt(gui.getPlayerDropbown("__MANUEL__ Dice", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2"));
+                    if (val < 7) {
+                        diceRoll[0] = val - 1;
+                        diceRoll[1] = 1;
+                    } else {
+                        diceRoll[0] = val - 6;
+                        diceRoll[1] = 6;
+                    }
+                }
+
+                gui.showDiceOnBoard(diceRoll);
+
+                if (diceRoll[0] == diceRoll[1]) {
+                    cntDoubleDiceRoll++;
+                    playAgain = true;
+                    System.out.println("ekstra tur: " + cntDoubleDiceRoll);
+                }
+
+                if (cntDoubleDiceRoll != 3) {
+                    p.move(diceRoll[0] + diceRoll[1]);
+
+                    gui.updatePlayers(pLst);
+                    //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
+                    board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                }
+                else {
+                    playAgain = false;
+                    // TODO: player go to jail
+                }
+
+                gui.updatePlayers(pLst);
+            
+            } else{                              // If the player is in jail
+
+                while(p.getJailTurn() <= 3) {
+                    int[] diceRoll = dice.roll(testing);
+                    gui.showDiceOnBoard(diceRoll);
+
+                    if (diceRoll[0] == diceRoll[1]) {
+                        p.move(diceRoll[0] + diceRoll[1]);
+
+                        gui.updatePlayers(pLst);
+                        board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                        gui.updatePlayers(pLst);
+                        p.setIsJailed(false);
+                        break;
+
+                    }else if(p.getJailTurn() == 3){
+                        p.addBal(-1000);
+                        p.setIsJailed(false);
+
+
+                    }else{ p.addJailTurn(); }
+                }
+            }
+        } while (playAgain);
     }
 
     public void setTesting() {

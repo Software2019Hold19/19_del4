@@ -10,12 +10,17 @@ import java.util.HashMap;
 public class FieldFactory {
 
     private HashMap<String, GUI_Ownable> ownable = new HashMap<String, GUI_Ownable>();
+    private HashMap<String, GUI_Street> streets = new HashMap<String, GUI_Street>();
 
     public FieldFactory() {
     }
 
     public HashMap<String, GUI_Ownable> getOwnable() {
         return ownable;
+    }
+
+    public HashMap<String, GUI_Street> getStreets() {
+        return streets;
     }
 
     public GUI_Field[] boardSetup(GameBoard board){
@@ -72,6 +77,7 @@ public class FieldFactory {
                     }
                     GUI_Street street = new GUI_Street(field.getName(), field.getSubName(), field.getDesc(), tmpLst[4], color, Color.BLACK);
                     ownable.put(field.getKey(), street);
+                    streets.put(field.getKey(), street);
                     guiFields[i++] = ownable.get(tmpLst[7]);
                     break;
 

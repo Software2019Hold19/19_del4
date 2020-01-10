@@ -30,6 +30,11 @@ public class GUIController {
     }
 
     public void showDiceOnBoard(int[] roll){
+        if (testing) {
+            gui.showMessage("Next turn");
+        }
+
+        
         gui.setDice(roll[0], roll[1]);
     }
 
@@ -74,7 +79,7 @@ public class GUIController {
     }
 
     public void updateBoard(OwnableField[] fLst, Player[] pLst){
-        bObs.ownerUpdate(gui.getFields(), fLst, fieldFac.getOwnable(), pObs.getGuiPlayerList(), pLst);
+        bObs.ownerUpdate(gui.getFields(), fLst, fieldFac.getOwnable(), pObs.getGuiPlayerList(), pLst, fieldFac.getStreets());
 
     }
 
@@ -139,6 +144,5 @@ public class GUIController {
     public void setTesting(){
         testing = true;
     }
-
 
 }

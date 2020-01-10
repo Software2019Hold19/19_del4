@@ -8,6 +8,7 @@ public class Player {
     boolean alive = true;
     int jailCount = 0;
     boolean isJailed = false;
+    boolean jailCard = false;
     int lastRollVal = 0;
 
     public Player (String name){
@@ -83,6 +84,14 @@ public class Player {
     public void jail(){
         setIsJailed(true);
         blink(10);
+    }
+
+    public boolean getJailCard(){
+        return jailCard;
+    }
+
+    public void setJailCard(boolean set){
+        jailCard = set;
     }
 
 }

@@ -45,12 +45,17 @@ public abstract class OwnableField extends Field {
     }
 
     private void payRent(Player player, Player[] pLst, GameBoard board){
-        player.addBal(-getRent(board));
+        Player tempPlayer = new Player("tmp");
 
         for (int i = 0; i < pLst.length; i++){
             if (getOwner().equals(pLst[i].getName())){
-                pLst[i].addBal(getRent(board));
+                tempPlayer = pLst[i];
             }
+        }
+
+        if(!tempPlayer.getIsJailed()){         //A player in jail can't collect rent
+            player.addBal(-getRent(board));
+            tempPlayer.addBal(getRent(board));
         }
     }
 

@@ -270,7 +270,8 @@ public class Controller {
                         gui.updatePlayers(pLst);
                         board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                         gui.updatePlayers(pLst);
-                        //gui.showMessage(escape);
+
+                        gui.showMessage(lib.text.get("PayedEscape"));
                     }
                     else { p.addJailTurn(); }
                     break;
@@ -287,8 +288,8 @@ public class Controller {
                     gui.updatePlayers(pLst);
                     board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                     gui.updatePlayers(pLst);
-                   // gui.showMessage(escape);
 
+                    gui.showMessage(lib.text.get("PayedEscape"));
 
                     break;
     

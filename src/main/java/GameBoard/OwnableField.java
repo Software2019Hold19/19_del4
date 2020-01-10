@@ -91,7 +91,4 @@ public abstract class OwnableField extends Field {
         }
     }
 
-    public void setOwner(String s){
-        this.owner = s;
-    };
 }

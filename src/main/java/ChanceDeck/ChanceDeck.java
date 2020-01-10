@@ -28,12 +28,12 @@ public class ChanceDeck {
         deck[10] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt9"),24);
         deck[11] = new PlayerMoveChanceCard(lib.text.get("ChanceCTxt9"));
         deck[12] = new BankChanceCard(lib.text.get("ChanceCTxt12"), 40000);
-        deck[13] = new BankChanceCard(lib.text.get("ChanceCTxt13"),400);
+        deck[13] = new BankChanceCard(lib.text.get("ChanceCTxt13"),-400);
         deck[14] = new BankChanceCard(lib.text.get("ChanceCTxt14"),4000);
 
 
+        deck[17] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt17"),15);
 
-        
 
         if (!testing) {
             shuffleDeck();

@@ -28,7 +28,7 @@ public class ChanceDeck {
         deck[11] = new PlayerMoveChanceCard(lib.text.get("ChanceCTxt9"));
 
         if (!testing) {
-            //shuffleDeck();
+            shuffleDeck();
         }
     }
 

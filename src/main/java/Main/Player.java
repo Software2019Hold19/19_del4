@@ -75,8 +75,8 @@ public class Player {
     public int getJailTurn() { return jailCount; }
 
     public void jail(){
-        blink(10);
         setIsJailed(true);
+        blink(10);
     }
 
 }

@@ -37,7 +37,7 @@ public abstract class OwnableField extends Field {
         super.landOnField(player, pLst, deck, board, gui, lib);
 
         if (!this.owner.equals("") && !(this.owner.equals(player.getName()))){
-            payRent(player,pLst);
+            payRent(player,pLst, board);
         }
         else if (this.owner.equals("")) {
             choiceToBuy(player,gui,lib);
@@ -45,18 +45,18 @@ public abstract class OwnableField extends Field {
 
     }
 
-    private void payRent(Player player, Player[] pLst){
-        player.addBal(-getRent());
+    private void payRent(Player player, Player[] pLst, GameBoard board){
+        player.addBal(-getRent(board));
 
         for (int i = 0; i < pLst.length; i++){
             if (getOwner().equals(pLst[i].getName())){
-                pLst[i].addBal(getRent());
+                pLst[i].addBal(getRent(board));
             }
         }
     }
 
     @Override
-    public int getRent(){return rent[level];}
+    public int getRent(GameBoard board){return rent[level];}
 
     public String getRentString() {
         return Integer.toString(rent[0]);

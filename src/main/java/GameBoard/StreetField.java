@@ -24,9 +24,8 @@ public class StreetField extends OwnableField {
         this.color = color;
         this.key = key;
     }
-
     @Override
-    public int getRent() {
+    public int getRent(GameBoard board) {
         return rent[level];
     }
 

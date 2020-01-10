@@ -24,7 +24,7 @@ public abstract class Field {
 
     public String toString() {return "";}
 
-    public int getRent() {
+    public int getRent(GameBoard board) {
         return rent[0];
     }
 

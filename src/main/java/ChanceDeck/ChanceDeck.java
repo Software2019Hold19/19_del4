@@ -1,5 +1,6 @@
 package ChanceDeck;
 
+import Main.Player;
 import Main.Translator;
 
 /**
@@ -8,18 +9,21 @@ import Main.Translator;
  */
 public class ChanceDeck {
 
-    ChanceCard deck[] = new ChanceCard[7];
+    ChanceCard deck[] = new ChanceCard[20];
     int cardCount = 0;
 
     public ChanceDeck(Translator lib, Boolean testing) {
 
         deck[0] = new ChoiceMoveChanceCard(lib.text.get("ChanceCTxt3"), true);
         deck[1] = new ChoiceMoveChanceCard(lib.text.get("ChanceCTxt4"), false);
-        deck[2] = new BankChanceCard(lib.text.get("ChanceCTxt1"), 2);
-        deck[3] = new BankChanceCard(lib.text.get("ChanceCTxt2"), -2);
-        deck[4] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt5"), true);
-        deck[5] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt6"), false);
+        deck[2] = new BankChanceCard(lib.text.get("ChanceCTxt"), 2);
+        deck[3] = new BankChanceCard(lib.text.get("ChanceCTxt2"), -2000);
+        deck[4] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt5"), 0);
+        deck[5] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt6"), 39);
         deck[6] = new JailChanceCard("Jailed");
+        deck[7] = new BankChanceCard(lib.text.get("ChanceCTxt1"),-2000);
+        deck[8] = new BankChanceCard(lib.text.get("ChanceCTxt7"),-200);
+        deck[9] = new GetOutOfJailFreeCard(lib.text.get("ChanceCTxt8"));
 
         if (!testing) {
             //shuffleDeck();

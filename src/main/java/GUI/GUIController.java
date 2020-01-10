@@ -45,6 +45,12 @@ public class GUIController {
         }
     }
 
+    public void displayChanceCard(String txt){
+        if (!testing) {
+            this.gui.displayChanceCard(txt);
+        }
+    }
+
     public String getPlayerDropbown(java.lang.String msg, java.lang.String... buttons)
     {
         if (testing){
@@ -79,7 +85,7 @@ public class GUIController {
     }
 
     public void updateBoard(OwnableField[] fLst, Player[] pLst){
-        bObs.ownerUpdate(gui.getFields(), fLst, fieldFac.getOwnable(), pObs.getGuiPlayerList(), pLst, fieldFac.getStreets());
+        bObs.ownerUpdate(gui.getFields(), fLst, fieldFac.getOwnable(), pObs.getGuiPlayerList(), pLst, fieldFac.getStreets(), board);
 
     }
 

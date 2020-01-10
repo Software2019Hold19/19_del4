@@ -62,7 +62,7 @@ public class ChanceDeck {
             cardCount = 0;
         }
         //return deck[cardCount++];//returns drawn card and THEN adds 1 to cardCount
-        return deck[6];
+        return deck[cardCount++];
     }
 
 

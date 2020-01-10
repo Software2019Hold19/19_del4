@@ -14,12 +14,13 @@ public abstract class Field {
     protected int rent[];
     protected int level;
 
-    public Field(String name, String subName, String desc, String type){
+    public Field(String name, String subName, String desc, String type, String key){
         this.name = name;
         this.type = type;
         this.subName = subName;
         this.desc = desc;
         this.level = 0;
+        this.key = key;
     }
 
     public String toString() {return "";}

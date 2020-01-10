@@ -16,10 +16,9 @@ public class StreetField extends OwnableField {
 
     // only used for get rent and gets content from landonfield
     private GameBoard boardTemp;
-    private Player[] pLstTemp;
 
     public StreetField(String name, String subName, String desc, String type, String rentStr, String color, String key){
-        super(name, subName, desc, type, rentStr); // TODO: edit to price and rent
+        super(name, subName, desc, type, rentStr, key); // TODO: edit to price and rent
 
         /*
         String[] rentLst = rentStr.split(",");
@@ -28,15 +27,14 @@ public class StreetField extends OwnableField {
             this.rent[i] = Integer.parseInt(rentLst[i]);
         }
 */
-
         this.color = color;
         this.key = key;
     }
-    @Override
 
+    @Override
     public int getRent(GameBoard board) {
         // if the player owns all fields of same color and no houses 2x rent
-        if (level == 0 && ownsSameColorFields(boardTemp, pLstTemp))
+        if (level == 0 && ownsSameColorFields(boardTemp))
         {
             return 2*rent[level];
         }
@@ -72,17 +70,138 @@ public class StreetField extends OwnableField {
     @Override
     public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
         this.boardTemp = board;
-        this.pLstTemp = pLst;
         //Import LandOnField from ownablefield class
         super.landOnField(player, pLst, deck, board, gui, lib);
 
         if (this.owner.equals(player.getName())) {
-            if (ownsSameColorFields(board)) {
-                chooseToBuyHouses(player, gui, lib);
+            while (ownsSameColorFields(board) && chooseToBuyHouses(player, gui, lib)) {
+                setHouseAndHotel(board);
                 System.out.println("owns same color fields");
             }
         }
     }
+    
+    // only to use when adding a house
+
+    // set the house and hotels and the highest field in perspective to rent
+    private void setHouseAndHotel(GameBoard board) {
+        // get level of fields in same color
+        // if they are all the same level add one to the higest price
+        // else add one to the lowest level
+        int[] listOfHouseLevel;
+
+        if (this.color.equals("lightblue") || this.color.equals("brown")) {
+            listOfHouseLevel = new int[2];
+        }
+        else {
+            listOfHouseLevel = new int[3];
+        }
+
+        // get same color field level
+        int fieldCnt = 0;
+        for (OwnableField field : board.getOwnableBoard()) {
+            if(field.getColor().equals(this.getColor())) {
+               listOfHouseLevel[fieldCnt] = field.getHouseLevel();
+               fieldCnt++;
+            }
+        }
+
+        // chech if same level
+        if (isFieldsSameLevel(listOfHouseLevel)) {
+            board.getOwnableBoard()[getHighestPricFieldIndex(board.getOwnableBoard())].addOneLevel();
+        }
+        else { // add one to the lowest level
+            board.getOwnableBoard()[getLowestLevelFieldIndex(board.getOwnableBoard())].addOneLevel();
+        }
+    }
+
+    private int getLowestLevelFieldIndex(OwnableField[] fields) {
+        int index = 100;
+        for (int i = 0; i < fields.length; i++) {
+            if (fields[i].getColor().equals(this.color)){
+                if (index == 100) {
+                    index = i;
+                }
+                if (fields[i].getHouseLevel() <= fields[index].getHouseLevel()) {
+                    index = i;
+                }
+            }
+        }
+
+        return index;
+    }
+
+    private int getHighestPricFieldIndex(OwnableField[] fields) {
+        int index = 100;
+        for (int i = 0; i < fields.length; i++) {
+            if (fields[i].getColor().equals(this.color)){
+                if (index == 100) {
+                    index = i;
+                }
+                if (fields[i].getPrice() >= fields[index].getPrice()) {
+                    index = i;
+                }
+            }
+        }
+
+        return index;
+    }
+
+    private boolean isFieldsSameLevel(int[] list) {
+        boolean sameLevel = true;
+        for (int i = 1; i < list.length; i++) {
+            if (sameLevel && list[i - 1] == list[i]) {
+                sameLevel = true;
+            }
+            else {
+                sameLevel = false;
+            }
+        }
+        return sameLevel;
+    }
+
+/*
+        super.landOnField(player, pLst, deck, board, gui, lib);
+        if (this.owner.equals("")){
+            gui.showMessage(String.format(lib.text.get("NotOwned"), price));
+            this.owner = player.getName();
+            player.addBal(-price);
+            gui.updateBoard(board.getOwnableBoard(), pLst);
+            //print - field not bought so you are buying this field
+        }
+        else if (player.getName().equals(this.owner)){ //player is the owner
+            gui.showMessage(lib.text.get("OwnField"));
+        }
+        else{
+            for(Player ownercheck : pLst){
+                if(ownercheck.getName().equals(this.owner)){//with for loop it finds player who owns THIS field
+                    int sameColorOwned = 0;//counter for how many fields of THIS color has THIS owner
+                    for(OwnableField fieldCheck : board.getOwnableBoard()){//checks all fields (including this)
+                        if(fieldCheck.getColor().equals(this.color) && fieldCheck.getOwner().equals(this.owner)){
+                            sameColorOwned++;
+                        }
+                    }
+                    if(ownercheck.getIsJailed()){  //Checks if the owner is in jailx
+                        gui.showMessage(String.format(lib.text.get("OthersFieldJailed"), ownercheck.getName()));
+                    }
+                    else if(sameColorOwned == 2){
+                        gui.showMessage(String.format(lib.text.get("OthersField"), ownercheck.getName(), 2*price));
+                        player.addBal(-(2*this.getRent()));
+                        ownercheck.addBal(2*this.getRent());
+                    }
+                    else{
+                        gui.showMessage(String.format(lib.text.get("OthersField"), ownercheck.getName(), price));
+                        player.addBal(-this.getRent());
+                        ownercheck.addBal(this.getRent());
+                    }
+                }
+            }
+        }       
+        
+        // Log to console
+        System.out.println(player.getName() + ": Landed on " + this.getName() + ", Field is owned by " + owner);
+
+*/
 
 
     private int getHousePrice() {
@@ -127,7 +246,7 @@ public class StreetField extends OwnableField {
 
     }
 
-    private void chooseToBuyHouses(Player player, GUIController gui, Translator lib) {
+    private boolean chooseToBuyHouses(Player player, GUIController gui, Translator lib) {
 
         // priser for huse <2000 1000kr. <4000 2000kr. <6000 3000kr.  ellers 4000kr.
         if (this.level <= 3) {
@@ -136,8 +255,13 @@ public class StreetField extends OwnableField {
 
             if (choise.equals("Ja")) {
                 if (player.getBal() > housePrice) {
-                    this.level++;
-                    player.addBal(-housePrice);
+                   // this.level++;
+                   // player.addBal(-housePrice);
+                   return true;
+                }
+                else {
+                    gui.showMessage(lib.text.get("NoMoney"));
+                    return false;
                 }
             }
         }
@@ -149,8 +273,16 @@ public class StreetField extends OwnableField {
                 if (player.getBal() > hotelPrice) {
                     this.level++;
                     player.addBal(-hotelPrice);
-                }
+                    return true;
+                 }
+                 else {
+                     gui.showMessage(lib.text.get("NoMoney"));
+                     return false;
+                 }
             }
         }
+
+        // never in use
+        return false;
     }
 }

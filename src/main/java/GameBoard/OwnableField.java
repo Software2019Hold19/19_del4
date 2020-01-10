@@ -13,8 +13,8 @@ public abstract class OwnableField extends Field {
     protected int price;
     protected String owner = "";
 
-    public OwnableField(String name, String subName, String desc, String type, String rentStr) {
-        super(name, subName, desc, type);
+    public OwnableField(String name, String subName, String desc, String type, String rentStr, String key) {
+        super(name, subName, desc, type, key);
 
         // Init price from subName
         this.price = Integer.parseInt(subName.split(" ")[0]);
@@ -69,12 +69,16 @@ public abstract class OwnableField extends Field {
         return this.owner;
     }
 
+    public void setOwner(String name) {
+        this.owner = name;
+    }
+
     public int getPrice() {
         return this.price;
     }
 
-    public void setOwner(String owner){
-        this.owner = owner;
+    public void addOneLevel() {
+        this.level++;        
     }
 
     public void choiceToBuy(Player player, GUIController gui, Translator lib){
@@ -85,5 +89,4 @@ public abstract class OwnableField extends Field {
             player.addBal(-this.price);
         }
     }
-
 }

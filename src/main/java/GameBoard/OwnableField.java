@@ -11,7 +11,6 @@ import ChanceDeck.ChanceDeck;
 public abstract class OwnableField extends Field {
 
     protected int price;
-    protected String key;
     protected String owner = "";
 
     public OwnableField(String name, String subName, String desc, String type, String rentStr) {
@@ -37,7 +36,7 @@ public abstract class OwnableField extends Field {
         super.landOnField(player, pLst, deck, board, gui, lib);
 
         if (!this.owner.equals("") && !(this.owner.equals(player.getName()))){
-            payRent(player,pLst);
+            payRent(player,pLst, board);
         }
         else if (this.owner.equals("")) {
             choiceToBuy(player,gui,lib);
@@ -45,18 +44,18 @@ public abstract class OwnableField extends Field {
 
     }
 
-    private void payRent(Player player, Player[] pLst){
-        player.addBal(-getRent());
+    private void payRent(Player player, Player[] pLst, GameBoard board){
+        player.addBal(-getRent(board));
 
         for (int i = 0; i < pLst.length; i++){
             if (getOwner().equals(pLst[i].getName())){
-                pLst[i].addBal(getRent());
+                pLst[i].addBal(getRent(board));
             }
         }
     }
 
     @Override
-    public int getRent(){return rent[level];}
+    public int getRent(GameBoard board){return rent[level];}
 
     public String getRentString() {
         return Integer.toString(rent[0]);
@@ -64,10 +63,6 @@ public abstract class OwnableField extends Field {
 
     public String getColor() {
         return "";
-    }
-
-    public String getKey() {
-        return key;
     }
 
     public String getOwner() {
@@ -91,7 +86,4 @@ public abstract class OwnableField extends Field {
         }
     }
 
-    public void setOwner(String s){
-        this.owner = s;
-    };
 }

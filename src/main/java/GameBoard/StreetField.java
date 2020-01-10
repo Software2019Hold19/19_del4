@@ -31,9 +31,9 @@ public class StreetField extends OwnableField {
         this.color = color;
         this.key = key;
     }
-
     @Override
-    public int getRent() {
+
+    public int getRent(GameBoard board) {
         // if the player owns all fields of same color and no houses 2x rent
         if (level == 0 && ownsSameColorFields(boardTemp))
         {
@@ -55,10 +55,6 @@ public class StreetField extends OwnableField {
 
     public void setOwner(String owner) {
         this.owner = owner;
-    }
-
-    public String getKey(){
-        return key;
     }
 
     @Override
@@ -248,28 +244,6 @@ public class StreetField extends OwnableField {
         else{
             return false;
         }
-        /*
-        for(Player ownercheck : pLst){
-            if(ownercheck.getName().equals(this.owner)){//with for loop it finds player who owns THIS field
-                int sameColorOwned = 0;//counter for how many fields of THIS color has THIS owner
-                for(OwnableField fieldCheck : board.getOwnableBoard()){//checks all fields (including this)
-                    if(fieldCheck.getColor().equals(this.color) && fieldCheck.getOwner().equals(this.owner)){
-                        sameColorOwned++;
-                    }
-                }
-                if(sameColorOwned == 3){
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            }
-            else {
-                return false;
-            }
-        }
-        return false;
-        */
 
     }
 

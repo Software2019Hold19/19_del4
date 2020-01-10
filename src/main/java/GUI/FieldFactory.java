@@ -94,13 +94,13 @@ public class FieldFactory {
                     break;
 
                 case ("brewery"):
-                    GUI_Brewery brew = new GUI_Brewery("default", field.getName(), field.getSubName(), field.getDesc(), Integer.toString(field.getRent()), Color.BLACK, Color.WHITE);
+                    GUI_Brewery brew = new GUI_Brewery("default", field.getName(), field.getSubName(), field.getDesc(), Integer.toString(field.getRent(board)), Color.BLACK, Color.WHITE);
                     ownable.put(field.getKey(), brew);
                     guiFields[i++] = brew;
                     break;
 
                 case ("ferry"):
-                    GUI_Shipping ship = new GUI_Shipping("default", field.getName(), field.getSubName(), field.getDesc(), Integer.toString(field.getRent()),Color.WHITE, Color.BLACK);
+                    GUI_Shipping ship = new GUI_Shipping("default", field.getName(), field.getSubName(), field.getDesc(), Integer.toString(field.getRent(board)),Color.WHITE, Color.BLACK);
                     ownable.put(field.getKey(), ship);
                     guiFields[i++] = ship;
                     break;

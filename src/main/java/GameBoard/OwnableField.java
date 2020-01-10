@@ -13,8 +13,8 @@ public abstract class OwnableField extends Field {
     protected int price;
     protected String owner = "";
 
-    public OwnableField(String name, String subName, String desc, String type, String rentStr) {
-        super(name, subName, desc, type);
+    public OwnableField(String name, String subName, String desc, String type, String rentStr, String key) {
+        super(name, subName, desc, type, key);
 
         // Init price from subName
         this.price = Integer.parseInt(subName.split(" ")[0]);
@@ -89,5 +89,4 @@ public abstract class OwnableField extends Field {
             player.addBal(-this.price);
         }
     }
-
 }

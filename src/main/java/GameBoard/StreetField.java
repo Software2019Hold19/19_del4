@@ -18,7 +18,7 @@ public class StreetField extends OwnableField {
     private GameBoard boardTemp;
 
     public StreetField(String name, String subName, String desc, String type, String rentStr, String color, String key){
-        super(name, subName, desc, type, rentStr); // TODO: edit to price and rent
+        super(name, subName, desc, type, rentStr, key); // TODO: edit to price and rent
 
         /*
         String[] rentLst = rentStr.split(",");
@@ -27,12 +27,11 @@ public class StreetField extends OwnableField {
             this.rent[i] = Integer.parseInt(rentLst[i]);
         }
 */
-
         this.color = color;
         this.key = key;
     }
-    @Override
 
+    @Override
     public int getRent(GameBoard board) {
         // if the player owns all fields of same color and no houses 2x rent
         if (level == 0 && ownsSameColorFields(boardTemp))
@@ -75,7 +74,7 @@ public class StreetField extends OwnableField {
         super.landOnField(player, pLst, deck, board, gui, lib);
 
         if (this.owner.equals(player.getName())) {
-            if (ownsSameColorFields(board) && chooseToBuyHouses(player, gui, lib)) {
+            while (ownsSameColorFields(board) && chooseToBuyHouses(player, gui, lib)) {
                 setHouseAndHotel(board);
                 System.out.println("owns same color fields");
             }

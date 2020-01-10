@@ -11,7 +11,6 @@ import ChanceDeck.ChanceDeck;
 public abstract class OwnableField extends Field {
 
     protected int price;
-    protected String key;
     protected String owner = "";
 
     public OwnableField(String name, String subName, String desc, String type, String rentStr) {
@@ -64,10 +63,6 @@ public abstract class OwnableField extends Field {
 
     public String getColor() {
         return "";
-    }
-
-    public String getKey() {
-        return key;
     }
 
     public String getOwner() {

@@ -64,3 +64,4 @@ No//Nej
 YourOptionsJail//Du er i fængsel, hvad vil du gøre?
 Roll//Kast terninger
 Pay//Betal 1000kr
+NoMoney//Du har ikke penge nok til købet

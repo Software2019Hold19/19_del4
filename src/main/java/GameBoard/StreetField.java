@@ -16,7 +16,6 @@ public class StreetField extends OwnableField {
 
     // only used for get rent and gets content from landonfield
     private GameBoard boardTemp;
-    private Player[] pLstTemp;
 
     public StreetField(String name, String subName, String desc, String type, String rentStr, String color, String key){
         super(name, subName, desc, type, rentStr); // TODO: edit to price and rent
@@ -36,7 +35,7 @@ public class StreetField extends OwnableField {
     @Override
     public int getRent() {
         // if the player owns all fields of same color and no houses 2x rent
-        if (level == 0 && ownsSameColorFields(boardTemp, pLstTemp))
+        if (level == 0 && ownsSameColorFields(boardTemp))
         {
             return 2*rent[level];
         }
@@ -76,18 +75,95 @@ public class StreetField extends OwnableField {
     @Override
     public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
         this.boardTemp = board;
-        this.pLstTemp = pLst;
         //Import LandOnField from ownablefield class
         super.landOnField(player, pLst, deck, board, gui, lib);
 
         if (this.owner.equals(player.getName())) {
-            if (ownsSameColorFields(board, pLst)) {
-                chooseToBuyHouses(player, gui, lib);
+            if (ownsSameColorFields(board) && chooseToBuyHouses(player, gui, lib)) {
+                setHouseAndHotel(board);
                 System.out.println("owns same color fields");
             }
         }
+    }
+    
+    // only to use when adding a house
 
+    // set the house and hotels and the highest field in perspective to rent
+    private void setHouseAndHotel(GameBoard board) {
+        // get level of fields in same color
+        // if they are all the same level add one to the higest price
+        // else add one to the lowest level
+        int[] listOfHouseLevel;
 
+        if (this.color.equals("lightblue") || this.color.equals("brown")) {
+            listOfHouseLevel = new int[2];
+        }
+        else {
+            listOfHouseLevel = new int[3];
+        }
+
+        // get same color field level
+        int fieldCnt = 0;
+        for (OwnableField field : board.getOwnableBoard()) {
+            if(field.getColor().equals(this.getColor())) {
+               listOfHouseLevel[fieldCnt] = field.getHouseLevel();
+               fieldCnt++;
+            }
+        }
+
+        // chech if same level
+        if (isFieldsSameLevel(listOfHouseLevel)) {
+            board.getOwnableBoard()[getHighestPricFieldIndex(board.getOwnableBoard())].addOneLevel();
+        }
+        else { // add one to the lowest level
+            board.getOwnableBoard()[getLowestLevelFieldIndex(board.getOwnableBoard())].addOneLevel();
+        }
+    }
+
+    private int getLowestLevelFieldIndex(OwnableField[] fields) {
+        int index = 100;
+        for (int i = 0; i < fields.length; i++) {
+            if (fields[i].getColor().equals(this.color)){
+                if (index == 100) {
+                    index = i;
+                }
+                if (fields[i].getHouseLevel() <= fields[index].getHouseLevel()) {
+                    index = i;
+                }
+            }
+        }
+
+        return index;
+    }
+
+    private int getHighestPricFieldIndex(OwnableField[] fields) {
+        int index = 100;
+        for (int i = 0; i < fields.length; i++) {
+            if (fields[i].getColor().equals(this.color)){
+                if (index == 100) {
+                    index = i;
+                }
+                if (fields[i].getPrice() >= fields[index].getPrice()) {
+                    index = i;
+                }
+            }
+        }
+
+        return index;
+    }
+
+    private boolean isFieldsSameLevel(int[] list) {
+        boolean sameLevel = true;
+        for (int i = 1; i < list.length; i++) {
+            if (sameLevel && list[i - 1] == list[i]) {
+                sameLevel = true;
+            }
+            else {
+                sameLevel = false;
+            }
+        }
+        return sameLevel;
+    }
 
 /*
         super.landOnField(player, pLst, deck, board, gui, lib);
@@ -131,7 +207,6 @@ public class StreetField extends OwnableField {
         System.out.println(player.getName() + ": Landed on " + this.getName() + ", Field is owned by " + owner);
 
 */
-    }
 
 
     private int getHousePrice() {
@@ -149,7 +224,7 @@ public class StreetField extends OwnableField {
         }
     }
 
-    private boolean ownsSameColorFields(GameBoard board, Player[] pLst){
+    private boolean ownsSameColorFields(GameBoard board){
         int ownSamecolorFieldCnt = 0;
         for (OwnableField field : board.getOwnableBoard()) {
             if(field.getColor().equals(this.getColor()) && field.getOwner().equals(this.owner)) {
@@ -198,7 +273,7 @@ public class StreetField extends OwnableField {
 
     }
 
-    private void chooseToBuyHouses(Player player, GUIController gui, Translator lib) {
+    private boolean chooseToBuyHouses(Player player, GUIController gui, Translator lib) {
 
         // priser for huse <2000 1000kr. <4000 2000kr. <6000 3000kr.  ellers 4000kr.
         if (this.level <= 3) {
@@ -207,8 +282,13 @@ public class StreetField extends OwnableField {
 
             if (choise.equals("Ja")) {
                 if (player.getBal() > housePrice) {
-                    this.level++;
-                    player.addBal(-housePrice);
+                   // this.level++;
+                   // player.addBal(-housePrice);
+                   return true;
+                }
+                else {
+                    gui.showMessage(lib.text.get("NoMoney"));
+                    return false;
                 }
             }
         }
@@ -220,8 +300,16 @@ public class StreetField extends OwnableField {
                 if (player.getBal() > hotelPrice) {
                     this.level++;
                     player.addBal(-hotelPrice);
-                }
+                    return true;
+                 }
+                 else {
+                     gui.showMessage(lib.text.get("NoMoney"));
+                     return false;
+                 }
             }
         }
+
+        // never in use
+        return false;
     }
 }

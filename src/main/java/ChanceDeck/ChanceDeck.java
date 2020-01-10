@@ -26,6 +26,7 @@ public class ChanceDeck {
         deck[9] = new GetOutOfJailFreeCard(lib.text.get("ChanceCTxt8"));
         deck[10] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt9"),23);
         deck[11] = new PlayerMoveChanceCard(lib.text.get("ChanceCTxt9"));
+        deck[12] = new BankChanceCard(lib.text.get("ChanceCTxt12"), 40000);
 
         if (!testing) {
             shuffleDeck();

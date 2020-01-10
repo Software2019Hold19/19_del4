@@ -236,7 +236,7 @@ public class Controller {
 
                 gui.updatePlayers(pLst);
             
-            }else if(p.getJailTurn() < 3){           // The player is jailed and gets a choice the next 3 turns
+            }else if(p.getJailTurn() < 4){           // The player is jailed and gets a choice the next 3 turns
 
                 int caseCounter = 0;
                 String roll = lib.text.get("JailRoll"); String pay = lib.text.get("JailPay");

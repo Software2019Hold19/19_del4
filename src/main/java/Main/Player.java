@@ -5,8 +5,10 @@ public class Player {
     String name;
     private Account acc = new Account();
     int fieldNumber = 0;
+    boolean alive = true;
     int jailCount = 0;
     boolean isJailed = false;
+    boolean jailCard = false;
 
     public Player (String name){
         this.name = name;
@@ -23,8 +25,8 @@ public class Player {
 
     public void move(int val){
         this.fieldNumber += val;
-        if (this.fieldNumber >= 24){
-            this.fieldNumber -= 24;
+        if (this.fieldNumber >= 40){
+            this.fieldNumber -= 40;
             this.addBal(4000); // income from start
         }
     }
@@ -45,6 +47,15 @@ public class Player {
         return fieldNumber;
     }
 
+
+    public boolean getAlive(){
+        return alive;
+    }
+
+    public void kill() {
+        this.alive = false;
+    }
+
     public boolean getIsJailed(){
         return isJailed;
     }
@@ -61,7 +72,20 @@ public class Player {
         jailCount = 0;
     }
 
-    public int getJailTurn(){
-        return jailCount;
+
+    public int getJailTurn() { return jailCount; }
+
+    public void jail(){
+        setIsJailed(true);
+        blink(10);
     }
+
+    public boolean getJailCard(){
+        return jailCard;
+    }
+
+    public void setJailCard(boolean set){
+        jailCard = set;
+    }
+
 }

@@ -7,15 +7,14 @@ import Main.Translator;
 
 public class GoToJailField extends Field {
 
-    public GoToJailField(String name, String subName, String desc, String type){
-        super(name, subName, desc, type);
+    public GoToJailField(String name, String subName, String desc, String type, String key){
+        super(name, subName, desc, type, key);
     }
 
     @Override
     public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
         gui.showMessage(lib.text.get("LandOnGoToJail"));
-        player.blink(6);
-        player.setIsJailed(true);
+        player.jail();
     }
 
     @Override

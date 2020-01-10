@@ -9,13 +9,18 @@ import java.util.HashMap;
 
 public class FieldFactory {
 
-    private HashMap<String, GUI_Street> ownable = new HashMap<String, GUI_Street>();
+    private HashMap<String, GUI_Ownable> ownable = new HashMap<String, GUI_Ownable>();
+    private HashMap<String, GUI_Street> streets = new HashMap<String, GUI_Street>();
 
     public FieldFactory() {
     }
 
-    public HashMap<String, GUI_Street> getOwnable() {
+    public HashMap<String, GUI_Ownable> getOwnable() {
         return ownable;
+    }
+
+    public HashMap<String, GUI_Street> getStreets() {
+        return streets;
     }
 
     public GUI_Field[] boardSetup(GameBoard board){
@@ -33,7 +38,7 @@ public class FieldFactory {
                     String[] tmpLst = field.getInfo();
                     Color color = Color.BLACK;
                     switch (tmpLst[5]){
-                        case("lightgray"):
+                        case("lightgrey"):
                             color = new Color(224, 224, 224);
                             break;
 
@@ -41,7 +46,7 @@ public class FieldFactory {
                             color = new Color(31, 236, 255);
                             break;
 
-                        case("darkgray"):
+                        case("darkgrey"):
                             color = new Color(117, 117, 117);
                             break;
 
@@ -71,7 +76,8 @@ public class FieldFactory {
 
                     }
                     GUI_Street street = new GUI_Street(field.getName(), field.getSubName(), field.getDesc(), tmpLst[4], color, Color.BLACK);
-                    ownable.put(tmpLst[7], street);
+                    ownable.put(field.getKey(), street);
+                    streets.put(field.getKey(), street);
                     guiFields[i++] = ownable.get(tmpLst[7]);
                     break;
 
@@ -88,11 +94,15 @@ public class FieldFactory {
                     break;
 
                 case ("brewery"):
-                    guiFields[i++] = new GUI_Brewery("default", field.getName(), field.getSubName(), field.getDesc(), Integer.toString(field.getRent()), Color.BLACK, Color.WHITE);
+                    GUI_Brewery brew = new GUI_Brewery("default", field.getName(), field.getSubName(), field.getDesc(), Integer.toString(field.getRent(board)), Color.BLACK, Color.WHITE);
+                    ownable.put(field.getKey(), brew);
+                    guiFields[i++] = brew;
                     break;
 
                 case ("ferry"):
-                    guiFields[i++] = new GUI_Shipping("default", field.getName(), field.getSubName(), field.getDesc(), Integer.toString(field.getRent()),Color.WHITE, Color.YELLOW);
+                    GUI_Shipping ship = new GUI_Shipping("default", field.getName(), field.getSubName(), field.getDesc(), Integer.toString(field.getRent(board)),Color.WHITE, Color.BLACK);
+                    ownable.put(field.getKey(), ship);
+                    guiFields[i++] = ship;
                     break;
 
                 case ("tax"):
@@ -100,6 +110,10 @@ public class FieldFactory {
                     break;
             }
         }
+        for (String key : ownable.keySet()) {
+            ownable.get(key).setBorder(Color.BLACK);
+        }
+
         return guiFields;
     }
 

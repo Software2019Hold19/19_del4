@@ -197,7 +197,7 @@ public class Controller {
                 
         do {
             if(!p.getIsJailed()) {  //If the player is not jailed
-                Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
+                Boolean manual = true; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
                 int[] diceRoll = dice.roll(testing);
                 if (manual) {
                     int val = Integer.parseInt(gui.getPlayerDropbown("__MANUEL__ Dice", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2"));
@@ -244,9 +244,10 @@ public class Controller {
                 String pay = lib.text.get("JailPay");
                 String jailCard = lib.text.get("JailCard");
 
-                if(!p.getJailCard()) {
+                if(!p.getJailCard()) {          //if the player doesn't have a "Get out of jail" chance card
                     jailOptionStr = gui.getPlayerDropbown(lib.text.get("YourOptionsJail"), roll, pay);
-                }else{
+                }
+                else{                           //if the player has a "Get out of jail" chance card
                     jailOptionStr = gui.getPlayerDropbown(lib.text.get("YourOptionsJail"), jailCard, roll, pay);
                 }
                 if(jailOptionStr == roll) { caseCounter = 1; }
@@ -255,7 +256,7 @@ public class Controller {
 
                 switch(caseCounter) {
 
-                    case(1):
+                    case(1):                                    //if the player chooses to roll for a pair
                         int[] diceRoll = dice.roll(testing);
                         gui.showDiceOnBoard(diceRoll);
 
@@ -268,8 +269,8 @@ public class Controller {
                             board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                             gui.updatePlayers(pLst);
                         }
-                        else if(p.getJailTurn() == 3){
-                            p.setIsJailed(false);
+                        else if(p.getJailTurn() == 3){          //if the player doesn't get a pair after 3 turns
+                            p.setIsJailed(false);               //then the player is forced to pay
                             p.resetJailTurn();
                             p.addBal(-1000);
                             p.move(diceRoll[0] + diceRoll[1]);
@@ -283,7 +284,7 @@ public class Controller {
                         else { p.addJailTurn(); }
                         break;
 
-                    case(2):
+                    case(2):                                    //if the player chooses to pay
                         p.setIsJailed(false);
                         p.resetJailTurn();
                         p.addBal(-1000);
@@ -300,7 +301,7 @@ public class Controller {
 
                         break;
 
-                    case(3):
+                    case(3):                                    //if the player has a "Get out of jail" chance card
                         p.setIsJailed(false);
                         p.resetJailTurn();
                         p.setJailCard(false);

@@ -33,7 +33,8 @@ Ferry3//DAMPSKIBSSELSKABET Ø. K: 4000 kr.: Du er landet på DAMPSKIBSSELSKABET 
 Ferry4//DAMPSKIBSSELSKABET. D. F. D. S.: 4000 kr.: Du er landet på DAMPSKIBSSELSKABET. D. F. D. S.: 500,1000,2000,4000
 Welcome//Velkommen til spillet. Spillet handler om at købe egendeomme før din modspiller. Den første der løber tør for penge har tabt.
 Tax1//Indkomstskat: 4000 kr. eller 10% : Du er landet på indkomstskat.
-Tax2//Ekstrordinærstatsskat: 2000 kr.: Du er landet på Ekstrordinærstatsskat.
+Tax1Choice//Du skal vælge at betale enten 4000 kr. eller 10% af din formue i skat.
+Tax2//Ekstrordinærstatsskat: 2000 kr.: Du er landet på Ekstrordinærstatsskat. Du skal betale 2000 kr. i skat.
 NumberOfPlayers//Hvor mange spillere spiller?
 InputName//Indtast Spiller %ds navn i det ledige felt.
 Turn//Det er %s's tur kast med terningerne.
@@ -62,6 +63,9 @@ Buyhotel//Vil du købe et hotel for
 Yes//Ja
 No//Nej
 YourOptionsJail//Du er i fængsel, hvad vil du gøre?
+Roll//Kast terninger
+Pay//Betal 1000kr
+NoMoney//Du har ikke penge nok til købet
 JailRoll//Kast terninger
 JailPay//Betal 1000kr
 PayedEscaped//%s bateler 1000 kr og er fri igen.

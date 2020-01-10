@@ -6,7 +6,7 @@ package GameBoard;
 public class BreweryField extends OwnableField {
 
     public BreweryField(String name, String subName, String desc, String type, String rent, String key) {
-        super(name, subName, desc, type, rent);
+        super(name, subName, desc, type, rent, key);
         this.key = key;
         // TODO Auto-generated constructor stub
     }

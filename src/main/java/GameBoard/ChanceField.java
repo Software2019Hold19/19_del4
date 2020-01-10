@@ -10,8 +10,8 @@ public class ChanceField extends Field {
 
     ChanceCard card;
 
-    public ChanceField(String name, String subName, String desc, String type){
-        super(name, subName, desc, type);
+    public ChanceField(String name, String subName, String desc, String type, String key){
+        super(name, subName, desc, type, key);
     }
 
     @Override

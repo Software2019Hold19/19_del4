@@ -30,8 +30,8 @@ public class ChanceDeck {
         deck[12] = new BankChanceCard(lib.text.get("ChanceCTxt12"), 40000);
         deck[13] = new BankChanceCard(lib.text.get("ChanceCTxt13"),-400);
         deck[14] = new BankChanceCard(lib.text.get("ChanceCTxt14"),4000);
-
-
+        deck[15] = new TaxChanceCard(lib.text.get("ChanceCTxt15"),500, 2500);
+        deck[16] = new TaxChanceCard(lib.text.get("ChanceCTxt16"),1000, 2500);
         deck[17] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt17"),15);
 
 

@@ -2,6 +2,7 @@ package ChanceDeck;
 
 import Main.Player;
 import Main.Translator;
+import GameBoard.OwnableField;
 
 /**
  * ChanceDeck
@@ -24,9 +25,15 @@ public class ChanceDeck {
         deck[7] = new BankChanceCard(lib.text.get("ChanceCTxt1"),-2000);
         deck[8] = new BankChanceCard(lib.text.get("ChanceCTxt7"),-200);
         deck[9] = new GetOutOfJailFreeCard(lib.text.get("ChanceCTxt8"));
-        deck[10] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt9"),23);
+        deck[10] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt9"),24);
         deck[11] = new PlayerMoveChanceCard(lib.text.get("ChanceCTxt9"));
         deck[12] = new BankChanceCard(lib.text.get("ChanceCTxt12"), 40000);
+        deck[13] = new BankChanceCard(lib.text.get("ChanceCTxt13"),400);
+        deck[14] = new BankChanceCard(lib.text.get("ChanceCTxt14"),4000);
+
+
+
+        
 
         if (!testing) {
             shuffleDeck();

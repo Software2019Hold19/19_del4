@@ -10,12 +10,12 @@ import GameBoard.OwnableField;
  */
 public class ChanceDeck {
 
-    ChanceCard deck[] = new ChanceCard[20];
+    ChanceCard deck[] = new ChanceCard[3];
     int cardCount = 0;
 
     public ChanceDeck(Translator lib, Boolean testing) {
 
-        deck[0] = new ChoiceMoveChanceCard(lib.text.get("ChanceCTxt3"), true);
+        /*deck[0] = new ChoiceMoveChanceCard(lib.text.get("ChanceCTxt3"), true);
         deck[1] = new ChoiceMoveChanceCard(lib.text.get("ChanceCTxt4"), false);
         deck[2] = new BankChanceCard(lib.text.get("ChanceCTxt10"), 1000);
         deck[3] = new BankChanceCard(lib.text.get("ChanceCTxt2"), -2000);
@@ -29,10 +29,10 @@ public class ChanceDeck {
         deck[11] = new PlayerMoveChanceCard(lib.text.get("ChanceCTxt9"));
         deck[12] = new BankChanceCard(lib.text.get("ChanceCTxt12"), 40000);
         deck[13] = new BankChanceCard(lib.text.get("ChanceCTxt13"),-400);
-        deck[14] = new BankChanceCard(lib.text.get("ChanceCTxt14"),4000);
-        deck[15] = new TaxChanceCard(lib.text.get("ChanceCTxt15"),500, 2500);
-        deck[16] = new TaxChanceCard(lib.text.get("ChanceCTxt16"),1000, 2500);
-        deck[17] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt17"),15);
+        deck[14] = new BankChanceCard(lib.text.get("ChanceCTxt14"),4000);*/
+        deck[0] = new TaxChanceCard(lib.text.get("ChanceCTxt15"),500, 2500);
+        deck[1] = new TaxChanceCard(lib.text.get("ChanceCTxt16"),1000, 2500);
+        deck[2] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt17"),15);
 
 
         if (!testing) {
@@ -69,6 +69,7 @@ public class ChanceDeck {
         if (cardCount >= deck.length){ //resets count when all cards have been drawn
             cardCount = 0;
         }
+
         return deck[cardCount++];//returns drawn card and THEN adds 1 to cardCount
         //return deck[6];
     }

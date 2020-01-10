@@ -32,8 +32,8 @@ public class Controller {
         playerCount = Integer.parseInt(playerCountstr);
         int startBal = 30000;
 
+        //name input - repeat if names are the same
         while (true) {
-
             boolean sameName = false;
             pLst = new Player[playerCount];
             for (int i = 0; i < playerCount; i++) {
@@ -86,6 +86,9 @@ public class Controller {
                 System.out.println("Turn Count total: " + turnCountTotal);
             }
         }
+        if (testing) {
+            setTesting();
+        }
         int max = pLst[0].getBal();
         String winner = pLst[0].getName();
         for (Player p : pLst){
@@ -94,6 +97,7 @@ public class Controller {
                 max = p.getBal();
             }
         }
+        System.out.println(turnCountTotal);
         gui.showMessage(String.format(lib.text.get("Winner"), winner));
     }
 
@@ -250,9 +254,9 @@ public class Controller {
 }
 
     public void setTesting() {
-        testing = true;
+        testing = !testing;
         deck = new ChanceDeck(lib, testing);
-        gui.setTesting();
+        gui.setTesting(testing);
     }
     
 }

@@ -42,7 +42,9 @@ public class PlayerObserver extends Observer{
             field.removeAllCars();
         }
         for (int i = 0; i < pLst.length; i++){
-           gui.getFields()[pLst[i].getFieldNumber()].setCar(guiPlayerList[i], true);
+            if (pLst[i].getAlive()) {
+                gui.getFields()[pLst[i].getFieldNumber()].setCar(guiPlayerList[i], true);
+            }
         }
     }
 

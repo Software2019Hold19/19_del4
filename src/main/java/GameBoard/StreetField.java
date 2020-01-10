@@ -14,6 +14,10 @@ public class StreetField extends OwnableField {
 
     HashMap<String, StreetField> pair = new HashMap<String, StreetField>();
 
+    // only used for get rent and gets content from landonfield
+    private GameBoard boardTemp;
+    private Player[] pLstTemp;
+
     public StreetField(String name, String subName, String desc, String type, String rentStr, String color, String key){
         super(name, subName, desc, type, rentStr); // TODO: edit to price and rent
 
@@ -31,7 +35,15 @@ public class StreetField extends OwnableField {
 
     @Override
     public int getRent() {
-        return rent[level];
+        // if the player owns all fields of same color and no houses 2x rent
+        if (level == 0 && ownsSameColorFields(boardTemp, pLstTemp))
+        {
+            return 2*rent[level];
+        }
+        else {
+            return rent[level];
+        }
+
     }
 
     public String getColor() {
@@ -59,6 +71,8 @@ public class StreetField extends OwnableField {
 
     @Override
     public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
+        this.boardTemp = board;
+        this.pLstTemp = pLst;
         //Import LandOnField from ownablefield class
         super.landOnField(player, pLst, deck, board, gui, lib);
 

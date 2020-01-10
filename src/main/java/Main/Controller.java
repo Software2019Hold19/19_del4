@@ -61,6 +61,24 @@ public class Controller {
         playGame();
     }
 
+    private void turnOrder(Player[] pLst){
+        int[] rolls = new int[pLst.length];
+        int maximum = 0;
+        Player[] starter;
+
+        for (int i = 0; i < pLst.length; i++){
+            int[] roll = dice.roll(testing);
+            int val = roll[0] + roll[1];
+            gui.showDiceOnBoard(roll);
+            gui.showMessage(String.format(lib.text.get("TurnOrderRoll"), pLst[i].getName(), val));
+            if (val > maximum){
+                val = maximum;
+                starter = {pLst[i]};
+            }
+
+        }
+    }
+
     private void playGame() {
         int turnCount = 0;
         int turnCountTotal = 0;
@@ -109,7 +127,6 @@ public class Controller {
             // if player has no money then die
             if (p.getBal() == 0) {
                 p.kill();
-
 
         //        gui.showMessage(String.format(lib.text.get("EndOfGame"), p.getName()));
             }

@@ -62,5 +62,6 @@ Buyhotel//Vil du købe et hotel for
 Yes//Ja
 No//Nej
 YourOptionsJail//Du er i fængsel, hvad vil du gøre?
-Roll//Kast terninger
-Pay//Betal 1000kr
+JailRoll//Kast terninger
+JailPay//Betal 1000kr
+TurnOrderRoll//Du, Spiller %s, har slået %d

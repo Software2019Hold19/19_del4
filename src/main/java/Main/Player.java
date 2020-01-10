@@ -8,6 +8,7 @@ public class Player {
     boolean alive = true;
     int jailCount = 0;
     boolean isJailed = false;
+    int lastRollVal = 0;
 
     public Player (String name){
         this.name = name;
@@ -23,6 +24,7 @@ public class Player {
     }// move directly to pos
 
     public void move(int val){
+        this.lastRollVal = val;
         this.fieldNumber += val;
         if (this.fieldNumber >= 40){
             this.fieldNumber -= 40;
@@ -53,6 +55,10 @@ public class Player {
 
     public void kill() {
         this.alive = false;
+    }
+
+    public int getLastRollVal(){
+        return this.lastRollVal;
     }
 
     public boolean getIsJailed(){

@@ -16,7 +16,7 @@ public class ChanceDeck {
 
         deck[0] = new ChoiceMoveChanceCard(lib.text.get("ChanceCTxt3"), true);
         deck[1] = new ChoiceMoveChanceCard(lib.text.get("ChanceCTxt4"), false);
-        deck[2] = new BankChanceCard(lib.text.get("ChanceCTxt"), 2);
+        deck[2] = new BankChanceCard(lib.text.get("ChanceCTxt10"), 1000);
         deck[3] = new BankChanceCard(lib.text.get("ChanceCTxt2"), -2000);
         deck[4] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt5"), 0);
         deck[5] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt6"), 39);
@@ -24,6 +24,8 @@ public class ChanceDeck {
         deck[7] = new BankChanceCard(lib.text.get("ChanceCTxt1"),-2000);
         deck[8] = new BankChanceCard(lib.text.get("ChanceCTxt7"),-200);
         deck[9] = new GetOutOfJailFreeCard(lib.text.get("ChanceCTxt8"));
+        deck[10] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt9"),23);
+        deck[11] = new PlayerMoveChanceCard(lib.text.get("ChanceCTxt9"));
 
         if (!testing) {
             //shuffleDeck();

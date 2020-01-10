@@ -61,10 +61,11 @@ public class Controller {
         playGame();
     }
 
-    private void turnOrder(Player[] pLst){
-        int[] rolls = new int[pLst.length];
+    private int turnOrder(Player[] pLst){
         int maximum = 0;
-        Player[] starter;
+        Player[] starter = new Player[0];
+
+        int res = 0;
 
         for (int i = 0; i < pLst.length; i++){
             int[] roll = dice.roll(testing);
@@ -72,15 +73,39 @@ public class Controller {
             gui.showDiceOnBoard(roll);
             gui.showMessage(String.format(lib.text.get("TurnOrderRoll"), pLst[i].getName(), val));
             if (val > maximum){
-                val = maximum;
-                starter = {pLst[i]};
-            }
+                maximum = val;
+                starter = new Player[] {pLst[i]};
+            } else if (val == maximum){
+                Player[] tmpLst = new Player[starter.length + 1];
+                for (int j = 0; j < starter.length; j++){
+                    tmpLst[j] = starter[j];
+                }
+                tmpLst[tmpLst.length - 1] = pLst[i];
+                starter = new Player[tmpLst.length];
+                for (int j = 0; j < starter.length; j++){
+                    starter[j] = tmpLst[j];
+                }
 
+            }
         }
+
+        if (starter.length > 1) {
+            gui.showMessage(lib.text.get("TurnOrderRedo"));
+            turnOrder(starter);
+        } else {
+            gui.showMessage(String.format(lib.text.get("TurnOrderWinner"), starter[0].getName()));
+            for (int j = 0; j < pLst.length; j++) {
+                if (pLst[j].getName().equals(starter[0].getName())){
+                    res = j;
+                }
+            }
+        }
+        return res;
     }
 
     private void playGame() {
-        int turnCount = 0;
+        gui.showMessage(lib.text.get("TurnOrderStart"));
+        int turnCount = turnOrder(pLst);
         int turnCountTotal = 0;
 
         while (!isOnePlayerLeft(lib)) {

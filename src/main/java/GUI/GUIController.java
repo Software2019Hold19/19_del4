@@ -30,9 +30,9 @@ public class GUIController {
     }
 
     public void showDiceOnBoard(int[] roll){
-        if (testing) {
+        /*if (testing) {
             gui.showMessage("Next turn");
-        }
+        }*/
 
         
         gui.setDice(roll[0], roll[1]);
@@ -141,8 +141,8 @@ public class GUIController {
 
     }
 
-    public void setTesting(){
-        testing = true;
+    public void setTesting(Boolean test){
+        testing = test;
     }
 
 }

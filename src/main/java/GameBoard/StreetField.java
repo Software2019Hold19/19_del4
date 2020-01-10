@@ -4,11 +4,19 @@ import GUI.GUIController;
 import Main.Player;
 import Main.Translator;
 
+import java.util.HashMap;
+
 public class StreetField extends OwnableField {
 
     private String color;
 
     private String key; // use in hashmap
+
+    HashMap<String, StreetField> pair = new HashMap<String, StreetField>();
+
+    // only used for get rent and gets content from landonfield
+    private GameBoard boardTemp;
+    private Player[] pLstTemp;
 
     public StreetField(String name, String subName, String desc, String type, String rentStr, String color, String key){
         super(name, subName, desc, type, rentStr); // TODO: edit to price and rent
@@ -25,8 +33,17 @@ public class StreetField extends OwnableField {
         this.key = key;
     }
     @Override
+
     public int getRent(GameBoard board) {
-        return rent[level];
+        // if the player owns all fields of same color and no houses 2x rent
+        if (level == 0 && ownsSameColorFields(boardTemp, pLstTemp))
+        {
+            return 2*rent[level];
+        }
+        else {
+            return rent[level];
+        }
+
     }
 
     public String getColor() {
@@ -39,10 +56,6 @@ public class StreetField extends OwnableField {
 
     public void setOwner(String owner) {
         this.owner = owner;
-    }
-
-    public String getKey(){
-        return key;
     }
 
     @Override
@@ -58,11 +71,13 @@ public class StreetField extends OwnableField {
 
     @Override
     public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
+        this.boardTemp = board;
+        this.pLstTemp = pLst;
         //Import LandOnField from ownablefield class
         super.landOnField(player, pLst, deck, board, gui, lib);
 
         if (this.owner.equals(player.getName())) {
-            if (ownsSameColorFields(board, pLst)) {
+            if (ownsSameColorFields(board)) {
                 chooseToBuyHouses(player, gui, lib);
                 System.out.println("owns same color fields");
             }
@@ -85,7 +100,7 @@ public class StreetField extends OwnableField {
         }
     }
 
-    private boolean ownsSameColorFields(GameBoard board, Player[] pLst){
+    private boolean ownsSameColorFields(GameBoard board){
         int ownSamecolorFieldCnt = 0;
         for (OwnableField field : board.getOwnableBoard()) {
             if(field.getColor().equals(this.getColor()) && field.getOwner().equals(this.owner)) {

@@ -11,7 +11,6 @@ import ChanceDeck.ChanceDeck;
 public abstract class OwnableField extends Field {
 
     protected int price;
-    protected String key;
     protected String owner = "";
 
     public OwnableField(String name, String subName, String desc, String type, String rentStr) {
@@ -66,10 +65,6 @@ public abstract class OwnableField extends Field {
         return "";
     }
 
-    public String getKey() {
-        return key;
-    }
-
     public String getOwner() {
         return this.owner;
     }
@@ -77,7 +72,10 @@ public abstract class OwnableField extends Field {
     public int getPrice() {
         return this.price;
     }
-    
+
+    public void setOwner(String owner){
+        this.owner = owner;
+    }
 
     public void choiceToBuy(Player player, GUIController gui, Translator lib){
         //shows dropdown with yes/no button to buy
@@ -88,7 +86,4 @@ public abstract class OwnableField extends Field {
         }
     }
 
-    public void setOwner(String s){
-        this.owner = s;
-    };
 }

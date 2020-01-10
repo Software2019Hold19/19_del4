@@ -32,8 +32,8 @@ public class Controller {
         playerCount = Integer.parseInt(playerCountstr);
         int startBal = 30000;
 
+        //name input - repeat if names are the same
         while (true) {
-
             boolean sameName = false;
             pLst = new Player[playerCount];
             for (int i = 0; i < playerCount; i++) {
@@ -61,8 +61,51 @@ public class Controller {
         playGame();
     }
 
+    private int turnOrder(Player[] pLst){
+        int maximum = 0;
+        Player[] starter = new Player[0];
+
+        int res = 0;
+
+        for (int i = 0; i < pLst.length; i++){
+            int[] roll = dice.roll(testing);
+            int val = roll[0] + roll[1];
+            gui.showDiceOnBoard(roll);
+            gui.showMessage(String.format(lib.text.get("TurnOrderRoll"), pLst[i].getName(), val));
+            if (val > maximum){
+                maximum = val;
+                starter = new Player[] {pLst[i]};
+            } else if (val == maximum){
+                Player[] tmpLst = new Player[starter.length + 1];
+                for (int j = 0; j < starter.length; j++){
+                    tmpLst[j] = starter[j];
+                }
+                tmpLst[tmpLst.length - 1] = pLst[i];
+                starter = new Player[tmpLst.length];
+                for (int j = 0; j < starter.length; j++){
+                    starter[j] = tmpLst[j];
+                }
+
+            }
+        }
+
+        if (starter.length > 1) {
+            gui.showMessage(lib.text.get("TurnOrderRedo"));
+            turnOrder(starter);
+        } else {
+            gui.showMessage(String.format(lib.text.get("TurnOrderWinner"), starter[0].getName()));
+            for (int j = 0; j < pLst.length; j++) {
+                if (pLst[j].getName().equals(starter[0].getName())){
+                    res = j;
+                }
+            }
+        }
+        return res;
+    }
+
     private void playGame() {
-        int turnCount = 0;
+        gui.showMessage(lib.text.get("TurnOrderStart"));
+        int turnCount = turnOrder(pLst);
         int turnCountTotal = 0;
 
         while (!isOnePlayerLeft(lib)) {
@@ -86,6 +129,9 @@ public class Controller {
                 System.out.println("Turn Count total: " + turnCountTotal);
             }
         }
+        if (testing) {
+            setTesting();
+        }
         int max = pLst[0].getBal();
         String winner = pLst[0].getName();
         for (Player p : pLst){
@@ -94,6 +140,7 @@ public class Controller {
                 max = p.getBal();
             }
         }
+        System.out.println(turnCountTotal);
         gui.showMessage(String.format(lib.text.get("Winner"), winner));
     }
 
@@ -105,7 +152,6 @@ public class Controller {
             // if player has no money then die
             if (p.getBal() == 0) {
                 p.kill();
-
 
         //        gui.showMessage(String.format(lib.text.get("EndOfGame"), p.getName()));
             }
@@ -130,7 +176,7 @@ public class Controller {
         int cntDoubleDiceRoll = 0;
         boolean playAgain = false;
 
-
+        /*
         if(!p.getIsJailed()) {  //If the player is not jailed
             int[] diceRoll = dice.roll(testing);
 
@@ -145,20 +191,64 @@ public class Controller {
 
 
             gui.updatePlayers(pLst);
-        }else if(p.getIsJailed() || p.getJailTurn() < 3){    // The player is jailed and gets a choice the next 3 turns
 
-            int caseCounter = 0;
-            String roll = lib.text.get("Roll"); String pay = lib.text.get("Pay");
-            String escape = lib.text.get("PayedEscape");
+        }
+        */
+                
+        do {
+            if(!p.getIsJailed()) {  //If the player is not jailed
+                Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
+                int[] diceRoll = dice.roll(testing);
+                if (manual) {
+                    int val = Integer.parseInt(gui.getPlayerDropbown("__MANUEL__ Dice", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2"));
+                    if (val < 7) {
+                        diceRoll[0] = val - 1;
+                        diceRoll[1] = 1;
+                    } else {
+                        diceRoll[0] = val - 6;
+                        diceRoll[1] = 6;
+                    }
+                }
 
-            String jailOptionStr = gui.getPlayerDropbown(lib.text.get("YourOptionsJail"),roll, pay);
+                gui.showDiceOnBoard(diceRoll);
 
-            if(jailOptionStr == roll) { caseCounter = 1; }
-            else if(jailOptionStr == pay) { caseCounter = 2; }
+                if (diceRoll[0] == diceRoll[1]) {
+                    cntDoubleDiceRoll++;
+                    playAgain = true;
+                }
+                else {
+                    playAgain = false;
+                }
 
-            switch(caseCounter) {
+                System.out.println( p.getName() + " tur nr: " + cntDoubleDiceRoll);
 
-                case(1):
+                if (cntDoubleDiceRoll != 3) {
+                    p.move(diceRoll[0] + diceRoll[1]);
+
+                    gui.updatePlayers(pLst);
+                    //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
+                    board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                }
+                else {
+                    playAgain = false;
+                    p.jail();
+                }
+
+                gui.updatePlayers(pLst);
+            
+            }else if(p.getJailTurn() < 3){           // The player is jailed and gets a choice the next 3 turns
+
+                int caseCounter = 0;
+                String roll = lib.text.get("Roll"); String pay = lib.text.get("Pay");
+    
+                String jailOptionStr = gui.getPlayerDropbown(lib.text.get("YourOptionsJail"),roll, pay);
+    
+                if(jailOptionStr == roll) { caseCounter = 1; }
+                else if(jailOptionStr == pay) { caseCounter = 2; }
+    
+                switch(caseCounter) {
+    
+                   case(1):
                     int[] diceRoll = dice.roll(testing);
                     gui.showDiceOnBoard(diceRoll);
 
@@ -200,79 +290,18 @@ public class Controller {
                     gui.showMessage(escape);
 
                     break;
-
-                default:
-                    throw new IllegalStateException("Unexpected value: " + jailOptionStr);
-            }
-        }
-                
-        do {
-            if(!p.getIsJailed()) {  //If the player is not jailed
-                Boolean manual = true; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
-                int[] diceRoll = dice.roll(testing);
-                if (manual) {
-                    int val = Integer.parseInt(gui.getPlayerDropbown("__MANUEL__ Dice", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2"));
-                    if (val < 7) {
-                        diceRoll[0] = val - 1;
-                        diceRoll[1] = 1;
-                    } else {
-                        diceRoll[0] = val - 6;
-                        diceRoll[1] = 6;
-                    }
+    
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + jailOptionStr);
                 }
-
-                gui.showDiceOnBoard(diceRoll);
-
-                if (diceRoll[0] == diceRoll[1]) {
-                    cntDoubleDiceRoll++;
-                    playAgain = true;
-                    System.out.println("ekstra tur: " + cntDoubleDiceRoll);
-                }
-
-                if (cntDoubleDiceRoll != 3) {
-                    p.move(diceRoll[0] + diceRoll[1]);
-
-                    gui.updatePlayers(pLst);
-                    //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
-                    board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
-                }
-                else {
-                    playAgain = false;
-                    // TODO: player go to jail
-                }
-
-                gui.updatePlayers(pLst);
-            
-            } else{                              // If the player is in jail
-
-                while(p.getJailTurn() <= 3) {
-                    int[] diceRoll = dice.roll(testing);
-                    gui.showDiceOnBoard(diceRoll);
-
-                    if (diceRoll[0] == diceRoll[1]) {
-                        p.move(diceRoll[0] + diceRoll[1]);
-
-                        gui.updatePlayers(pLst);
-                        board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
-                        gui.updatePlayers(pLst);
-                        p.setIsJailed(false);
-                        break;
-
-                    }else if(p.getJailTurn() == 3){
-                        p.addBal(-1000);
-                        p.setIsJailed(false);
-
-
-                    }else{ p.addJailTurn(); }
-                }
-            }
-        } while (playAgain);
-    }
+        } 
+    }while (playAgain);
+}
 
     public void setTesting() {
-        testing = true;
+        testing = !testing;
         deck = new ChanceDeck(lib, testing);
-        gui.setTesting();
+        gui.setTesting(testing);
     }
     
 }

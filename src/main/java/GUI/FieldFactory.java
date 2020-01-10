@@ -113,6 +113,7 @@ public class FieldFactory {
         for (String key : ownable.keySet()) {
             ownable.get(key).setBorder(Color.BLACK);
         }
+
         return guiFields;
     }
 

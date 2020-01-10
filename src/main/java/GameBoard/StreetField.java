@@ -77,6 +77,8 @@ public class StreetField extends OwnableField {
             while (ownsSameColorFields(board) && chooseToBuyHouses(player, gui, lib)) {
                 setHouseAndHotel(board);
                 System.out.println("owns same color fields");
+                gui.updateBoard(board.getOwnableBoard(), pLst);
+                gui.updatePlayers(pLst);
             }
         }
     }
@@ -255,9 +257,9 @@ public class StreetField extends OwnableField {
 
             if (choise.equals("Ja")) {
                 if (player.getBal() > housePrice) {
-                   // this.level++;
-                   // player.addBal(-housePrice);
-                   return true;
+                 //   this.level++;
+                    player.addBal(-housePrice);
+                    return true;
                 }
                 else {
                     gui.showMessage(lib.text.get("NoMoney"));
@@ -271,7 +273,7 @@ public class StreetField extends OwnableField {
 
             if (choise.equals("Ja")) {
                 if (player.getBal() > hotelPrice) {
-                    this.level++;
+                   // this.level++;
                     player.addBal(-hotelPrice);
                     return true;
                  }

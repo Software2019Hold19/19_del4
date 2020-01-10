@@ -248,45 +248,48 @@ public class Controller {
     
                 switch(caseCounter) {
     
-                    case(1):
-                        int[] diceRoll = dice.roll(testing);
-                        gui.showDiceOnBoard(diceRoll);
-    
-                        if(diceRoll[0] == diceRoll[1]){
-                            p.setIsJailed(false);
-                            p.resetJailTurn();
-                            p.move(diceRoll[0] + diceRoll[1]);
-    
-                            gui.updatePlayers(pLst);
-                            board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
-                            gui.updatePlayers(pLst);
-                        }
-                        else if(p.getJailTurn() == 3){
-                            p.setIsJailed(false);
-                            p.resetJailTurn();
-                            p.addBal(-1000);
-                            p.move(diceRoll[0] + diceRoll[1]);
-    
-                            gui.updatePlayers(pLst);
-                            board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
-                            gui.updatePlayers(pLst);
-                        }
-                        else { p.addJailTurn(); }
-                        break;
-    
-                    case(2):
+                   case(1):
+                    int[] diceRoll = dice.roll(testing);
+                    gui.showDiceOnBoard(diceRoll);
+
+                    if(diceRoll[0] == diceRoll[1]){
                         p.setIsJailed(false);
                         p.resetJailTurn();
-                        p.addBal(-1000);
-    
-                        int[] diceRoll2 = dice.roll(testing);
-                        gui.showDiceOnBoard(diceRoll2);
-                        p.move(diceRoll2[0] + diceRoll2[1]);
-    
+                        p.move(diceRoll[0] + diceRoll[1]);
+
                         gui.updatePlayers(pLst);
                         board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                         gui.updatePlayers(pLst);
-                        break;
+                    }
+                    else if(p.getJailTurn() == 3){
+                        p.setIsJailed(false);
+                        p.resetJailTurn();
+                        p.addBal(-1000);
+                        p.move(diceRoll[0] + diceRoll[1]);
+
+                        gui.updatePlayers(pLst);
+                        board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                        gui.updatePlayers(pLst);
+                        gui.showMessage(escape);
+                    }
+                    else { p.addJailTurn(); }
+                    break;
+
+                case(2):
+                    p.setIsJailed(false);
+                    p.resetJailTurn();
+                    p.addBal(-1000);
+
+                    int[] diceRoll2 = dice.roll(testing);
+                    gui.showDiceOnBoard(diceRoll2);
+                    p.move(diceRoll2[0] + diceRoll2[1]);
+
+                    gui.updatePlayers(pLst);
+                    board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                    gui.updatePlayers(pLst);
+                    gui.showMessage(escape);
+
+                    break;
     
                     default:
                         throw new IllegalStateException("Unexpected value: " + jailOptionStr);

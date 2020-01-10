@@ -64,6 +64,7 @@ No//Nej
 YourOptionsJail//Du er i fængsel, hvad vil du gøre?
 JailRoll//Kast terninger
 JailPay//Betal 1000kr
+PayedEscaped//%s bateler 1000 kr og er fri igen.
 TurnOrderStart//Vi slår om at starte spillet. Den der slår størst starter
 TurnOrderRoll//Du, Spiller %s, har slået %d
 TurnOrderRedo//Op til flere spillere har slået det samme, så der skal slå om igen.

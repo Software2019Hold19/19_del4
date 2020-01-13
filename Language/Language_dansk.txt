@@ -43,6 +43,7 @@ EndOfGame//%s har desværre ikke flere penge og spillet er derfor slut.
 WinnerByDefault//%s har fået over 100 penge og derfor slutter spillet.
 Winner//%s har flest penge og har vundet. Tillykke!
 SameName//Spillere kan ikke hedde det samme.
+NoName//Spillere skal have et navn!
 OwnField//Du ejer selv dette felt.
 OthersField//Dette felt er eget af %s og du skal betale dem %d kroner!
 OthersFieldJailed//Dette felt er eget af %s men spiller er i fængsel. Ingen betaling.

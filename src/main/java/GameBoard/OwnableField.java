@@ -164,6 +164,7 @@ public abstract class OwnableField extends Field {
         gui.showMessage(String.format(lib.text.get("AuctionWin"), pInAuction[0].getName(), this.auctionPrice));
         setOwner(pInAuction[0].getName());
         pInAuction[0].addBal(-this.auctionPrice);
+        this.auctionPrice = price / 2;
 
     }
 

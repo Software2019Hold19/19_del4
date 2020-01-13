@@ -205,8 +205,6 @@ public class Controller {
         do {
             if(!p.getIsJailed()) {  //If the player is not jailed
 
-                managementStream(p);
-
                 /*// Property Management
                String inputBtn = gui.getPlayerBtn("msg", lib.text.get("PM"), lib.text.get("Roll"),lib.text.get("GiveUp")); // TODO: change text t input from lib;
 
@@ -357,7 +355,7 @@ public class Controller {
     private void propertyMangement() {
         // choose color
     }
-
+    
     public void managementStream(Player p){
         while(true) {
             String inputBtn = gui.getPlayerBtn("msg", lib.text.get("PM"), lib.text.get("Roll"), lib.text.get("GiveUp"));

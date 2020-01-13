@@ -69,6 +69,14 @@ public class GUIController {
         }
     }
 
+    public int getPlayerInt(String msg){
+        if (testing) {
+            return 0;
+        } else {
+            return gui.getUserInteger(msg, 0, Integer.MAX_VALUE);
+        }
+    }
+
     public String getUserString(String msg) {
         if (testing){
             return String.valueOf(testNames++);

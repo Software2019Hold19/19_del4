@@ -36,10 +36,10 @@ public abstract class OwnableField extends Field {
         super.landOnField(player, pLst, deck, board, gui, lib);
 
         if (!this.owner.equals("") && !(this.owner.equals(player.getName()))){
-            payRent(player,pLst, board);
+            payRent(player, pLst, board);
         }
         else if (this.owner.equals("")) {
-            choiceToBuy(player,gui,lib);
+            choiceToBuy(player, gui, lib, pLst);
         }
 
     }
@@ -90,7 +90,7 @@ public abstract class OwnableField extends Field {
         return this.level;
     }
 
-    public void choiceToBuy(Player player, GUIController gui, Translator lib){
+    public void choiceToBuy(Player player, GUIController gui, Translator lib, Player[] pLst){
         //shows dropdown with yes/no button to buy
         String buyChoice = gui.getPlayerDropbown(String.format(lib.text.get("ChoiceToBuy"), this.price), lib.text.get("Yes"), lib.text.get("No"));
         if(buyChoice.equals(lib.text.get("Yes"))) {
@@ -103,6 +103,35 @@ public abstract class OwnableField extends Field {
                 gui.showMessage(lib.text.get("NoMoney"));
             }
         }
+        else {
+            auction(player, pLst, gui, lib);
+
+        }
 
     }
+
+    public void auction(Player player, Player[] pLst, GUIController gui, Translator lib) {
+        Player[] pInAuction = new Player[pLst.length - 2];
+        int i = 0;
+        for (Player p : pLst){
+            if (!p.getName().equals(player.getName())){
+                pInAuction[i++] = p;
+            }
+        }
+        gui.showMessage(String.format(lib.text.get("AutionStart"), player.getName()));
+
+        while (i > 2) {
+
+        }
+
+    }
+
+    public Boolean auctionTurn(Player player, GUIController gui, Translator lib) {
+        String Answer = gui.getPlayerBtn(String.format(lib.text.get("AuctionTurn"), player.getName()), lib.text.get("ActionYesBtn"), lib.text.get("ActionNoBtn"));
+        if (Answer.equals(lib.text.get("ActionYesBtn"))) {
+            int adding = 
+        }
+        return false;
+    }
+
 }

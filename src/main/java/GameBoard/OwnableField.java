@@ -172,7 +172,7 @@ public abstract class OwnableField extends Field {
         if (price < player.getBal()) {
             String Answer = gui.getPlayerBtn(String.format(lib.text.get("AuctionTurn"), price, player.getName()), lib.text.get("AuctionYesBtn"), lib.text.get("AuctionNoBtn"));
             if (Answer.equals(lib.text.get("AuctionYesBtn"))) {
-                int adding = gui.getPlayerInt(String.format(lib.text.get("AuctionAddMoney"), player.getName()), price, player.getBal());
+                int adding = gui.getPlayerInt(String.format(lib.text.get("AuctionAddMoney"), price, player.getName()), price, player.getBal());
                 this.auctionPrice = price + adding;
                 return true;
             } else {

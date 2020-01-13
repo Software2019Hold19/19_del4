@@ -78,7 +78,7 @@ AuctionStart//Spiller %s vil ikke købe feltet, så det går på auktion
 AuctionTurn//Feltet står til at koste %d. Vil spiller %s være med eller udgå?
 AuctionYesBtn//Auktion!
 AuctionNoBtn//Udgå
-AuctionAddMoney//Indtast det antal kroner Spiller %s vil tilføje til sit bud
+AuctionAddMoney//Feltet koster allerede %d. Indtast det antal kroner Spiller %s vil tilføje til sit bud
 AuctionOut//Spiller %s stopper i aktionen
 AuctionNoMoney// Spiller %s har ikke nok penge til at deltage i aktionen.
 AuctionNext//Spiller %s forstører sit bud og aktionen fortsætter

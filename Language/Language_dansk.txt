@@ -96,4 +96,5 @@ SellHouse//Sælg et hus
 ChooseAField//Vælg et felt
 NoHouses//Du har ikke flere huse på grunden
 NoFields//Du ejer ingen felter
-Mortage//Pantsætte denne ejendom
+MortageProp//Du pantsætter denne ejendom
+ReopenProp//Du genåbner denne ejendom

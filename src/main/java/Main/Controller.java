@@ -364,7 +364,7 @@ public class Controller {
                     chooseField = false;
                 }
                 
-                playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"),lib.text.get("Mortage"), lib.text.get("ChooseNewField"), lib.text.get("Roll"));
+                playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"),lib.text.get("MortageProp"),lib.text.get("ReopenProp"), lib.text.get("ChooseNewField"), lib.text.get("Roll"));
         
                 // sell house
                 if (playerNextStep.equals(lib.text.get("SellHouse"))) {
@@ -380,14 +380,17 @@ public class Controller {
                         gui.updateBoard(playersFields, pLst);
                     }
                 }
-
+                //Mortage a property
                 else if(playerNextStep.equals(lib.text.get("Mortage"))){
                     playersFields[propertyIndex].setMortage(true);
                     int price = playersFields[propertyIndex].getPrice();
                     double input = price * 0.5;
                     int money = (int)input;
-
                     player.addBal(money);
+                }
+                //Reopen properties
+                else if(playerNextStep.equals(lib.text.get("ReopenProp"))){
+
                 }
                 // choose new field
                 else if (playerNextStep.equals(lib.text.get("ChooseNewField"))) {

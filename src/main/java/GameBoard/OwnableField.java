@@ -89,9 +89,16 @@ public abstract class OwnableField extends Field {
     public void choiceToBuy(Player player, GUIController gui, Translator lib){
         //shows dropdown with yes/no button to buy
         String buyChoice = gui.getPlayerDropbown(String.format(lib.text.get("ChoiceToBuy"), this.price), lib.text.get("Yes"), lib.text.get("No"));
-        if(buyChoice.equals(lib.text.get("Yes"))){
-            setOwner(player.getName());
-            player.addBal(-this.price);
+        if(buyChoice.equals(lib.text.get("Yes"))) {
+            // checking if the player has enough money
+            if (player.getBal() >= this.price) {
+                setOwner(player.getName());
+                player.addBal(-this.price);
+            }
+            else {
+                gui.showMessage(lib.text.get("NoMoney"));
+            }
         }
+
     }
 }

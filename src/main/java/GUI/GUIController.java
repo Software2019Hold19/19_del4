@@ -98,7 +98,7 @@ public class GUIController {
         return fieldFac.boardSetup(board);
     }
 
-    public void updatePlayers(Player[] pLst){
+    public void updatePlayers(Player[] pLst) throws InterruptedException {
         pObs.update(gui, pLst);
     }
 
@@ -167,6 +167,7 @@ public class GUIController {
 
     public void setTesting(Boolean test){
         testing = test;
+        pObs.setTesting(test);
     }
 
 }

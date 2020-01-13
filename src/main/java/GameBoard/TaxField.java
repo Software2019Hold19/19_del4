@@ -17,7 +17,7 @@ public class TaxField extends Field {
         // TODO Auto-generated constructor stub
     }
     @Override
-    public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
+    public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib) throws InterruptedException {
         super.landOnField(player, pLst, deck, board, gui, lib);
         int payAmount = 0;
         if(this.key.equals("Tax1")){

@@ -86,6 +86,10 @@ public abstract class OwnableField extends Field {
         this.level++;        
     }
 
+    public int getHouseLevel() {
+        return this.level;
+    }
+
     public void choiceToBuy(Player player, GUIController gui, Translator lib){
         //shows dropdown with yes/no button to buy
         String buyChoice = gui.getPlayerDropbown(String.format(lib.text.get("ChoiceToBuy"), this.price), lib.text.get("Yes"), lib.text.get("No"));

@@ -36,31 +36,50 @@ public abstract class OwnableField extends Field {
         super.landOnField(player, pLst, deck, board, gui, lib);
 
         if (!this.owner.equals("") && !(this.owner.equals(player.getName()))){
-            payRent(player,pLst, board);
+            payRent(player, pLst, board, lib, gui);
         }
         else if (this.owner.equals("")) {
             choiceToBuy(player,gui,lib);
         }
+        else if (this.owner.equals(player.getName())){
+            gui.showMessage(lib.text.get("OwnField"));
+        }
 
     }
 
-    private void payRent(Player player, Player[] pLst, GameBoard board){
+    private void payRent(Player player, Player[] pLst, GameBoard board, Translator lib, GUIController gui){
         Player tempPlayer = new Player("tmp");
 
-        for (int i = 0; i < pLst.length; i++){
+        for (int i = 0; i < pLst.length; i++){      //finds owners player object
             if (getOwner().equals(pLst[i].getName())){
                 tempPlayer = pLst[i];
             }
         }
 
         if(!tempPlayer.getIsJailed()){         //A player in jail can't collect rent
-            player.addBal(-getRent(board));
-            tempPlayer.addBal(getRent(board));
+
+            if(this.type.equals("brewery")){ //brewery needs "player" object to calculate rent so uses different "getRent"method
+                gui.showMessage(String.format(lib.text.get("OthersField"), this.owner, getRent(board, player)));
+                player.addBal(-getRent(board, player));
+                tempPlayer.addBal(getRent(board, player));
+            }
+            else {//all other ownable fields
+                gui.showMessage(String.format(lib.text.get("OthersField"), this.owner, getRent(board)));
+                player.addBal(-getRent(board));
+                tempPlayer.addBal(getRent(board));
+            }
+        }
+        else {          //if player is jailed
+            gui.showMessage(String.format(lib.text.get("OthersFieldJailed"), tempPlayer.getName()));
         }
     }
 
     @Override
     public int getRent(GameBoard board){return rent[level];}
+
+    public int getRent(GameBoard Board, Player player){//lavet for at kunne bruge player i brewery!
+        return rent[level];
+    }
 
     public String getRentString() {
         return Integer.toString(rent[0]);

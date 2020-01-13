@@ -4,7 +4,9 @@ import ChanceDeck.ChanceDeck;
 import GUI.GUIController;
 import GameBoard.GameBoard;
 import GameBoard.OwnableField;
+import GameBoard.Field;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class Controller {
@@ -17,7 +19,7 @@ public class Controller {
     Dice dice = new Dice();
     int playerCount;
 
-    
+
     public Controller() throws IOException {
         
     }
@@ -360,12 +362,17 @@ public class Controller {
                     }
                     
                     String selectedFieldName = gui.getPlayerDropbown(lib.text.get("ChooseAField"), fieldNames);
-                    propertyIndex = getFieldIndex(selectedFieldName, playersFields);
+                    propertyIndex = getOwnableFieldIndex(selectedFieldName, playersFields);
                     chooseField = false;
                 }
-                
-                playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"),lib.text.get("MortageProp"),lib.text.get("ReopenProp"), lib.text.get("ChooseNewField"), lib.text.get("Roll"));
-        
+
+                if(!playersFields[propertyIndex].getMortage()) {
+                    playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("MortgageProp"), lib.text.get("ChooseNewField"), lib.text.get("Roll"));
+                } else {
+                    playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("ReopenProp"), lib.text.get("ChooseNewField"), lib.text.get("Roll"));
+                }
+
+
                 // sell house
                 if (playerNextStep.equals(lib.text.get("SellHouse"))) {
                     // checks if there is any houses on the field
@@ -381,20 +388,24 @@ public class Controller {
                     }
                 }
                 //Mortage a property
-                else if(playerNextStep.equals(lib.text.get("Mortage"))){
+                else if(playerNextStep.equals(lib.text.get("MortgageProp"))){
                     playersFields[propertyIndex].setMortage(true);
                     int price = playersFields[propertyIndex].getPrice();
                     double input = price * 0.5;
                     int money = (int)input;
                     player.addBal(money);
+                    int boardIndex = getFieldIndex(playersFields[propertyIndex].getName(), board.getBoard());
+                    gui.getGui().getFields()[boardIndex].setForeGroundColor(Color.GRAY);
                 }
                 //Reopen properties
                 else if(playerNextStep.equals(lib.text.get("ReopenProp"))){
-                playersFields[propertyIndex].setMortage(false);
-                int price = playersFields[propertyIndex].getPrice();
-                double input = price*0.55;
-                int money = (int)input;
-                player.addBal(-money);
+                    playersFields[propertyIndex].setMortage(false);
+                    int price = playersFields[propertyIndex].getPrice();
+                    double input = price*0.55;
+                    int money = (int)input;
+                    player.addBal(-money);
+                    int boardIndex = getFieldIndex(playersFields[propertyIndex].getName(), board.getBoard());
+                    gui.getGui().getFields()[boardIndex].setForeGroundColor(Color.BLACK);
                 }
                 // choose new field
                 else if (playerNextStep.equals(lib.text.get("ChooseNewField"))) {
@@ -404,13 +415,23 @@ public class Controller {
             } while (!playerNextStep.equals(lib.text.get("Roll"))); // while not roll
     }
 
-    public int getFieldIndex(String name, OwnableField[] fields) {
+    public int getOwnableFieldIndex(String name, OwnableField[] fields) {
         for (int i = 0; i < fields.length; i++) {
             if (fields[i].getName().equals(name)) {
                 return i;
             }
         }
-        
+
+        return 0;
+    }
+
+    public int getFieldIndex(String name, Field[] fields) {
+        for (int i = 0; i < fields.length; i++) {
+            if (fields[i].getName().equals(name)) {
+                return i;
+            }
+        }
+
         return 0;
     }
 
@@ -429,12 +450,19 @@ public class Controller {
                 String answer = gui.getPlayerBtn(lib.text.get("Sure"), lib.text.get("Yes"), lib.text.get("No"));
                 if(answer.equals(lib.text.get("Yes"))){
                     p.kill();
+                    break;
                 }
                 else{
                     break;
                 }
             }
             if (inputBtn.equals(lib.text.get("Roll"))){
+                break;
+            }
+            if (!p.getAlive()){
+                gui.showMessage(lib.text.get("PlayerGiveUp"));
+                gui.updateBoard(board.getOwnableBoard(), pLst);
+                gui.updatePlayers(pLst);
                 break;
             }
         }  

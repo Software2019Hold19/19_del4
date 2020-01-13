@@ -106,7 +106,7 @@ public class FieldFactory {
                     break;
 
                 case ("tax"):
-                    guiFields[i++] = new GUI_Tax(field.getName(), field.getSubName(), field.getDesc(), Color.WHITE, Color.BLUE);
+                    guiFields[i++] = new GUI_Tax(field.getName(), field.getSubName(), field.getDesc(), Color.WHITE, Color.BLACK);
                     break;
             }
         }

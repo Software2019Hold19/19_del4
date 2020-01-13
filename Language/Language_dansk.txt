@@ -83,4 +83,8 @@ TurnOrderStart//Vi slår om at starte spillet. Den der slår størst starter
 TurnOrderRoll//Du, Spiller %s, har slået %d
 TurnOrderRedo//Op til flere spillere har slået det samme, så der skal slå om igen.
 TurnOrderWinner//Spiller %s har slået højst og starter spillet.
-
+ChooseNewField//Vælg nyt felter
+SellHouse//Sælg et hus
+RollDice//Roll med terningerne
+ChooseAField//Vælg et felt
+ChooseNext//Hvad vil du gøre nu?

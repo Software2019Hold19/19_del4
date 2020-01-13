@@ -207,48 +207,48 @@ public class Controller {
         do {
             if(!p.getIsJailed()) {  //If the player is not jailed
 
-                managementStream(p,board);
+                managementStream(p, board);
+                if(p.getAlive()){
 
-                Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
-                int[] diceRoll = dice.roll(testing);
-                if (manual) {
-                    int val = Integer.parseInt(gui.getPlayerDropbown("__MANUEL__ Dice", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2"));
-                    if (val < 7) {
-                        diceRoll[0] = val - 1;
-                        diceRoll[1] = 1;
-                    } else {
-                        diceRoll[0] = val - 6;
-                        diceRoll[1] = 6;
+                    Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
+                    int[] diceRoll = dice.roll(testing);
+                    if (manual) {
+                        int val = Integer.parseInt(gui.getPlayerDropbown("__MANUEL__ Dice", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2"));
+                        if (val < 7) {
+                            diceRoll[0] = val - 1;
+                            diceRoll[1] = 1;
+                        } else {
+                            diceRoll[0] = val - 6;
+                            diceRoll[1] = 6;
+                        }
                     }
-                }
 
-                gui.showDiceOnBoard(diceRoll);
+                    gui.showDiceOnBoard(diceRoll);
 
-                if (diceRoll[0] == diceRoll[1]) {
-                    cntDoubleDiceRoll++;
-                    playAgain = true;
-                }
-                else {
-                    playAgain = false;
-                }
+                    if (diceRoll[0] == diceRoll[1]) {
+                        cntDoubleDiceRoll++;
+                        playAgain = true;
+                    } else {
+                        playAgain = false;
+                    }
 
-                System.out.println( p.getName() + " tur nr: " + cntDoubleDiceRoll);
+                    System.out.println(p.getName() + " tur nr: " + cntDoubleDiceRoll);
 
-                if (cntDoubleDiceRoll != 3) {
-                    p.move(diceRoll[0] + diceRoll[1]);
+                    if (cntDoubleDiceRoll != 3) {
+                        p.move(diceRoll[0] + diceRoll[1]);
+
+                        gui.updatePlayers(pLst);
+                        //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
+                        board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                    } else {
+                        playAgain = false;
+                        p.jail();
+                    }
 
                     gui.updatePlayers(pLst);
-                    //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
-                    board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
-                }
-                else {
-                    playAgain = false;
-                    p.jail();
                 }
 
-                gui.updatePlayers(pLst);
-            
-            }else if(p.getJailTurn() < 4){           // The player is jailed and gets a choice the next 3 turns
+            } else if(p.getJailTurn() < 4){           // The player is jailed and gets a choice the next 3 turns
 
                 int caseCounter = 0;
                 String jailOptionStr = "";
@@ -326,7 +326,7 @@ public class Controller {
                         board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                         gui.updatePlayers(pLst);
                         break;
-    
+
                     default:
                         throw new IllegalStateException("Unexpected value: " + jailOptionStr);
                 }
@@ -354,7 +354,7 @@ public class Controller {
         
                 if (chooseField) {
                     String fieldNames[] = new String[playersFields.length];
-        
+
                     for (int i = 0; i < playersFields.length; i++) {
                         fieldNames[i] = playersFields[i].getName();
                     }
@@ -399,20 +399,25 @@ public class Controller {
 
     public void managementStream(Player p, GameBoard board){
         while(true) {
-            String inputBtn = gui.getPlayerBtn("msg", lib.text.get("PM"), lib.text.get("Roll"), lib.text.get("GiveUp"));
-            if(inputBtn.equals("Property Mangement")) {
-                propertyMangement(p,board);
+            String inputBtn = gui.getPlayerBtn(lib.text.get("MessagePM"), lib.text.get("PM"), lib.text.get("Roll"), lib.text.get("GiveUp"));
+            if (inputBtn.equals(lib.text.get("PM"))) {
+                if (p.getPlayersFields(board.getOwnableBoard()).length == 0){
+                    gui.showMessage(lib.text.get("NoFields"));
+                }
+                else {
+                    propertyMangement(p, board);
+                }
             }
-            while (inputBtn.equals("Giv op")) {
+            while (inputBtn.equals(lib.text.get("GiveUp"))) {
                 String answer = gui.getPlayerBtn(lib.text.get("Sure"), lib.text.get("Yes"), lib.text.get("No"));
-                if(answer.equals("ja")){
+                if(answer.equals(lib.text.get("Yes"))){
                     p.kill();
                 }
                 else{
                     break;
                 }
             }
-            if (inputBtn.equals("Rul med terningerne")){
+            if (inputBtn.equals(lib.text.get("Roll"))){
                 break;
             }
         }  

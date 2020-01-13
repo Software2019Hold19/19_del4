@@ -37,7 +37,7 @@ Tax1Choice//Du skal vælge at betale enten 4000 kr. eller 10% af din formue i sk
 Tax2//Ekstrordinærstatsskat: 2000 kr.: Du er landet på Ekstrordinærstatsskat. Du skal betale 2000 kr. i skat.
 NumberOfPlayers//Hvor mange spillere spiller?
 InputName//Indtast Spiller %ds navn i det ledige felt.
-Turn//Det er %s's tur kast med terningerne.
+Turn//Det er %s's tur.
 Roll//Du har slået %d og %d så du rykker frem til %s.
 EndOfGame//%s har desværre ikke flere penge og spillet er derfor slut.
 WinnerByDefault//%s har fået over 100 penge og derfor slutter spillet.
@@ -83,6 +83,7 @@ TurnOrderStart//Vi slår om at starte spillet. Den der slår størst starter
 TurnOrderRoll//Du, Spiller %s, har slået %d
 TurnOrderRedo//Op til flere spillere har slået det samme, så der skal slå om igen.
 TurnOrderWinner//Spiller %s har slået højst og starter spillet.
+MessagePM//Hvad vil du gerne gøre?
 Sell//Sælge
 Mortage//Pantsætning
 Trading//Bytte
@@ -94,3 +95,4 @@ ChooseNewField//Vælg nyt felt
 SellHouse//Sælg et hus
 ChooseAField//Vælg et felt
 NoHouses//Du har ikke flere huse på grunden
+NoFields//Du ejer ingen felter

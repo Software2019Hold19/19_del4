@@ -137,6 +137,7 @@ public class StreetField extends OwnableField {
 
         // chech if same level
         if (isFieldsSameLevel(listOfHouseLevel) && this.level == 0) {
+            // sell field
             this.owner = "";
             player.addBal(this.price);
         }

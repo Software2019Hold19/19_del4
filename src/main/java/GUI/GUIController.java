@@ -22,6 +22,7 @@ public class GUIController {
     private FieldFactory fieldFac = new FieldFactory();
     private Boolean testing = false;
     private int testNames = 0;
+    private int testCount = -1;
 
     public GUIController(Translator _lib, GameBoard _board) {
         lib = _lib;
@@ -54,7 +55,7 @@ public class GUIController {
     public String getPlayerDropbown(java.lang.String msg, java.lang.String... buttons)
     {
         if (testing){
-            return buttons[0];
+            return buttons[testCount++ % buttons.length];
         }
         return gui.getUserSelection(msg,buttons);
     }

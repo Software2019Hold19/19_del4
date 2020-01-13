@@ -27,11 +27,6 @@ public abstract class OwnableField extends Field {
         }
     }
 
-    @Override
-    public String toString() {
-        return this.getName();
-    }
-
     public void ownField () {
 
     }
@@ -89,10 +84,6 @@ public abstract class OwnableField extends Field {
 
     public void addOneLevel() {
         this.level++;        
-    }
-
-    public void minusOneLevel() {
-        this.level--;
     }
 
     public int getHouseLevel() {

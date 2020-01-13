@@ -3,8 +3,6 @@ package Main;
 import ChanceDeck.ChanceDeck;
 import GUI.GUIController;
 import GameBoard.GameBoard;
-import GameBoard.OwnableField;
-
 import java.io.IOException;
 
 public class Controller {
@@ -209,9 +207,20 @@ public class Controller {
 
                 managementStream(p);
 
-                if (inputBtn.equals("property mangement")) {
-                    propertyMangement(p, board);
-                } 
+                /*// Property Management
+               String inputBtn = gui.getPlayerBtn("msg", lib.text.get("PM"), lib.text.get("Roll"),lib.text.get("GiveUp")); // TODO: change text t input from lib;
+
+                //Poperty Manegement is getting started here!
+                if (inputBtn.equals("Property Mangement")) {
+                    propertyMangement();
+                } else if (inputBtn.equals("Giv op")) {
+                    String answer = gui.getPlayerBtn(lib.text.get("Sure"), lib.text.get("Yes"), lib.text.get("No"));
+                    if (answer.equals("Ja")) {
+                        p.kill();
+                    } else {
+                        propertyMangement();
+                    }
+                }*/
 
 
                 Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
@@ -344,9 +353,30 @@ public class Controller {
         deck = new ChanceDeck(lib, testing);
         gui.setTesting(testing);
     }
-    
+
+    private void propertyMangement() {
+        // choose color
+    }
+
+    public void managementStream(Player p){
+        while(true) {
+            String inputBtn = gui.getPlayerBtn("msg", lib.text.get("PM"), lib.text.get("Roll"), lib.text.get("GiveUp"));
+            if(inputBtn.equals("Property Mangement")) {
+                propertyMangement();
+            }
+            while (inputBtn.equals("Giv op")) {
+                String answer = gui.getPlayerBtn(lib.text.get("Sure"), lib.text.get("Yes"), lib.text.get("No"));
+                if(answer.equals("ja")){
+                    p.kill();
+                }
+                else{
+                    break;
+                }
+            }
+            if (inputBtn.equals("Rul med terningerne")){
+                break;
+            }
+        }
+    }
 }
 
-private void propertyMangement() {
-    // choose color 
-}

@@ -204,6 +204,16 @@ public class Controller {
                 
         do {
             if(!p.getIsJailed()) {  //If the player is not jailed
+
+                // Property Management
+                String inputBtn = gui.getPlayerBtn("msg", " ", " "); // TODO: change text t input from lib;
+
+                if (inputBtn.equals("property mangement")) {
+                    propertyMangement();
+                } 
+
+
+
                 Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
                 int[] diceRoll = dice.roll(testing);
                 if (manual) {
@@ -337,4 +347,6 @@ public class Controller {
     
 }
 
-
+private void propertyMangement() {
+    // choose color 
+}

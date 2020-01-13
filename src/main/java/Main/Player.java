@@ -98,7 +98,7 @@ public class Player {
         jailCard = set;
     }
 
-    public OwnableField[] playersFields(OwnableField[] fields){
+    public OwnableField[] getPlayersFields(OwnableField[] fields){
 
         OwnableField[] fieldLst = new OwnableField[0];
 

@@ -117,6 +117,55 @@ public class StreetField extends OwnableField {
         }
     }
 
+    
+    private void sellHouseAndHotel(Player player, OwnableField[] playersFields) {
+        int[] listOfHouseLevel;
+        if (this.color.equals("lightblue") || this.color.equals("brown")) {
+            listOfHouseLevel = new int[2];
+        }
+        else {
+            listOfHouseLevel = new int[3];
+        }
+
+        int fieldCnt = 0;
+        for (OwnableField field : playersFields) {
+            if(field.getColor().equals(this.getColor())) {
+               listOfHouseLevel[fieldCnt] = field.getHouseLevel();
+               fieldCnt++;
+            }
+        }
+
+        // chech if same level
+        if (isFieldsSameLevel(listOfHouseLevel) && this.level == 0) {
+            this.owner = "";
+            player.addBal(this.price);
+        }
+        else if (isFieldsSameLevel(listOfHouseLevel)) {
+            playersFields[getHighestPricFieldIndex(playersFields)].minusOneLevel();
+            player.addBal(getHousePrice());
+        }
+        else { // minus one to the highest level
+            playersFields[getHighestLevelFieldIndex(playersFields)].minusOneLevel();
+            player.addBal(getHousePrice());
+        }
+    }
+
+    private int getHighestLevelFieldIndex(OwnableField[] fields) {
+        int index = 100;
+        for (int i = 0; i < fields.length; i++) {
+            if (fields[i].getColor().equals(this.color)){
+                if (index == 100) {
+                    index = i;
+                }
+                if (fields[i].getHouseLevel() >= fields[index].getHouseLevel()) {
+                    index = i;
+                }
+            }
+        }
+
+        return index;
+    }
+
     private int getLowestLevelFieldIndex(OwnableField[] fields) {
         int index = 100;
         for (int i = 0; i < fields.length; i++) {

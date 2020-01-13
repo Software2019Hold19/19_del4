@@ -21,7 +21,7 @@ public class Controller {
     }
 
     // Init players and language
-    public void startGame() throws IOException {
+    public void startGame() throws IOException, InterruptedException {
         String selectedL = gui.getPlayerDropbown("Vælg Sprog / Choose Language", "Dansk");
         lib.getLanguage(selectedL);
         gui.updateLanguage(lib);
@@ -120,7 +120,7 @@ public class Controller {
         return res;
     }
 
-    private void playGame() {
+    private void playGame() throws InterruptedException {
         gui.showMessage(lib.text.get("TurnOrderStart"));
         int turnCount = turnOrder(pLst);
         int turnCountTotal = 0;
@@ -186,7 +186,7 @@ public class Controller {
     }
 
 
-    private void playerTurn(Player p) {
+    private void playerTurn(Player p) throws InterruptedException {
         
         int cntDoubleDiceRoll = 0;
         boolean playAgain = false;

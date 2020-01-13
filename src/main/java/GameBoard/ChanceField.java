@@ -15,7 +15,7 @@ public class ChanceField extends Field {
     }
 
     @Override
-    public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
+    public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib) throws InterruptedException {
        // super.landOnField(player, pLst, deck, board, gui, lib);
 
         System.out.println(getDesc());

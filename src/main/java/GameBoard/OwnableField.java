@@ -48,7 +48,7 @@ public abstract class OwnableField extends Field {
     }
 
     private void payRent(Player player, Player[] pLst, GameBoard board, Translator lib, GUIController gui){
-        Player tempPlayer = new Player("tmp");
+        Player tempPlayer = new Player("tmp", 0);
 
         for (int i = 0; i < pLst.length; i++){      //finds owners player object
             if (getOwner().equals(pLst[i].getName())){

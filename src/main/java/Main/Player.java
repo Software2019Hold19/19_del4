@@ -11,10 +11,6 @@ public class Player {
     boolean jailCard = false;
     int lastRollVal = 0;
 
-    public Player (String name){
-        this.name = name;
-    }
-
     public Player (String name, int Bal){
         this.name = name;
         this.acc.addBalance(Bal);

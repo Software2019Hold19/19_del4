@@ -118,8 +118,6 @@ public class Controller {
                     turnCount = 0;
             }
 
-            gui.showMessage(String.format(lib.text.get("Turn"), pLst[turnCount].getName()));
-
             playerTurn(pLst[turnCount]);
 
             turnCount++;
@@ -194,8 +192,14 @@ public class Controller {
 
         }
         */
+        gui.showMessage(String.format(lib.text.get("Turn"), p.getName()));
                 
         do {
+            if(playAgain){
+                gui.showMessage(String.format(lib.text.get("RollDoubleTurn"), p.getName()));
+            }
+
+
             if(!p.getIsJailed()) {  //If the player is not jailed
                 Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
                 int[] diceRoll = dice.roll(testing);
@@ -318,7 +322,7 @@ public class Controller {
                     default:
                         throw new IllegalStateException("Unexpected value: " + jailOptionStr);
                 }
-        } 
+        }
     }while (playAgain);
 }
 

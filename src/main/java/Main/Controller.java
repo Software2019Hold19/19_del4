@@ -207,21 +207,7 @@ public class Controller {
         do {
             if(!p.getIsJailed()) {  //If the player is not jailed
 
-                /*// Property Management
-               String inputBtn = gui.getPlayerBtn("msg", lib.text.get("PM"), lib.text.get("Roll"),lib.text.get("GiveUp")); // TODO: change text t input from lib;
-
-                //Poperty Manegement is getting started here!
-                if (inputBtn.equals("Property Mangement")) {
-                    propertyMangement();
-                } else if (inputBtn.equals("Giv op")) {
-                    String answer = gui.getPlayerBtn(lib.text.get("Sure"), lib.text.get("Yes"), lib.text.get("No"));
-                    if (answer.equals("Ja")) {
-                        p.kill();
-                    } else {
-                        propertyMangement();
-                    }
-                }*/
-
+                managementStream(p,board);
 
                 Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
                 int[] diceRoll = dice.roll(testing);
@@ -400,12 +386,12 @@ public class Controller {
         
         return 0;
     }
-    
-    public void managementStream(Player p){
+
+    public void managementStream(Player p, GameBoard board){
         while(true) {
             String inputBtn = gui.getPlayerBtn("msg", lib.text.get("PM"), lib.text.get("Roll"), lib.text.get("GiveUp"));
             if(inputBtn.equals("Property Mangement")) {
-                propertyMangement();
+                propertyMangement(p,board);
             }
             while (inputBtn.equals("Giv op")) {
                 String answer = gui.getPlayerBtn(lib.text.get("Sure"), lib.text.get("Yes"), lib.text.get("No"));

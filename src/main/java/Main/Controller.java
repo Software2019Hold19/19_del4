@@ -358,6 +358,8 @@ public class Controller {
                     for (int i = 0; i < playersFields.length; i++) {
                         fieldNames[i] = playersFields[i].getName();
                     }
+
+                    gui.updateBoard(board.getOwnableBoard(), pLst);
                     
                     String selectedFieldName = gui.getPlayerDropbown(lib.text.get("ChooseAField"), fieldNames);
                     propertyIndex = getFieldIndex(selectedFieldName, playersFields);
@@ -371,13 +373,19 @@ public class Controller {
                     // checks if there is any houses on the field
                     if (playersFields[propertyIndex].getHouseLevel() <= 0) {
                         gui.showMessage(lib.text.get("NoHouses"));
+                        String sellFieldAnwser = gui.getPlayerBtn("ER DU SIKKER PÅ AT SÆLGE FELTET", "JA", "NEJ");
+                        
+                        if (sellFieldAnwser.equals("JA")) {
+                            playersFields[propertyIndex].sellHouseAndHotel(player,playersFields);
+                            chooseField = true;
+                        }
+
                     }
                     // Sælger et hus
                     else {
                         playersFields[propertyIndex].sellHouseAndHotel(player,playersFields);
                         /*playersFields[propertyIndex].minusOneLevel();
                         player.addBal(playersFields[propertyIndex].getHousePrice());*/
-                        gui.updateBoard(playersFields, pLst);
                     }
                 }
                 //Mortage a property

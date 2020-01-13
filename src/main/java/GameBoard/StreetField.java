@@ -34,7 +34,7 @@ public class StreetField extends OwnableField {
     @Override
     public int getRent(GameBoard board) {
         // if the player owns all fields of same color and no houses 2x rent
-        if (level == 0 && ownsSameColorFields(boardTemp))
+        if (level == 0 && ownsSameColorFields(board))
         {
             return 2*rent[level];
         }

@@ -114,8 +114,6 @@ public class Player {
                 fieldLst = tmpLst;
             }
         }
-
         return fieldLst;
     }
-
 }

@@ -117,8 +117,8 @@ public class StreetField extends OwnableField {
         }
     }
 
-    
-    private void sellHouseAndHotel(Player player, OwnableField[] playersFields) {
+    @Override
+    public void sellHouseAndHotel(Player player, OwnableField[] playersFields) {
         int[] listOfHouseLevel;
         if (this.color.equals("lightblue") || this.color.equals("brown")) {
             listOfHouseLevel = new int[2];

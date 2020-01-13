@@ -364,7 +364,7 @@ public class Controller {
                     chooseField = false;
                 }
                 
-                playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("ChooseNewField"), lib.text.get("Roll"));
+                playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"),lib.text.get("Mortage"), lib.text.get("ChooseNewField"), lib.text.get("Roll"));
         
                 // sell house
                 if (playerNextStep.equals(lib.text.get("SellHouse"))) {
@@ -374,10 +374,20 @@ public class Controller {
                     }
                     // Sælger et hus
                     else {
-                        playersFields[propertyIndex].minusOneLevel();
-                        player.addBal(playersFields[propertyIndex].getHousePrice());
+                        playersFields[propertyIndex].sellHouseAndHotel(player,playersFields);
+                        /*playersFields[propertyIndex].minusOneLevel();
+                        player.addBal(playersFields[propertyIndex].getHousePrice());*/
                         gui.updateBoard(playersFields, pLst);
                     }
+                }
+
+                else if(playerNextStep.equals(lib.text.get("Mortage"))){
+                    playersFields[propertyIndex].setMortage(true);
+                    int price = playersFields[propertyIndex].getPrice();
+                    double input = price * 0.5;
+                    int money = (int)input;
+
+                    player.addBal(money);
                 }
                 // choose new field
                 else if (playerNextStep.equals(lib.text.get("ChooseNewField"))) {
@@ -401,7 +411,7 @@ public class Controller {
         while(true) {
             String inputBtn = gui.getPlayerBtn(lib.text.get("MessagePM"), lib.text.get("PM"), lib.text.get("Roll"), lib.text.get("GiveUp"));
             if (inputBtn.equals(lib.text.get("PM"))) {
-                if (p.getPlayersFields(board.getOwnableBoard()).length == 0){
+                if (p.getPlayersFields(board.getOwnableBoard()) == null){
                     gui.showMessage(lib.text.get("NoFields"));
                 }
                 else {

@@ -12,6 +12,7 @@ public abstract class OwnableField extends Field {
 
     protected int price;
     protected String owner = "";
+    protected boolean mortage;
 
     public OwnableField(String name, String subName, String desc, String type, String rentStr, String key) {
         super(name, subName, desc, type, key);
@@ -35,16 +36,18 @@ public abstract class OwnableField extends Field {
     public void landOnField (Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
         super.landOnField(player, pLst, deck, board, gui, lib);
 
-        if (!this.owner.equals("") && !(this.owner.equals(player.getName()))){
-            payRent(player,pLst, board);
+        if(getMortage()){
+            gui.showMessage("msg");
+        }
+        else if (!this.owner.equals("") && !(this.owner.equals(player.getName()))){
+            payRentToPlayer(player,pLst, board);
         }
         else if (this.owner.equals("")) {
             choiceToBuy(player,gui,lib);
         }
-
     }
 
-    private void payRent(Player player, Player[] pLst, GameBoard board){
+    private void payRentToPlayer(Player player, Player[] pLst, GameBoard board){
         Player tempPlayer = new Player("tmp");
 
         for (int i = 0; i < pLst.length; i++){
@@ -57,6 +60,14 @@ public abstract class OwnableField extends Field {
             player.addBal(-getRent(board));
             tempPlayer.addBal(getRent(board));
         }
+    }
+
+    public boolean setMortage(boolean set){
+        return mortage;
+    }
+
+    public boolean getMortage(){
+        return mortage;
     }
 
     @Override
@@ -106,5 +117,8 @@ public abstract class OwnableField extends Field {
             setOwner(player.getName());
             player.addBal(-this.price);
         }
+    }
+    public void sellHouseAndHotel(Player player, OwnableField[] playersFields){
+
     }
 }

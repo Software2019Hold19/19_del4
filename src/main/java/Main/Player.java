@@ -1,19 +1,20 @@
 package Main;
 
 
+import GameBoard.Field;
+import GameBoard.GameBoard;
+import GameBoard.OwnableField;
+
 public class Player {
     String name;
     private Account acc = new Account();
     int fieldNumber = 0;
+    int oldFieldNumber = 0;
     boolean alive = true;
     int jailCount = 0;
     boolean isJailed = false;
     boolean jailCard = false;
     int lastRollVal = 0;
-
-    public Player (String name){
-        this.name = name;
-    }
 
     public Player (String name, int Bal){
         this.name = name;
@@ -47,6 +48,17 @@ public class Player {
 
     public int getFieldNumber() {
         return fieldNumber;
+    }
+
+    public int getOldFieldNumber() {
+        return oldFieldNumber;
+    }
+
+    public void step() {
+        oldFieldNumber++;
+        if (oldFieldNumber >= 40) {
+            oldFieldNumber = 0;
+        }
     }
 
 
@@ -92,6 +104,26 @@ public class Player {
 
     public void setJailCard(boolean set){
         jailCard = set;
+    }
+
+    public OwnableField[] playersFields(OwnableField[] fields){
+
+        OwnableField[] fieldLst = new OwnableField[0];
+
+        for (int i = 0; i < fields.length; i++){
+            if (fields[i].getOwner().equals(getName())){
+                OwnableField[] tmpLst = new OwnableField[fieldLst.length + 1];
+
+                for (int j = 0; j < fieldLst.length; j++) {
+                    tmpLst[j] = fieldLst[j];
+                }
+                
+                tmpLst[tmpLst.length - 1] = fields[i];
+                fieldLst = tmpLst;
+            }
+        }
+
+        return fieldLst;
     }
 
 }

@@ -85,7 +85,7 @@ public class Controller {
         String res = "";
 
         for (int i = 0; i < pLst.length; i++){
-            int[] roll = dice.roll(true);//testing);
+            int[] roll = dice.roll(testing);
             int val = roll[0] + roll[1];
             gui.showDiceOnBoard(roll);
             gui.showMessage(String.format(lib.text.get("TurnOrderRoll"), pLst[i].getName(), val));

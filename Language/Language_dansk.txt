@@ -65,8 +65,8 @@ ChanceCTxt11//Du flytter 3 felter tilbage
 ChanceCTxt12//Matador-legatet, du modtager 40000 kr.
 ChanceCTxt13//Betal din parkeringsbøde på 400 kr.
 ChanceCTxt14//DU modtager 4000 kr. af banken.
-ChanceCTxt15//
-ChanceCTxt16//
+ChanceCTxt15//Kul- og kokspriserne er steget, og du skal betale 500 pr. hus og 2500 pr. hotel
+ChanceCTxt16//Ejendomsskatterne er steget og ekstraudgifterne er 1000 pr. hus og 2500 pr. hotel
 ChanceCTxt17//Flyt frem til Øresundsbåden
 ChoiceToBuy//Ingen ejer dette felt. Vil du købe feltet for %d kroner?
 Buyhouse//Vil du købe et hus for

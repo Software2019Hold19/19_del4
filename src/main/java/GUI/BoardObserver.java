@@ -47,8 +47,14 @@ public class BoardObserver extends Observer {
                             ownable.get(key).setBorder(color);
                             ownable.get(key).setOwnerName(owner); //test
                             ownable.get(key).setRent(Integer.toString(fields[i].getRent(board)));
+                            break;
                         }
+
                     }
+                } else {
+                    guiFields[i].setDescription(fields[i].getDesc());
+                    ownable.get(key).setBorder(Color.BLACK);
+                    ownable.get(key).setOwnerName(""); //test
                 }
             }
         }

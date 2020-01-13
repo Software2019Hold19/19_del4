@@ -5,6 +5,7 @@ import GUI.GUIController;
 import GameBoard.GameBoard;
 import GameBoard.OwnableField;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class Controller {
@@ -29,6 +30,8 @@ public class Controller {
         gui.updateLanguage(lib);
         board.boardUpdate(lib);
         gui.showMessage(lib.text.get("Welcome"));
+
+        //gui.getGui().getFields()[1].setForeGroundColor(Color.GRAY);
 
         String playerCountstr = gui.getPlayerDropbown(lib.text.get("NumberOfPlayers"), "3", "4", "5", "6");
         playerCount = Integer.parseInt(playerCountstr);

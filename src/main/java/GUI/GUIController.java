@@ -69,11 +69,11 @@ public class GUIController {
         }
     }
 
-    public int getPlayerInt(String msg){
+    public int getPlayerInt(String msg, int price, int bal){
         if (testing) {
             return 0;
         } else {
-            return gui.getUserInteger(msg, 0, Integer.MAX_VALUE);
+            return gui.getUserInteger(msg, 0, bal - price);
         }
     }
 

@@ -32,7 +32,7 @@ public class Controller {
         playerCount = Integer.parseInt(playerCountstr);
         int startBal = 30000;
 
-        //gui.getPlayerBtn("Test", new String[]{"test1", "test2"});
+        //gui.getPlayerDropbown("Test", new String[]{"test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2"});
         //System.out.println(gui.getPlayerInt("TestInt"));
         //name input - repeat if names are the same
         while (true) {

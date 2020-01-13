@@ -245,10 +245,10 @@ public class Controller {
 
                 if (cntDoubleDiceRoll != 3) {
                     p.move(diceRoll[0] + diceRoll[1]);
-
                     gui.updatePlayers(pLst);
                     //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
                     board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                    gui.updateBoard(board.getOwnableBoard(), pLst);
                 }
                 else {
                     playAgain = false;
@@ -335,13 +335,13 @@ public class Controller {
                         board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                         gui.updatePlayers(pLst);
                         break;
-    
+
                     default:
                         throw new IllegalStateException("Unexpected value: " + jailOptionStr);
                 }
-        }
-    }while (playAgain);
-}
+            }
+        }while (playAgain);
+    }
 
     public void setTesting() {
         testing = !testing;

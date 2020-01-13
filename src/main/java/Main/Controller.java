@@ -351,11 +351,12 @@ public class Controller {
             // Roll
             String playerNextStep;
             int propertyIndex = 0;
-            OwnableField[] playersFields = player.getPlayersFields(board.getOwnableBoard());
+           
             boolean chooseField = true;
         
             do {
-        
+                OwnableField[] playersFields = player.getPlayersFields(board.getOwnableBoard());
+                
                 if (chooseField) {
                     String fieldNames[] = new String[playersFields.length];
 
@@ -382,9 +383,9 @@ public class Controller {
                     // checks if there is any houses on the field
                     if (playersFields[propertyIndex].getHouseLevel() <= 0) {
                         gui.showMessage(lib.text.get("NoHouses"));
-                        String sellFieldAnwser = gui.getPlayerBtn("ER DU SIKKER PÅ AT SÆLGE FELTET", "JA", "NEJ");
+                        String sellFieldAnwser = gui.getPlayerBtn(lib.text.get("Sure"), lib.text.get("Yes"), lib.text.get("No"));
                         
-                        if (sellFieldAnwser.equals("JA")) {
+                        if (sellFieldAnwser.equals(lib.text.get("Yes"))) {
                             playersFields[propertyIndex].sellHouseAndHotel(player,playersFields);
                             chooseField = true;
                         }

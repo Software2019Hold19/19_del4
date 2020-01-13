@@ -91,11 +91,11 @@ Trading//Bytte
 Roll//Rul med terningerne
 PM//Property Mangement
 GiveUp//Giv op
-Sure//Er du sikker på at di vil give op?
+Sure//Er du sikker?
 ChooseNewField//Vælg nyt felt
 SellHouse//Sælg et hus
 ChooseAField//Vælg et felt
-NoHouses//Du har ikke flere huse på grunden
+NoHouses//Du har ikke flere huse på grunden, men du kan sælge grunden istedet
 NoFields//Du ejer ingen felter
 MortgageProp//Du pantsætter denne ejendom
 ReopenProp//Du genåbner denne ejendom

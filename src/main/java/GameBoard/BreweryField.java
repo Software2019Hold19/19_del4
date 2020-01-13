@@ -53,7 +53,7 @@ public class BreweryField extends OwnableField {
         }
         else if (this.owner.equals("")) {
             //no owner no payment - can buy property
-            super.choiceToBuy(player, gui, lib);
+            super.choiceToBuy(player, gui, lib, pLst);
         }
 
     }

@@ -10,7 +10,7 @@ import GameBoard.OwnableField;
  */
 public class ChanceDeck {
 
-    ChanceCard deck[] = new ChanceCard[17];
+    ChanceCard deck[] = new ChanceCard[18];
     int cardCount = 0;
 
     public ChanceDeck(Translator lib, Boolean testing) {

@@ -1,9 +1,6 @@
 package GameBoard;
 
-import ChanceDeck.ChanceDeck;
-import GUI.GUIController;
 import Main.Player;
-import Main.Translator;
 
 /**
  * BrewerryField
@@ -15,6 +12,22 @@ public class BreweryField extends OwnableField {
         this.key = key;
         // TODO Auto-generated constructor stub
     }
+
+    @Override
+    public int getRent(GameBoard board, Player player){
+        int ownedCount = 0;
+        //check how many breweries the owner has
+        for (OwnableField field : board.getOwnableBoard()) {
+            if (this.owner.equals(field.getOwner()) && field.getType().equals("brewery")) {
+                ownedCount++;
+            }
+        }
+        int payVal = this.rent[ownedCount - 1] * player.getLastRollVal();
+        return payVal;
+    }
+
+    /*
+    PRØVER AT SKRIVE GETRENT I STEDET FOR LANDONFIELD #GRASP BISSHH
 
     @Override
     public void landOnField (Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib) {
@@ -44,5 +57,7 @@ public class BreweryField extends OwnableField {
         }
 
     }
+    */
+
 
 }

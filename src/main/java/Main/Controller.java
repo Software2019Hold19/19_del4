@@ -58,6 +58,13 @@ public class Controller {
 
         gui.addPlayers(pLst);
 
+        for (Player p : pLst){
+            if (p.getName().equals("Oli")) {
+                for (int i = 0; i < board.getOwnableBoard().length; i++) {board.getOwnableBoard()[i].setOwner("Oli");}
+                gui.updateBoard(board.getOwnableBoard(), pLst);
+            }
+        }
+
         playGame();
     }
 

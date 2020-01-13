@@ -32,7 +32,7 @@ public class TaxChanceCard extends ChanceCard{
     }
 
     private int[] getHousesAndHotels(Player player, GameBoard board) {
-        int result[] = {0, 0};
+        int result[] = {0, 0}; // (houses, hotels)
 
         for (OwnableField field : board.getOwnableBoard()) {
             if (field.getOwner().equals(player.getName())) {

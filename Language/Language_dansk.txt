@@ -55,6 +55,8 @@ ChanceCTxt1//De har kørt over for fuld stop betal 2000 kr.
 ChanceCTxt2//Du har anskaffet dig et nyt dæk betal 2000 kr.
 ChanceCTxt3//Flyt 1-5 felter
 ChanceCTxt4//Flyt 1 felt eller træk et nyt kort
+ChanceMove1//Ryk 1
+ChanceNewCard//Træk kort
 ChanceCTxt5//Flyt til start
 ChanceCTxt6//Flyt til Rådhuspladsen
 ChanceCTxt7//Betal 200 kr. for vogn vask

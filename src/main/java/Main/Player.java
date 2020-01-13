@@ -100,14 +100,22 @@ public class Player {
 
     public OwnableField[] playersFields(OwnableField[] fields){
 
-        OwnableField[] fieldLst = fields;
+        OwnableField[] fieldLst = new OwnableField[0];
 
         for (int i = 0; i < fields.length; i++){
             if (fields[i].getOwner().equals(getName())){
-                fieldLst[i] = fields[i];
+                OwnableField[] tmpLst = new OwnableField[fieldLst.length + 1];
+
+                for (int j = 0; j < fieldLst.length; j++) {
+                    tmpLst[j] = fieldLst[j];
+                }
+                
+                tmpLst[tmpLst.length - 1] = fields[i];
+                fieldLst = tmpLst;
             }
         }
-        return fields;
+
+        return fieldLst;
     }
 
 }

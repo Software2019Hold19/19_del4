@@ -390,7 +390,11 @@ public class Controller {
                 }
                 //Reopen properties
                 else if(playerNextStep.equals(lib.text.get("ReopenProp"))){
-
+                playersFields[propertyIndex].setMortage(false);
+                int price = playersFields[propertyIndex].getPrice();
+                double input = price*0.55;
+                int money = (int)input;
+                player.addBal(-money);
                 }
                 // choose new field
                 else if (playerNextStep.equals(lib.text.get("ChooseNewField"))) {
@@ -414,7 +418,7 @@ public class Controller {
         while(true) {
             String inputBtn = gui.getPlayerBtn(lib.text.get("MessagePM"), lib.text.get("PM"), lib.text.get("Roll"), lib.text.get("GiveUp"));
             if (inputBtn.equals(lib.text.get("PM"))) {
-                if (p.getPlayersFields(board.getOwnableBoard()) == null){
+                if (p.getPlayersFields(board.getOwnableBoard()).length < 1){
                     gui.showMessage(lib.text.get("NoFields"));
                 }
                 else {

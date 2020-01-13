@@ -22,6 +22,7 @@ public class GUIController {
     private FieldFactory fieldFac = new FieldFactory();
     private Boolean testing = false;
     private int testNames = 0;
+    private int testCount = -1;
 
     public GUIController(Translator _lib, GameBoard _board) {
         lib = _lib;
@@ -45,10 +46,16 @@ public class GUIController {
         }
     }
 
+    public void displayChanceCard(String txt){
+        if (!testing) {
+            this.gui.displayChanceCard(txt);
+        }
+    }
+
     public String getPlayerDropbown(java.lang.String msg, java.lang.String... buttons)
     {
         if (testing){
-            return buttons[0];
+            return buttons[testCount++ % buttons.length];
         }
         return gui.getUserSelection(msg,buttons);
     }
@@ -79,7 +86,7 @@ public class GUIController {
     }
 
     public void updateBoard(OwnableField[] fLst, Player[] pLst){
-        bObs.ownerUpdate(gui.getFields(), fLst, fieldFac.getOwnable(), pObs.getGuiPlayerList(), pLst, fieldFac.getStreets());
+        bObs.ownerUpdate(gui.getFields(), fLst, fieldFac.getOwnable(), pObs.getGuiPlayerList(), pLst, fieldFac.getStreets(), board);
 
     }
 

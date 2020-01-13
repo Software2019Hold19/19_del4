@@ -254,6 +254,7 @@ public class Controller {
                 }
                 else {
                     playAgain = false;
+                    gui.showMessage(lib.text.get("JailTripleDouble"));
                     p.jail();
                 }
 

@@ -2,6 +2,7 @@ package ChanceDeck;
 
 import Main.Player;
 import Main.Translator;
+import GameBoard.OwnableField;
 
 /**
  * ChanceDeck
@@ -9,7 +10,7 @@ import Main.Translator;
  */
 public class ChanceDeck {
 
-    ChanceCard deck[] = new ChanceCard[20];
+    ChanceCard deck[] = new ChanceCard[17];
     int cardCount = 0;
 
     public ChanceDeck(Translator lib, Boolean testing) {
@@ -24,11 +25,18 @@ public class ChanceDeck {
         deck[7] = new BankChanceCard(lib.text.get("ChanceCTxt1"),-2000);
         deck[8] = new BankChanceCard(lib.text.get("ChanceCTxt7"),-200);
         deck[9] = new GetOutOfJailFreeCard(lib.text.get("ChanceCTxt8"));
-        deck[10] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt9"),23);
+        deck[10] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt9"),24);
         deck[11] = new PlayerMoveChanceCard(lib.text.get("ChanceCTxt9"));
+        deck[12] = new BankChanceCard(lib.text.get("ChanceCTxt12"), 40000);
+        deck[13] = new BankChanceCard(lib.text.get("ChanceCTxt13"),-400);
+        deck[14] = new BankChanceCard(lib.text.get("ChanceCTxt14"),4000);
+        deck[15] = new TaxChanceCard(lib.text.get("ChanceCTxt15"),500, 2500);
+        deck[16] = new TaxChanceCard(lib.text.get("ChanceCTxt16"),1000, 2500);
+        deck[17] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt17"),15);
+
 
         if (!testing) {
-            //shuffleDeck();
+            shuffleDeck();
         }
     }
 
@@ -61,8 +69,9 @@ public class ChanceDeck {
         if (cardCount >= deck.length){ //resets count when all cards have been drawn
             cardCount = 0;
         }
-        //return deck[cardCount++];//returns drawn card and THEN adds 1 to cardCount
-        return deck[6];
+
+        return deck[cardCount++];//returns drawn card and THEN adds 1 to cardCount
+        //return deck[6];
     }
 
 

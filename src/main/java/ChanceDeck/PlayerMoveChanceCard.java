@@ -17,6 +17,6 @@ public class PlayerMoveChanceCard extends MoveChanceCard {
     public boolean drawn(Player player, GameBoard board){
         player.move(-3);
 
-        return false;
+        return true;
     }
 }

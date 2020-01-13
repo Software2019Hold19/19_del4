@@ -62,17 +62,22 @@ ChanceCTxt8//Hvis du har dette kort kan du gratis komme ud af fænslet
 ChanceCTxt9//Flyt til Grønningen
 ChanceCTxt10//Du modtager 1000 kr. af banken
 ChanceCTxt11//Du flytter 3 felter tilbage
+ChanceCTxt12//Matador-legatet, du modtager 40000 kr.
+ChanceCTxt13//Betal din parkeringsbøde på 400 kr.
+ChanceCTxt14//DU modtager 4000 kr. af banken.
+ChanceCTxt15//Kul- og kokspriserne er steget, og du skal betale 500 pr. hus og 2500 pr. hotel
+ChanceCTxt16//Ejendomsskatterne er steget og ekstraudgifterne er 1000 pr. hus og 2500 pr. hotel
+ChanceCTxt17//Flyt frem til Øresundsbåden
 ChoiceToBuy//Ingen ejer dette felt. Vil du købe feltet for %d kroner?
 Buyhouse//Vil du købe et hus for
 Buyhotel//Vil du købe et hotel for
 Yes//Ja
 No//Nej
 YourOptionsJail//Du er i fængsel, hvad vil du gøre?
-Roll//Kast terninger
-Pay//Betal 1000kr
 NoMoney//Du har ikke penge nok til købet
 JailRoll//Kast terninger
 JailPay//Betal 1000kr
+JailCard//Brug chance kort
 PayedEscaped//%s bateler 1000 kr og er fri igen.
 TurnOrderStart//Vi slår om at starte spillet. Den der slår størst starter
 TurnOrderRoll//Du, Spiller %s, har slået %d

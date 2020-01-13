@@ -6,6 +6,7 @@ import Main.Player;
 /**
  * SpecifikMoveChanceCard Move to Start or to "Strandpomenaden"
  */
+
 public class SpecifikMoveChanceCard extends MoveChanceCard {
 
     int pos = 0;
@@ -21,14 +22,15 @@ public class SpecifikMoveChanceCard extends MoveChanceCard {
             int val = pos - player.getFieldNumber();
             player.move(val);
 
-            return false;
+
+            return true;
         }
         else {
             int val = 40 - player.getFieldNumber() + pos;
             player.move(val);
             player.addBal(4000);
 
-            return false;
+            return true;
         }
         
     }

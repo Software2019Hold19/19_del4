@@ -78,14 +78,14 @@ public class Controller {
         playGame();
     }
 
-    private int turnOrder(Player[] pLst){
+    private String turnOrder(Player[] pLst){
         int maximum = 0;
         Player[] starter = new Player[0];
 
-        int res = 0;
+        String res = "";
 
         for (int i = 0; i < pLst.length; i++){
-            int[] roll = dice.roll(testing);
+            int[] roll = dice.roll(true);//testing);
             int val = roll[0] + roll[1];
             gui.showDiceOnBoard(roll);
             gui.showMessage(String.format(lib.text.get("TurnOrderRoll"), pLst[i].getName(), val));
@@ -108,21 +108,23 @@ public class Controller {
 
         if (starter.length > 1) {
             gui.showMessage(lib.text.get("TurnOrderRedo"));
-            turnOrder(starter);
+            res = turnOrder(starter);
         } else {
             gui.showMessage(String.format(lib.text.get("TurnOrderWinner"), starter[0].getName()));
-            for (int j = 0; j < pLst.length; j++) {
-                if (pLst[j].getName().equals(starter[0].getName())){
-                    res = j;
-                }
-            }
+            res = starter[0].getName();
         }
         return res;
     }
 
     private void playGame() throws InterruptedException {
         gui.showMessage(lib.text.get("TurnOrderStart"));
-        int turnCount = turnOrder(pLst);
+        String starterName = turnOrder(pLst);
+        int turnCount = 0;
+        for (int i = 0; i < pLst.length; i++){
+            if (pLst[i].getName().equals(starterName)) {
+                turnCount = i;
+            }
+        }
         int turnCountTotal = 0;
 
         while (!isOnePlayerLeft(lib)) {

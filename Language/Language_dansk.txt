@@ -43,6 +43,7 @@ EndOfGame//%s har desværre ikke flere penge og spillet er derfor slut.
 WinnerByDefault//%s har fået over 100 penge og derfor slutter spillet.
 Winner//%s har flest penge og har vundet. Tillykke!
 SameName//Spillere kan ikke hedde det samme.
+NoName//Spillere skal have et navn!
 OwnField//Du ejer selv dette felt.
 OthersField//Dette felt er eget af %s og du skal betale dem %d kroner!
 OthersFieldJailed//Dette felt er eget af %s men spiller er i fængsel. Ingen betaling.
@@ -79,7 +80,7 @@ AuctionStart//Spiller %s vil ikke købe feltet, så det går på auktion
 AuctionTurn//Feltet står til at koste %d. Vil spiller %s være med eller udgå?
 AuctionYesBtn//Auktion!
 AuctionNoBtn//Udgå
-AuctionAddMoney//Indtast det antal kroner Spiller %s vil tilføje til sit bud
+AuctionAddMoney//Feltet koster allerede %d. Indtast det antal kroner Spiller %s vil tilføje til sit bud
 AuctionOut//Spiller %s stopper i aktionen
 AuctionNoMoney// Spiller %s har ikke nok penge til at deltage i aktionen.
 AuctionNext//Spiller %s forstører sit bud og aktionen fortsætter

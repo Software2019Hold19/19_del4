@@ -37,22 +37,30 @@ public class Controller {
         //name input - repeat if names are the same
         while (true) {
             boolean sameName = false;
+            boolean noName = false;
             pLst = new Player[playerCount];
             for (int i = 0; i < playerCount; i++) {
                 Player p = new Player(gui.getUserString(String.format(lib.text.get("InputName"), i + 1)), startBal);
+                System.out.println(p.getName());
+                if (p.getName().equals("")) {
+                    noName = true;
+                }
                 pLst[i] = p;
             }
-
-            for (int i = 0; i < pLst.length; i++) {
-                for (int j = i + 1; j < pLst.length; j++) {
-                    if (pLst[i].getName().equals(pLst[j].getName())) {
-                        sameName = true;
-                        gui.showMessage(lib.text.get("SameName"));
+            if (!noName) {
+                for (int i = 0; i < pLst.length; i++) {
+                    for (int j = i + 1; j < pLst.length; j++) {
+                        if (pLst[i].getName().equals(pLst[j].getName())) {
+                            sameName = true;
+                            gui.showMessage(lib.text.get("SameName"));
+                        }
                     }
                 }
+            } else {
+                gui.showMessage(lib.text.get("NoName"));
             }
 
-            if (!sameName) {
+            if (!sameName && !noName) {
                 break;
             }
 

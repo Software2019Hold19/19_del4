@@ -12,12 +12,14 @@ public abstract class OwnableField extends Field {
 
     protected int price;
     protected String owner = "";
+    protected int auctionPrice;
 
     public OwnableField(String name, String subName, String desc, String type, String rentStr, String key) {
         super(name, subName, desc, type, key);
 
         // Init price from subName
         this.price = Integer.parseInt(subName.split(" ")[0]);
+        this.auctionPrice = price / 2;
 
         // Converting string to rent array
         String[] rentLst = rentStr.split(",");
@@ -39,7 +41,7 @@ public abstract class OwnableField extends Field {
             payRent(player, pLst, board, lib, gui);
         }
         else if (this.owner.equals("")) {
-            choiceToBuy(player,gui,lib);
+            choiceToBuy(player, gui, lib, pLst);
         }
         else if (this.owner.equals(player.getName())){
             gui.showMessage(lib.text.get("OwnField"));
@@ -105,7 +107,11 @@ public abstract class OwnableField extends Field {
         this.level++;        
     }
 
-    public void choiceToBuy(Player player, GUIController gui, Translator lib){
+    public int getHouseLevel() {
+        return this.level;
+    }
+
+    public void choiceToBuy(Player player, GUIController gui, Translator lib, Player[] pLst){
         //shows dropdown with yes/no button to buy
         String buyChoice = gui.getPlayerDropbown(String.format(lib.text.get("ChoiceToBuy"), this.price), lib.text.get("Yes"), lib.text.get("No"));
         if(buyChoice.equals(lib.text.get("Yes"))) {
@@ -118,6 +124,64 @@ public abstract class OwnableField extends Field {
                 gui.showMessage(lib.text.get("NoMoney"));
             }
         }
+        else {
+            auction(player, pLst, gui, lib);
+
+        }
 
     }
+
+    public void auction(Player player, Player[] pLst, GUIController gui, Translator lib) {
+        Player[] pInAuction = new Player[pLst.length - 1];
+        int i = 0;
+        for (Player p : pLst){
+            if (!p.getName().equals(player.getName()) && p.getAlive()){
+                pInAuction[i++] = p;
+            }
+        }
+        gui.showMessage(String.format(lib.text.get("AuctionStart"), player.getName()));
+        int j = 0;
+        while (pInAuction.length > 1) {
+            Player currentP = pInAuction[j++];
+            if (auctionTurn(currentP, gui, lib, this.auctionPrice)){
+                gui.showMessage(String.format(lib.text.get("AuctionNext"), currentP.getName()));
+            } else {
+                gui.showMessage(String.format(lib.text.get("AuctionOut"), currentP.getName()));
+                j--;
+                Player[] tmp = new Player[pInAuction.length - 1];
+                int l = 0;
+                for (int k = 0; k < pInAuction.length; k++){
+                    if (!pInAuction[k].getName().equals(currentP.getName())){
+                        tmp[l++] = pInAuction[k];
+                    }
+                }
+                pInAuction = tmp;
+            }
+            if (j >= pInAuction.length) {
+                j = 0;
+            }
+        }
+        gui.showMessage(String.format(lib.text.get("AuctionWin"), pInAuction[0].getName(), this.auctionPrice));
+        setOwner(pInAuction[0].getName());
+        pInAuction[0].addBal(-this.auctionPrice);
+
+    }
+
+    public Boolean auctionTurn(Player player, GUIController gui, Translator lib, int price) {
+        if (price < player.getBal()) {
+            String Answer = gui.getPlayerBtn(String.format(lib.text.get("AuctionTurn"), price, player.getName()), lib.text.get("AuctionYesBtn"), lib.text.get("AuctionNoBtn"));
+            if (Answer.equals(lib.text.get("AuctionYesBtn"))) {
+                int adding = gui.getPlayerInt(String.format(lib.text.get("AuctionAddMoney"), player.getName()), price, player.getBal());
+                this.auctionPrice = price + adding;
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            gui.showMessage(String.format(lib.text.get("AuctionNoMoney"), player.getName()));
+            return false;
+        }
+
+    }
+
 }

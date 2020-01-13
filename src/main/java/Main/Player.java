@@ -1,6 +1,10 @@
 package Main;
 
 
+import GameBoard.Field;
+import GameBoard.GameBoard;
+import GameBoard.OwnableField;
+
 public class Player {
     String name;
     private Account acc = new Account();
@@ -88,6 +92,26 @@ public class Player {
 
     public void setJailCard(boolean set){
         jailCard = set;
+    }
+
+    public OwnableField[] playersFields(OwnableField[] fields){
+
+        OwnableField[] fieldLst = new OwnableField[0];
+
+        for (int i = 0; i < fields.length; i++){
+            if (fields[i].getOwner().equals(getName())){
+                OwnableField[] tmpLst = new OwnableField[fieldLst.length + 1];
+
+                for (int j = 0; j < fieldLst.length; j++) {
+                    tmpLst[j] = fieldLst[j];
+                }
+                
+                tmpLst[tmpLst.length - 1] = fields[i];
+                fieldLst = tmpLst;
+            }
+        }
+
+        return fieldLst;
     }
 
 }

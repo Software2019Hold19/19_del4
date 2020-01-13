@@ -54,9 +54,9 @@ public class BoardObserver extends Observer {
         }
     }
 
-    public void houseAndHotelUpdate(HashMap<String, GUI_Street> streets, Field[] fields) {
+    public void houseAndHotelUpdate(HashMap<String, GUI_Street> streets, OwnableField[] fields) {
         for (String key : streets.keySet()) {
-            for (Field field : fields){
+            for (OwnableField field : fields){
                 if (field.getKey().equals(key)){
                     if (field.getHouseLevel() < 5) {
                         streets.get(key).setHouses(field.getHouseLevel());

@@ -32,6 +32,8 @@ public class Controller {
         playerCount = Integer.parseInt(playerCountstr);
         int startBal = 30000;
 
+        //gui.getPlayerDropbown("Test", new String[]{"test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2"});
+        //System.out.println(gui.getPlayerInt("TestInt"));
         //name input - repeat if names are the same
         while (true) {
             boolean sameName = false;
@@ -57,6 +59,13 @@ public class Controller {
         }
 
         gui.addPlayers(pLst);
+
+        for (Player p : pLst){
+            if (p.getName().equals("Oli")) {
+                for (int i = 0; i < board.getOwnableBoard().length; i++) {board.getOwnableBoard()[i].setOwner("Oli");}
+                gui.updateBoard(board.getOwnableBoard(), pLst);
+            }
+        }
 
         playGame();
     }

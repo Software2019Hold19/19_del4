@@ -3,6 +3,8 @@ package Main;
 import ChanceDeck.ChanceDeck;
 import GUI.GUIController;
 import GameBoard.GameBoard;
+import GameBoard.OwnableField;
+
 import java.io.IOException;
 
 public class Controller {
@@ -352,8 +354,51 @@ public class Controller {
         gui.setTesting(testing);
     }
 
-    private void propertyMangement() {
-        // choose color
+    private void propertyMangement(Player player, GameBoard board) {
+        
+            // Choose a field
+            // Sell house or choose a new field
+            // Roll
+            String playerNextStep;
+            int propertyIndex = 0;
+            OwnableField[] playersFields = player.getPlayersFields(board.getOwnableBoard());
+            boolean chooseField = true;
+        
+            do {
+        
+                if (chooseField) {
+                    String fieldNames[] = new String[playersFields.length];
+        
+                    for (int i = 0; i < playersFields.length; i++) {
+                        fieldNames[i] = playersFields[i].getName();
+                    }
+                    
+                    String selectedFieldName = gui.getPlayerDropbown(lib.text.get("ChooseAField"), fieldNames);
+                    propertyIndex = getFieldIndex(selectedFieldName, playersFields);
+                    chooseField = false;
+                }
+                
+                playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("ChooseNewField"), lib.text.get("Roll"));
+        
+                if (playerNextStep.equals(lib.text.get("SellHouse"))) {
+                    playersFields[propertyIndex].minusOneLevel();
+                    gui.updateBoard(playersFields, pLst);
+                }
+                else if (playerNextStep.equals(lib.text.get("ChooseNewField"))) {
+                    chooseField = true;
+                }
+        
+            } while (!playerNextStep.equals(lib.text.get("Roll"))); // while not roll
+    }
+
+    public int getFieldIndex(String name, OwnableField[] fields) {
+        for (int i = 0; i < fields.length; i++) {
+            if (fields[i].getName().equals(name)) {
+                return i;
+            }
+        }
+        
+        return 0;
     }
     
     public void managementStream(Player p){
@@ -374,7 +419,7 @@ public class Controller {
             if (inputBtn.equals("Rul med terningerne")){
                 break;
             }
-        }
-    }
+        }  
+     }
 }
 

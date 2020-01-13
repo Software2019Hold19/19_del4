@@ -205,8 +205,8 @@ public class StreetField extends OwnableField {
 
 */
 
-
-    private int getHousePrice() {
+    @Override
+    public int getHousePrice() {
         if (this.price < 2000) {
             return 1000;
         }

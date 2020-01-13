@@ -86,8 +86,17 @@ public abstract class OwnableField extends Field {
         this.level++;        
     }
 
+    public void minusOneLevel() {
+        if (this.level > 0)
+            this.level--;
+    }
+
     public int getHouseLevel() {
         return this.level;
+    }
+
+    public int getHousePrice() {
+        return 0;
     }
 
     public void choiceToBuy(Player player, GUIController gui, Translator lib){

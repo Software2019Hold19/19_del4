@@ -366,10 +366,20 @@ public class Controller {
                 
                 playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("ChooseNewField"), lib.text.get("Roll"));
         
+                // sell house
                 if (playerNextStep.equals(lib.text.get("SellHouse"))) {
-                    playersFields[propertyIndex].minusOneLevel();
-                    gui.updateBoard(playersFields, pLst);
+                    // checks if there is any houses on the field
+                    if (playersFields[propertyIndex].getHouseLevel() <= 0) {
+                        gui.showMessage(lib.text.get("NoHouses"));
+                    }
+                    // Sælger et hus
+                    else {
+                        playersFields[propertyIndex].minusOneLevel();
+                        player.addBal(playersFields[propertyIndex].getHousePrice());
+                        gui.updateBoard(playersFields, pLst);
+                    }
                 }
+                // choose new field
                 else if (playerNextStep.equals(lib.text.get("ChooseNewField"))) {
                     chooseField = true;
                 }

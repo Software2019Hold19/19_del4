@@ -93,3 +93,4 @@ Sure//Er du sikker på at di vil give op?
 ChooseNewField//Vælg nyt felt
 SellHouse//Sælg et hus
 ChooseAField//Vælg et felt
+NoHouses//Du har ikke flere huse på grunden

@@ -100,7 +100,8 @@ MessagePM//Hvad vil du, spiller %s, gerne gøre?
 Sell//Sælge
 Mortage//Pantsætning
 Trading//Bytte
-Roll//Rul med terningerne
+RollChoice//Rul med terningerne
+Back//Tilbage
 PM//Property Mangement
 GiveUp//Giv op
 Sure//Er du sikker?

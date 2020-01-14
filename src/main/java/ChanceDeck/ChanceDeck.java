@@ -12,8 +12,12 @@ public class ChanceDeck {
 
     ChanceCard deck[] = new ChanceCard[18];
     int cardCount = 0;
+    boolean testing;
+    int testNum;
 
-    public ChanceDeck(Translator lib, Boolean testing) {
+    public ChanceDeck(Translator lib, Boolean testing, Integer testDeckNum) {
+        this.testNum = testDeckNum;
+        this.testing = testing;
 
         deck[0] = new ChoiceMoveChanceCard(lib.text.get("ChanceCTxt3"), true);
         deck[1] = new ChoiceMoveChanceCard(lib.text.get("ChanceCTxt4"), false);
@@ -34,10 +38,12 @@ public class ChanceDeck {
         deck[16] = new TaxChanceCard(lib.text.get("ChanceCTxt16"),1000, 2500);
         deck[17] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt17"),15);
 
-
+        /*
         if (!testing) {
             shuffleDeck();
         }
+
+         */
     }
 
     public void shuffleDeck(){
@@ -66,12 +72,35 @@ public class ChanceDeck {
     }
 
     public ChanceCard draw() {
+
+        if(testNum > -1 && testNum < deck.length){
+            return deck[testNum];
+        }else{
+            if (!testing) {
+                shuffleDeck();
+            }
+
+            if (cardCount >= deck.length){ //resets count when all cards have been drawn
+                cardCount = 0;
+            }
+
+            return deck[cardCount++];//returns drawn card and THEN adds 1 to cardCount
+            //return deck[6];
+        }
+
+        /*
+        if (!testing) {
+            shuffleDeck();
+        }
+
         if (cardCount >= deck.length){ //resets count when all cards have been drawn
             cardCount = 0;
         }
 
         return deck[cardCount++];//returns drawn card and THEN adds 1 to cardCount
         //return deck[6];
+
+         */
     }
 
 

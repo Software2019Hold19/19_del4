@@ -15,7 +15,7 @@ public class Controller {
     GameBoard board = new GameBoard(lib);
     GUIController gui = new GUIController(lib, board);
     Player[] pLst;
-    ChanceDeck deck = new ChanceDeck(lib, testing);
+    ChanceDeck deck = new ChanceDeck(lib, testing, -1);
     Dice dice = new Dice();
     int playerCount;
 
@@ -173,10 +173,12 @@ public class Controller {
         int aliveCount = 0;
         for (Player p : pLst) {
             // if player has no money then die
-            if (p.getBal() == 0) {
+            if (p.getBal() == 0 && p.getAlive()) {
                 p.kill();
 
         //        gui.showMessage(String.format(lib.text.get("EndOfGame"), p.getName()));
+            }else if(p.getBal() == 0 && !p.getAlive()){
+
             }
             if (p.getAlive()){
                 aliveCount++;
@@ -259,8 +261,15 @@ public class Controller {
                         p.move(diceRoll[0] + diceRoll[1]);
                         gui.updatePlayers(pLst);
                         //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
-                        board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
-                        gui.updateBoard(board.getOwnableBoard(), pLst);
+                        if(manual && board.getBoard()[p.getFieldNumber()].getType() == "chance"){
+                            int val = Integer.parseInt(gui.getPlayerDropbown(lib.text.get("ChanceManualMsg"), "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"));
+                            deck = new ChanceDeck(lib, testing, val);
+                            board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                            gui.updateBoard(board.getOwnableBoard(), pLst);
+                        }else {
+                            board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                            gui.updateBoard(board.getOwnableBoard(), pLst);
+                        }
                     } else {
                         playAgain = false;
                         gui.showMessage(lib.text.get("JailTripleDouble"));
@@ -359,7 +368,7 @@ public class Controller {
 
     public void setTesting() {
         testing = !testing;
-        deck = new ChanceDeck(lib, testing);
+        deck = new ChanceDeck(lib, testing, -1);
         gui.setTesting(testing);
     }
 

@@ -19,7 +19,7 @@ public class StreetField extends OwnableField {
     private GameBoard boardTemp;
 
     public StreetField(String name, String subName, String desc, String type, String rentStr, String color, String key){
-        super(name, subName, desc, type, rentStr, key); // TODO: edit to price and rent
+        super(name, subName, desc, type, rentStr, key);
 
         /*
         String[] rentLst = rentStr.split(",");

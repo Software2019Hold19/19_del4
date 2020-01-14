@@ -1,6 +1,6 @@
 package GUI;
 
-public class Observer {
+abstract class Observer {
     public Observer(){
 
     }

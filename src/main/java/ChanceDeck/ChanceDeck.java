@@ -73,7 +73,7 @@ public class ChanceDeck {
 
     public ChanceCard draw() {
 
-        if(testNum > -1 && testNum < deck.length){
+        if(testNum > -1 && testNum < deck.length){  //needed for manual mode
             return deck[testNum];
         }else{
             if (!testing) {

@@ -265,6 +265,7 @@ public class Controller {
                         playAgain = false;
                         gui.showMessage(lib.text.get("JailTripleDouble"));
                         p.jail();
+                        gui.updatePlayers(pLst);
                     }
 
                 } else if (p.getJailTurn() < 4) {           // The player is jailed and gets a choice the next 3 turns

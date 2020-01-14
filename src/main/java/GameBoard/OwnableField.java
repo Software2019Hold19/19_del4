@@ -93,7 +93,13 @@ public abstract class OwnableField extends Field {
 
     protected void sellField(Player player) {
         this.owner = "";
-        player.addBal(this.price);
+        if (mortage) {
+            this.mortage = false;
+            player.addBal((int) (Math.round(this.price * 0.45)));
+        } else {
+            player.addBal(this.price);
+        }
+
     }
 
     @Override

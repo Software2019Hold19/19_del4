@@ -168,13 +168,15 @@ public class Controller {
     }
 
     // kills players that are on 0 money and checks how many are left.
-    private boolean isOnePlayerLeft(Translator lib) {    //dette var "hasPlayerNotWon" før
+    private boolean isOnePlayerLeft(Translator lib) throws InterruptedException {    //dette var "hasPlayerNotWon" før
 
         int aliveCount = 0;
         for (Player p : pLst) {
             // if player has no money then die
-            if (p.getBal() == 0) {
-                p.kill();
+            if (p.getBal() < 0) {
+                gui.showMessage(String.format(lib.text.get("TrialStart"), p.getName()));
+                while (deathTrial(p));
+
 
         //        gui.showMessage(String.format(lib.text.get("EndOfGame"), p.getName()));
             }
@@ -193,6 +195,22 @@ public class Controller {
         //return !isGameFinished;
     }
 
+    private Boolean deathTrial(Player p) throws InterruptedException {
+        managementStream(p, board, "Return");
+        if (!p.getAlive()){
+            return false;
+        } else if (p.getPlayersFields(board.getOwnableBoard()).length == 0 && p.getBal() < 0){
+            gui.showMessage(lib.text.get("TrialLose"));
+            p.kill(); //Kill Confirmed
+            return false;
+        } else if (p.getBal() < 0) {
+            gui.showMessage(lib.text.get("TrialTurn"));
+            return true;
+        } else {
+            gui.showMessage(lib.text.get("TrialWin"));
+            return false;
+        }
+    }
 
     private void playerTurn(Player p) throws InterruptedException {
 
@@ -227,7 +245,7 @@ public class Controller {
 
             if (!p.getIsJailed()) {  //If the player is not jailed
 
-                managementStream(p, board);
+                managementStream(p, board, "RollChoice");
                 if (p.getAlive()) {
 
                     Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
@@ -469,9 +487,9 @@ public class Controller {
         return 0;
     }
 
-    public void managementStream(Player p, GameBoard board) throws InterruptedException {
+    public void managementStream(Player p, GameBoard board, String end) throws InterruptedException {
         while(true) {
-            String inputBtn = gui.getPlayerBtn(String.format(lib.text.get("MessagePM"), p.getName()), lib.text.get("PM"), lib.text.get("RollChoice"), lib.text.get("GiveUp"));
+            String inputBtn = gui.getPlayerBtn(String.format(lib.text.get("MessagePM"), p.getName()), lib.text.get("PM"), lib.text.get(end), lib.text.get("GiveUp"));
             if (inputBtn.equals(lib.text.get("PM"))) {
                 if (p.getPlayersFields(board.getOwnableBoard()).length < 1){
                     gui.showMessage(lib.text.get("NoFields"));
@@ -490,7 +508,7 @@ public class Controller {
                     break;
                 }
             }
-            if (inputBtn.equals(lib.text.get("RollChoice"))){
+            if (inputBtn.equals(lib.text.get(end))){
                 break;
             }
             if (!p.getAlive()){

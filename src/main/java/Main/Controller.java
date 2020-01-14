@@ -513,9 +513,9 @@ public class Controller {
         return 0;
     }
 
-    public void managementStream(Player p, GameBoard board, String end) throws InterruptedException {
+    private void managementStream(Player p, GameBoard board, String end) throws InterruptedException {
         while(true) {
-            String inputBtn = gui.getPlayerBtn(String.format(lib.text.get("MessagePM"), p.getName()), lib.text.get("PM"), lib.text.get(end), lib.text.get("GiveUp"));
+            String inputBtn = gui.getPlayerBtn(String.format(lib.text.get("MessagePM"), p.getName()), lib.text.get("PM"), lib.text.get("GiveUp"), lib.text.get(end));
             if (inputBtn.equals(lib.text.get("PM"))) {
                 if (p.getPlayersFields(board.getOwnableBoard()).length < 1){
                     gui.showMessage(lib.text.get("NoFields"));
@@ -538,7 +538,7 @@ public class Controller {
                 break;
             }
             if (!p.getAlive()){
-                gui.showMessage(lib.text.get("PlayerGiveUp"));
+                gui.showMessage(String.format(lib.text.get("PlayerGiveUp"), p.getName()));
                 gui.updateBoard(board.getOwnableBoard(), pLst);
                 gui.updatePlayers(pLst);
                 break;

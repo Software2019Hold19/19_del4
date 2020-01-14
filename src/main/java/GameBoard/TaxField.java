@@ -13,8 +13,6 @@ public class TaxField extends Field {
     public TaxField(String name, String subName, String desc, String type, String key) {
 
         super(name, subName, desc, type, key);
-
-        // TODO Auto-generated constructor stub
     }
     @Override
     public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib) throws InterruptedException {

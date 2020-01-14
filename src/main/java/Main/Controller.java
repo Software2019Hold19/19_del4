@@ -182,6 +182,13 @@ public class Controller {
             }
             if (p.getAlive()){
                 aliveCount++;
+            } else {
+                if (p.getPlayersFields(board.getOwnableBoard()).length > 0) {
+                    for (OwnableField field : p.getPlayersFields(board.getOwnableBoard())) {
+                        gui.showMessage(String.format(lib.text.get("GiveUpAuction"), p.getName(), field.getName()));
+                        field.auction(p, pLst, gui, lib);
+                    }
+                }
             }
 
         //        gui.showMessage(String.format(lib.text.get("WinnerByDefault"), p.getName()));

@@ -99,6 +99,7 @@ TrialStart//Spiller %s har desværre ikke flere penge, så du må sælge noget h
 TrialTurn//Du har stadig ikke nok penge.. Du må sælge noget mere
 TrialWin//Du har nu nok penge til at fortsætte!
 TrialLose//Du har ikke flere egendomme og stadig ikke nok penge, så du er gået bankerot.
+GiveUpAuction//Spiller %s havde felt %s, så dette er nu på auktion
 Return//Retur
 MessagePM//Hvad vil du, spiller %s, gerne gøre?
 Sell//Sælge
@@ -106,7 +107,7 @@ Mortage//Pantsætning
 Trading//Bytte
 RollChoice//Rul med terningerne
 Back//Tilbage
-PM//Property Mangement
+PM//Administrer egendomme
 GiveUp//Giv op
 Sure//Er du sikker?
 ChooseNewField//Vælg nyt felt

@@ -21,12 +21,12 @@ public class ChanceDeck {
         deck[3] = new BankChanceCard(lib.text.get("ChanceCTxt2"), -2000);
         deck[4] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt5"), 0);
         deck[5] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt6"), 39);
-        deck[6] = new JailChanceCard("Jailed");
+        deck[6] = new JailChanceCard(lib.text.get("LandOnGoToJail"));
         deck[7] = new BankChanceCard(lib.text.get("ChanceCTxt1"),-2000);
         deck[8] = new BankChanceCard(lib.text.get("ChanceCTxt7"),-200);
         deck[9] = new GetOutOfJailFreeCard(lib.text.get("ChanceCTxt8"));
         deck[10] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt9"),24);
-        deck[11] = new PlayerMoveChanceCard(lib.text.get("ChanceCTxt9"));
+        deck[11] = new PlayerMoveChanceCard(lib.text.get("ChanceCTxt11"));
         deck[12] = new BankChanceCard(lib.text.get("ChanceCTxt12"), 40000);
         deck[13] = new BankChanceCard(lib.text.get("ChanceCTxt13"),-400);
         deck[14] = new BankChanceCard(lib.text.get("ChanceCTxt14"),4000);

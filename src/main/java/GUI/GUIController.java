@@ -22,6 +22,7 @@ public class GUIController {
     private FieldFactory fieldFac = new FieldFactory();
     private Boolean testing = false;
     private int testNames = 0;
+    private int testCount = -1;
 
     public GUIController(Translator _lib, GameBoard _board) {
         lib = _lib;
@@ -54,7 +55,7 @@ public class GUIController {
     public String getPlayerDropbown(java.lang.String msg, java.lang.String... buttons)
     {
         if (testing){
-            return buttons[0];
+            return buttons[testCount++ % buttons.length];
         }
         return gui.getUserSelection(msg, buttons);
     }
@@ -65,6 +66,14 @@ public class GUIController {
         }
         else {
             return gui.getUserButtonPressed(msg, buttons);
+        }
+    }
+
+    public int getPlayerInt(String msg, int price, int bal){
+        if (testing) {
+            return 0;
+        } else {
+            return gui.getUserInteger(msg, 0, bal - price);
         }
     }
 
@@ -89,7 +98,7 @@ public class GUIController {
         return fieldFac.boardSetup(board);
     }
 
-    public void updatePlayers(Player[] pLst){
+    public void updatePlayers(Player[] pLst) throws InterruptedException {
         pObs.update(gui, pLst);
     }
 
@@ -158,6 +167,7 @@ public class GUIController {
 
     public void setTesting(Boolean test){
         testing = test;
+        pObs.setTesting(test);
     }
 
 }

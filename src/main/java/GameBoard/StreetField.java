@@ -68,7 +68,7 @@ public class StreetField extends OwnableField {
     }
 
     @Override
-    public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
+    public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib) throws InterruptedException {
         this.boardTemp = board;
         //Import LandOnField from ownablefield class
         super.landOnField(player, pLst, deck, board, gui, lib);

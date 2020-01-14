@@ -6,13 +6,18 @@ public class Dice {
     private int[][] testingRolls = {{3,6},
                                     {1,1},
                                     {1,5},
-                                    {3,6},
-                                    {1,6},
-                                    {2,6},
-                                    {2,2},
+                                    {3,3},
+                                    {1,1},
+                                    {1,2},
+                                    {3,1},
+                                    {4,2},
+                                    {1,1},
                                     {6,6},
-                                    //{2,2},
-                                    {1,6},
+                                    {6,4},
+                                    {3,1},
+                                    {3,1},
+                                    {5,5},
+                                    {2,2},
                                     {2,3},
                                     {1,3},
                                     {5,6},
@@ -33,9 +38,10 @@ public class Dice {
         }
         if (testing) {
             return testingRolls[testIndex++];
+        } else {
+            int[] rolled = {die1.roll(), die2.roll()};
+            return rolled;
         }
-        int[] rolled = {die1.roll(), die2.roll()};
-        return rolled;
     }
 
 }

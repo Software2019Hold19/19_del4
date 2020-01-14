@@ -1,10 +1,5 @@
 package GameBoard;
 
-import ChanceDeck.ChanceDeck;
-import GUI.GUIController;
-import Main.Player;
-import Main.Translator;
-
 /**
  * FerryField
  */

@@ -513,7 +513,7 @@ public class Controller {
         return 0;
     }
 
-    public void managementStream(Player p, GameBoard board, String end) throws InterruptedException {
+    private void managementStream(Player p, GameBoard board, String end) throws InterruptedException {
         while(true) {
             String inputBtn = gui.getPlayerBtn(String.format(lib.text.get("MessagePM"), p.getName()), lib.text.get("PM"), lib.text.get("GiveUp"), lib.text.get(end));
             if (inputBtn.equals(lib.text.get("PM"))) {

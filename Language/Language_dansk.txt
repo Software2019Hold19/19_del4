@@ -40,8 +40,7 @@ InputName//Indtast Spiller %ds navn i det ledige felt.
 Turn//Det er %s's tur.
 Roll//Du har slået %d og %d så du rykker frem til %s.
 EndOfGame//%s har desværre ikke flere penge og spillet er derfor slut.
-WinnerByDefault//%s har fået over 100 penge og derfor slutter spillet.
-Winner//%s har flest penge og har vundet. Tillykke!
+Winner//%s er den sidste spiller tilbage og har vundet. Tillykke!
 SameName//Spillere kan ikke hedde det samme.
 NoName//Spillere skal have et navn!
 OwnField//Du ejer selv dette felt.
@@ -52,12 +51,12 @@ LandOnStart//Du lander på startfeltet og modtager 4000 kr.!
 LandOnJail//Du er på besøg i fængslet.
 LandOnFree//Du er landet på gratis parkering. Tag en velfortjent pause!
 LandOnGoToJail//Du er blevet fanget i at snyde og skal i fængsel! For at slippe ud skal du betale 1000 kr. eller slå 2 ens.
+ChanceMove1//Ryk 1
+ChanceNewCard//Træk kort
 ChanceCTxt1//De har kørt over for fuld stop betal 2000 kr.
 ChanceCTxt2//Du har anskaffet dig et nyt dæk betal 2000 kr.
 ChanceCTxt3//Flyt 1-5 felter
 ChanceCTxt4//Flyt 1 felt eller træk et nyt kort
-ChanceMove1//Ryk 1
-ChanceNewCard//Træk kort
 ChanceCTxt5//Flyt til start
 ChanceCTxt6//Flyt til Rådhuspladsen
 ChanceCTxt7//Betal 200 kr. for vogn vask
@@ -97,7 +96,7 @@ TurnOrderRoll//Du, Spiller %s, har slået %d
 TurnOrderRedo//Op til flere spillere har slået det samme, så der skal slå om igen.
 TurnOrderWinner//Spiller %s har slået højst og starter spillet.
 PlayerGiveUp//Spiller %s giver op
-MessagePM//Hvad vil du gerne gøre?
+MessagePM//Hvad vil du, spiller %s, gerne gøre?
 Sell//Sælge
 Mortage//Pantsætning
 Trading//Bytte

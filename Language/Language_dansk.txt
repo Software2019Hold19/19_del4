@@ -118,4 +118,5 @@ NoFields//Du ejer ingen felter
 MortgageProp//Du pantsætter denne ejendom
 ReopenProp//Du genåbner denne ejendom
 RollDoubleTurn//Da du slog to ens får du en tur til, %s, slå med terningerne!
+ChanceManualMsg//Vælg kort nummer:
 IsMortgage//Denne grund er pantsat.

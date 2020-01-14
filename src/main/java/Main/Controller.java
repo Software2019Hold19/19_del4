@@ -15,7 +15,7 @@ public class Controller {
     GameBoard board = new GameBoard(lib);
     GUIController gui = new GUIController(lib, board);
     Player[] pLst;
-    ChanceDeck deck = new ChanceDeck(lib, testing);
+    ChanceDeck deck = new ChanceDeck(lib, testing, -1);
     Dice dice = new Dice();
     int playerCount;
 
@@ -179,6 +179,8 @@ public class Controller {
 
 
         //        gui.showMessage(String.format(lib.text.get("EndOfGame"), p.getName()));
+            }else if(p.getBal() == 0 && !p.getAlive()){
+
             }
             if (p.getAlive()){
                 aliveCount++;
@@ -250,7 +252,7 @@ public class Controller {
             }
 
 
-            if (!p.getIsJailed()) {  //If the player is not jailed
+            if (p.getAlive()) {  //If the player is not jailed
 
                 managementStream(p, board, "RollChoice");
                 if (p.getAlive()) {
@@ -273,6 +275,9 @@ public class Controller {
                     if (diceRoll[0] == diceRoll[1]) {
                         cntDoubleDiceRoll++;
                         playAgain = true;
+                        if(cntDoubleDiceRoll == 3){
+                            playAgain = false;
+                        }
                     } else {
                         playAgain = false;
                     }
@@ -284,8 +289,15 @@ public class Controller {
                         p.move(diceRoll[0] + diceRoll[1]);
                         gui.updatePlayers(pLst);
                         //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
-                        board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
-                        gui.updateBoard(board.getOwnableBoard(), pLst);
+                        if(manual && board.getBoard()[p.getFieldNumber()].getType() == "chance"){
+                            int val = Integer.parseInt(gui.getPlayerDropbown(lib.text.get("ChanceManualMsg"), "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"));
+                            deck = new ChanceDeck(lib, testing, val);
+                            board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                            gui.updateBoard(board.getOwnableBoard(), pLst);
+                        }else {
+                            board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                            gui.updateBoard(board.getOwnableBoard(), pLst);
+                        }
                     } else {
                         playAgain = false;
                         gui.showMessage(lib.text.get("JailTripleDouble"));
@@ -293,7 +305,11 @@ public class Controller {
                         gui.updatePlayers(pLst);
                     }
 
-                } else if (p.getJailTurn() < 4) {           // The player is jailed and gets a choice the next 3 turns
+                }
+                if (p.getIsJailed() && p.getJailTurn() < 4) {           // The player is jailed and gets a choice the next 3 turns
+
+                    gui.updatePlayers(pLst);
+                    playAgain = false;
 
                     int caseCounter = 0;
                     String jailOptionStr = "";
@@ -385,7 +401,7 @@ public class Controller {
 
     public void setTesting() {
         testing = !testing;
-        deck = new ChanceDeck(lib, testing);
+        deck = new ChanceDeck(lib, testing, -1);
         gui.setTesting(testing);
     }
 

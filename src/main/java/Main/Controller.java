@@ -416,6 +416,7 @@ public class Controller {
                         /*playersFields[propertyIndex].minusOneLevel();
                         player.addBal(playersFields[propertyIndex].getHousePrice());*/
                     }
+                    gui.updateBoard(playersFields,pLst);
                 }
                 //Mortage a property
                 else if(playerNextStep.equals(lib.text.get("MortgageProp"))){

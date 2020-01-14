@@ -369,7 +369,7 @@ public class Controller {
                     propertyIndex = getOwnableFieldIndex(selectedFieldName, playersFields);
                     chooseField = false;
                 }
-
+                
                 if(!playersFields[propertyIndex].getMortage()) {
                     playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("MortgageProp"), lib.text.get("ChooseNewField"), lib.text.get("Roll"));
                 } else {
@@ -383,7 +383,7 @@ public class Controller {
                     if (playersFields[propertyIndex].getHouseLevel() <= 0) {
                         gui.showMessage(lib.text.get("NoHouses"));
                         String sellFieldAnwser = gui.getPlayerBtn("ER DU SIKKER PÅ AT SÆLGE FELTET", "JA", "NEJ");
-                        
+
                         if (sellFieldAnwser.equals("JA")) {
                             playersFields[propertyIndex].sellHouseAndHotel(player,playersFields);
                             chooseField = true;
@@ -421,7 +421,7 @@ public class Controller {
                 else if (playerNextStep.equals(lib.text.get("ChooseNewField"))) {
                     chooseField = true;
                 }
-        
+
             } while (!playerNextStep.equals(lib.text.get("Roll"))); // while not roll
     }
 

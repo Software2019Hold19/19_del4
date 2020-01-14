@@ -51,7 +51,7 @@ NotOwned//Du køber dette felt for %d penge, Tillykke!
 LandOnStart//Du lander på startfeltet og modtager 4000 kr.!
 LandOnJail//Du er på besøg i fængslet.
 LandOnFree//Du er landet på gratis parkering. Tag en velfortjent pause!
-LandOnGoToJail//Du er blevet fanget i at snyde og skal i fængsel! Betal din bøde på 1 penge og spil videre.
+LandOnGoToJail//Du er blevet fanget i at snyde og skal i fængsel! For at slippe ud skal du betale 1000 kr. eller slå 2 ens.
 ChanceCTxt1//De har kørt over for fuld stop betal 2000 kr.
 ChanceCTxt2//Du har anskaffet dig et nyt dæk betal 2000 kr.
 ChanceCTxt3//Flyt 1-5 felter
@@ -90,6 +90,7 @@ NoMoney//Du har ikke penge nok til købet
 JailRoll//Kast terninger
 JailPay//Betal 1000kr
 JailCard//Brug chance kort
+JailTripleDouble//Det er 3. gang i træk, at du slår to ens. Det må være snyd. Du skal i fængsel.
 PayedEscaped//%s bateler 1000 kr og er fri igen.
 TurnOrderStart//Vi slår om at starte spillet. Den der slår størst starter
 TurnOrderRoll//Du, Spiller %s, har slået %d

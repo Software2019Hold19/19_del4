@@ -27,6 +27,7 @@ public class ChanceField extends Field {
         if (card.drawn(player, board)){
             gui.updatePlayers(pLst);
             board.getBoard()[player.getFieldNumber()].landOnField(player, pLst, deck, board, gui, lib);
+            gui.updateBoard(board.getOwnableBoard(),pLst);
         }
 
 

@@ -389,7 +389,8 @@ public class Controller {
                     propertyIndex = getOwnableFieldIndex(selectedFieldName, playersFields);
                     chooseField = false;
                 }
-                
+
+                System.out.println(playersFields[propertyIndex].getMortage());
                 if(!playersFields[propertyIndex].getMortage()) {
                     playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("MortgageProp"), lib.text.get("ChooseNewField"), lib.text.get("Back"));
                 } else {

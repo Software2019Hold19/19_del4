@@ -81,8 +81,8 @@ public abstract class OwnableField extends Field {
         }
     }
 
-    public boolean setMortage(boolean set){
-        return mortage;
+    public void setMortage(boolean set){
+        mortage = set;
     }
 
     public boolean getMortage(){

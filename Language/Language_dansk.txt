@@ -31,17 +31,15 @@ Ferry1//D/S BORNHOLM 1866: 4000 kr.: Du er landet på D/S BORNHOLM 1866.: 500,10
 Ferry2//DAMPSKIBSSELSKABET A/S ØRESUND: 4000 kr.: Du er landet på DAMPSKIBSSELSKABET A/S ØRESUND.: 500,1000,2000,4000
 Ferry3//DAMPSKIBSSELSKABET Ø. K: 4000 kr.: Du er landet på DAMPSKIBSSELSKABET Ø. K.: 500,1000,2000,4000
 Ferry4//DAMPSKIBSSELSKABET. D. F. D. S.: 4000 kr.: Du er landet på DAMPSKIBSSELSKABET. D. F. D. S.: 500,1000,2000,4000
-Welcome//Velkommen til spillet. Spillet handler om at købe egendeomme før din modspiller. Den første der løber tør for penge har tabt.
+Welcome//Velkommen til spillet. Spillet handler om at købe egendeomme før din modspiller. Spillere der løber tør for penge har tabt.
 Tax1//Indkomstskat: 4000 kr. eller 10% : Du er landet på indkomstskat.
 Tax1Choice//Du skal vælge at betale enten 4000 kr. eller 10% af din formue i skat.
 Tax2//Ekstrordinærstatsskat: 2000 kr.: Du er landet på Ekstrordinærstatsskat. Du skal betale 2000 kr. i skat.
 NumberOfPlayers//Hvor mange spillere spiller?
 InputName//Indtast Spiller %ds navn i det ledige felt.
-Turn//Det er %s's tur kast med terningerne.
+Turn//Det er %s's tur.
 Roll//Du har slået %d og %d så du rykker frem til %s.
-EndOfGame//%s har desværre ikke flere penge og spillet er derfor slut.
-WinnerByDefault//%s har fået over 100 penge og derfor slutter spillet.
-Winner//%s har flest penge og har vundet. Tillykke!
+Winner//%s er den sidste spiller tilbage og har vundet. Tillykke!
 SameName//Spillere kan ikke hedde det samme.
 NoName//Spillere skal have et navn!
 OwnField//Du ejer selv dette felt.
@@ -51,13 +49,13 @@ NotOwned//Du køber dette felt for %d penge, Tillykke!
 LandOnStart//Du lander på startfeltet og modtager 4000 kr.!
 LandOnJail//Du er på besøg i fængslet.
 LandOnFree//Du er landet på gratis parkering. Tag en velfortjent pause!
-LandOnGoToJail//Du er blevet fanget i at snyde og skal i fængsel! Betal din bøde på 1 penge og spil videre.
+LandOnGoToJail//Du er blevet fanget i at snyde og skal i fængsel! For at slippe ud skal du betale 1000 kr. eller slå 2 ens.
+ChanceMove1//Ryk 1
+ChanceNewCard//Træk kort
 ChanceCTxt1//De har kørt over for fuld stop betal 2000 kr.
 ChanceCTxt2//Du har anskaffet dig et nyt dæk betal 2000 kr.
 ChanceCTxt3//Flyt 1-5 felter
 ChanceCTxt4//Flyt 1 felt eller træk et nyt kort
-ChanceMove1//Ryk 1
-ChanceNewCard//Træk kort
 ChanceCTxt5//Flyt til start
 ChanceCTxt6//Flyt til Rådhuspladsen
 ChanceCTxt7//Betal 200 kr. for vogn vask
@@ -90,9 +88,35 @@ NoMoney//Du har ikke penge nok til købet
 JailRoll//Kast terninger
 JailPay//Betal 1000kr
 JailCard//Brug chance kort
+JailTripleDouble//Det er 3. gang i træk, at du slår to ens. Det må være snyd. Du skal i fængsel.
 PayedEscaped//%s bateler 1000 kr og er fri igen.
 TurnOrderStart//Vi slår om at starte spillet. Den der slår størst starter
 TurnOrderRoll//Du, Spiller %s, har slået %d
 TurnOrderRedo//Op til flere spillere har slået det samme, så der skal slå om igen.
 TurnOrderWinner//Spiller %s har slået højst og starter spillet.
+PlayerGiveUp//Spiller %s giver op
+TrialStart//Spiller %s har desværre ikke flere penge, så du må sælge noget hvis du kan.
+TrialTurn//Du har stadig ikke nok penge.. Du må sælge noget mere
+TrialWin//Du har nu nok penge til at fortsætte!
+TrialLose//Du har ikke flere egendomme og stadig ikke nok penge, så du er gået bankerot.
+GiveUpAuction//Spiller %s havde felt %s, så dette er nu på auktion
+Return//Retur
+MessagePM//Hvad vil du, spiller %s, gerne gøre?
+Sell//Sælge
+Mortage//Pantsætning
+Trading//Bytte
+RollChoice//Rul med terningerne
+Back//Tilbage
+PM//Administrer ejendomme
+GiveUp//Giv op
+Sure//Er du sikker?
+ChooseNewField//Vælg nyt felt
+SellHouse//Sælg et hus
+ChooseAField//Vælg et felt
+NoHouses//Du har ikke flere huse på grunden, men du kan sælge grunden istedet
+NoFields//Du ejer ingen felter
+MortgageProp//Du pantsætter denne ejendom
+ReopenProp//Du genåbner denne ejendom
 RollDoubleTurn//Da du slog to ens får du en tur til, %s, slå med terningerne!
+ChanceManualMsg//Vælg kort nummer:
+IsMortgage//Denne grund er pantsat.

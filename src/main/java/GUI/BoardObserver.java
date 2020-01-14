@@ -40,15 +40,25 @@ public class BoardObserver extends Observer {
                     }
                 }
                 if (!owner.equals("")) {
-                    guiFields[i].setDescription(fields[i].getDesc() + "\nOwner: " + owner);
+                    /*for (int j = 0; j < guiFields.length; j++) {
+                        if (guiFields[j].getTitle().equals(fields[i].getName())){
+                            guiFields[j].setDescription(fields[i].getDesc() + "\nOwner: " + owner);
+                        }
+                    }*/
                     for (GUI_Player guiP : guiPLst) {
                         if (guiP.getName().equals(owner)) {
                             Color color = guiP.getCar().getPrimaryColor();
                             ownable.get(key).setBorder(color);
                             ownable.get(key).setOwnerName(owner); //test
                             ownable.get(key).setRent(Integer.toString(fields[i].getRent(board)));
+                            break;
                         }
+
                     }
+                } else {
+                    //guiFields[i].setDescription(fields[i].getDesc());
+                    ownable.get(key).setBorder(Color.BLACK);
+                    ownable.get(key).setOwnerName(""); //test
                 }
             }
         }

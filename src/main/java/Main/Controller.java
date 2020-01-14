@@ -363,7 +363,7 @@ public class Controller {
         gui.setTesting(testing);
     }
 
-    private void propertyMangement(Player player, GameBoard board) {
+    private void propertyMangement(Player player, GameBoard board) throws InterruptedException {
         
             // Choose a field
             // Sell house or choose a new field
@@ -375,6 +375,8 @@ public class Controller {
         
             do {
                 OwnableField[] playersFields = player.getPlayersFields(board.getOwnableBoard());
+                gui.updateBoard(playersFields,pLst);
+                gui.updatePlayers(pLst);
                 
                 if (chooseField) {
                     String fieldNames[] = new String[playersFields.length];
@@ -389,7 +391,8 @@ public class Controller {
                     propertyIndex = getOwnableFieldIndex(selectedFieldName, playersFields);
                     chooseField = false;
                 }
-                
+
+                System.out.println(playersFields[propertyIndex].getMortage());
                 if(!playersFields[propertyIndex].getMortage()) {
                     playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("MortgageProp"), lib.text.get("ChooseNewField"), lib.text.get("Back"));
                 } else {
@@ -416,7 +419,6 @@ public class Controller {
                         /*playersFields[propertyIndex].minusOneLevel();
                         player.addBal(playersFields[propertyIndex].getHousePrice());*/
                     }
-                    gui.updateBoard(playersFields,pLst);
                 }
                 //Mortage a property
                 else if(playerNextStep.equals(lib.text.get("MortgageProp"))){

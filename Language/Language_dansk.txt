@@ -43,18 +43,21 @@ EndOfGame//%s har desværre ikke flere penge og spillet er derfor slut.
 WinnerByDefault//%s har fået over 100 penge og derfor slutter spillet.
 Winner//%s har flest penge og har vundet. Tillykke!
 SameName//Spillere kan ikke hedde det samme.
+NoName//Spillere skal have et navn!
 OwnField//Du ejer selv dette felt.
-OthersField//Dette felt er eget af %s og du skal betale dem %d penge!
-OthersFieldJailed//Dette felt er eget af %s men spiller er i fængsel.
+OthersField//Dette felt er eget af %s og du skal betale dem %d kroner!
+OthersFieldJailed//Dette felt er eget af %s men spiller er i fængsel. Ingen betaling.
 NotOwned//Du køber dette felt for %d penge, Tillykke!
 LandOnStart//Du lander på startfeltet og modtager 4000 kr.!
 LandOnJail//Du er på besøg i fængslet.
 LandOnFree//Du er landet på gratis parkering. Tag en velfortjent pause!
-LandOnGoToJail//Du er blevet fanget i at snyde og skal i fængsel! Betal din bøde på 1 penge og spil videre.
+LandOnGoToJail//Du er blevet fanget i at snyde og skal i fængsel! For at slippe ud skal du betale 1000 kr. eller slå 2 ens.
 ChanceCTxt1//De har kørt over for fuld stop betal 2000 kr.
 ChanceCTxt2//Du har anskaffet dig et nyt dæk betal 2000 kr.
 ChanceCTxt3//Flyt 1-5 felter
 ChanceCTxt4//Flyt 1 felt eller træk et nyt kort
+ChanceMove1//Ryk 1
+ChanceNewCard//Træk kort
 ChanceCTxt5//Flyt til start
 ChanceCTxt6//Flyt til Rådhuspladsen
 ChanceCTxt7//Betal 200 kr. for vogn vask
@@ -73,11 +76,21 @@ Buyhouse//Vil du købe et hus for
 Buyhotel//Vil du købe et hotel for
 Yes//Ja
 No//Nej
+AuctionStart//Spiller %s vil ikke købe feltet, så det går på auktion
+AuctionTurn//Feltet står til at koste %d. Vil spiller %s være med eller udgå?
+AuctionYesBtn//Auktion!
+AuctionNoBtn//Udgå
+AuctionAddMoney//Feltet koster allerede %d. Indtast det antal kroner Spiller %s vil tilføje til sit bud
+AuctionOut//Spiller %s stopper i aktionen
+AuctionNoMoney// Spiller %s har ikke nok penge til at deltage i aktionen.
+AuctionNext//Spiller %s forstører sit bud og aktionen fortsætter
+AuctionWin//Spiller %s er den sidste tilbage i auktionen og vinder derfor feltet for %dkr
 YourOptionsJail//Du er i fængsel, hvad vil du gøre?
 NoMoney//Du har ikke penge nok til købet
 JailRoll//Kast terninger
 JailPay//Betal 1000kr
 JailCard//Brug chance kort
+JailTripleDouble//Det er 3. gang i træk, at du slår to ens. Det må være snyd. Du skal i fængsel.
 PayedEscaped//%s bateler 1000 kr og er fri igen.
 TurnOrderStart//Vi slår om at starte spillet. Den der slår størst starter
 TurnOrderRoll//Du, Spiller %s, har slået %d
@@ -91,11 +104,12 @@ Trading//Bytte
 Roll//Rul med terningerne
 PM//Property Mangement
 GiveUp//Giv op
-Sure//Er du sikker på at di vil give op?
+Sure//Er du sikker?
 ChooseNewField//Vælg nyt felt
 SellHouse//Sælg et hus
 ChooseAField//Vælg et felt
-NoHouses//Du har ikke flere huse på grunden
+NoHouses//Du har ikke flere huse på grunden, men du kan sælge grunden istedet
 NoFields//Du ejer ingen felter
 MortgageProp//Du pantsætter denne ejendom
 ReopenProp//Du genåbner denne ejendom
+RollDoubleTurn//Da du slog to ens får du en tur til, %s, slå med terningerne!

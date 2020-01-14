@@ -9,15 +9,12 @@ public class Player {
     String name;
     private Account acc = new Account();
     int fieldNumber = 0;
+    int oldFieldNumber = 0;
     boolean alive = true;
     int jailCount = 0;
     boolean isJailed = false;
     boolean jailCard = false;
     int lastRollVal = 0;
-
-    public Player (String name){
-        this.name = name;
-    }
 
     public Player (String name, int Bal){
         this.name = name;
@@ -51,6 +48,17 @@ public class Player {
 
     public int getFieldNumber() {
         return fieldNumber;
+    }
+
+    public int getOldFieldNumber() {
+        return oldFieldNumber;
+    }
+
+    public void step() {
+        oldFieldNumber++;
+        if (oldFieldNumber >= 40) {
+            oldFieldNumber = 0;
+        }
     }
 
 

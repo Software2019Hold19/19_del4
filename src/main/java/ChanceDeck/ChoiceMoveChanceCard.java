@@ -48,16 +48,18 @@ public class ChoiceMoveChanceCard extends MoveChanceCard {
     public void guiHandler(GUIController gui, Translator lib){
         super.guiHandler(gui, lib);
         
-        if (moveUpToFiveFields)
-        {
-
+        if (moveUpToFiveFields){
             moveFields = gui.getPlayerDropbown(lib.text.get("ChanceCTxt3"), "1", "2", "3", "4", "5");
-            
         }
-        else
-        {
+        else {
             // move 1 fields or draw new card
-            moveFields = gui.getPlayerDropbown(lib.text.get("ChanceCTxt4"), "0", "1");
+            moveFields = gui.getPlayerDropbown(lib.text.get("ChanceCTxt4"), lib.text.get("ChanceMove1"), lib.text.get("ChanceNewCard"));
+            if(moveFields.equals(lib.text.get("ChanceNewCard"))){
+                moveFields = "0";
+            }
+            else if(moveFields.equals(lib.text.get("ChanceMove1"))){
+                moveFields = "1";
+            }
             
         }
 

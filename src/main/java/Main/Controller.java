@@ -25,7 +25,7 @@ public class Controller {
     }
 
     // Init players and language
-    public void startGame() throws IOException {
+    public void startGame() throws IOException, InterruptedException {
         String selectedL = gui.getPlayerDropbown("Vælg Sprog / Choose Language", "Dansk");
         lib.getLanguage(selectedL);
         gui.updateLanguage(lib);
@@ -38,25 +38,35 @@ public class Controller {
         playerCount = Integer.parseInt(playerCountstr);
         int startBal = 30000;
 
+        //gui.getPlayerDropbown("Test", new String[]{"test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2","test1", "test2"});
+        //System.out.println(gui.getPlayerInt("TestInt"));
         //name input - repeat if names are the same
         while (true) {
             boolean sameName = false;
+            boolean noName = false;
             pLst = new Player[playerCount];
             for (int i = 0; i < playerCount; i++) {
                 Player p = new Player(gui.getUserString(String.format(lib.text.get("InputName"), i + 1)), startBal);
+                System.out.println(p.getName());
+                if (p.getName().equals("")) {
+                    noName = true;
+                }
                 pLst[i] = p;
             }
-
-            for (int i = 0; i < pLst.length; i++) {
-                for (int j = i + 1; j < pLst.length; j++) {
-                    if (pLst[i].getName().equals(pLst[j].getName())) {
-                        sameName = true;
-                        gui.showMessage(lib.text.get("SameName"));
+            if (!noName) {
+                for (int i = 0; i < pLst.length; i++) {
+                    for (int j = i + 1; j < pLst.length; j++) {
+                        if (pLst[i].getName().equals(pLst[j].getName())) {
+                            sameName = true;
+                            gui.showMessage(lib.text.get("SameName"));
+                        }
                     }
                 }
+            } else {
+                gui.showMessage(lib.text.get("NoName"));
             }
 
-            if (!sameName) {
+            if (!sameName && !noName) {
                 break;
             }
 
@@ -74,11 +84,11 @@ public class Controller {
         playGame();
     }
 
-    private int turnOrder(Player[] pLst){
+    private String turnOrder(Player[] pLst){
         int maximum = 0;
         Player[] starter = new Player[0];
 
-        int res = 0;
+        String res = "";
 
         for (int i = 0; i < pLst.length; i++){
             int[] roll = dice.roll(testing);
@@ -104,21 +114,23 @@ public class Controller {
 
         if (starter.length > 1) {
             gui.showMessage(lib.text.get("TurnOrderRedo"));
-            turnOrder(starter);
+            res = turnOrder(starter);
         } else {
             gui.showMessage(String.format(lib.text.get("TurnOrderWinner"), starter[0].getName()));
-            for (int j = 0; j < pLst.length; j++) {
-                if (pLst[j].getName().equals(starter[0].getName())){
-                    res = j;
-                }
-            }
+            res = starter[0].getName();
         }
         return res;
     }
 
-    private void playGame() {
+    private void playGame() throws InterruptedException {
         gui.showMessage(lib.text.get("TurnOrderStart"));
-        int turnCount = turnOrder(pLst);
+        String starterName = turnOrder(pLst);
+        int turnCount = 0;
+        for (int i = 0; i < pLst.length; i++){
+            if (pLst[i].getName().equals(starterName)) {
+                turnCount = i;
+            }
+        }
         int turnCountTotal = 0;
 
         while (!isOnePlayerLeft(lib)) {
@@ -130,8 +142,6 @@ public class Controller {
                 if(turnCount >= playerCount)
                     turnCount = 0;
             }
-
-            gui.showMessage(String.format(lib.text.get("Turn"), pLst[turnCount].getName()));
 
             playerTurn(pLst[turnCount]);
 
@@ -184,7 +194,7 @@ public class Controller {
     }
 
 
-    private void playerTurn(Player p) {
+    private void playerTurn(Player p) throws InterruptedException {
         
         int cntDoubleDiceRoll = 0;
         boolean playAgain = false;
@@ -207,8 +217,14 @@ public class Controller {
 
         }
         */
+        gui.showMessage(String.format(lib.text.get("Turn"), p.getName()));
                 
         do {
+            if(playAgain){
+                gui.showMessage(String.format(lib.text.get("RollDoubleTurn"), p.getName()));
+            }
+
+
             if(!p.getIsJailed()) {  //If the player is not jailed
 
                 managementStream(p, board);
@@ -238,18 +254,20 @@ public class Controller {
 
                     System.out.println(p.getName() + " tur nr: " + cntDoubleDiceRoll);
 
-                    if (cntDoubleDiceRoll != 3) {
-                        p.move(diceRoll[0] + diceRoll[1]);
+      
 
-                        gui.updatePlayers(pLst);
-                        //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
-                        board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
-                    } else {
-                        playAgain = false;
-                        p.jail();
-                    }
 
+                if (cntDoubleDiceRoll != 3) {
+                    p.move(diceRoll[0] + diceRoll[1]);
                     gui.updatePlayers(pLst);
+                    //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
+                    board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                    gui.updateBoard(board.getOwnableBoard(), pLst);
+                }
+                else {
+                    playAgain = false;
+                    gui.showMessage(lib.text.get("JailTripleDouble"));
+                    p.jail();
                 }
 
             } else if(p.getJailTurn() < 4){           // The player is jailed and gets a choice the next 3 turns
@@ -334,9 +352,9 @@ public class Controller {
                     default:
                         throw new IllegalStateException("Unexpected value: " + jailOptionStr);
                 }
-        } 
-    }while (playAgain);
-}
+            }
+        }while (playAgain);
+    }
 
     public void setTesting() {
         testing = !testing;
@@ -351,11 +369,12 @@ public class Controller {
             // Roll
             String playerNextStep;
             int propertyIndex = 0;
-            OwnableField[] playersFields = player.getPlayersFields(board.getOwnableBoard());
+           
             boolean chooseField = true;
         
             do {
-        
+                OwnableField[] playersFields = player.getPlayersFields(board.getOwnableBoard());
+                
                 if (chooseField) {
                     String fieldNames[] = new String[playersFields.length];
 
@@ -382,9 +401,9 @@ public class Controller {
                     // checks if there is any houses on the field
                     if (playersFields[propertyIndex].getHouseLevel() <= 0) {
                         gui.showMessage(lib.text.get("NoHouses"));
-                        String sellFieldAnwser = gui.getPlayerBtn("ER DU SIKKER PÅ AT SÆLGE FELTET", "JA", "NEJ");
-
-                        if (sellFieldAnwser.equals("JA")) {
+                        String sellFieldAnwser = gui.getPlayerBtn(lib.text.get("Sure"), lib.text.get("Yes"), lib.text.get("No"));
+                        
+                        if (sellFieldAnwser.equals(lib.text.get("Yes"))) {
                             playersFields[propertyIndex].sellHouseAndHotel(player,playersFields);
                             chooseField = true;
                         }

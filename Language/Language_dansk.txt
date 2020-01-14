@@ -107,7 +107,7 @@ Mortage//Pantsætning
 Trading//Bytte
 RollChoice//Rul med terningerne
 Back//Tilbage
-PM//Administrer egendomme
+PM//Administrer ejendomme
 GiveUp//Giv op
 Sure//Er du sikker?
 ChooseNewField//Vælg nyt felt

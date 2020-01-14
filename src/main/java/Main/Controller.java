@@ -450,7 +450,7 @@ public class Controller {
                     // checks if there is any houses on the field
                     if (playersFields[propertyIndex].getHouseLevel() <= 0) {
                         gui.showMessage(lib.text.get("NoHouses"));
-                        String sellFieldAnwser = gui.getPlayerBtn(lib.text.get("Sure"), lib.text.get("Yes"), lib.text.get("No"));
+                        String sellFieldAnwser = gui.getPlayerBtn(lib.text.get("Sure"), lib.text.get("No"), lib.text.get("Yes"));
                         
                         if (sellFieldAnwser.equals(lib.text.get("Yes"))) {
                             playersFields[propertyIndex].sellHouseAndHotel(player,playersFields);
@@ -525,7 +525,7 @@ public class Controller {
                 }
             }
             while (inputBtn.equals(lib.text.get("GiveUp"))) {
-                String answer = gui.getPlayerBtn(lib.text.get("Sure"), lib.text.get("Yes"), lib.text.get("No"));
+                String answer = gui.getPlayerBtn(lib.text.get("Sure"), lib.text.get("No"), lib.text.get("Yes"));
                 if(answer.equals(lib.text.get("Yes"))){
                     p.kill();
                     break;

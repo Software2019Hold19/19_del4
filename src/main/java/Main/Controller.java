@@ -289,7 +289,10 @@ public class Controller {
                         p.move(diceRoll[0] + diceRoll[1]);
                         gui.updatePlayers(pLst);
                         //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
-                        if(manual && board.getBoard()[p.getFieldNumber()].getType() == "chance"){
+
+                                //If manual is true, then manually draw specific cards
+                                //else run as normal
+                        if(manual && board.getBoard()[p.getFieldNumber()].getType() == "chance"){ // if manual=true and the field is a chance field
                             int val = Integer.parseInt(gui.getPlayerDropbown(lib.text.get("ChanceManualMsg"), "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"));
                             deck = new ChanceDeck(lib, testing, val);
                             board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);

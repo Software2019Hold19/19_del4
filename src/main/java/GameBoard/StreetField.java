@@ -1,6 +1,7 @@
 package GameBoard;
 import ChanceDeck.ChanceDeck;
 import GUI.GUIController;
+import Main.Controller;
 import Main.Player;
 import Main.Translator;
 
@@ -9,7 +10,7 @@ import java.util.HashMap;
 public class StreetField extends OwnableField {
 
     private String color;
-
+    private GUIController gui;
     private String key; // use in hashmap
 
     HashMap<String, StreetField> pair = new HashMap<String, StreetField>();

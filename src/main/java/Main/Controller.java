@@ -391,9 +391,9 @@ public class Controller {
                 }
                 
                 if(!playersFields[propertyIndex].getMortage()) {
-                    playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("MortgageProp"), lib.text.get("ChooseNewField"), lib.text.get("Roll"));
+                    playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("MortgageProp"), lib.text.get("ChooseNewField"), lib.text.get("Back"));
                 } else {
-                    playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("ReopenProp"), lib.text.get("ChooseNewField"), lib.text.get("Roll"));
+                    playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("ReopenProp"), lib.text.get("ChooseNewField"), lib.text.get("Back"));
                 }
 
 
@@ -442,7 +442,7 @@ public class Controller {
                     chooseField = true;
                 }
 
-            } while (!playerNextStep.equals(lib.text.get("Roll"))); // while not roll
+            } while (!playerNextStep.equals(lib.text.get("Back"))); // while not roll
     }
 
     public int getOwnableFieldIndex(String name, OwnableField[] fields) {
@@ -467,7 +467,7 @@ public class Controller {
 
     public void managementStream(Player p, GameBoard board) throws InterruptedException {
         while(true) {
-            String inputBtn = gui.getPlayerBtn(String.format(lib.text.get("MessagePM"), p.getName()), lib.text.get("PM"), lib.text.get("Roll"), lib.text.get("GiveUp"));
+            String inputBtn = gui.getPlayerBtn(String.format(lib.text.get("MessagePM"), p.getName()), lib.text.get("PM"), lib.text.get("RollChoice"), lib.text.get("GiveUp"));
             if (inputBtn.equals(lib.text.get("PM"))) {
                 if (p.getPlayersFields(board.getOwnableBoard()).length < 1){
                     gui.showMessage(lib.text.get("NoFields"));
@@ -486,7 +486,7 @@ public class Controller {
                     break;
                 }
             }
-            if (inputBtn.equals(lib.text.get("Roll"))){
+            if (inputBtn.equals(lib.text.get("RollChoice"))){
                 break;
             }
             if (!p.getAlive()){

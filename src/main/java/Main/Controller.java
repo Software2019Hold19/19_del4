@@ -227,12 +227,12 @@ public class Controller {
             }
 
 
-            if (!p.getIsJailed()) {  //If the player is not jailed
+            if (p.getAlive()) {  //If the player is not jailed
 
                 managementStream(p, board);
-                if (p.getAlive()) {
+                if (!p.getIsJailed()) {
 
-                    Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
+                    Boolean manual = true; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
                     int[] diceRoll = dice.roll(testing);
                     if (manual) {
                         int val = Integer.parseInt(gui.getPlayerDropbown("__MANUEL__ Dice", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2"));
@@ -250,6 +250,9 @@ public class Controller {
                     if (diceRoll[0] == diceRoll[1]) {
                         cntDoubleDiceRoll++;
                         playAgain = true;
+                        if(cntDoubleDiceRoll == 3){
+                            playAgain = false;
+                        }
                     } else {
                         playAgain = false;
                     }
@@ -274,9 +277,14 @@ public class Controller {
                         playAgain = false;
                         gui.showMessage(lib.text.get("JailTripleDouble"));
                         p.jail();
+                        gui.updatePlayers(pLst);
                     }
 
-                } else if (p.getJailTurn() < 4) {           // The player is jailed and gets a choice the next 3 turns
+                }
+                if (p.getIsJailed() && p.getJailTurn() < 4) {           // The player is jailed and gets a choice the next 3 turns
+
+                    gui.updatePlayers(pLst);
+                    playAgain = false;
 
                     int caseCounter = 0;
                     String jailOptionStr = "";

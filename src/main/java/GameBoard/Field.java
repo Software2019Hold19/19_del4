@@ -2,6 +2,7 @@ package GameBoard;
 
 import ChanceDeck.ChanceDeck;
 import GUI.GUIController;
+import GUI.PlayerObserver;
 import Main.Player;
 import Main.Translator;
 
@@ -58,6 +59,7 @@ public abstract class Field {
 
     public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib) throws InterruptedException {
         guiHandler(gui, lib);
+        gui.updatePlayers(pLst);
     }
 
     public void guiHandler(GUIController gui, Translator lib){

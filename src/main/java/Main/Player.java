@@ -6,15 +6,15 @@ import GameBoard.GameBoard;
 import GameBoard.OwnableField;
 
 public class Player {
-    String name;
+    private String name;
     private Account acc = new Account();
-    int fieldNumber = 0;
-    int oldFieldNumber = 0;
-    boolean alive = true;
-    int jailCount = 0;
-    boolean isJailed = false;
-    boolean jailCard = false;
-    int lastRollVal = 0;
+    private int fieldNumber = 0;
+    private int oldFieldNumber = 0;
+    private boolean alive = true;
+    private int jailCount = 0;
+    private boolean isJailed = false;
+    private boolean jailCard = false;
+    private int lastRollVal = 0;
 
     public Player (String name, int Bal){
         this.name = name;
@@ -106,7 +106,7 @@ public class Player {
         jailCard = set;
     }
 
-    public OwnableField[] playersFields(OwnableField[] fields){
+    public OwnableField[] getPlayersFields(OwnableField[] fields){
 
         OwnableField[] fieldLst = new OwnableField[0];
 
@@ -117,13 +117,11 @@ public class Player {
                 for (int j = 0; j < fieldLst.length; j++) {
                     tmpLst[j] = fieldLst[j];
                 }
-                
+
                 tmpLst[tmpLst.length - 1] = fields[i];
                 fieldLst = tmpLst;
             }
         }
-
         return fieldLst;
     }
-
 }

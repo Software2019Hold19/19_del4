@@ -1,6 +1,7 @@
 package GameBoard;
 import ChanceDeck.ChanceDeck;
 import GUI.GUIController;
+import Main.Controller;
 import Main.Player;
 import Main.Translator;
 
@@ -9,7 +10,7 @@ import java.util.HashMap;
 public class StreetField extends OwnableField {
 
     private String color;
-
+    private GUIController gui;
     private String key; // use in hashmap
 
     HashMap<String, StreetField> pair = new HashMap<String, StreetField>();
@@ -34,7 +35,7 @@ public class StreetField extends OwnableField {
     @Override
     public int getRent(GameBoard board) {
         // if the player owns all fields of same color and no houses 2x rent
-        if (level == 0 && ownsSameColorFields(boardTemp))
+        if (level == 0 && ownsSameColorFields(board))
         {
             return 2*rent[level];
         }
@@ -81,6 +82,7 @@ public class StreetField extends OwnableField {
                 gui.updatePlayers(pLst);
             }
         }
+        gui.updatePlayers(pLst);
     }
     
     // only to use when adding a house
@@ -115,6 +117,55 @@ public class StreetField extends OwnableField {
         else { // add one to the lowest level
             board.getOwnableBoard()[getLowestLevelFieldIndex(board.getOwnableBoard())].addOneLevel();
         }
+    }
+
+    @Override
+    public void sellHouseAndHotel(Player player, OwnableField[] playersFields) {
+        int[] listOfHouseLevel;
+        if (this.color.equals("lightblue") || this.color.equals("brown")) {
+            listOfHouseLevel = new int[2];
+        }
+        else {
+            listOfHouseLevel = new int[3];
+        }
+
+        int fieldCnt = 0;
+        for (OwnableField field : playersFields) {
+            if(field.getColor().equals(this.getColor())) {
+               listOfHouseLevel[fieldCnt] = field.getHouseLevel();
+               fieldCnt++;
+            }
+        }
+
+        // chech if same level
+        if (isFieldsSameLevel(listOfHouseLevel) && this.level == 0) {
+            // sell field
+            sellField(player);
+        }
+        else if (isFieldsSameLevel(listOfHouseLevel)) {
+            playersFields[getHighestPricFieldIndex(playersFields)].minusOneLevel();
+            player.addBal(getHousePrice());
+        }
+        else { // minus one to the highest level
+            playersFields[getHighestLevelFieldIndex(playersFields)].minusOneLevel();
+            player.addBal(getHousePrice());
+        }
+    }
+
+    private int getHighestLevelFieldIndex(OwnableField[] fields) {
+        int index = 100;
+        for (int i = 0; i < fields.length; i++) {
+            if (fields[i].getColor().equals(this.color)){
+                if (index == 100) {
+                    index = i;
+                }
+                if (fields[i].getHouseLevel() >= fields[index].getHouseLevel()) {
+                    index = i;
+                }
+            }
+        }
+
+        return index;
     }
 
     private int getLowestLevelFieldIndex(OwnableField[] fields) {
@@ -205,8 +256,8 @@ public class StreetField extends OwnableField {
 
 */
 
-
-    private int getHousePrice() {
+    @Override
+    public int getHousePrice() {
         if (this.price < 2000) {
             return 1000;
         }

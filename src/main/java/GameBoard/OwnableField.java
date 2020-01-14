@@ -12,6 +12,7 @@ public abstract class OwnableField extends Field {
 
     protected int price;
     protected String owner = "";
+    protected boolean mortage;
     protected int auctionPrice;
 
     public OwnableField(String name, String subName, String desc, String type, String rentStr, String key) {
@@ -37,7 +38,11 @@ public abstract class OwnableField extends Field {
     public void landOnField (Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib) throws InterruptedException {
         super.landOnField(player, pLst, deck, board, gui, lib);
 
-        if (!this.owner.equals("") && !(this.owner.equals(player.getName()))){
+
+        if(getMortage()){
+            gui.showMessage(lib.text.get("IsMortgage"));
+        }
+        else if (!this.owner.equals("") && !(this.owner.equals(player.getName()))){
             payRent(player, pLst, board, lib, gui);
         }
         else if (this.owner.equals("")) {
@@ -47,7 +52,9 @@ public abstract class OwnableField extends Field {
             gui.showMessage(lib.text.get("OwnField"));
         }
 
+        gui.updatePlayers(pLst);
     }
+
 
     private void payRent(Player player, Player[] pLst, GameBoard board, Translator lib, GUIController gui){
         Player tempPlayer = new Player("tmp", 0);
@@ -74,6 +81,25 @@ public abstract class OwnableField extends Field {
         else {          //if player is jailed
             gui.showMessage(String.format(lib.text.get("OthersFieldJailed"), tempPlayer.getName()));
         }
+    }
+
+    public void setMortage(boolean set){
+        mortage = set;
+    }
+
+    public boolean getMortage(){
+        return mortage;
+    }
+
+    protected void sellField(Player player) {
+        this.owner = "";
+        if (mortage) {
+            this.mortage = false;
+            player.addBal((int) (Math.round(this.price * 0.45)));
+        } else {
+            player.addBal(this.price);
+        }
+
     }
 
     @Override
@@ -107,11 +133,23 @@ public abstract class OwnableField extends Field {
         this.level++;        
     }
 
+    public void minusOneLevel() {
+        if (this.level > 0)
+            this.level--;
+    }
+
     public int getHouseLevel() {
         return this.level;
     }
 
+
+    public int getHousePrice() {
+        return 0;
+    }
+
+
     public void choiceToBuy(Player player, GUIController gui, Translator lib, Player[] pLst){
+
         //shows dropdown with yes/no button to buy
         String buyChoice = gui.getPlayerDropbown(String.format(lib.text.get("ChoiceToBuy"), this.price), lib.text.get("Yes"), lib.text.get("No"));
         if(buyChoice.equals(lib.text.get("Yes"))) {
@@ -167,6 +205,11 @@ public abstract class OwnableField extends Field {
         this.auctionPrice = price / 2;
 
     }
+
+    public void sellHouseAndHotel(Player player, OwnableField[] playersFields){
+        sellField(player);
+    }
+
 
     public Boolean auctionTurn(Player player, GUIController gui, Translator lib, int price) {
         if (price < player.getBal()) {

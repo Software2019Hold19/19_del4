@@ -195,7 +195,7 @@ public class Controller {
 
 
     private void playerTurn(Player p) throws InterruptedException {
-        
+
         int cntDoubleDiceRoll = 0;
         boolean playAgain = false;
 
@@ -218,17 +218,17 @@ public class Controller {
         }
         */
         gui.showMessage(String.format(lib.text.get("Turn"), p.getName()));
-                
+
         do {
-            if(playAgain){
+            if (playAgain) {
                 gui.showMessage(String.format(lib.text.get("RollDoubleTurn"), p.getName()));
             }
 
 
-            if(!p.getIsJailed()) {  //If the player is not jailed
+            if (!p.getIsJailed()) {  //If the player is not jailed
 
                 managementStream(p, board);
-                if(p.getAlive()){
+                if (p.getAlive()) {
 
                     Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
                     int[] diceRoll = dice.roll(testing);
@@ -254,106 +254,107 @@ public class Controller {
 
                     System.out.println(p.getName() + " tur nr: " + cntDoubleDiceRoll);
 
-      
 
+                    if (cntDoubleDiceRoll != 3) {
+                        p.move(diceRoll[0] + diceRoll[1]);
+                        gui.updatePlayers(pLst);
+                        //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
+                        board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                        gui.updateBoard(board.getOwnableBoard(), pLst);
+                    } else {
+                        playAgain = false;
+                        gui.showMessage(lib.text.get("JailTripleDouble"));
+                        p.jail();
+                    }
 
-                if (cntDoubleDiceRoll != 3) {
-                    p.move(diceRoll[0] + diceRoll[1]);
-                    gui.updatePlayers(pLst);
-                    //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
-                    board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
-                    gui.updateBoard(board.getOwnableBoard(), pLst);
-                }
-                else {
-                    playAgain = false;
-                    gui.showMessage(lib.text.get("JailTripleDouble"));
-                    p.jail();
-                }
+                } else if (p.getJailTurn() < 4) {           // The player is jailed and gets a choice the next 3 turns
 
-            } else if(p.getJailTurn() < 4){           // The player is jailed and gets a choice the next 3 turns
+                    int caseCounter = 0;
+                    String jailOptionStr = "";
+                    String roll = lib.text.get("JailRoll");
+                    String pay = lib.text.get("JailPay");
+                    String jailCard = lib.text.get("JailCard");
 
-                int caseCounter = 0;
-                String jailOptionStr = "";
-                String roll = lib.text.get("JailRoll");
-                String pay = lib.text.get("JailPay");
-                String jailCard = lib.text.get("JailCard");
+                    if (!p.getJailCard()) {          //if the player doesn't have a "Get out of jail" chance card
+                        jailOptionStr = gui.getPlayerDropbown(lib.text.get("YourOptionsJail"), roll, pay);
+                    } else {                           //if the player has a "Get out of jail" chance card
+                        jailOptionStr = gui.getPlayerDropbown(lib.text.get("YourOptionsJail"), jailCard, roll, pay);
+                    }
+                    if (jailOptionStr == roll) {
+                        caseCounter = 1;
+                    } else if (jailOptionStr == pay) {
+                        caseCounter = 2;
+                    } else {
+                        caseCounter = 3;
+                    }
 
-                if(!p.getJailCard()) {          //if the player doesn't have a "Get out of jail" chance card
-                    jailOptionStr = gui.getPlayerDropbown(lib.text.get("YourOptionsJail"), roll, pay);
-                }
-                else{                           //if the player has a "Get out of jail" chance card
-                    jailOptionStr = gui.getPlayerDropbown(lib.text.get("YourOptionsJail"), jailCard, roll, pay);
-                }
-                if(jailOptionStr == roll) { caseCounter = 1; }
-                else if(jailOptionStr == pay) { caseCounter = 2; }
-                else{ caseCounter = 3; }
+                    switch (caseCounter) {
 
-                switch(caseCounter) {
+                        case (1):                                    //if the player chooses to roll for a pair
+                            int[] diceRoll = dice.roll(testing);
+                            gui.showDiceOnBoard(diceRoll);
 
-                    case(1):                                    //if the player chooses to roll for a pair
-                        int[] diceRoll = dice.roll(testing);
-                        gui.showDiceOnBoard(diceRoll);
+                            if (diceRoll[0] == diceRoll[1]) {
+                                p.setIsJailed(false);
+                                p.resetJailTurn();
+                                p.move(diceRoll[0] + diceRoll[1]);
 
-                        if(diceRoll[0] == diceRoll[1]){
+                                gui.updatePlayers(pLst);
+                                board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                                gui.updatePlayers(pLst);
+                            } else if (p.getJailTurn() == 3) {          //if the player doesn't get a pair after 3 turns
+                                p.setIsJailed(false);               //then the player is forced to pay
+                                p.resetJailTurn();
+                                p.addBal(-1000);
+                                p.move(diceRoll[0] + diceRoll[1]);
+
+                                gui.updatePlayers(pLst);
+                                board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                                gui.updatePlayers(pLst);
+
+                                gui.showMessage(lib.text.get("PayedEscape"));
+                            } else {
+                                p.addJailTurn();
+                            }
+                            break;
+
+                        case (2):                                    //if the player chooses to pay
                             p.setIsJailed(false);
                             p.resetJailTurn();
-                            p.move(diceRoll[0] + diceRoll[1]);
-
-                            gui.updatePlayers(pLst);
-                            board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
-                            gui.updatePlayers(pLst);
-                        }
-                        else if(p.getJailTurn() == 3){          //if the player doesn't get a pair after 3 turns
-                            p.setIsJailed(false);               //then the player is forced to pay
-                            p.resetJailTurn();
                             p.addBal(-1000);
-                            p.move(diceRoll[0] + diceRoll[1]);
+
+                            int[] diceRoll2 = dice.roll(testing);
+                            gui.showDiceOnBoard(diceRoll2);
+                            p.move(diceRoll2[0] + diceRoll2[1]);
 
                             gui.updatePlayers(pLst);
                             board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                             gui.updatePlayers(pLst);
 
                             gui.showMessage(lib.text.get("PayedEscape"));
-                        }
-                        else { p.addJailTurn(); }
-                        break;
 
-                    case(2):                                    //if the player chooses to pay
-                        p.setIsJailed(false);
-                        p.resetJailTurn();
-                        p.addBal(-1000);
+                            break;
 
-                        int[] diceRoll2 = dice.roll(testing);
-                        gui.showDiceOnBoard(diceRoll2);
-                        p.move(diceRoll2[0] + diceRoll2[1]);
+                        case (3):                                    //if the player has a "Get out of jail" chance card
+                            p.setIsJailed(false);
+                            p.resetJailTurn();
+                            p.setJailCard(false);
 
-                        gui.updatePlayers(pLst);
-                        board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
-                        gui.updatePlayers(pLst);
+                            int[] diceRoll3 = dice.roll(testing);
+                            gui.showDiceOnBoard(diceRoll3);
+                            p.move(diceRoll3[0] + diceRoll3[1]);
 
-                        gui.showMessage(lib.text.get("PayedEscape"));
+                            gui.updatePlayers(pLst);
+                            board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                            gui.updatePlayers(pLst);
+                            break;
 
-                        break;
-
-                    case(3):                                    //if the player has a "Get out of jail" chance card
-                        p.setIsJailed(false);
-                        p.resetJailTurn();
-                        p.setJailCard(false);
-
-                        int[] diceRoll3 = dice.roll(testing);
-                        gui.showDiceOnBoard(diceRoll3);
-                        p.move(diceRoll3[0] + diceRoll3[1]);
-
-                        gui.updatePlayers(pLst);
-                        board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
-                        gui.updatePlayers(pLst);
-                        break;
-
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + jailOptionStr);
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + jailOptionStr);
+                    }
                 }
             }
-        }while (playAgain);
+        } while (playAgain);
     }
 
     public void setTesting() {
@@ -464,9 +465,9 @@ public class Controller {
         return 0;
     }
 
-    public void managementStream(Player p, GameBoard board){
+    public void managementStream(Player p, GameBoard board) throws InterruptedException {
         while(true) {
-            String inputBtn = gui.getPlayerBtn(lib.text.get("MessagePM"), lib.text.get("PM"), lib.text.get("Roll"), lib.text.get("GiveUp"));
+            String inputBtn = gui.getPlayerBtn(String.format(lib.text.get("MessagePM"), p.getName()), lib.text.get("PM"), lib.text.get("Roll"), lib.text.get("GiveUp"));
             if (inputBtn.equals(lib.text.get("PM"))) {
                 if (p.getPlayersFields(board.getOwnableBoard()).length < 1){
                     gui.showMessage(lib.text.get("NoFields"));

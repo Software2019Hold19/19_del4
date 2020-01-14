@@ -91,6 +91,11 @@ public abstract class OwnableField extends Field {
         return mortage;
     }
 
+    protected void sellField(Player player) {
+        this.owner = "";
+        player.addBal(this.price);
+    }
+
     @Override
     public int getRent(GameBoard board){return rent[level];}
 
@@ -196,7 +201,7 @@ public abstract class OwnableField extends Field {
     }
 
     public void sellHouseAndHotel(Player player, OwnableField[] playersFields){
-
+        sellField(player);
     }
 
 

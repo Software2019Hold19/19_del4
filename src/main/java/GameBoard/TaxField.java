@@ -33,6 +33,8 @@ public class TaxField extends Field {
             payAmount = 2000;
         }
         player.addBal(-payAmount);
+
+        gui.updatePlayers(pLst);
     }
     
 }

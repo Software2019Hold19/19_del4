@@ -40,7 +40,7 @@ public abstract class OwnableField extends Field {
 
 
         if(getMortage()){
-            gui.showMessage("msg");
+            gui.showMessage(lib.text.get("IsMortgage"));
         }
         else if (!this.owner.equals("") && !(this.owner.equals(player.getName()))){
             payRent(player, pLst, board, lib, gui);
@@ -51,6 +51,8 @@ public abstract class OwnableField extends Field {
         else if (this.owner.equals(player.getName())){
             gui.showMessage(lib.text.get("OwnField"));
         }
+
+        gui.updatePlayers(pLst);
     }
 
 

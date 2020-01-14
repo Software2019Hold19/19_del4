@@ -82,6 +82,7 @@ public class StreetField extends OwnableField {
                 gui.updatePlayers(pLst);
             }
         }
+        gui.updatePlayers(pLst);
     }
     
     // only to use when adding a house

@@ -21,10 +21,11 @@ public class    StartField extends Field {
     }
 
     @Override
-    public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib){
+    public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib) throws InterruptedException {
         gui.showMessage(lib.text.get("LandOnStart"));
         //money is added when passing this field (see Player.move())
         //metoden er her kun fordi alle fields skal have en
+        gui.updatePlayers(pLst);
     }
 
     @Override

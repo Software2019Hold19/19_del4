@@ -155,6 +155,8 @@ public class Controller {
         if (testing) {
             setTesting();
         }
+        gui.updatePlayers(pLst);
+        gui.updateBoard(board.getOwnableBoard(), pLst);
         int max = pLst[0].getBal();
         String winner = pLst[0].getName();
         for (Player p : pLst){
@@ -173,7 +175,7 @@ public class Controller {
         int aliveCount = 0;
         for (Player p : pLst) {
             // if player has no money then die
-            if (p.getBal() < 0) {
+            if (p.getBal() < 0 && p.getAlive()) {
                 gui.showMessage(String.format(lib.text.get("TrialStart"), p.getName()));
                 while (deathTrial(p));
 
@@ -187,8 +189,14 @@ public class Controller {
             } else {
                 if (p.getPlayersFields(board.getOwnableBoard()).length > 0) {
                     for (OwnableField field : p.getPlayersFields(board.getOwnableBoard())) {
-                        gui.showMessage(String.format(lib.text.get("GiveUpAuction"), p.getName(), field.getName()));
-                        field.auction(p, pLst, gui, lib);
+                        if (!testing) {
+                            gui.showMessage(String.format(lib.text.get("GiveUpAuction"), p.getName(), field.getName()));
+                            field.auction(p, pLst, gui, lib);
+                            gui.updateBoard(board.getOwnableBoard(), pLst);
+                        } else {
+                            field.setOwner("");
+                            gui.updateBoard(board.getOwnableBoard(), pLst);
+                        }
                     }
                 }
             }
@@ -205,18 +213,23 @@ public class Controller {
     }
 
     private Boolean deathTrial(Player p) throws InterruptedException {
-        managementStream(p, board, "Return");
-        if (!p.getAlive()){
-            return false;
-        } else if (p.getPlayersFields(board.getOwnableBoard()).length == 0 && p.getBal() < 0){
-            gui.showMessage(lib.text.get("TrialLose"));
-            p.kill(); //Kill Confirmed
-            return false;
-        } else if (p.getBal() < 0) {
-            gui.showMessage(lib.text.get("TrialTurn"));
-            return true;
+        if (!testing) {
+            managementStream(p, board, "Return");
+            if (!p.getAlive()) {
+                return false;
+            } else if (p.getPlayersFields(board.getOwnableBoard()).length == 0 && p.getBal() < 0) {
+                gui.showMessage(lib.text.get("TrialLose"));
+                p.kill(); //Kill Confirmed
+                return false;
+            } else if (p.getBal() < 0) {
+                gui.showMessage(lib.text.get("TrialTurn"));
+                return true;
+            } else {
+                gui.showMessage(lib.text.get("TrialWin"));
+                return false;
+            }
         } else {
-            gui.showMessage(lib.text.get("TrialWin"));
+            p.kill();
             return false;
         }
     }
@@ -226,24 +239,6 @@ public class Controller {
         int cntDoubleDiceRoll = 0;
         boolean playAgain = false;
 
-        /*
-        if(!p.getIsJailed()) {  //If the player is not jailed
-            int[] diceRoll = dice.roll(testing);
-
-            gui.showDiceOnBoard(diceRoll);
-
-            p.move(diceRoll[0] + diceRoll[1]);
-
-
-            gui.updatePlayers(pLst);
-            //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
-            board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
-
-
-            gui.updatePlayers(pLst);
-
-        }
-        */
         gui.showMessage(String.format(lib.text.get("Turn"), p.getName()));
 
         do {
@@ -252,10 +247,11 @@ public class Controller {
             }
 
 
-            if (p.getAlive()) {  //If the player is not jailed
+            if (p.getAlive()) {
 
-                managementStream(p, board, "RollChoice");
-                if (p.getAlive()) {
+                if (!p.getIsJailed()) { //If the player is not jailed
+
+                    managementStream(p, board, "RollChoice");
 
                     Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
                     int[] diceRoll = dice.roll(testing);
@@ -294,12 +290,16 @@ public class Controller {
                                 //else run as normal
                         if(manual && board.getBoard()[p.getFieldNumber()].getType() == "chance"){ // if manual=true and the field is a chance field
                             int val = Integer.parseInt(gui.getPlayerDropbown(lib.text.get("ChanceManualMsg"), "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"));
-                            deck = new ChanceDeck(lib, testing, val);
+                            deck = new ChanceDeck(lib, true, val);
                             board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                             gui.updateBoard(board.getOwnableBoard(), pLst);
                         }else {
                             board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                             gui.updateBoard(board.getOwnableBoard(), pLst);
+                            gui.updatePlayers(pLst);
+                        }
+                        if(p.getIsJailed()){
+                            playAgain = false;
                         }
                     } else {
                         playAgain = false;
@@ -309,7 +309,7 @@ public class Controller {
                     }
 
                 }
-                if (p.getIsJailed() && p.getJailTurn() < 4) {           // The player is jailed and gets a choice the next 3 turns
+                else if (p.getIsJailed()) {           // The player is jailed and gets a choice the next 3 turns
 
                     gui.updatePlayers(pLst);
                     playAgain = false;
@@ -431,14 +431,16 @@ public class Controller {
                     }
 
                     gui.updateBoard(board.getOwnableBoard(), pLst);
-                    
-                    String selectedFieldName = gui.getPlayerDropbown(lib.text.get("ChooseAField"), fieldNames);
-                    propertyIndex = getOwnableFieldIndex(selectedFieldName, playersFields);
+                    if (fieldNames.length > 0) {
+                        String selectedFieldName = gui.getPlayerDropbown(lib.text.get("ChooseAField"), fieldNames);
+                        propertyIndex = getOwnableFieldIndex(selectedFieldName, playersFields);
+                    } else {
+                        gui.showMessage(lib.text.get("NoFields"));
+                    }
                     chooseField = false;
                 }
 
-                System.out.println(playersFields[propertyIndex].getMortage());
-                if(!playersFields[propertyIndex].getMortage()) {
+                if(playersFields.length != 0 && !playersFields[propertyIndex].getMortgage()) {
                     playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("MortgageProp"), lib.text.get("ChooseNewField"), lib.text.get("Back"));
                 } else {
                     playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("ReopenProp"), lib.text.get("ChooseNewField"), lib.text.get("Back"));
@@ -454,7 +456,9 @@ public class Controller {
                         
                         if (sellFieldAnwser.equals(lib.text.get("Yes"))) {
                             playersFields[propertyIndex].sellHouseAndHotel(player,playersFields);
-                            chooseField = true;
+                            if (playersFields.length != 0) {
+                                chooseField = true;
+                            }
                         }
 
                     }
@@ -467,7 +471,7 @@ public class Controller {
                 }
                 //Mortage a property
                 else if(playerNextStep.equals(lib.text.get("MortgageProp"))){
-                    playersFields[propertyIndex].setMortage(true);
+                    playersFields[propertyIndex].setMortgage(true);
                     int price = playersFields[propertyIndex].getPrice();
                     double input = price * 0.5;
                     int money = (int)input;
@@ -477,7 +481,7 @@ public class Controller {
                 }
                 //Reopen properties
                 else if(playerNextStep.equals(lib.text.get("ReopenProp"))){
-                    playersFields[propertyIndex].setMortage(false);
+                    playersFields[propertyIndex].setMortgage(false);
                     int price = playersFields[propertyIndex].getPrice();
                     double input = price*0.55;
                     int money = (int)input;
@@ -487,7 +491,9 @@ public class Controller {
                 }
                 // choose new field
                 else if (playerNextStep.equals(lib.text.get("ChooseNewField"))) {
-                    chooseField = true;
+                    if (playersFields.length != 0) {
+                        chooseField = true;
+                    }
                 }
 
             } while (!playerNextStep.equals(lib.text.get("Back"))); // while not roll
@@ -525,12 +531,15 @@ public class Controller {
                 }
             }
             while (inputBtn.equals(lib.text.get("GiveUp"))) {
-                String answer = gui.getPlayerBtn(lib.text.get("Sure"), lib.text.get("No"), lib.text.get("Yes"));
-                if(answer.equals(lib.text.get("Yes"))){
-                    p.kill();
-                    break;
-                }
-                else{
+                if (!testing) {
+                    String answer = gui.getPlayerBtn(lib.text.get("Sure"), lib.text.get("No"), lib.text.get("Yes"));
+                    if (answer.equals(lib.text.get("Yes"))) {
+                        p.kill();
+                        break;
+                    } else {
+                        break;
+                    }
+                } else {
                     break;
                 }
             }

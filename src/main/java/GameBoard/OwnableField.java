@@ -12,7 +12,7 @@ public abstract class OwnableField extends Field {
 
     protected int price;
     protected String owner = "";
-    protected boolean mortage;
+    protected boolean mortgage;
     protected int auctionPrice;
 
     public OwnableField(String name, String subName, String desc, String type, String rentStr, String key) {
@@ -35,7 +35,7 @@ public abstract class OwnableField extends Field {
         super.landOnField(player, pLst, deck, board, gui, lib);
 
 
-        if(getMortage()){
+        if(getMortgage()){
             gui.showMessage(lib.text.get("IsMortgage"));
         }
         else if (!this.owner.equals("") && !(this.owner.equals(player.getName()))){
@@ -79,18 +79,18 @@ public abstract class OwnableField extends Field {
         }
     }
 
-    public void setMortage(boolean set){
-        mortage = set;
+    public void setMortgage(boolean set){
+        mortgage = set;
     }
 
-    public boolean getMortage(){
-        return mortage;
+    public boolean getMortgage(){
+        return mortgage;
     }
 
     protected void sellField(Player player) {
         this.owner = "";
-        if (mortage) {
-            this.mortage = false;
+        if (mortgage) {
+            this.mortgage = false;
             player.addBal((int) (Math.round(this.price * 0.45)));
         } else {
             player.addBal(this.price);
@@ -173,33 +173,34 @@ public abstract class OwnableField extends Field {
                 pInAuction[i++] = p;
             }
         }
-        gui.showMessage(String.format(lib.text.get("AuctionStart"), player.getName()));
-        int j = 0;
-        while (pInAuction.length > 1) {
-            Player currentP = pInAuction[j++];
-            if (auctionTurn(currentP, gui, lib, this.auctionPrice)){
-                gui.showMessage(String.format(lib.text.get("AuctionNext"), currentP.getName()));
-            } else {
-                gui.showMessage(String.format(lib.text.get("AuctionOut"), currentP.getName()));
-                j--;
-                Player[] tmp = new Player[pInAuction.length - 1];
-                int l = 0;
-                for (int k = 0; k < pInAuction.length; k++){
-                    if (!pInAuction[k].getName().equals(currentP.getName())){
-                        tmp[l++] = pInAuction[k];
+        if (i != 1) {
+            gui.showMessage(String.format(lib.text.get("AuctionStart"), player.getName()));
+            int j = 0;
+            while (pInAuction.length > 1) {
+                Player currentP = pInAuction[j++];
+                if (auctionTurn(currentP, gui, lib, this.auctionPrice)) {
+                    gui.showMessage(String.format(lib.text.get("AuctionNext"), currentP.getName()));
+                } else {
+                    gui.showMessage(String.format(lib.text.get("AuctionOut"), currentP.getName()));
+                    j--;
+                    Player[] tmp = new Player[pInAuction.length - 1];
+                    int l = 0;
+                    for (int k = 0; k < pInAuction.length; k++) {
+                        if (!pInAuction[k].getName().equals(currentP.getName())) {
+                            tmp[l++] = pInAuction[k];
+                        }
                     }
+                    pInAuction = tmp;
                 }
-                pInAuction = tmp;
+                if (j >= pInAuction.length) {
+                    j = 0;
+                }
             }
-            if (j >= pInAuction.length) {
-                j = 0;
-            }
+            gui.showMessage(String.format(lib.text.get("AuctionWin"), pInAuction[0].getName(), this.auctionPrice));
+            setOwner(pInAuction[0].getName());
+            pInAuction[0].addBal(-this.auctionPrice);
+            this.auctionPrice = price / 2;
         }
-        gui.showMessage(String.format(lib.text.get("AuctionWin"), pInAuction[0].getName(), this.auctionPrice));
-        setOwner(pInAuction[0].getName());
-        pInAuction[0].addBal(-this.auctionPrice);
-        this.auctionPrice = price / 2;
-
     }
 
     public void sellHouseAndHotel(Player player, OwnableField[] playersFields){

@@ -31,19 +31,21 @@ public class ChanceDeck {
         deck[9] = new GetOutOfJailFreeCard(lib.text.get("ChanceCTxt8"));
         deck[10] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt9"),24);
         deck[11] = new PlayerMoveChanceCard(lib.text.get("ChanceCTxt11"));
-        deck[12] = new BankChanceCard(lib.text.get("ChanceCTxt12"), 40000);
+        deck[12] = new BankChanceCard(lib.text.get("ChanceCTxt12"), 10000);
         deck[13] = new BankChanceCard(lib.text.get("ChanceCTxt13"),-400);
         deck[14] = new BankChanceCard(lib.text.get("ChanceCTxt14"),4000);
         deck[15] = new TaxChanceCard(lib.text.get("ChanceCTxt15"),500, 2500);
         deck[16] = new TaxChanceCard(lib.text.get("ChanceCTxt16"),1000, 2500);
         deck[17] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt17"),15);
 
-        /*
+
+
         if (!testing) {
             shuffleDeck();
         }
 
-         */
+
+
     }
 
     public void shuffleDeck(){
@@ -76,14 +78,11 @@ public class ChanceDeck {
         if(testNum > -1 && testNum < deck.length){  //needed for manual mode
             return deck[testNum];
         }else{
-            if (!testing) {
-                shuffleDeck();
-            }
 
             if (cardCount >= deck.length){ //resets count when all cards have been drawn
                 cardCount = 0;
             }
-
+            System.out.println(cardCount);
             return deck[cardCount++];//returns drawn card and THEN adds 1 to cardCount
             //return deck[6];
         }

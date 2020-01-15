@@ -13,6 +13,5 @@ public class Account {
 
     public void addBalance(int val){
         this.balance += val;
-        if(this.balance < 0){ this.balance = 0; }
     }
 }

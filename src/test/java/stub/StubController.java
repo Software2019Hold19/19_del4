@@ -6,6 +6,7 @@ import GameBoard.*;
 import Main.Dice;
 import Main.Player;
 import Main.Translator;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 
 import java.awt.*;
@@ -14,6 +15,7 @@ import java.io.IOException;
 public class StubController {
 
     Boolean testing = false;
+    Boolean jTest = false;
     Translator lib = new Translator("Dansk");
     GameBoard board = new GameBoard(lib);
     GUIController gui = new GUIController(lib, board);
@@ -33,7 +35,7 @@ public class StubController {
     }
 
     // Init players and language
-    public void startGame(String amount, String[] names, Boolean nameTest, Integer jailCaseNum) throws IOException, InterruptedException {
+    public void startGame(String amount, String[] names, Boolean play, Integer jailCaseNum) throws IOException, InterruptedException {
         lib.getLanguage("Dansk");
         gui.updateLanguage(lib);
         this.jailCaseNum = jailCaseNum;
@@ -55,6 +57,9 @@ public class StubController {
             for (int i = 0; i < playerCount; i++) {
                 Player p = new Player(String.format(names[i], i + 1), startBal);
                 System.out.println(p.getName());
+
+                if(jailCaseNum > 0){ p.setIsJailed(true); } //Jail test
+
                 if (p.getName().equals("")) {
                     noName = true;
                 }
@@ -88,7 +93,7 @@ public class StubController {
             }
         }
 
-        if(!nameTest){
+        if(play){
             playGame();
         }
 
@@ -235,24 +240,6 @@ public class StubController {
         int cntDoubleDiceRoll = 0;
         boolean playAgain = false;
 
-        /*
-        if(!p.getIsJailed()) {  //If the player is not jailed
-            int[] diceRoll = dice.roll(testing);
-
-            gui.showDiceOnBoard(diceRoll);
-
-            p.move(diceRoll[0] + diceRoll[1]);
-
-
-            gui.updatePlayers(pLst);
-            //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
-            board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
-
-
-            gui.updatePlayers(pLst);
-
-        }
-        */
         System.out.println(String.format(lib.text.get("Turn"), p.getName()));
 
         do {
@@ -262,11 +249,11 @@ public class StubController {
 
 
             if (p.getAlive()) {  //If the player is not jailed
-                if(jailCaseNum <= 0){
-                    managementStream(p, board, "RollChoice");
-                }
 
-                if (p.getAlive()) {
+                if (!p.getIsJailed()) {
+                    if(jailCaseNum <= 0){
+                        managementStream(p, board, "RollChoice");
+                    }
 
                     Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
                     int[] diceRoll = dice.roll(testing);
@@ -311,6 +298,9 @@ public class StubController {
                             board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                             //gui.updateBoard(board.getOwnableBoard(), pLst);
                         }
+                        if(p.getIsJailed()){
+                            playAgain = false;
+                        }
                     } else {
                         playAgain = false;
                         System.out.println(lib.text.get("JailTripleDouble"));
@@ -344,6 +334,7 @@ public class StubController {
                                     gui.updatePlayers(pLst);
                                     board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                                     gui.updatePlayers(pLst);
+                                    p.kill();
                                 } else if (p.getJailTurn() == 3) {          //if the player doesn't get a pair after 3 turns
                                     p.setIsJailed(false);               //then the player is forced to pay
                                     p.resetJailTurn();
@@ -355,6 +346,7 @@ public class StubController {
                                     gui.updatePlayers(pLst);
 
                                     gui.showMessage(lib.text.get("PayedEscape"));
+                                    p.kill();
                                 } else {
                                     p.addJailTurn();
                                 }
@@ -375,6 +367,8 @@ public class StubController {
 
                                 gui.showMessage(lib.text.get("PayedEscape"));
 
+                                p.kill();
+
                                 break;
 
                             case (3):                                    //if the player has a "Get out of jail" chance card
@@ -389,6 +383,9 @@ public class StubController {
                                 gui.updatePlayers(pLst);
                                 board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                                 gui.updatePlayers(pLst);
+
+                                p.kill();
+
                                 break;
 
                             default:
@@ -515,8 +512,8 @@ public class StubController {
                 chooseField = false;
             }
 
-            System.out.println(playersFields[propertyIndex].getMortage());
-            if(!playersFields[propertyIndex].getMortage()) {
+            System.out.println(playersFields[propertyIndex].getMortgage());
+            if(!playersFields[propertyIndex].getMortgage()) {
                 playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("MortgageProp"), lib.text.get("ChooseNewField"), lib.text.get("Back"));
             } else {
                 playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("ReopenProp"), lib.text.get("ChooseNewField"), lib.text.get("Back"));
@@ -545,7 +542,7 @@ public class StubController {
             }
             //Mortage a property
             else if(playerNextStep.equals(lib.text.get("MortgageProp"))){
-                playersFields[propertyIndex].setMortage(true);
+                playersFields[propertyIndex].setMortgage(true);
                 int price = playersFields[propertyIndex].getPrice();
                 double input = price * 0.5;
                 int money = (int)input;
@@ -555,7 +552,7 @@ public class StubController {
             }
             //Reopen properties
             else if(playerNextStep.equals(lib.text.get("ReopenProp"))){
-                playersFields[propertyIndex].setMortage(false);
+                playersFields[propertyIndex].setMortgage(false);
                 int price = playersFields[propertyIndex].getPrice();
                 double input = price*0.55;
                 int money = (int)input;

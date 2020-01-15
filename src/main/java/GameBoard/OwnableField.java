@@ -12,7 +12,7 @@ public abstract class OwnableField extends Field {
 
     protected int price;
     protected String owner = "";
-    protected boolean mortage;
+    protected boolean mortgage;
     protected int auctionPrice;
 
     public OwnableField(String name, String subName, String desc, String type, String rentStr, String key) {
@@ -35,7 +35,7 @@ public abstract class OwnableField extends Field {
         super.landOnField(player, pLst, deck, board, gui, lib);
 
 
-        if(getMortage()){
+        if(getMortgage()){
             gui.showMessage(lib.text.get("IsMortgage"));
         }
         else if (!this.owner.equals("") && !(this.owner.equals(player.getName()))){
@@ -79,18 +79,18 @@ public abstract class OwnableField extends Field {
         }
     }
 
-    public void setMortage(boolean set){
-        mortage = set;
+    public void setMortgage(boolean set){
+        mortgage = set;
     }
 
-    public boolean getMortage(){
-        return mortage;
+    public boolean getMortgage(){
+        return mortgage;
     }
 
     protected void sellField(Player player) {
         this.owner = "";
-        if (mortage) {
-            this.mortage = false;
+        if (mortgage) {
+            this.mortgage = false;
             player.addBal((int) (Math.round(this.price * 0.45)));
         } else {
             player.addBal(this.price);

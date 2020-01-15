@@ -247,9 +247,9 @@ public class Controller {
             }
 
 
-            if (p.getAlive()) {  //If the player is not jailed
+            if (p.getAlive()) {
 
-                if (!p.getIsJailed()) {
+                if (!p.getIsJailed()) { //If the player is not jailed
 
                     managementStream(p, board, "RollChoice");
 
@@ -296,6 +296,7 @@ public class Controller {
                         }else {
                             board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                             gui.updateBoard(board.getOwnableBoard(), pLst);
+                            gui.updatePlayers(pLst);
                         }
                         if(p.getIsJailed()){
                             playAgain = false;
@@ -439,7 +440,7 @@ public class Controller {
                     chooseField = false;
                 }
 
-                if(playersFields.length != 0 && !playersFields[propertyIndex].getMortage()) {
+                if(playersFields.length != 0 && !playersFields[propertyIndex].getMortgage()) {
                     playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("MortgageProp"), lib.text.get("ChooseNewField"), lib.text.get("Back"));
                 } else {
                     playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("ReopenProp"), lib.text.get("ChooseNewField"), lib.text.get("Back"));
@@ -470,7 +471,7 @@ public class Controller {
                 }
                 //Mortage a property
                 else if(playerNextStep.equals(lib.text.get("MortgageProp"))){
-                    playersFields[propertyIndex].setMortage(true);
+                    playersFields[propertyIndex].setMortgage(true);
                     int price = playersFields[propertyIndex].getPrice();
                     double input = price * 0.5;
                     int money = (int)input;
@@ -480,7 +481,7 @@ public class Controller {
                 }
                 //Reopen properties
                 else if(playerNextStep.equals(lib.text.get("ReopenProp"))){
-                    playersFields[propertyIndex].setMortage(false);
+                    playersFields[propertyIndex].setMortgage(false);
                     int price = playersFields[propertyIndex].getPrice();
                     double input = price*0.55;
                     int money = (int)input;

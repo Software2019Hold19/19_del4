@@ -24,6 +24,7 @@ public class StubController {
     Dice dice = new Dice();
     int playerCount;
     int jailCaseNum;
+    public boolean playerJailed = true;
 
 
     public StubController() throws IOException {
@@ -325,6 +326,7 @@ public class StubController {
                         switch(jailCaseNum){
                             case (1):                                    //if the player chooses to roll for a pair
                                 int[] diceRoll = dice.roll(testing);
+                                System.out.println(diceRoll[0] +", "+ diceRoll[1]);
 
                                 if (diceRoll[0] == diceRoll[1]) {
                                     p.setIsJailed(false);
@@ -334,6 +336,7 @@ public class StubController {
                                     gui.updatePlayers(pLst);
                                     board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                                     gui.updatePlayers(pLst);
+                                    this.playerJailed = p.getIsJailed();
                                     p.kill();
                                 } else if (p.getJailTurn() == 3) {          //if the player doesn't get a pair after 3 turns
                                     p.setIsJailed(false);               //then the player is forced to pay
@@ -346,6 +349,8 @@ public class StubController {
                                     gui.updatePlayers(pLst);
 
                                     gui.showMessage(lib.text.get("PayedEscape"));
+
+                                    this.playerJailed = p.getIsJailed();
                                     p.kill();
                                 } else {
                                     p.addJailTurn();
@@ -367,6 +372,7 @@ public class StubController {
 
                                 gui.showMessage(lib.text.get("PayedEscape"));
 
+                                this.playerJailed = p.getIsJailed();
                                 p.kill();
 
                                 break;
@@ -384,6 +390,7 @@ public class StubController {
                                 board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                                 gui.updatePlayers(pLst);
 
+                                this.playerJailed = p.getIsJailed();
                                 p.kill();
 
                                 break;

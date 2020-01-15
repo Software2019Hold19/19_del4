@@ -44,11 +44,34 @@ public class ControllerTest {
 
     }
 
-    @Test
-    public void testJail() throws IOException, InterruptedException {
-        initVariables(3);
-        stubController.startGame(testStr, getNames(), true, 1); //Numbers 1 - 3
+    @Test public void GetOutOfJail() throws IOException, InterruptedException {
+        testJail1();
+        testJail2();
+        testJail3();
+    }
 
+    @Test
+    public void testJail1() throws IOException, InterruptedException {
+        initVariables(2);
+
+        stubController.startGame(testStr, getNames(), true, 1); //Numbers 1 - 3
+        assertEquals(stubController.playerJailed, false);
+    }
+
+    @Test
+    public void testJail2() throws IOException, InterruptedException {
+        initVariables(2);
+
+        stubController.startGame(testStr, getNames(), true, 2); //Numbers 1 - 3
+        assertEquals(stubController.playerJailed, false);
+    }
+
+    @Test
+    public void testJail3() throws IOException, InterruptedException {
+        initVariables(2);
+
+        stubController.startGame(testStr, getNames(), true, 3); //Numbers 1 - 3
+        assertEquals(stubController.playerJailed, false);
     }
 
 

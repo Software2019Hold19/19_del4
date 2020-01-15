@@ -147,7 +147,7 @@ public abstract class OwnableField extends Field {
     public void choiceToBuy(Player player, GUIController gui, Translator lib, Player[] pLst){
 
         //shows dropdown with yes/no button to buy
-        String buyChoice = gui.getPlayerDropbown(String.format(lib.text.get("ChoiceToBuy"), this.price), lib.text.get("Yes"), lib.text.get("No"));
+        String buyChoice = gui.getPlayerDropdown(String.format(lib.text.get("ChoiceToBuy"), this.price), lib.text.get("Yes"), lib.text.get("No"));
         if(buyChoice.equals(lib.text.get("Yes"))) {
             // checking if the player has enough money
             if (player.getBal() >= this.price) {
@@ -156,6 +156,7 @@ public abstract class OwnableField extends Field {
             }
             else {
                 gui.showMessage(lib.text.get("NoMoney"));
+                auction(player, pLst, gui, lib);
             }
         }
         else {
@@ -170,10 +171,12 @@ public abstract class OwnableField extends Field {
         int i = 0;
         for (Player p : pLst){
             if (!p.getName().equals(player.getName()) && p.getAlive()){
-                pInAuction[i++] = p;
+                if (p.getBal() >= this.auctionPrice + 50) {
+                    pInAuction[i++] = p;
+                }
             }
         }
-        if (i != 1) {
+        if (i > 1) {
             gui.showMessage(String.format(lib.text.get("AuctionStart"), player.getName()));
             int j = 0;
             while (pInAuction.length > 1) {
@@ -200,11 +203,16 @@ public abstract class OwnableField extends Field {
             setOwner(pInAuction[0].getName());
             pInAuction[0].addBal(-this.auctionPrice);
             this.auctionPrice = price / 2;
+        } else if (i == 1) {
+            gui.showMessage(String.format(lib.text.get("AuctionStart"), player.getName()));
+            gui.showMessage(String.format(lib.text.get("AuctionAutoWin"), pInAuction[0].getName(), this.auctionPrice));
+            setOwner(pInAuction[0].getName());
+            pInAuction[0].addBal(-this.auctionPrice);
+            this.auctionPrice = price / 2;
+        } else {
+            gui.showMessage(lib.text.get("AuctionNoPlayers"));
+            setOwner("");
         }
-    }
-
-    public void sellHouseAndHotel(Player player, OwnableField[] playersFields){
-        sellField(player);
     }
 
 
@@ -213,7 +221,15 @@ public abstract class OwnableField extends Field {
             String Answer = gui.getPlayerBtn(String.format(lib.text.get("AuctionTurn"), price, player.getName()), lib.text.get("AuctionYesBtn"), lib.text.get("AuctionNoBtn"));
             if (Answer.equals(lib.text.get("AuctionYesBtn"))) {
                 int adding = gui.getPlayerInt(String.format(lib.text.get("AuctionAddMoney"), price, player.getName()), price, player.getBal());
-                this.auctionPrice = price + adding;
+                if (adding + price > player.getBal()){
+                    gui.showMessage(lib.text.get("AuctionTooHighBid"));
+                    return auctionTurn(player, gui, lib, price);
+                } else if (adding < 50) {
+                    gui.showMessage(lib.text.get("AuctionTooLowBid"));
+                    return auctionTurn(player, gui, lib, price);
+                } else {
+                    this.auctionPrice = price + adding;
+                }
                 return true;
             } else {
                 return false;
@@ -223,6 +239,10 @@ public abstract class OwnableField extends Field {
             return false;
         }
 
+    }
+
+    public void sellHouseAndHotel(Player player, OwnableField[] playersFields){
+        sellField(player);
     }
 
 }

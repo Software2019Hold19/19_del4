@@ -1,7 +1,6 @@
 package GameBoard;
 import ChanceDeck.ChanceDeck;
 import GUI.GUIController;
-import Main.Controller;
 import Main.Player;
 import Main.Translator;
 
@@ -304,7 +303,7 @@ public class StreetField extends OwnableField {
         // priser for huse <2000 1000kr. <4000 2000kr. <6000 3000kr.  ellers 4000kr.
         if (this.level <= 3) {
             int housePrice = getHousePrice();
-            String choise = gui.getPlayerDropbown(lib.text.get("Buyhouse") + housePrice + " kr.", lib.text.get("Yes"), lib.text.get("No"));
+            String choise = gui.getPlayerDropdown(lib.text.get("Buyhouse") + housePrice + " kr.", lib.text.get("Yes"), lib.text.get("No"));
 
             if (choise.equals("Ja")) {
                 if (player.getBal() > housePrice) {
@@ -320,7 +319,7 @@ public class StreetField extends OwnableField {
         }
         else if (this.level == 4) {
             int hotelPrice = getHousePrice();
-            String choise = gui.getPlayerDropbown(lib.text.get("Buyhotel")+ hotelPrice + " kr.", lib.text.get("Yes"), lib.text.get("No"));
+            String choise = gui.getPlayerDropdown(lib.text.get("Buyhotel")+ hotelPrice + " kr.", lib.text.get("Yes"), lib.text.get("No"));
 
             if (choise.equals("Ja")) {
                 if (player.getBal() > hotelPrice) {

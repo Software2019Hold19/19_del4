@@ -257,7 +257,7 @@ public class StubController {
                     Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
                     int[] diceRoll = dice.roll(testing);
                     if (manual) {
-                        int val = Integer.parseInt(gui.getPlayerDropbown("__MANUEL__ Dice", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2"));
+                        int val = Integer.parseInt(gui.getPlayerDropdown("__MANUEL__ Dice", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2"));
                         if (val < 7) {
                             diceRoll[0] = val - 1;
                             diceRoll[1] = 1;
@@ -289,7 +289,7 @@ public class StubController {
                         //If manual is true, then manually draw specific cards
                         //else run as normal
                         if(manual && board.getBoard()[p.getFieldNumber()].getType() == "chance"){ // if manual=true and the field is a chance field
-                            int val = Integer.parseInt(gui.getPlayerDropbown(lib.text.get("ChanceManualMsg"), "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"));
+                            int val = Integer.parseInt(gui.getPlayerDropdown(lib.text.get("ChanceManualMsg"), "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"));
                             deck = new ChanceDeck(lib, testing, val);
                             board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                             //gui.updateBoard(board.getOwnableBoard(), pLst);
@@ -399,9 +399,9 @@ public class StubController {
                         }
                     }else{
                         if (!p.getJailCard()) {          //if the player doesn't have a "Get out of jail" chance card
-                            jailOptionStr = gui.getPlayerDropbown(lib.text.get("YourOptionsJail"), roll, pay);
+                            jailOptionStr = gui.getPlayerDropdown(lib.text.get("YourOptionsJail"), roll, pay);
                         } else {                           //if the player has a "Get out of jail" chance card
-                            jailOptionStr = gui.getPlayerDropbown(lib.text.get("YourOptionsJail"), jailCard, roll, pay);
+                            jailOptionStr = gui.getPlayerDropdown(lib.text.get("YourOptionsJail"), jailCard, roll, pay);
                         }
                         if (jailOptionStr == roll) {
                             caseCounter = 1;
@@ -512,7 +512,7 @@ public class StubController {
 
                 gui.updateBoard(board.getOwnableBoard(), pLst);
 
-                String selectedFieldName = gui.getPlayerDropbown(lib.text.get("ChooseAField"), fieldNames);
+                String selectedFieldName = gui.getPlayerDropdown(lib.text.get("ChooseAField"), fieldNames);
                 propertyIndex = getOwnableFieldIndex(selectedFieldName, playersFields);
                 chooseField = false;
             }

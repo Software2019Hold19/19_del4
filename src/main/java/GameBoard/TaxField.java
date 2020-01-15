@@ -19,7 +19,7 @@ public class TaxField extends Field {
         super.landOnField(player, pLst, deck, board, gui, lib);
         int payAmount = 0;
         if(this.key.equals("Tax1")){
-            String choice = gui.getPlayerDropbown(lib.text.get("Tax1Choice"), "10%", "4000 kr.");
+            String choice = gui.getPlayerDropdown(lib.text.get("Tax1Choice"), "10%", "4000 kr.");
             if(choice.equals("10%")){
                 payAmount = player.getBal() / 10;;
             }

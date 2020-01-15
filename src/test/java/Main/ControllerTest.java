@@ -34,7 +34,7 @@ public class ControllerTest {
         String[] pNames = new String[testNum];
         Player[] pLst;
 
-        stubController.startGame(testStr, names, false, 0); //Number 0 for no jail test
+        stubController.startGame(true, testStr, names, false, 0); //Number 0 for no jail test
         pLst = stubController.getPLst();
         for(int i = 0; i < testNum; i++){
             pNames[i] = pLst[i].getName();
@@ -54,24 +54,30 @@ public class ControllerTest {
     public void testJail1() throws IOException, InterruptedException {
         initVariables(2);
 
-        stubController.startGame(testStr, getNames(), true, 1); //Numbers 1 - 3
+        stubController.startGame(true, testStr, getNames(), true, 1); //Numbers 1 - 3
         assertEquals(stubController.playerJailed, false);
+        System.out.println("---------------------\nPlayer in jail: "+
+                stubController.playerJailed +"\n---------------------\n");
     }
 
     @Test
     public void testJail2() throws IOException, InterruptedException {
         initVariables(2);
 
-        stubController.startGame(testStr, getNames(), true, 2); //Numbers 1 - 3
+        stubController.startGame(true, testStr, getNames(), true, 2); //Numbers 1 - 3
         assertEquals(stubController.playerJailed, false);
+        System.out.println("---------------------\nPlayer in jail: "+
+                stubController.playerJailed +"\n---------------------\n");
     }
 
     @Test
     public void testJail3() throws IOException, InterruptedException {
         initVariables(2);
 
-        stubController.startGame(testStr, getNames(), true, 3); //Numbers 1 - 3
+        stubController.startGame(true, testStr, getNames(), true, 3); //Numbers 1 - 3
         assertEquals(stubController.playerJailed, false);
+        System.out.println("---------------------\nPlayer in jail: "+
+                stubController.playerJailed +"\n---------------------\n");
     }
 
 

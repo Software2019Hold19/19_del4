@@ -36,11 +36,11 @@ public class StubController {
     }
 
     // Init players and language
-    public void startGame(String amount, String[] names, Boolean play, Integer jailCaseNum) throws IOException, InterruptedException {
+    public void startGame(Boolean jTest, String amount, String[] names, Boolean play, Integer jailCaseNum) throws IOException, InterruptedException {
         lib.getLanguage("Dansk");
         gui.updateLanguage(lib);
         this.jailCaseNum = jailCaseNum;
-
+        this.jTest = jTest;
 
         //gui.getGui().getFields()[1].setForeGroundColor(Color.GRAY);
 

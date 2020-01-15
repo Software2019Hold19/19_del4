@@ -155,6 +155,8 @@ public class Controller {
         if (testing) {
             setTesting();
         }
+        gui.updatePlayers(pLst);
+        gui.updateBoard(board.getOwnableBoard(), pLst);
         int max = pLst[0].getBal();
         String winner = pLst[0].getName();
         for (Player p : pLst){
@@ -187,8 +189,14 @@ public class Controller {
             } else {
                 if (p.getPlayersFields(board.getOwnableBoard()).length > 0) {
                     for (OwnableField field : p.getPlayersFields(board.getOwnableBoard())) {
-                        gui.showMessage(String.format(lib.text.get("GiveUpAuction"), p.getName(), field.getName()));
-                        field.auction(p, pLst, gui, lib);
+                        if (!testing) {
+                            gui.showMessage(String.format(lib.text.get("GiveUpAuction"), p.getName(), field.getName()));
+                            field.auction(p, pLst, gui, lib);
+                            gui.updateBoard(board.getOwnableBoard(), pLst);
+                        } else {
+                            field.setOwner("");
+                            gui.updateBoard(board.getOwnableBoard(), pLst);
+                        }
                     }
                 }
             }
@@ -231,24 +239,6 @@ public class Controller {
         int cntDoubleDiceRoll = 0;
         boolean playAgain = false;
 
-        /*
-        if(!p.getIsJailed()) {  //If the player is not jailed
-            int[] diceRoll = dice.roll(testing);
-
-            gui.showDiceOnBoard(diceRoll);
-
-            p.move(diceRoll[0] + diceRoll[1]);
-
-
-            gui.updatePlayers(pLst);
-            //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
-            board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
-
-
-            gui.updatePlayers(pLst);
-
-        }
-        */
         gui.showMessage(String.format(lib.text.get("Turn"), p.getName()));
 
         do {
@@ -257,9 +247,9 @@ public class Controller {
             }
 
 
-            if (p.getAlive()) {  //If the player is not jailed
+            if (p.getAlive()) {
 
-                if (!p.getIsJailed()) {
+                if (!p.getIsJailed()) { //If the player is not jailed
 
                     managementStream(p, board, "RollChoice");
 

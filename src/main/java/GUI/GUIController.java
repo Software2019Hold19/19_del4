@@ -62,7 +62,7 @@ public class GUIController {
 
     public String getPlayerBtn(String msg, java.lang.String... buttons){
         if (testing) {
-            return buttons[0];
+            return buttons[buttons.length - 1];
         }
         else {
             return gui.getUserButtonPressed(msg, buttons);

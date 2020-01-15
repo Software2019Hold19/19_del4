@@ -175,4 +175,6 @@ public class GUIController {
         }
     }
 
+    public void setTestNames(int num){ this.testNames = num; }
+
 }

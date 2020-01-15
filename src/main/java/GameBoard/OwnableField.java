@@ -186,7 +186,7 @@ public abstract class OwnableField extends Field {
                     gui.showMessage(String.format(lib.text.get("AuctionOut"), currentP.getName()));
                     j--;
                     Player[] tmp = new Player[pInAuction.length - 1];
-
+                    int l = 0;
                     for (int k = 0; k < pInAuction.length; k++) {
                         if (!pInAuction[k].getName().equals(currentP.getName())) {
                             tmp[l++] = pInAuction[k];

@@ -257,9 +257,9 @@ public class Controller {
             }
 
 
-            if (p.getAlive()) {  //If the player is not jailed
+            if (p.getAlive()) {
 
-                if (!p.getIsJailed()) {
+                if (!p.getIsJailed()) { //If the player is not jailed
 
                     managementStream(p, board, "RollChoice");
 

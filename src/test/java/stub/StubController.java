@@ -6,8 +6,6 @@ import GameBoard.*;
 import Main.Dice;
 import Main.Player;
 import Main.Translator;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 
 import java.awt.*;
 import java.io.IOException;

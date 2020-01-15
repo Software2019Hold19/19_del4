@@ -252,60 +252,61 @@ public class Controller {
                 if (!p.getIsJailed()) { //If the player is not jailed
 
                     managementStream(p, board, "RollChoice");
-
-                    Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
-                    int[] diceRoll = dice.roll(testing);
-                    if (manual) {
-                        int val = Integer.parseInt(gui.getPlayerDropbown("__MANUEL__ Dice", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2"));
-                        if (val < 7) {
-                            diceRoll[0] = val - 1;
-                            diceRoll[1] = 1;
-                        } else {
-                            diceRoll[0] = val - 6;
-                            diceRoll[1] = 6;
+                    if (p.getAlive()) { //If player gives up in managementStream, they shouldn't get a turn
+                        Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
+                        int[] diceRoll = dice.roll(testing);
+                        if (manual) {
+                            int val = Integer.parseInt(gui.getPlayerDropbown("__MANUEL__ Dice", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2"));
+                            if (val < 7) {
+                                diceRoll[0] = val - 1;
+                                diceRoll[1] = 1;
+                            } else {
+                                diceRoll[0] = val - 6;
+                                diceRoll[1] = 6;
+                            }
                         }
-                    }
 
-                    gui.showDiceOnBoard(diceRoll);
+                        gui.showDiceOnBoard(diceRoll);
 
-                    if (diceRoll[0] == diceRoll[1]) {
-                        cntDoubleDiceRoll++;
-                        playAgain = true;
-                        if(cntDoubleDiceRoll == 3){
+                        if (diceRoll[0] == diceRoll[1]) {
+                            cntDoubleDiceRoll++;
+                            playAgain = true;
+                            if (cntDoubleDiceRoll == 3) {
+                                playAgain = false;
+                            }
+                        } else {
                             playAgain = false;
                         }
-                    } else {
-                        playAgain = false;
-                    }
 
-                    System.out.println(p.getName() + " tur nr: " + cntDoubleDiceRoll);
+                        System.out.println(p.getName() + " tur nr: " + cntDoubleDiceRoll);
 
 
-                    if (cntDoubleDiceRoll != 3) {
-                        p.move(diceRoll[0] + diceRoll[1]);
-                        gui.updatePlayers(pLst);
-                        //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
+                        if (cntDoubleDiceRoll != 3) {
+                            p.move(diceRoll[0] + diceRoll[1]);
+                            gui.updatePlayers(pLst);
+                            //       board.getBoard()[p.getFieldNumber()].guiHandler(gui, lib);
 
-                                //If manual is true, then manually draw specific cards
-                                //else run as normal
-                        if(manual && board.getBoard()[p.getFieldNumber()].getType() == "chance"){ // if manual=true and the field is a chance field
-                            int val = Integer.parseInt(gui.getPlayerDropbown(lib.text.get("ChanceManualMsg"), "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"));
-                            deck = new ChanceDeck(lib, true, val);
-                            board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
-                            gui.updateBoard(board.getOwnableBoard(), pLst);
-                        }else {
-                            board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
-                            gui.updateBoard(board.getOwnableBoard(), pLst);
+                            //If manual is true, then manually draw specific cards
+                            //else run as normal
+                            if (manual && board.getBoard()[p.getFieldNumber()].getType() == "chance") { // if manual=true and the field is a chance field
+                                int val = Integer.parseInt(gui.getPlayerDropbown(lib.text.get("ChanceManualMsg"), "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"));
+                                deck = new ChanceDeck(lib, true, val);
+                                board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                                gui.updateBoard(board.getOwnableBoard(), pLst);
+                            } else {
+                                board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                                gui.updateBoard(board.getOwnableBoard(), pLst);
+                                gui.updatePlayers(pLst);
+                            }
+                            if (p.getIsJailed()) {
+                                playAgain = false;
+                            }
+                        } else {
+                            playAgain = false;
+                            gui.showMessage(lib.text.get("JailTripleDouble"));
+                            p.jail();
                             gui.updatePlayers(pLst);
                         }
-                        if(p.getIsJailed()){
-                            playAgain = false;
-                        }
-                    } else {
-                        playAgain = false;
-                        gui.showMessage(lib.text.get("JailTripleDouble"));
-                        p.jail();
-                        gui.updatePlayers(pLst);
                     }
 
                 }

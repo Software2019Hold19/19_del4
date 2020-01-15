@@ -214,17 +214,21 @@ public abstract class OwnableField extends Field {
         }
     }
 
-    public void sellHouseAndHotel(Player player, OwnableField[] playersFields){
-        sellField(player);
-    }
-
 
     public Boolean auctionTurn(Player player, GUIController gui, Translator lib, int price) {
         if (price < player.getBal()) {
             String Answer = gui.getPlayerBtn(String.format(lib.text.get("AuctionTurn"), price, player.getName()), lib.text.get("AuctionYesBtn"), lib.text.get("AuctionNoBtn"));
             if (Answer.equals(lib.text.get("AuctionYesBtn"))) {
                 int adding = gui.getPlayerInt(String.format(lib.text.get("AuctionAddMoney"), price, player.getName()), price, player.getBal());
-                this.auctionPrice = price + adding;
+                if (adding + price > player.getBal()){
+                    gui.showMessage(lib.text.get("AuctionTooHighBid"));
+                    return auctionTurn(player, gui, lib, price);
+                } else if (adding < 50) {
+                    gui.showMessage(lib.text.get("AuctionTooLowBid"));
+                    return auctionTurn(player, gui, lib, price);
+                } else {
+                    this.auctionPrice = price + adding;
+                }
                 return true;
             } else {
                 return false;
@@ -234,6 +238,10 @@ public abstract class OwnableField extends Field {
             return false;
         }
 
+    }
+
+    public void sellHouseAndHotel(Player player, OwnableField[] playersFields){
+        sellField(player);
     }
 
 }

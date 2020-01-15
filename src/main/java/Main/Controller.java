@@ -246,14 +246,15 @@ public class Controller {
                 gui.showMessage(String.format(lib.text.get("RollDoubleTurn"), p.getName()));
             }
 
-
             if (p.getAlive()) {
 
                 if (!p.getIsJailed()) { //If the player is not jailed
 
                     managementStream(p, board, "RollChoice");
-                    if (p.getAlive()) { //If player gives up in managementStream, they shouldn't get a turn
-                        Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
+                    if (!p.getAlive()) { //If player gives up in managementStream, they shouldn't get a turn
+                        playAgain = false;
+                    } else {
+                        Boolean manual = true; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
                         int[] diceRoll = dice.roll(testing);
                         if (manual) {
                             int val = Integer.parseInt(gui.getPlayerDropbown("__MANUEL__ Dice", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2"));

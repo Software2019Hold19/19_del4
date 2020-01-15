@@ -415,87 +415,91 @@ public class Controller {
             // Choose a field
             // Sell house or choose a new field
             // Roll
-            String playerNextStep;
+            String playerNextStep = "";
             int propertyIndex = 0;
            
             boolean chooseField = true;
         
             do {
-                OwnableField[] playersFields = player.getPlayersFields(board.getOwnableBoard());
-                gui.updateBoard(playersFields,pLst);
-                gui.updatePlayers(pLst);
-                
-                if (chooseField) {
-                    String fieldNames[] = new String[playersFields.length];
+                if (player.getBal() > 0) {
+                    OwnableField[] playersFields = player.getPlayersFields(board.getOwnableBoard());
+                    gui.updateBoard(playersFields, pLst);
+                    gui.updatePlayers(pLst);
 
-                    for (int i = 0; i < playersFields.length; i++) {
-                        fieldNames[i] = playersFields[i].getName();
-                    }
+                    if (chooseField) {
+                        String fieldNames[] = new String[playersFields.length];
 
-                    gui.updateBoard(board.getOwnableBoard(), pLst);
-                    if (fieldNames.length > 0) {
-                        String selectedFieldName = gui.getPlayerDropbown(lib.text.get("ChooseAField"), fieldNames);
-                        propertyIndex = getOwnableFieldIndex(selectedFieldName, playersFields);
-                    } else {
-                        gui.showMessage(lib.text.get("NoFields"));
-                    }
-                    chooseField = false;
-                }
-
-                if(playersFields.length != 0 && !playersFields[propertyIndex].getMortgage()) {
-                    playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("MortgageProp"), lib.text.get("ChooseNewField"), lib.text.get("Back"));
-                } else {
-                    playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("ReopenProp"), lib.text.get("ChooseNewField"), lib.text.get("Back"));
-                }
-
-
-                // sell house
-                if (playerNextStep.equals(lib.text.get("SellHouse"))) {
-                    // checks if there is any houses on the field
-                    if (playersFields[propertyIndex].getHouseLevel() <= 0) {
-                        gui.showMessage(lib.text.get("NoHouses"));
-                        String sellFieldAnwser = gui.getPlayerBtn(lib.text.get("Sure"), lib.text.get("No"), lib.text.get("Yes"));
-                        
-                        if (sellFieldAnwser.equals(lib.text.get("Yes"))) {
-                            playersFields[propertyIndex].sellHouseAndHotel(player,playersFields);
-                            if (playersFields.length != 0) {
-                                chooseField = true;
-                            }
+                        for (int i = 0; i < playersFields.length; i++) {
+                            fieldNames[i] = playersFields[i].getName();
                         }
 
+                        gui.updateBoard(board.getOwnableBoard(), pLst);
+                        if (fieldNames.length > 0) {
+                            String selectedFieldName = gui.getPlayerDropbown(lib.text.get("ChooseAField"), fieldNames);
+                            propertyIndex = getOwnableFieldIndex(selectedFieldName, playersFields);
+                        } else {
+                            gui.showMessage(lib.text.get("NoFields"));
+                        }
+                        chooseField = false;
                     }
-                    // Sælger et hus
-                    else {
-                        playersFields[propertyIndex].sellHouseAndHotel(player,playersFields);
+
+                    if (playersFields.length != 0 && !playersFields[propertyIndex].getMortgage()) {
+                        playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("MortgageProp"), lib.text.get("ChooseNewField"), lib.text.get("Back"));
+                    } else {
+                        playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("ReopenProp"), lib.text.get("ChooseNewField"), lib.text.get("Back"));
+                    }
+
+
+                    // sell house
+                    if (playerNextStep.equals(lib.text.get("SellHouse"))) {
+                        // checks if there is any houses on the field
+                        if (playersFields[propertyIndex].getHouseLevel() <= 0) {
+                            gui.showMessage(lib.text.get("NoHouses"));
+                            String sellFieldAnwser = gui.getPlayerBtn(lib.text.get("Sure"), lib.text.get("No"), lib.text.get("Yes"));
+
+                            if (sellFieldAnwser.equals(lib.text.get("Yes"))) {
+                                playersFields[propertyIndex].sellHouseAndHotel(player, playersFields);
+                                if (playersFields.length != 0) {
+                                    chooseField = true;
+                                }
+                            }
+
+                        }
+                        // Sælger et hus
+                        else {
+                            playersFields[propertyIndex].sellHouseAndHotel(player, playersFields);
                         /*playersFields[propertyIndex].minusOneLevel();
                         player.addBal(playersFields[propertyIndex].getHousePrice());*/
+                        }
                     }
-                }
-                //Mortage a property
-                else if(playerNextStep.equals(lib.text.get("MortgageProp"))){
-                    playersFields[propertyIndex].setMortgage(true);
-                    int price = playersFields[propertyIndex].getPrice();
-                    double input = price * 0.5;
-                    int money = (int)input;
-                    player.addBal(money);
-                    int boardIndex = getFieldIndex(playersFields[propertyIndex].getName(), board.getBoard());
-                    gui.getGui().getFields()[boardIndex].setForeGroundColor(Color.GRAY);
-                }
-                //Reopen properties
-                else if(playerNextStep.equals(lib.text.get("ReopenProp"))){
-                    playersFields[propertyIndex].setMortgage(false);
-                    int price = playersFields[propertyIndex].getPrice();
-                    double input = price*0.55;
-                    int money = (int)input;
-                    player.addBal(-money);
-                    int boardIndex = getFieldIndex(playersFields[propertyIndex].getName(), board.getBoard());
-                    gui.getGui().getFields()[boardIndex].setForeGroundColor(Color.BLACK);
-                }
-                // choose new field
-                else if (playerNextStep.equals(lib.text.get("ChooseNewField"))) {
-                    if (playersFields.length != 0) {
-                        chooseField = true;
+                    //Mortage a property
+                    else if (playerNextStep.equals(lib.text.get("MortgageProp"))) {
+                        playersFields[propertyIndex].setMortgage(true);
+                        int price = playersFields[propertyIndex].getPrice();
+                        double input = price * 0.5;
+                        int money = (int) input;
+                        player.addBal(money);
+                        int boardIndex = getFieldIndex(playersFields[propertyIndex].getName(), board.getBoard());
+                        gui.getGui().getFields()[boardIndex].setForeGroundColor(Color.GRAY);
                     }
+                    //Reopen properties
+                    else if (playerNextStep.equals(lib.text.get("ReopenProp"))) {
+                        playersFields[propertyIndex].setMortgage(false);
+                        int price = playersFields[propertyIndex].getPrice();
+                        double input = price * 0.55;
+                        int money = (int) input;
+                        player.addBal(-money);
+                        int boardIndex = getFieldIndex(playersFields[propertyIndex].getName(), board.getBoard());
+                        gui.getGui().getFields()[boardIndex].setForeGroundColor(Color.BLACK);
+                    }
+                    // choose new field
+                    else if (playerNextStep.equals(lib.text.get("ChooseNewField"))) {
+                        if (playersFields.length != 0) {
+                            chooseField = true;
+                        }
+                    }
+                } else {
+                    deathTrial(player);
                 }
 
             } while (!playerNextStep.equals(lib.text.get("Back"))); // while not roll

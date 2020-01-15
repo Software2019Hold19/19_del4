@@ -484,13 +484,20 @@ public class Controller {
                     }
                     //Reopen properties
                     else if (playerNextStep.equals(lib.text.get("ReopenProp"))) {
-                        playersFields[propertyIndex].setMortgage(false);
                         int price = playersFields[propertyIndex].getPrice();
                         double input = price * 0.55;
                         int money = (int) input;
-                        player.addBal(-money);
-                        int boardIndex = getFieldIndex(playersFields[propertyIndex].getName(), board.getBoard());
-                        gui.getGui().getFields()[boardIndex].setForeGroundColor(Color.BLACK);
+                        if (player.getBal() > money) {
+                            playersFields[propertyIndex].setMortgage(false);
+                            player.addBal(-money);
+                            int boardIndex = getFieldIndex(playersFields[propertyIndex].getName(), board.getBoard());
+                            Color color = Color.BLACK;
+                            if (playersFields[propertyIndex].getType().equals("brewery"))
+                                color = Color.WHITE;
+                            gui.getGui().getFields()[boardIndex].setForeGroundColor(color);
+                        } else {
+                            gui.showMessage(lib.text.get("ReopenPropNoMoney"));
+                        }
                     }
                     // choose new field
                     else if (playerNextStep.equals(lib.text.get("ChooseNewField"))) {
@@ -499,7 +506,9 @@ public class Controller {
                         }
                     }
                 } else {
-                    deathTrial(player);
+                    gui.updatePlayers(pLst);
+                    gui.showMessage(String.format(lib.text.get("TrialStart"), player.getName()));
+                    while (deathTrial(player));
                 }
 
             } while (!playerNextStep.equals(lib.text.get("Back"))); // while not roll

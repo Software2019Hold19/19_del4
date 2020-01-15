@@ -11,7 +11,7 @@ public class GetOutOfJailFreeCard extends ChanceCard {
 
     @Override
     public boolean drawn(Player player, GameBoard board){
-        player.getJailCard();
+        player.setJailCard(true);
         return false;
     }
 }

@@ -70,8 +70,8 @@ ChanceCTxt15//Kul- og kokspriserne er steget, og du skal betale 500 pr. hus og 2
 ChanceCTxt16//Ejendomsskatterne er steget og ekstraudgifterne er 1000 pr. hus og 2500 pr. hotel
 ChanceCTxt17//Flyt frem til Øresundsbåden
 ChoiceToBuy//Ingen ejer dette felt. Vil du købe feltet for %d kroner?
-Buyhouse//Vil du købe et hus for
-Buyhotel//Vil du købe et hotel for
+BuyHouse//Vil du købe et hus for %dkr.
+BuyHotel//Vil du købe et hotel for %dkr.
 Yes//Ja
 No//Nej
 AuctionStart//Spiller %s vil ikke købe feltet, så det går på auktion
@@ -121,6 +121,7 @@ NoHouses//Du har ikke flere huse på grunden, men du kan sælge grunden istedet
 NoFields//Du ejer ingen felter
 MortgageProp//Du pantsætter denne ejendom
 ReopenProp//Du genåbner denne ejendom
+ReopenPropNoMoney//Du har ikke nok penge til at genåbne denne grund
 RollDoubleTurn//Da du slog to ens får du en tur til, %s, slå med terningerne!
 ChanceManualMsg//Vælg kort nummer:
 IsMortgage//Denne grund er pantsat.

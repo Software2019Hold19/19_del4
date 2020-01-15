@@ -38,12 +38,9 @@ public class ChanceDeck {
         deck[16] = new TaxChanceCard(lib.text.get("ChanceCTxt16"),1000, 2500);
         deck[17] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt17"),15);
 
-        /*
         if (!testing) {
             shuffleDeck();
         }
-
-         */
     }
 
     public void shuffleDeck(){
@@ -76,10 +73,6 @@ public class ChanceDeck {
         if(testNum > -1 && testNum < deck.length){  //needed for manual mode
             return deck[testNum];
         }else{
-            if (!testing) {
-                shuffleDeck();
-            }
-
             if (cardCount >= deck.length){ //resets count when all cards have been drawn
                 cardCount = 0;
             }

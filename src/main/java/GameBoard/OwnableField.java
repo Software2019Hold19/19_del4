@@ -156,6 +156,7 @@ public abstract class OwnableField extends Field {
             }
             else {
                 gui.showMessage(lib.text.get("NoMoney"));
+                auction(player, pLst, gui, lib);
             }
         }
         else {

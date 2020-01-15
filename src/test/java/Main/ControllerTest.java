@@ -20,14 +20,21 @@ public class ControllerTest {
         return names;
     }
 
+    void initVariables(int testNum){
+        this.testNum = testNum;
+        testStr = testNum + "";
+    }
+
     @Test
     public void testPlayerSelection() throws IOException, InterruptedException {
+
+        initVariables(6);
 
         String[] names = getNames();
         String[] pNames = new String[testNum];
         Player[] pLst;
 
-        stubController.startGame(testStr, names, true, 0);
+        stubController.startGame(testStr, names, false, 0); //Number 0 for no jail test
         pLst = stubController.getPLst();
         for(int i = 0; i < testNum; i++){
             pNames[i] = pLst[i].getName();
@@ -39,8 +46,8 @@ public class ControllerTest {
 
     @Test
     public void testJail() throws IOException, InterruptedException {
-        //testNum = 3;
-        stubController.startGame(testStr, getNames(), false, 1);
+        initVariables(3);
+        stubController.startGame(testStr, getNames(), true, 1); //Numbers 1 - 3
 
     }
 

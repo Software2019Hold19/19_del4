@@ -301,6 +301,7 @@ public class Controller {
                         }else {
                             board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                             gui.updateBoard(board.getOwnableBoard(), pLst);
+                            gui.updatePlayers(pLst);
                         }
                         if(p.getIsJailed()){
                             playAgain = false;

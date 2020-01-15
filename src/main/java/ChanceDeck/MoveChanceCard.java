@@ -18,10 +18,5 @@ public class MoveChanceCard extends ChanceCard {
       //  super.drawn(player, board);
 
       return false;
-    }
-
-    protected void moveToField(Player player, int toField) {
-        // move player to field
-    }
-    
+    }    
 }

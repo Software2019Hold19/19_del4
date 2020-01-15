@@ -173,7 +173,7 @@ public class Controller {
         int aliveCount = 0;
         for (Player p : pLst) {
             // if player has no money then die
-            if (p.getBal() < 0) {
+            if (p.getBal() < 0 && p.getAlive()) {
                 gui.showMessage(String.format(lib.text.get("TrialStart"), p.getName()));
                 while (deathTrial(p));
 
@@ -205,18 +205,23 @@ public class Controller {
     }
 
     private Boolean deathTrial(Player p) throws InterruptedException {
-        managementStream(p, board, "Return");
-        if (!p.getAlive()){
-            return false;
-        } else if (p.getPlayersFields(board.getOwnableBoard()).length == 0 && p.getBal() < 0){
-            gui.showMessage(lib.text.get("TrialLose"));
-            p.kill(); //Kill Confirmed
-            return false;
-        } else if (p.getBal() < 0) {
-            gui.showMessage(lib.text.get("TrialTurn"));
-            return true;
+        if (!testing) {
+            managementStream(p, board, "Return");
+            if (!p.getAlive()) {
+                return false;
+            } else if (p.getPlayersFields(board.getOwnableBoard()).length == 0 && p.getBal() < 0) {
+                gui.showMessage(lib.text.get("TrialLose"));
+                p.kill(); //Kill Confirmed
+                return false;
+            } else if (p.getBal() < 0) {
+                gui.showMessage(lib.text.get("TrialTurn"));
+                return true;
+            } else {
+                gui.showMessage(lib.text.get("TrialWin"));
+                return false;
+            }
         } else {
-            gui.showMessage(lib.text.get("TrialWin"));
+            p.kill();
             return false;
         }
     }
@@ -431,14 +436,16 @@ public class Controller {
                     }
 
                     gui.updateBoard(board.getOwnableBoard(), pLst);
-                    
-                    String selectedFieldName = gui.getPlayerDropbown(lib.text.get("ChooseAField"), fieldNames);
-                    propertyIndex = getOwnableFieldIndex(selectedFieldName, playersFields);
+                    if (fieldNames.length > 0) {
+                        String selectedFieldName = gui.getPlayerDropbown(lib.text.get("ChooseAField"), fieldNames);
+                        propertyIndex = getOwnableFieldIndex(selectedFieldName, playersFields);
+                    } else {
+                        gui.showMessage(lib.text.get("NoFields"));
+                    }
                     chooseField = false;
                 }
 
-                System.out.println(playersFields[propertyIndex].getMortage());
-                if(!playersFields[propertyIndex].getMortage()) {
+                if(playersFields.length != 0 && !playersFields[propertyIndex].getMortage()) {
                     playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("MortgageProp"), lib.text.get("ChooseNewField"), lib.text.get("Back"));
                 } else {
                     playerNextStep = gui.getPlayerBtn(lib.text.get("ChooseNext"), lib.text.get("SellHouse"), lib.text.get("ReopenProp"), lib.text.get("ChooseNewField"), lib.text.get("Back"));
@@ -454,7 +461,9 @@ public class Controller {
                         
                         if (sellFieldAnwser.equals(lib.text.get("Yes"))) {
                             playersFields[propertyIndex].sellHouseAndHotel(player,playersFields);
-                            chooseField = true;
+                            if (playersFields.length != 0) {
+                                chooseField = true;
+                            }
                         }
 
                     }
@@ -487,7 +496,9 @@ public class Controller {
                 }
                 // choose new field
                 else if (playerNextStep.equals(lib.text.get("ChooseNewField"))) {
-                    chooseField = true;
+                    if (playersFields.length != 0) {
+                        chooseField = true;
+                    }
                 }
 
             } while (!playerNextStep.equals(lib.text.get("Back"))); // while not roll
@@ -525,12 +536,15 @@ public class Controller {
                 }
             }
             while (inputBtn.equals(lib.text.get("GiveUp"))) {
-                String answer = gui.getPlayerBtn(lib.text.get("Sure"), lib.text.get("No"), lib.text.get("Yes"));
-                if(answer.equals(lib.text.get("Yes"))){
-                    p.kill();
-                    break;
-                }
-                else{
+                if (!testing) {
+                    String answer = gui.getPlayerBtn(lib.text.get("Sure"), lib.text.get("No"), lib.text.get("Yes"));
+                    if (answer.equals(lib.text.get("Yes"))) {
+                        p.kill();
+                        break;
+                    } else {
+                        break;
+                    }
+                } else {
                     break;
                 }
             }

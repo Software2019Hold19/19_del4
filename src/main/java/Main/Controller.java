@@ -26,7 +26,7 @@ public class Controller {
 
     // Init players and language
     public void startGame() throws IOException, InterruptedException {
-        String selectedL = gui.getPlayerDropbown("Vælg Sprog / Choose Language", "Dansk");
+        String selectedL = gui.getPlayerDropdown("Vælg Sprog / Choose Language", "Dansk");
         lib.getLanguage(selectedL);
         gui.updateLanguage(lib);
         board.boardUpdate(lib);
@@ -34,7 +34,7 @@ public class Controller {
 
         //gui.getGui().getFields()[1].setForeGroundColor(Color.GRAY);
 
-        String playerCountstr = gui.getPlayerDropbown(lib.text.get("NumberOfPlayers"), "3", "4", "5", "6");
+        String playerCountstr = gui.getPlayerDropdown(lib.text.get("NumberOfPlayers"), "3", "4", "5", "6");
         playerCount = Integer.parseInt(playerCountstr);
         int startBal = 30000;
 
@@ -257,7 +257,7 @@ public class Controller {
                         Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
                         int[] diceRoll = dice.roll(testing);
                         if (manual) {
-                            int val = Integer.parseInt(gui.getPlayerDropbown("__MANUEL__ Dice", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2"));
+                            int val = Integer.parseInt(gui.getPlayerDropdown("__MANUEL__ Dice", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2"));
                             if (val < 7) {
                                 diceRoll[0] = val - 1;
                                 diceRoll[1] = 1;
@@ -290,7 +290,7 @@ public class Controller {
                             //If manual is true, then manually draw specific cards
                             //else run as normal
                             if (manual && board.getBoard()[p.getFieldNumber()].getType() == "chance") { // if manual=true and the field is a chance field
-                                int val = Integer.parseInt(gui.getPlayerDropbown(lib.text.get("ChanceManualMsg"), "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"));
+                                int val = Integer.parseInt(gui.getPlayerDropdown(lib.text.get("ChanceManualMsg"), "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"));
                                 deck = new ChanceDeck(lib, true, val);
                                 board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                                 gui.updateBoard(board.getOwnableBoard(), pLst);
@@ -323,9 +323,9 @@ public class Controller {
                     String jailCard = lib.text.get("JailCard");
 
                     if (!p.getJailCard()) {          //if the player doesn't have a "Get out of jail" chance card
-                        jailOptionStr = gui.getPlayerDropbown(lib.text.get("YourOptionsJail"), roll, pay);
+                        jailOptionStr = gui.getPlayerDropdown(lib.text.get("YourOptionsJail"), roll, pay);
                     } else {                           //if the player has a "Get out of jail" chance card
-                        jailOptionStr = gui.getPlayerDropbown(lib.text.get("YourOptionsJail"), jailCard, roll, pay);
+                        jailOptionStr = gui.getPlayerDropdown(lib.text.get("YourOptionsJail"), jailCard, roll, pay);
                     }
                     if (jailOptionStr == roll) {
                         caseCounter = 1;
@@ -435,7 +435,7 @@ public class Controller {
 
                         gui.updateBoard(board.getOwnableBoard(), pLst);
                         if (fieldNames.length > 0) {
-                            String selectedFieldName = gui.getPlayerDropbown(lib.text.get("ChooseAField"), fieldNames);
+                            String selectedFieldName = gui.getPlayerDropdown(lib.text.get("ChooseAField"), fieldNames);
                             propertyIndex = getOwnableFieldIndex(selectedFieldName, playersFields);
                         } else {
                             gui.showMessage(lib.text.get("NoFields"));

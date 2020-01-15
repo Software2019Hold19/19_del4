@@ -52,7 +52,7 @@ public class GUIController {
         }
     }
 
-    public String getPlayerDropbown(java.lang.String msg, java.lang.String... buttons)
+    public String getPlayerDropdown(java.lang.String msg, java.lang.String... buttons)
     {
         if (testing){
             return buttons[testCount++ % buttons.length];

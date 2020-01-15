@@ -23,7 +23,7 @@ public class ControllerTest {
         return names;
     }
 
-    void initVariables(int testNum){
+    public void initVariables(int testNum){
         this.testNum = testNum;
         testStr = testNum + "";
 
@@ -34,6 +34,11 @@ public class ControllerTest {
         for(int i = 0; i < controller.playerCount; i++){
             controller.pLst[i] = new Player(controller.gui.getUserString(""), 1000);
         }
+    }
+
+    public Player[] getPlayers(int testNum){
+        initVariables(testNum);
+        return controller.pLst;
     }
 
     @Test

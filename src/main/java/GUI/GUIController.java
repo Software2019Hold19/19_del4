@@ -73,7 +73,7 @@ public class GUIController {
         if (testing) {
             return 0;
         } else {
-            return gui.getUserInteger(msg, 0, bal - price);
+            return gui.getUserInteger(msg, 50, bal - price);
         }
     }
 

@@ -83,6 +83,8 @@ AuctionOut//Spiller %s stopper i aktionen
 AuctionNoMoney// Spiller %s har ikke nok penge til at deltage i aktionen.
 AuctionNext//Spiller %s forstører sit bud og aktionen fortsætter
 AuctionWin//Spiller %s er den sidste tilbage i auktionen og vinder derfor feltet for %dkr
+AuctionAutoWin//Spiller %s er den eneste spiller i auktionen og vinder derfor feltet for %dkr
+AuctionNoPlayers//Ingen spillere har nok penge til at være med i aktionen.. grunden bliver frisat i stedet
 YourOptionsJail//Du er i fængsel, hvad vil du gøre?
 NoMoney//Du har ikke penge nok til købet
 JailRoll//Kast terninger

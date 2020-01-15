@@ -170,10 +170,12 @@ public abstract class OwnableField extends Field {
         int i = 0;
         for (Player p : pLst){
             if (!p.getName().equals(player.getName()) && p.getAlive()){
-                pInAuction[i++] = p;
+                if (p.getBal() >= this.auctionPrice + 50) {
+                    pInAuction[i++] = p;
+                }
             }
         }
-        if (i != 1) {
+        if (i > 1) {
             gui.showMessage(String.format(lib.text.get("AuctionStart"), player.getName()));
             int j = 0;
             while (pInAuction.length > 1) {
@@ -184,7 +186,7 @@ public abstract class OwnableField extends Field {
                     gui.showMessage(String.format(lib.text.get("AuctionOut"), currentP.getName()));
                     j--;
                     Player[] tmp = new Player[pInAuction.length - 1];
-                    int l = 0;
+
                     for (int k = 0; k < pInAuction.length; k++) {
                         if (!pInAuction[k].getName().equals(currentP.getName())) {
                             tmp[l++] = pInAuction[k];
@@ -200,6 +202,15 @@ public abstract class OwnableField extends Field {
             setOwner(pInAuction[0].getName());
             pInAuction[0].addBal(-this.auctionPrice);
             this.auctionPrice = price / 2;
+        } else if (i == 1) {
+            gui.showMessage(String.format(lib.text.get("AuctionStart"), player.getName()));
+            gui.showMessage(String.format(lib.text.get("AuctionAutoWin"), pInAuction[0].getName(), this.auctionPrice));
+            setOwner(pInAuction[0].getName());
+            pInAuction[0].addBal(-this.auctionPrice);
+            this.auctionPrice = price / 2;
+        } else {
+            gui.showMessage(lib.text.get("AuctionNoPlayers"));
+            setOwner("");
         }
     }
 

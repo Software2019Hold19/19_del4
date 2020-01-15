@@ -254,7 +254,7 @@ public class Controller {
                     if (!p.getAlive()) { //If player gives up in managementStream, they shouldn't get a turn
                         playAgain = false;
                     } else {
-                        Boolean manual = true; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
+                        Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
                         int[] diceRoll = dice.roll(testing);
                         if (manual) {
                             int val = Integer.parseInt(gui.getPlayerDropdown("__MANUEL__ Dice", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2"));

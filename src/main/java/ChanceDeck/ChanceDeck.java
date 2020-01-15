@@ -39,9 +39,11 @@ public class ChanceDeck {
         deck[17] = new SpecifikMoveChanceCard(lib.text.get("ChanceCTxt17"),15);
 
 
+
         if (!testing) {
             shuffleDeck();
         }
+
 
 
     }

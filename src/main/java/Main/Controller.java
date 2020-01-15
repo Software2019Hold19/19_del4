@@ -259,8 +259,9 @@ public class Controller {
 
             if (p.getAlive()) {  //If the player is not jailed
 
-                managementStream(p, board, "RollChoice");
-                if (p.getAlive()) {
+                if (!p.getIsJailed()) {
+
+                    managementStream(p, board, "RollChoice");
 
                     Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
                     int[] diceRoll = dice.roll(testing);
@@ -299,12 +300,15 @@ public class Controller {
                                 //else run as normal
                         if(manual && board.getBoard()[p.getFieldNumber()].getType() == "chance"){ // if manual=true and the field is a chance field
                             int val = Integer.parseInt(gui.getPlayerDropbown(lib.text.get("ChanceManualMsg"), "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"));
-                            deck = new ChanceDeck(lib, testing, val);
+                            deck = new ChanceDeck(lib, true, val);
                             board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                             gui.updateBoard(board.getOwnableBoard(), pLst);
                         }else {
                             board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
                             gui.updateBoard(board.getOwnableBoard(), pLst);
+                        }
+                        if(p.getIsJailed()){
+                            playAgain = false;
                         }
                     } else {
                         playAgain = false;
@@ -314,7 +318,7 @@ public class Controller {
                     }
 
                 }
-                if (p.getIsJailed() && p.getJailTurn() < 4) {           // The player is jailed and gets a choice the next 3 turns
+                else if (p.getIsJailed()) {           // The player is jailed and gets a choice the next 3 turns
 
                     gui.updatePlayers(pLst);
                     playAgain = false;

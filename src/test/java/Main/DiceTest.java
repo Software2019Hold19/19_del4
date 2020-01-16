@@ -14,11 +14,12 @@ public class DiceTest {
         int[] actual = new int[12];
         int[] expected = new int[]{0, 2, 5, 8, 11, 13, 16, 13, 11, 8, 5, 2};
 
-        for(int i = 0; i < testRolls; i++){
+        for(int i = 0; i < testRolls; i++){        //Rolls two dice x amount of times
             int[] roll = dice.roll(false);
-            int val = roll[0] + roll[1];
+            int val = roll[0] + roll[1];           //Saves the combined value
 
-            collector[val-1] += 1 ;
+            collector[val-1] += 1;          //collector array gets an index based on the value minus 1
+                                            //and adds 1 to that index
         }
         System.out.println("Expected\n" +
                 "2: 2.778%\n" +
@@ -35,18 +36,18 @@ public class DiceTest {
 
 
         System.out.println("Actual");
-        actual[0] = 0;
+        actual[0] = 0;                  //so both arrays', actual and expected, starting index has the value 0
 
-        for(int i = 1; i < collector.length; i++){
+        for(int i = 1; i < collector.length; i++){                  //takes results and converting it to percentages
             float sum = (float) collector[i] / (float) testRolls;
             float percentage = sum * 100;
 
-            actual[i]= (int) percentage;
+            actual[i]= (int) percentage;        //Getting rid of decimals (for simplicity)
 
             System.out.println((i+1) +": "+ percentage +"%");
         }
 
-        assertArrayEquals(expected, actual);
+        assertArrayEquals(expected, actual);  //JUnit test, if both arrays are equal
     }
 
 }

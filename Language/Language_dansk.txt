@@ -63,26 +63,30 @@ ChanceCTxt8//Hvis du har dette kort kan du gratis komme ud af fænslet
 ChanceCTxt9//Flyt til Grønningen
 ChanceCTxt10//Du modtager 1000 kr. af banken
 ChanceCTxt11//Du flytter 3 felter tilbage
-ChanceCTxt12//Matador-legatet, du modtager 40000 kr.
+ChanceCTxt12//Matador-legatet, du modtager 10000 kr.
 ChanceCTxt13//Betal din parkeringsbøde på 400 kr.
 ChanceCTxt14//DU modtager 4000 kr. af banken.
 ChanceCTxt15//Kul- og kokspriserne er steget, og du skal betale 500 pr. hus og 2500 pr. hotel
 ChanceCTxt16//Ejendomsskatterne er steget og ekstraudgifterne er 1000 pr. hus og 2500 pr. hotel
 ChanceCTxt17//Flyt frem til Øresundsbåden
 ChoiceToBuy//Ingen ejer dette felt. Vil du købe feltet for %d kroner?
-Buyhouse//Vil du købe et hus for
-Buyhotel//Vil du købe et hotel for
+BuyHouse//Vil du købe et hus for %dkr.
+BuyHotel//Vil du købe et hotel for %dkr.
 Yes//Ja
 No//Nej
 AuctionStart//Spiller %s vil ikke købe feltet, så det går på auktion
-AuctionTurn//Feltet står til at koste %d. Vil spiller %s være med eller udgå?
+AuctionTurn//Feltet står til at koste %d. Vil spiller %s være med eller udgå? (mindste bud: 50kr)
 AuctionYesBtn//Auktion!
 AuctionNoBtn//Udgå
-AuctionAddMoney//Feltet koster allerede %d. Indtast det antal kroner Spiller %s vil tilføje til sit bud
+AuctionAddMoney//Feltet koster allerede %d. Indtast det antal kroner Spiller %s vil tilføje til sit bud (mindste bud: 50kr)
 AuctionOut//Spiller %s stopper i aktionen
 AuctionNoMoney// Spiller %s har ikke nok penge til at deltage i aktionen.
 AuctionNext//Spiller %s forstører sit bud og aktionen fortsætter
 AuctionWin//Spiller %s er den sidste tilbage i auktionen og vinder derfor feltet for %dkr
+AuctionAutoWin//Spiller %s er den eneste spiller i auktionen og vinder derfor feltet for %dkr
+AuctionNoPlayers//Ingen spillere har nok penge til at være med i aktionen.. grunden bliver frisat i stedet
+AuctionTooHighBid//Så mange penge har du slet ikke, din tosse :( Du må prøve igen
+AuctionTooLowBid//Mindste budet er 50kr, Du må prøve igen
 YourOptionsJail//Du er i fængsel, hvad vil du gøre?
 NoMoney//Du har ikke penge nok til købet
 JailRoll//Kast terninger
@@ -117,6 +121,7 @@ NoHouses//Du har ikke flere huse på grunden, men du kan sælge grunden istedet
 NoFields//Du ejer ingen felter
 MortgageProp//Du pantsætter denne ejendom
 ReopenProp//Du genåbner denne ejendom
+ReopenPropNoMoney//Du har ikke nok penge til at genåbne denne grund
 RollDoubleTurn//Da du slog to ens får du en tur til, %s, slå med terningerne!
 ChanceManualMsg//Vælg kort nummer:
 IsMortgage//Denne grund er pantsat.

@@ -52,7 +52,7 @@ public class GUIController {
         }
     }
 
-    public String getPlayerDropbown(java.lang.String msg, java.lang.String... buttons)
+    public String getPlayerDropdown(java.lang.String msg, java.lang.String... buttons)
     {
         if (testing){
             return buttons[testCount++ % buttons.length];
@@ -62,7 +62,7 @@ public class GUIController {
 
     public String getPlayerBtn(String msg, java.lang.String... buttons){
         if (testing) {
-            return buttons[0];
+            return buttons[buttons.length - 1];
         }
         else {
             return gui.getUserButtonPressed(msg, buttons);
@@ -73,7 +73,7 @@ public class GUIController {
         if (testing) {
             return 0;
         } else {
-            return gui.getUserInteger(msg, 0, bal - price);
+            return gui.getUserInteger(msg, 50, bal - price);
         }
     }
 
@@ -86,6 +86,7 @@ public class GUIController {
 
     public void addPlayers(Player[] playerList){
         pObs = new PlayerObserver(playerList);
+        pObs.setTesting(testing);
 
         for (GUI_Player p : pObs.getGuiPlayerList()) {
             gui.addPlayer(p);
@@ -167,7 +168,13 @@ public class GUIController {
 
     public void setTesting(Boolean test){
         testing = test;
-        pObs.setTesting(test);
+        try {
+            pObs.setTesting(testing);
+        } catch (NullPointerException e) {
+            System.out.println("start of testing");
+        }
     }
+
+    public void setTestNames(int num){ this.testNames = num; }
 
 }

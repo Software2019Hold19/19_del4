@@ -9,14 +9,14 @@ public class PlayerTest {
 
 
     @org.junit.Test
-    public void blink() {
+    public void testBlink() {
         player.blink(23);
-        assertEquals(23,player.fieldNumber);
+        assertEquals(23,player.getFieldNumber());
     }
 
     @org.junit.Test
-    public void move() {
-        player.move(24);
-        assertEquals(2,player.getBal());
+    public void testMove() {
+        player.move(40);
+        assertEquals(4000,player.getBal());
     }
 }

@@ -31,6 +31,8 @@ public class Player {
         if (this.fieldNumber >= 40){
             this.fieldNumber -= 40;
             this.addBal(4000); // income from start
+        } else if (this.fieldNumber < 0) {
+            this.fieldNumber += 40;
         }
     }
 
@@ -94,8 +96,8 @@ public class Player {
     public int getJailTurn() { return jailCount; }
 
     public void jail(){
-        setIsJailed(true);
         blink(10);
+        setIsJailed(true);
     }
 
     public boolean getJailCard(){

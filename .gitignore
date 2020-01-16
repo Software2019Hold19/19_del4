@@ -2,6 +2,7 @@
 .idea/workspace.xml
 .idea/uiDesigner.xml
 
+.pdf
 
 # Compiled class file
 *.class
@@ -33,3 +34,4 @@ hs_err_pid*
 .classpath
 .project
 target/
+19_M2.pdf

@@ -57,6 +57,10 @@ public class BoardObserver extends Observer {
                     }
                 } else {
                     //guiFields[i].setDescription(fields[i].getDesc());
+                    Color color = Color.BLACK;
+                    if (key.equals("Brewery1") || key.equals("Brewery2"))
+                        color = Color.WHITE;
+                    ownable.get(key).setForeGroundColor(color);
                     ownable.get(key).setBorder(Color.BLACK);
                     ownable.get(key).setOwnerName(""); //test
                 }

@@ -49,11 +49,11 @@ public class ChoiceMoveChanceCard extends MoveChanceCard {
         super.guiHandler(gui, lib);
         
         if (moveUpToFiveFields){
-            moveFields = gui.getPlayerDropbown(lib.text.get("ChanceCTxt3"), "1", "2", "3", "4", "5");
+            moveFields = gui.getPlayerDropdown(lib.text.get("ChanceCTxt3"), "1", "2", "3", "4", "5");
         }
         else {
             // move 1 fields or draw new card
-            moveFields = gui.getPlayerDropbown(lib.text.get("ChanceCTxt4"), lib.text.get("ChanceMove1"), lib.text.get("ChanceNewCard"));
+            moveFields = gui.getPlayerDropdown(lib.text.get("ChanceCTxt4"), lib.text.get("ChanceMove1"), lib.text.get("ChanceNewCard"));
             if(moveFields.equals(lib.text.get("ChanceNewCard"))){
                 moveFields = "0";
             }

@@ -7,7 +7,7 @@ import gui_main.GUI;
 import static org.junit.Assert.*;
 
 public class AccountTest {
-    Player player1 = new Player("name");
+    Player player1 = new Player("name", 1000);
     Player[] list = new Player[]{player1};
 
     PlayerObserver playerOb = new PlayerObserver(list);
@@ -15,7 +15,7 @@ public class AccountTest {
     GUI_Player guiP = new GUI_Player("name1",player1.getBal());
 
     @Test
-    public void addBalance() {
+    public void testAddBalance() throws InterruptedException {
         player1.addBal(5);
         playerOb.update(gui,list);
 

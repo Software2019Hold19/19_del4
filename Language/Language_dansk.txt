@@ -74,16 +74,16 @@ BuyHouse//Vil du købe et hus for %dkr.
 BuyHotel//Vil du købe et hotel for %dkr.
 Yes//Ja
 No//Nej
-AuctionStart//Spiller %s vil ikke købe feltet, så det går på auktion
+AuctionStart//%s vil ikke købe feltet, så det går på auktion
 AuctionTurn//Feltet står til at koste %d. Vil spiller %s være med eller udgå? (mindste bud: 50kr)
 AuctionYesBtn//Auktion!
 AuctionNoBtn//Udgå
 AuctionAddMoney//Feltet koster allerede %d. Indtast det antal kroner Spiller %s vil tilføje til sit bud (mindste bud: 50kr)
-AuctionOut//Spiller %s stopper i aktionen
-AuctionNoMoney// Spiller %s har ikke nok penge til at deltage i aktionen.
-AuctionNext//Spiller %s forstører sit bud og aktionen fortsætter
-AuctionWin//Spiller %s er den sidste tilbage i auktionen og vinder derfor feltet for %dkr
-AuctionAutoWin//Spiller %s er den eneste spiller i auktionen og vinder derfor feltet for %dkr
+AuctionOut//%s stopper i aktionen
+AuctionNoMoney// %s har ikke nok penge til at deltage i aktionen.
+AuctionNext//%s forstører sit bud og aktionen fortsætter
+AuctionWin//%s er den sidste tilbage i auktionen og vinder derfor feltet for %dkr
+AuctionAutoWin//%s er den eneste spiller i auktionen og vinder derfor feltet for %dkr
 AuctionNoPlayers//Ingen spillere har nok penge til at være med i aktionen.. grunden bliver frisat i stedet
 AuctionTooHighBid//Så mange penge har du slet ikke, din tosse :( Du må prøve igen
 AuctionTooLowBid//Mindste budet er 50kr, Du må prøve igen
@@ -95,17 +95,17 @@ JailCard//Brug chance kort
 JailTripleDouble//Det er 3. gang i træk, at du slår to ens. Det må være snyd. Du skal i fængsel.
 PayedEscaped//%s bateler 1000 kr og er fri igen.
 TurnOrderStart//Vi slår om at starte spillet. Den der slår størst starter
-TurnOrderRoll//Du, Spiller %s, har slået %d
+TurnOrderRoll//Du, %s, har slået %d
 TurnOrderRedo//Op til flere spillere har slået det samme, så der skal slå om igen.
-TurnOrderWinner//Spiller %s har slået højst og starter spillet.
-PlayerGiveUp//Spiller %s går ud af spillet
-TrialStart//Spiller %s har desværre ikke flere penge, så du må sælge noget hvis du kan.
+TurnOrderWinner//%s har slået højst og starter spillet.
+PlayerGiveUp//%s går ud af spillet
+TrialStart//%s har desværre ikke flere penge, så du må sælge noget hvis du kan.
 TrialTurn//Du har stadig ikke nok penge.. Du må sælge noget mere
 TrialWin//Du har nu nok penge til at fortsætte!
 TrialLose//Du har ikke flere egendomme og stadig ikke nok penge, så du er gået bankerot.
-GiveUpAuction//Spiller %s havde felt %s, så dette er nu på auktion
+GiveUpAuction//%s havde felt %s, så dette er nu på auktion
 Return//Retur
-MessagePM//Hvad vil du, spiller %s, gerne gøre?
+MessagePM//Hvad vil du, %s, gerne gøre?
 Sell//Sælge
 Mortage//Pantsætning
 Trading//Bytte

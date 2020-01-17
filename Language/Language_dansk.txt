@@ -44,7 +44,7 @@ SameName//Spillere kan ikke hedde det samme.
 NoName//Spillere skal have et navn!
 OwnField//Du ejer selv dette felt.
 OthersField//Dette felt er eget af %s og du skal betale dem %d kroner!
-OthersFieldJailed//Dette felt er eget af %s men spiller er i fængsel. Ingen betaling.
+OthersFieldJailed//Dette felt er eget af %s men spilleren er i fængsel. Ingen betaling.
 NotOwned//Du køber dette felt for %d penge, Tillykke!
 LandOnStart//Du lander på startfeltet og modtager 4000 kr.!
 LandOnJail//Du er på besøg i fængslet.
@@ -75,10 +75,10 @@ BuyHotel//Vil du købe et hotel for %dkr.
 Yes//Ja
 No//Nej
 AuctionStart//%s vil ikke købe feltet, så det går på auktion
-AuctionTurn//Feltet står til at koste %d. Vil spiller %s være med eller udgå? (mindste bud: 50kr)
+AuctionTurn//Feltet står til at koste %d. Vil %s være med eller udgå? (mindste bud: 50kr)
 AuctionYesBtn//Auktion!
 AuctionNoBtn//Udgå
-AuctionAddMoney//Feltet koster allerede %d. Indtast det antal kroner Spiller %s vil tilføje til sit bud (mindste bud: 50kr)
+AuctionAddMoney//Feltet koster allerede %d. Indtast det antal kroner %s vil tilføje til sit bud (mindste bud: 50kr)
 AuctionOut//%s stopper i aktionen
 AuctionNoMoney// %s har ikke nok penge til at deltage i aktionen.
 AuctionNext//%s forstører sit bud og aktionen fortsætter
@@ -115,7 +115,7 @@ PM//Administrer ejendomme
 GiveUp//Giv op
 Sure//Er du sikker?
 ChooseNewField//Vælg nyt felt
-SellHouse//Sælg et hus
+SellHouse//Salg
 ChooseAField//Vælg et felt
 NoHouses//Du har ikke flere huse på grunden, men du kan sælge grunden istedet
 NoFields//Du ejer ingen felter

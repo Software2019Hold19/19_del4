@@ -70,6 +70,7 @@ public class Player {
 
     public void kill() {
         this.alive = false;
+        this.addBal(-getBal() - 1);
     }
 
     public int getLastRollVal(){

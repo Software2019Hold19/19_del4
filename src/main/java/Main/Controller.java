@@ -463,7 +463,6 @@ public class Controller {
                                     chooseField = true;
                                 }
                             }
-
                         }
                         // Sælger et hus
                         else {
@@ -520,7 +519,6 @@ public class Controller {
                 return i;
             }
         }
-
         return 0;
     }
 

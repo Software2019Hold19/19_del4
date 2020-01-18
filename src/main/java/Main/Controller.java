@@ -254,7 +254,7 @@ public class Controller {
                     if (!p.getAlive()) { //If player gives up in managementStream, they shouldn't get a turn
                         playAgain = false;
                     } else {
-                        Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
+                        Boolean manual = true; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
                         int[] diceRoll = dice.roll(testing);
                         if (manual) {
                             int val = Integer.parseInt(gui.getPlayerDropdown("__MANUEL__ Dice", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2"));
@@ -316,7 +316,7 @@ public class Controller {
                     gui.updatePlayers(pLst);
                     playAgain = false;
 
-                    int caseCounter = 0;
+                    int caseSwitch = 0;
                     String jailOptionStr = "";
                     String roll = lib.text.get("JailRoll");
                     String pay = lib.text.get("JailPay");
@@ -328,40 +328,36 @@ public class Controller {
                         jailOptionStr = gui.getPlayerDropdown(lib.text.get("YourOptionsJail"), jailCard, roll, pay);
                     }
                     if (jailOptionStr == roll) {
-                        caseCounter = 1;
+                        caseSwitch = 1;
                     } else if (jailOptionStr == pay) {
-                        caseCounter = 2;
+                        caseSwitch = 2;
                     } else {
-                        caseCounter = 3;
+                        caseSwitch = 3;
                     }
 
-                    switch (caseCounter) {
+                    switch (caseSwitch) {
 
                         case (1):                                    //if the player chooses to roll for a pair
-                            int[] diceRoll = dice.roll(testing);
-                            gui.showDiceOnBoard(diceRoll);
+                            int tries = 3;
+                            while (tries > 0) {
+                                int[] diceRoll = dice.roll(testing);
+                                gui.showDiceOnBoard(diceRoll);
 
-                            if (diceRoll[0] == diceRoll[1]) {
-                                p.setIsJailed(false);
-                                p.resetJailTurn();
-                                p.move(diceRoll[0] + diceRoll[1]);
+                                if (diceRoll[0] == diceRoll[1]) {
+                                    gui.showMessage(String.format(lib.text.get("JailRollWin"), diceRoll[0], diceRoll[1]));
+                                    p.setIsJailed(false);
+                                    p.resetJailTurn();
+                                    p.move(diceRoll[0] + diceRoll[1]);
 
-                                gui.updatePlayers(pLst);
-                                board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
-                                gui.updatePlayers(pLst);
-                            } else if (p.getJailTurn() == 3) {          //if the player doesn't get a pair after 3 turns
-                                p.setIsJailed(false);               //then the player is forced to pay
-                                p.resetJailTurn();
-                                p.addBal(-1000);
-                                p.move(diceRoll[0] + diceRoll[1]);
-
-                                gui.updatePlayers(pLst);
-                                board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
-                                gui.updatePlayers(pLst);
-
-                                gui.showMessage(lib.text.get("PayedEscape"));
-                            } else {
-                                p.addJailTurn();
+                                    gui.updatePlayers(pLst);
+                                    board.getBoard()[p.getFieldNumber()].landOnField(p, pLst, deck, board, gui, lib);
+                                    gui.updatePlayers(pLst);
+                                    break;
+                                } else if (--tries == 0) {          //if the player doesn't get a pair after 3 turns
+                                    gui.showMessage(String.format(lib.text.get("JailRollTurnLast"), diceRoll[0], diceRoll[1]));
+                                } else {
+                                    gui.showMessage(String.format(lib.text.get("JailRollTurn"), diceRoll[0], diceRoll[1], tries));
+                                }
                             }
                             break;
 

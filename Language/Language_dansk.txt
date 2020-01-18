@@ -90,6 +90,9 @@ AuctionTooLowBid//Mindste budet er 50kr, Du må prøve igen
 YourOptionsJail//Du er i fængsel, hvad vil du gøre?
 NoMoney//Du har ikke penge nok til købet
 JailRoll//Kast terninger
+JailRollTurn//Du slår %d og %d med terningerne, dette er dog ikke ens,så du kommer ikke ud denne gang. Du har %d forsøg igen
+JailRollTurnLast//Du slår %d og %d med terningerne, dette er dog ikke ens, så du kommer ikke ud denne gang. Du har ikke flere forsøg, så du må prøve igen i næste tur
+JailRollWin//Du slår %d og %d med terningerne, og du slipper fri!
 JailPay//Betal 1000kr
 JailCard//Brug chance kort
 JailTripleDouble//Det er 3. gang i træk, at du slår to ens. Det må være snyd. Du skal i fængsel.

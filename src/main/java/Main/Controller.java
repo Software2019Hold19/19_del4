@@ -242,8 +242,11 @@ public class Controller {
         gui.showMessage(String.format(lib.text.get("Turn"), p.getName()));
 
         do {
-            if (playAgain) {
+            if (playAgain && p.getBal() > 0) {
                 gui.showMessage(String.format(lib.text.get("RollDoubleTurn"), p.getName()));
+            } else if (p.getBal() <= 0){
+                gui.showMessage(String.format(lib.text.get("TrialStart"), p.getName()));
+                while (deathTrial(p));
             }
 
             if (p.getAlive()) {
@@ -254,7 +257,7 @@ public class Controller {
                     if (!p.getAlive()) { //If player gives up in managementStream, they shouldn't get a turn
                         playAgain = false;
                     } else {
-                        Boolean manual = true; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
+                        Boolean manual = false; //TODO: FOR MANUAL DICE ROLLS!!! MAKE SURE TO LEAVE ON FALSE!!!!!!!!!!!!!!!!!! (TODO FOR COLOR)
                         int[] diceRoll = dice.roll(testing);
                         if (manual) {
                             int val = Integer.parseInt(gui.getPlayerDropdown("__MANUEL__ Dice", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2"));
@@ -406,7 +409,7 @@ public class Controller {
         gui.setTesting(testing);
     }
 
-    private void propertyMangement(Player player, GameBoard board) throws InterruptedException {
+    private void propertyMangement(Player player, GameBoard board, String end) throws InterruptedException {
         
             // Choose a field
             // Sell house or choose a new field
@@ -417,7 +420,7 @@ public class Controller {
             boolean chooseField = true;
         
             do {
-                if (player.getBal() > 0) {
+                if (end.equals("Return") || player.getBal() > 0) {
                     OwnableField[] playersFields = player.getPlayersFields(board.getOwnableBoard());
                     gui.updateBoard(playersFields, pLst);
                     gui.updatePlayers(pLst);
@@ -538,7 +541,7 @@ public class Controller {
                     gui.showMessage(lib.text.get("NoFields"));
                 }
                 else {
-                    propertyMangement(p, board);
+                    propertyMangement(p, board, end);
                 }
             }
             while (inputBtn.equals(lib.text.get("GiveUp"))) {

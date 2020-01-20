@@ -55,8 +55,6 @@ public abstract class Field {
         return null;
     }
 
-
-
     public void landOnField(Player player, Player[] pLst, ChanceDeck deck, GameBoard board, GUIController gui, Translator lib) throws InterruptedException {
         guiHandler(gui, lib);
         gui.updatePlayers(pLst);

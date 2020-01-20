@@ -305,7 +305,7 @@ public class StreetField extends OwnableField {
             int housePrice = getHousePrice();
             String choice = gui.getPlayerDropdown(String.format(lib.text.get("BuyHouse"), housePrice), lib.text.get("Yes"), lib.text.get("No"));
 
-            if (choice.equals("Ja")) {
+            if (choice.equals("Ja")) { //always false if changed language
                 if (player.getBal() > housePrice) {
                  //   this.level++;
                     player.addBal(-housePrice);
@@ -321,7 +321,7 @@ public class StreetField extends OwnableField {
             int hotelPrice = getHousePrice();
             String choice = gui.getPlayerDropdown(String.format(lib.text.get("BuyHotel"), hotelPrice), lib.text.get("Yes"), lib.text.get("No"));
 
-            if (choice.equals("Ja")) {
+            if (choice.equals("Ja")) { //always false if changed language
                 if (player.getBal() > hotelPrice) {
                    // this.level++;
                     player.addBal(-hotelPrice);

@@ -16,7 +16,7 @@ public class Translator {
 
     }
 
-    public void getLanguage(String language) throws IOException {
+    public void getLanguage(String language) throws IOException { //for updating language
         String file ="Language/Language_" + language.toLowerCase() + ".txt";
         BufferedReader reader = new BufferedReader(new FileReader(file));
         //text = new HashMap<String, String>();
@@ -26,9 +26,9 @@ public class Translator {
 
             String[] parts = line.split("//",2);
             if(parts.length >= 2){
-            String key = parts[0];
-            String value = parts[1];
-            text.put(key,value);
+                String key = parts[0];
+                String value = parts[1];
+                text.put(key,value);
             }
 
         }

@@ -28,7 +28,7 @@ public class SpecifikMoveChanceCard extends MoveChanceCard {
         else {
             int val = 40 - player.getFieldNumber() + pos;
             player.move(val);
-            player.addBal(4000);
+            //player.addBal(4000);
 
             return true;
         }

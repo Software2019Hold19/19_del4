@@ -53,7 +53,7 @@ public class ChanceDeck {
         - creates copy of deck (cardlist) and makes boolean array in same size.
         - each index in the deck is filled with a random card from cardlist
         - when a card is grabbed from the list it is marked as taken ("true")
-        - if card is alreaddy grabbed from list a new number is gererated until a free card is found.*/
+        - if card is already grabbed from list a new number is gererated until a free card is found.*/
         java.util.Random random = new java.util.Random();
         boolean[] cardTaken = new boolean[deck.length];
 

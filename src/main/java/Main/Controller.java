@@ -203,7 +203,7 @@ public class Controller {
 
         //        gui.showMessage(String.format(lib.text.get("WinnerByDefault"), p.getName()));
         }
-        if(aliveCount==1){
+        if(aliveCount == 1){
             return true;
         }
         else {

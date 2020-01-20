@@ -55,14 +55,14 @@ public class BoardObserver extends Observer {
                         }
 
                     }
-                } else {
+                } else { // for securing mortgage
                     //guiFields[i].setDescription(fields[i].getDesc());
                     Color color = Color.BLACK;
                     if (key.equals("Brewery1") || key.equals("Brewery2"))
                         color = Color.WHITE;
                     ownable.get(key).setForeGroundColor(color);
                     ownable.get(key).setBorder(Color.BLACK);
-                    ownable.get(key).setOwnerName(""); //test
+                    ownable.get(key).setOwnerName("");
                 }
             }
         }
